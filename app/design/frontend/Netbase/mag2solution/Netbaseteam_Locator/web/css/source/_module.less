@@ -1,0 +1,35 @@
+
+& when (@media-common = true) {
+// ===========locator============//
+    .locator-wrapper {
+        .search-box .search-tab.active {
+            background-color: @theme_color !important;
+        }
+        .list-store-box .list-title h2 {
+            background-color: @theme_color !important;
+        }
+    }
+    
+    .slider-range-min .slider-range-amount {
+        color: @theme_color !important;
+    }
+    .marketplace-locator-index {
+        .columns {
+            padding: @indent__xl 0;
+        }
+        .pac-container.pac-logo {
+            top: 350px !important;
+        }
+        .option-direction {
+            .box-input {
+                clear: left;
+                height: 30px;
+                margin: auto;
+                .get-direction {
+                    padding: 5px @indent__s;
+                    margin-right: ceil(0.7 * @indent__s);
+                }
+            }
+        } 
+    }
+}

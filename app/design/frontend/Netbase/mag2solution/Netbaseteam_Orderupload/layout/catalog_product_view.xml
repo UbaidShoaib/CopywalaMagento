@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="Netbaseteam_Orderupload::css/uploadfile.css"/>
+    </head>
+    <body>
+       	<referenceContainer name = "product.info.nb_additional">
+    		<block class="Magento\Catalog\Block\Product\View" name="product.info.nb_additional.nb_orderupload" template="Netbaseteam_Orderupload::orderupload.phtml"/>
+    	</referenceContainer>
+    </body>
+</page>

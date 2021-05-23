@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--/**
+* @category   Netbaseteam
+* @package    Netbaseteam_Ajaxcart
+* @copyright  Copyright (c) 2018 Netbaseteam
+*/-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="ajaxcart" frontName="ajaxcart">
+            <module name="Netbaseteam_Ajaxcart"/>
+        </route>
+    </router>
+</config>

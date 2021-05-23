@@ -1,0 +1,70 @@
+<?php
+/**
+ * Copyright 2017 Netbaseteam, Inc. All rights reserved.
+ */
+?>
+<?php /** @var $block \Netbaseteam\Blog\Block\Cms\Postlist */ ?>
+
+<?php
+	$posts = $block->getPosts();
+?>
+<?php if ($posts): ?>
+<section class="trend-blog-02 section-antique">
+	<div class="container">
+		<div class="title-box">
+			<h4><?php echo __('Lastest new of week') ?></h4>
+			<img src="<?php echo $block->getViewFileUrl('images/cms/gallery_title_icon_1.png'); ?>" alt="<?php echo __('gallery title') ?>" /> 
+			<h2><?php echo __('Antique trend blog') ?></h2>
+		</div>
+		<div class="content-box row">
+			<?php foreach ($posts as $key => $post): ?>
+					<div class="trend-blog__item col-md-4">
+						<?php if ($post->getThumbnail()): ?>
+							<div class="post-img ">
+								<a href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>" title="<?php echo __($post->getTitle()); ?>">
+									<img src="<?php echo $block->getImagePostUrl($post->getThumbnail()); ?>" alt="<?php echo __($post->getThumbnail()); ?>" />
+								</a>
+							</div>	
+						<?php endif ?>
+
+						<div class="post-content">
+
+							<?php if ($block->getCategoryName($post->getId())): ?>
+								<div class="cate-info">
+									<span><?php echo __($block->getCategoryName($post->getId())); ?></span>
+								</div>
+							<?php endif ?>
+							<h3 class="title">
+								<a href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>" title="<?php echo __($post->getTitle()); ?>">
+									<?php echo __($block->validShortContent($post->getTitle(),35)); ?>
+								</a>
+							</h3>
+							<div class="meta-btn">
+								<div class="meta-btn__item create-time">
+									<i class="icon-clock"></i>
+									<span><?php echo __($block->formatCreatedDate($post->getCreationTime())); ?></span>	
+								</div>
+								<div class="meta-btn__item author">
+									<i class="icon-user"></i>
+									<span><?php echo __($post->getAuthorName()); ?></span>
+								</div>
+								<div class="meta-btn__item num-comments">
+									<i class="icon-comment"></i>
+									<span><?php echo __($block->getNumberComments($post->getId())) ?></span>
+									<span><?php echo __('Comments') ?></span>
+								</div>
+							</div>
+							<div class="short-content">
+								<?php echo __($block->validShortContent($post->getShortContent(),150)); ?>
+							</div>
+							<div class="action">
+								<a class="shop-btn read-more-btn button" href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>"><span><?php echo __('Read more'); ?></span> </a>
+							</div>
+						</div>
+						
+					</div>
+			<?php endforeach ?>
+		</div>
+	</div>
+</section>
+<?php endif ?>

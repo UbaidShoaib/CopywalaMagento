@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="page.wrapper"> 
+            <container name="container.wrapper.breadcrumbs" htmlClass="wrapper-breadcrumbs" htmlTag="div" before="main.content">
+                <container name="wrapper.breadcrumbs" htmlClass="wrapper-breadcrumbs-inner" htmlTag="div" />
+                <block class="Magento\Cms\Block\Block" name="shopbybrand.breadcrumbs.image">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">image-faq</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+        
+        <move element="page.main.title" destination="wrapper.breadcrumbs" before="-"/>
+        <move element="breadcrumbs" destination="wrapper.breadcrumbs" after="page.main.title"/>
+        <move element="category.image" destination="container.wrapper.breadcrumbs" after="wrapper.breadcrumbs"/>
+        <referenceContainer name="catalog.compare.sidebar" remove="true" />
+
+	</body>
+</page>

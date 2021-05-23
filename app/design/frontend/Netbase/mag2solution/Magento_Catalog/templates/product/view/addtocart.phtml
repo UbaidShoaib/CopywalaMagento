@@ -1,0 +1,105 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()): ?>
+
+
+<!-- <?php 
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $moduleManager = $objectManager->get(Magento\Framework\Module\Manager::class);
+ ?> -->
+
+
+<div class="box-tocart row">
+    <?php if (!$block->hasOptions()):?>
+        <?= $block->getChildHtml('product.info.addtocart.nb_additional') ?>
+    <?php else:?> 
+        <?= $block->getChildHtml('product.info.addtocart.additional.nb_additional') ?>
+    <?php endif ?>
+
+    <div class="fieldset cart-action">
+        <div class="cart-action__title">
+            <h3><?= __('Job Summary') ?></h3>
+            <p><?= __('See the total pricing and checkout') ?></p>
+        </div>
+        <?php if ($block->shouldRenderQuantity()): ?>
+        <div class="field qty">
+
+            <script type="text/x-magento-init">
+            {
+                "*": {
+                        "Magento_Ui/js/core/app": {
+                            "components": {
+                                "qty_change": {
+                                    "component": "Netbase_Product/js/product/view/qty_change",
+                                    "defaultQty": <?php echo $block->getProductDefaultQty() * 1 ?>
+                                }
+                            }
+                        }
+                }
+            }
+            </script>
+            
+            <div class="control" data-bind="scope: 'qty_change'">
+                <input  data-bind="value: qty()"
+                    type="number"
+                    name="qty"
+                    id="qty"
+                    maxlength="12"
+                    title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                    data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                />
+                <div class="control__qty-change">
+                    <button data-bind="click: decreaseQty"><i class="icon-down-open-big"></i></button>
+                    <span></span>
+                    <button data-bind="click: increaseQty"><i class="icon-up-open-big"></i></button>
+                </div>
+                
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="submit"
+                    title="<?= /* @escapeNotVerified */ $buttonTitle ?>"
+                    class="action primary tocart"
+                    id="product-addtocart-button">
+                <span><?= /* @escapeNotVerified */ $buttonTitle ?></span>
+            </button>
+
+        </div>
+        <div class="box-tocart-addto-content">
+            <?= $block->getChildHtml('product.info.addto02') ?>
+        </div>
+    </div>
+
+    
+</div>
+<?php endif; ?>
+<?php if ($block->isRedirectToCartEnabled()) : ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/product/view/validation": {
+                "radioCheckboxClosest": ".nested"
+            }
+        }
+    }
+</script>
+<?php else : ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>
+<?php endif; ?>

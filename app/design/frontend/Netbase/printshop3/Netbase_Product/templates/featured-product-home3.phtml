@@ -1,0 +1,144 @@
+<?php 
+/**
+* Copyright © 2016 SW-THEMES. All rights reserved.
+*/
+use Magento\Framework\App\Action\Action;
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+	$showWishlist = true;
+    $showCompare = true;
+	$_helper = $this->helper('Netbase\Product\Helper\Data'); 
+	$config = $_helper->getConfig("pro_featured/general"); 
+	$categories = explode(',', $config['categories']); 
+	//var_dump($categories);
+	$attributeId = $config['attribute_code'];  
+	$title = $_helper->getTitle('pro_featured/general/title');
+	$currentSymbol = $_helper->getCurrencySymbol();
+	$banner = $_helper->getBanner('pro_featured/general/banner'); 
+	$tabs = $_helper->getAllTabs('pro_featured/general/categories','featured-tab-');
+?>
+<section class="featured-product home-product-tab"> 
+	<div class="container">
+		<div class="inner-block">
+			<div class="row">
+				<div class="home-product-title col-md-4">
+					<img src="<?php echo $block->getViewFileUrl('images/img-product.jpg'); ?>" alt="<?php echo __('img-product') ?>" /> 
+					<div class="text">
+						<h5><?php echo __('New') ?></h5>
+	            		<h2><?php echo __('Love Selling magic mugs') ?></h2>
+					</div>
+					
+				</div> 
+				<div class="col-md-8 home-product-tab-content"> 
+					<?php
+					foreach($categories as $categoryId):   
+					?>
+					<div id="featured-tab" class="tab-content" data-rev="<?php echo $categoryId ?>">
+						<div class="home-product-slider products-grid nb-list">
+							<div class="products list items product-items owl-carousel row display-clear">
+								<?php 
+									$productCollection = $block->getProductCollection($categoryId, $attributeId);
+									//var_dump($productCollection); die();
+									$total = count($productCollection);
+									$i=0; foreach ($productCollection as $_product):
+								?>
+									<?php if($i%4 == 0){ echo '<ol class="wrap-item ">'; }  ?>
+									   	<li class="product item col-sm-6 col-md-6 col-lg-6">
+			                                <div class="product-item-info" data-container="product-grid">
+			                                    <?php      
+			                                        $originalPrice = $_product->getPrice();  //200 
+			                                        $specialPrice = $_product->getSpecialPrice();  
+			                                        ?>
+			                                    <?php if(($specialPrice)&&($specialPrice <= $originalPrice)){?>	
+			                                    <div class="sale">
+			                                        <span> 
+			                                        <?php
+			                                            $saleof= abs(($specialPrice/($originalPrice))*100-100);
+			                                            echo '- ';    
+			                                            print_r(floor($saleof));
+			                                            echo '%'; 
+			                                            ?>									 
+			                                        </span> 
+			                                    </div>
+			                                    <?php } ?>
+			                                    <?php
+			                                        $image = 'category_page_grid' or 'category_page_list';
+			                                        $_imagehelper = $this->helper('Magento\Catalog\Helper\Image'); 
+			                                        $productImage = $_imagehelper->init($_product, $image)->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(250)->getUrl();
+			                                        ?>
+			                                    <div class="product-item-actions-wrap">
+			                                        <a href="<?php echo $_product->getProductUrl() ?>" class="product photo product-item-photo display-flex" tabindex="-1">
+			                                        <img alt="" src="<?php echo $productImage; ?>" />
+			                                        </a> 
+			                                        
+			                                    </div>
+			                                    <div class="product details product-item-details">
+			                                        <div class="inner-product">
+			                                            <a title="<?php echo $_product->getName(); ?>" href="<?php echo $_product->getProductUrl() ?>" class="product-item-link">
+			                                            <?php echo substr($_product->getName(),0,30); ?>
+			                                            </a>
+			                                            <?php
+			                                                $originalPrice = $_product->getData('price')+0;
+			                                                $finalPrice = $_product->getData('special_price')+0; 
+			                                                ?>
+			                                            <div class="price-home <?php if($finalPrice){ echo 'price-sale'; } ?>">
+			                                                <?php
+			                                                    if ($finalPrice) {
+			                                                    	echo "<span class='special'>".$_helper->getFormatPrice($finalPrice, 2)."</span>";
+			                                                    };
+			                                                    //
+			                                                    if ($originalPrice) {
+			                                                    	echo "<span class='normal'>".$_helper->getFormatPrice($originalPrice, 2)."</span>";
+			                                                    }; 
+			                                                    ?>
+			                                            </div>
+			                                        </div>
+			                                    </div>
+			                                   
+			                                </div>
+			                            </li> 
+									<?php if($i % 4 == 3 || $i == $total -1) { echo '</ol>'; }?>
+								<?php
+									$i++;
+									endforeach;
+								?>
+							</div>
+						</div>
+					</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</section> 
+<script> 
+require(['jquery','owlCarousel'], function($) {
+    jQuery(document).ready(function() {		
+		$('.owl-carousel').owlCarousel({
+		    loop:true,
+		    margin:10,
+		    responsiveClass:true,
+		    navText: ["<i class='icon-left-open'></i>", "<i class='icon-right-open'></i>"],
+			navClass: ['owl-prev', 'owl-next'],
+		    responsive:{
+		        0:{
+		            items:1,
+		            nav:true
+		        },
+		        600:{
+		            items:1,
+		            nav:false
+		        },
+		        1000:{
+		            items:1,
+		            nav:true,
+		            loop:false
+		        }
+		    }
+		})
+
+	});
+}); 
+</script>

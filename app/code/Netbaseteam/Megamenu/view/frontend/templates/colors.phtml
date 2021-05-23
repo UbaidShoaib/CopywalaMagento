@@ -1,0 +1,63 @@
+<?php
+$helper = $this->helper('Netbaseteam\Megamenu\Helper\Data');
+?>
+<style>
+/* Background color when hover item */
+.magemenu-menu.horizontal-menu .explodedmenu > li:hover > a, 
+.magemenu-menu.vertical-menu .explodedmenu > li:hover,
+.magemenu-menu.horizontal-menu .menu .inner-cms-block .block.block-cate .subcate:hover,
+.magemenu-menu.vertical-menu .explodedmenu li.menu .inner-cms-block .block.block-cate .subcate:hover,
+.magemenu-menu.horizontal-menu .menu .inner-cms-block .block.block-cate .subcate .itemMenu:hover,
+.magemenu-menu.vertical-menu .explodedmenu li.menu .inner-cms-block .block.block-cate .subcate .itemMenu:hover,
+.magemenu-menu li.subcate_list:hover
+{
+    background: <?php echo $helper->getBcolorHover(); ?> none repeat scroll 0 0;
+}
+.magemenu-menu.horizontal-menu .explodedmenu li.menu.parentMenu:hover .explodedmenu-menu-popup ,
+.magemenu-menu.vertical-menu .explodedmenu li.menu.parentMenu:hover .explodedmenu-menu-popup, .magemenu-menu.vertical-menu .explodedmenu li.menu:hover .explodedmenu-menu-popup
+{
+	border-top: 3px solid <?php echo $helper->getBcolorHover(); ?>;
+}
+
+.magemenu-menu .explodedmenu-menu-popup .action.primary {
+    background: <?php echo $helper->getBcolorHover(); ?> none repeat scroll 0 0;
+    border: 1px solid <?php echo $helper->getBcolorHover(); ?>;
+}
+
+/* Text Menu Color */
+.magemenu-menu.horizontal-menu .menu .inner-cms-block .block.block-cate .subcate h3 > a ,
+.magemenu-menu.horizontal-menu .explodedmenu li.menu > a,
+.magemenu-menu.horizontal-menu .menu .inner-cms-block .block.block-cate .subcate .itemMenu a,
+.magemenu-menu.vertical-menu .explodedmenu > li > a,
+.magemenu-menu.vertical-menu .explodedmenu li.menu .inner-cms-block .block.block-cate .subcate h3 > a,
+.magemenu-menu.vertical-menu .explodedmenu li.menu .inner-cms-block .block.block-cate .subcate .itemMenu a,
+.nbtype-4 .explodedmenu-menu-popup pgrid_title_menu
+{
+    color: <?php echo $helper->getTextColor(); ?>;
+}
+
+/* Text Menu Color When Hover */
+.magemenu-menu.horizontal-menu .menu .inner-cms-block .block.block-cate .subcate:hover h3 a,
+.magemenu-menu.horizontal-menu .menu .inner-cms-block .block.block-cate .subcate .itemMenu:hover > a,
+.magemenu-menu.horizontal-menu .explodedmenu > li:hover > a span,
+.magemenu-menu.vertical-menu .explodedmenu > li:hover > a
+{
+    color: <?php echo $helper->getTextColorHover(); ?>;
+}
+
+/* Product Name Color */
+.magemenu-menu .explodedmenu-menu-popup .product-name > a,
+.magemenu-menu .explodedmenu-menu-popup .mm-product-name,
+.magemenu-menu .explodedmenu-menu-popup .plist-pname > span,
+.vertical-menu .row-product-list .nb_lbl_type a:hover,
+.magemenu-menu .explodedmenu li.menu.parentMenu.nbtype-5 .row-product-list > div a, .magemenu-menu .subcate_content a.mm-product-name:hover
+{
+	color: <?php echo $helper->getTextProductColor(); ?>;
+}
+
+/* Product Price Color */
+.magemenu-menu .price-box .price {
+    color: <?php echo $helper->getPriceColor(); ?>;
+}
+
+</style>

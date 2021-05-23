@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Netbaseteam Team
+ * @copyright Copyright (c) 2018 Cmsmart (http://www.cmsmart.net)
+ * @package Netbaseteam_Onestepcheckout
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Checkout\Block\Onepage">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="netbaseteamCheckout" xsi:type="object">Netbaseteam\Onestepcheckout\Block\Onepage\LayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Block\Checkout\AttributeMerger">
+        <plugin name="Netbaseteam_Onestepcheckout::AttributeMerger" type="Netbaseteam\Onestepcheckout\Plugin\AttributeMerger" />
+    </type>
+    <type name="\Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="Netbaseteam_Onestepcheckout::LayoutProcessor" type="Netbaseteam\Onestepcheckout\Plugin\LayoutProcessor" />
+    </type>
+
+    <type name="Magento\Checkout\Model\DefaultConfigProvider">
+        <plugin name="Netbaseteam_Onestepcheckout::DefaultConfigProvider" type="Netbaseteam\Onestepcheckout\Plugin\DefaultConfigProvider" />
+    </type>
+
+    <type name="Magento\Checkout\Helper\Data">
+        <plugin name="Netbaseteam_Onestepcheckout::Helper" type="Netbaseteam\Onestepcheckout\Plugin\CheckoutHelperPlugin" />
+    </type>
+
+    <type name="Magento\Checkout\Controller\Onepage\Success">
+        <plugin name="Netbaseteam_Onestepcheckout::SuccessPlugin" type="Netbaseteam\Onestepcheckout\Plugin\Controller\Onepage\SuccessPlugin" />
+    </type>
+</config>

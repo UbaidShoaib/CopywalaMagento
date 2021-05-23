@@ -1,0 +1,1998 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<blocks>
+		<cms_item>
+			<title>Login Info Block</title>
+			<identifier>login-data</identifier>
+			<content><![CDATA[
+				<div class="message info" style="margin-top: 50px;">
+				    <p><strong>Try Demo Customer Access</strong></p>
+				    <p><span style="display:inline-block; width: 80px; padding-right: 10px;">Email:</span>roni_cost@example.com</p>
+				    <p><span style="display:inline-block; width: 80px; padding-right: 10px;">Password:</span>roni_cost3@example.com</p>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item> 
+		<cms_item>
+			<title>Giftcard Block</title>
+			<identifier>giftcard-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo">
+				    <div class="block-promo-wrapper block-promo-2columns">
+				        <a href="{{store url=""}}" class="block-promo giftcard-mailed">
+				            <span class="content">
+				                <strong class="title">Give it away now</strong>
+				                <span class="info">A gift card always beats a blind guess</span>
+				                <span class="more icon">Mailed Gift Cards</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/giftcards/giftcard-mailed.jpg"}}" alt="" /></span>
+				        </a>
+				        <a href="{{store url=""}}" class="block-promo giftcard-virtual">
+				            <img src="{{media url="wysiwyg/giftcards/giftcard-virtual.png"}}" alt="" />
+				            <span class="content">
+				                <strong class="title">Can't decide?</strong>
+				                <span class="info">Just remember it's the card that counts</span>
+				                <span class="more icon">Virtual Gift Cards</span>
+				            </span>
+				        </a>
+				    </div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Eco Friendly Block</title>
+			<identifier>eco-friendly-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo">
+				    <div class="block-promo collection-eco">
+				        <img src="{{media url="wysiwyg/collection/collection-eco.jpg"}}" alt="" />
+				        <span class="content">
+				            <strong class="title">Eco-friendly, ego-friendly</strong>
+				            <span class="info">Recycled polyester, hemp and organic cotton apperel</span>
+				        </span>
+				    </div>
+				</div>
+				{{widget type="Magento\CatalogWidget\Block\Product\ProductsList" products_count="5" template="product/widget/content/grid.phtml" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`eco_collection`,`operator`:`==`,`value`:`1`^],`1--2`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`new`,`operator`:`==`,`value`:`1`^]^]"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Performance Fabrics Block</title>
+			<identifier>performance-fabrics-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo">
+				   <div class="block-promo collection-performance">
+				       <img src="{{media url="wysiwyg/collection/collection-performance.jpg"}}" alt="" />
+				       <span class="content">
+				           <strong class="title">You're the best</strong>
+				           <span class="info">Make a strong statement with Luma Performance sportswear</span>
+				       </span>
+				   </div>
+				</div>
+				{{widget type="Magento\CatalogWidget\Block\Product\ProductsList" products_count="5" template="product/widget/content/grid.phtml" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`performance_fabric`,`operator`:`==`,`value`:`1`^],`1--2`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`new`,`operator`:`==`,`value`:`1`^]^]"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Performance Fabrics Block</title>
+			<identifier>performance-fabrics-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo">
+				   <div class="block-promo collection-performance">
+				       <img src="{{media url="wysiwyg/collection/collection-performance.jpg"}}" alt="" />
+				       <span class="content">
+				           <strong class="title">You're the best</strong>
+				           <span class="info">Make a strong statement with Luma Performance sportswear</span>
+				       </span>
+				   </div>
+				</div>
+				{{widget type="Magento\CatalogWidget\Block\Product\ProductsList" products_count="5" template="product/widget/content/grid.phtml" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`performance_fabric`,`operator`:`==`,`value`:`1`^],`1--2`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`new`,`operator`:`==`,`value`:`1`^]^]"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>New Block</title>
+			<identifier>new-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo">
+				    <a href="{{store url=""}}collections/yoga-new.html" class="block-promo new-main">
+				        <img src="{{media url="wysiwyg/new/new-main.jpg"}}" alt="" />
+				        <span class="content">
+				            <span class="info">New Luma Yoga Collection</span>
+				            <strong class="title">The very latest yoga styles  plus twists on timeless classics</strong>
+				            <span class="more button">Shop New Yoga</span>
+				        </span>
+				    </a>
+
+				    <div class="block-promo-wrapper block-promo-2columns">
+				        <a href="{{store url=""}}collections/performance-new.html" class="block-promo new-performance">
+				            <img src="{{media url="wysiwyg/new/new-performance.jpg"}}" alt="" />
+				            <span class="content">
+				                <strong class="title">Whatever day brings</strong>
+				                <span class="info">Luma Cocona<sup>™</sup> for breathability, CoolTech<sup>™</sup> for wicking, or a blend of&nbsp;both.</span>
+				                <span class="more icon">Performance Fabrics</span>
+				            </span>
+				        </a>
+				        <a href="{{store url=""}}collections/eco-new.html" class="block-promo new-eco">
+				            <img src="{{media url="wysiwyg/new/new-eco.jpg"}}" alt="" />
+				            <span class="content">
+				                <strong class="title">A sense of renewal</strong>
+				                <span class="info">Enjoy comfort of body and mind with Luma eco-friendly choices</span>
+				                <span class="more icon">Shop Eco Friendly </span>
+				            </span>
+				        </a>
+				    </div>
+				</div>
+				<div class="content-heading">
+				    <h2 class="title">Luma's Latest</h2>
+				    <p class="info">Just in time for the new season!</p>
+				</div>
+				{{widget type="Magento\CatalogWidget\Block\Product\ProductsList" products_per_page="4" products_count="4" template="product/widget/content/grid.phtml" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`new`,`operator`:`==`,`value`:`1`^]^]"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Sale Block</title>
+			<identifier>sale-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo">
+				    <a href="{{store url=""}}promotions/women-sale.html" class="block-promo sale-main">
+				        <img src="{{media url="wysiwyg/sale/sale-main.jpg"}}" alt="" />
+				        <span class="content">
+				            <span class="info">Women’s Deals</span>
+				            <strong class="title">Pristine prices on pants, tanks and bras.</strong>
+				            <span class="more button">Shop Women’s Deals</span>
+				        </span>
+				    </a>
+				    <div class="block-promo-wrapper block-promo-2columns">
+				        <a href="{{store url=""}}promotions/men-sale.html" class="block-promo sale-mens">
+				            <img src="{{media url="wysiwyg/sale/sale-mens.jpg"}}" alt="" />
+				            <span class="content">
+				                <strong class="title">Men’s Bargains</strong>
+				                <span class="info">Stretch your budget with active attire</span>
+				                <span class="more icon">Shop Men’s Deals</span>
+				            </span>
+				        </a>
+				        <a href="{{store url=""}}gear.html" class="block-promo sale-women">
+				            <img src="{{media url="wysiwyg/sale/sale-gear.jpg"}}" alt="" />
+				            <span class="content">
+				                <strong class="title">Luma Gear Steals</strong>
+				                <span class="info">Your best efforts deserve a deal</span>
+				                <span class="more icon">Shop Luma Gear</span>
+				            </span>
+				        </a>
+				    </div>
+				    <div class="block-promo-wrapper block-promo-3columns">
+				        <a class="block-promo sale-20-off">
+				            <span class="content">
+				                <strong class="title">20% OFF</strong>
+				                <span class="info">Every $200-plus purchase!</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/sale/sale-20-off.png"}}" alt="" /></span>
+				        </a>
+				        <a class="block-promo sale-free-shipping">
+				            <span class="content">
+				                <strong class="title">Spend $50 or more&nbsp;&mdash; shipping is free!</strong>
+				                <img src="{{media url="wysiwyg/sale/sale-free-shipping.png"}}" alt="" />
+				                <span class="info">Buy more, save more</span>
+				            </span>
+				        </a>
+				        <a href="{{store url=""}}women/tops-women/tees-women.html" class="block-promo sale-womens-t-shirts">
+				            <span class="content">
+				                <strong class="title">You can't have too many tees</strong>
+				                <span class="info">4 tees for the price of 3. Right now</span>
+				                <span class="more icon">Tees on sale</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/womens/womens-t-shirts.png"}}" alt="" /></span>
+				        </a>
+				    </div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Gear Block</title>
+			<identifier>gear-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo">
+				    <a href="{{store url=""}}gear.html" class="block-promo gear-main">
+				        <img src="{{media url="wysiwyg/gear/gear-main.jpg"}}" alt="" />
+				        <span class="content">
+				            <strong class="title">Sprite Yoga Companion Kit</strong>
+				            <span class="info">Save up to 20% on a&nbsp;bundle!</span>
+				            <span class="more button">Shop Yoga Kit</span>
+				        </span>
+				    </a>
+				    <div class="block-promo-wrapper block-promo-2columns">
+				        <a href="{{store url=""}}gear/fitness-equipment.html" class="block-promo gear-fitnes">
+				            <img src="{{media url="wysiwyg/gear/gear-fitnes.jpg"}}" alt="" />
+				            <span class="content">
+				                <strong class="title">Loosen Up</strong>
+				                <span class="info">Extend your training with yoga straps, tone bands,<br />and jump ropes</span>
+				                <span class="more icon">Shop Fitness</span>
+				            </span>
+				        </a>
+				        <a href="{{store url=""}}gear/fitness-equipment.html" class="block-promo gear-equipment">
+				            <img src="{{media url="wysiwyg/gear/gear-equipment.jpg"}}" alt="" />
+				            <span class="content">
+				                <strong class="title">Here’s to you!</strong>
+				                <span class="info">$4 Luma water bottle<br />(save&nbsp;70%)</span>
+				                <span class="note">Enter promo code H2O<br />at check out</span>
+				            </span>
+				        </a>
+				    </div>
+				    <div class="block-promo-wrapper block-promo-3columns">
+				        <a href="{{store url=""}}gear/bags.html" class="block-promo gear-category-bags">
+				            <span class="content">
+				                <strong class="title">Tote, cart or carry</strong>
+				                <span class="info">Luma bags go the distance</span>
+				                <span class="more icon">Shop Bags</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/gear/gear-category-bags.jpg"}}" alt="" /></span>
+				        </a>
+				        <a href="{{store url=""}}gear/fitness-equipment.html" class="block-promo gear-category-equipment">
+				            <span class="content">
+				                <strong class="title">Let’s get after it!</strong>
+				                <span class="info">Luma gym equipment fits your goals and&nbsp;style</span>
+				                <span class="more icon">Shop Equipment</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/gear/gear-category-equipment.jpg"}}" alt="" /></span>
+				        </a>
+				        <a href="{{store url=""}}gear/watches.html" class="block-promo gear-category-watches">
+				            <span class="content">
+				                <strong class="title">Luma watches</strong>
+				                <span class="info">Keeping pace has never been more stylish</span>
+				                <span class="more icon">Shop Watches</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/gear/gear-category-watches.jpg"}}" alt="" /></span>
+				        </a>
+				    </div>
+				</div>
+				<div class="content-heading">
+				    <h2 class="title">Hot Sellers</h2>
+				    <p class="info">Favorites from Luma shoppers</p>
+				</div>
+				{{widget type="Magento\CatalogWidget\Block\Product\ProductsList" products_per_page="4" products_count="4" template="product/widget/content/grid.phtml" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`()`,`value`:`24-MB02, 24-WB04, 24-UG06, 24-WG080`^]^]"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Men Block</title>
+			<identifier>men-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo">
+				    <a href="{{store url=""}}men.html" class="block-promo mens-main">
+				        <img src="{{media url="wysiwyg/mens/mens-main.jpg"}}" alt="" />
+				        <span class="content">
+				            <span class="info">Luma’s Performance Fabric collection</span>
+				            <strong class="title">Going the extra mile just got extra comfortable</strong>
+				            <span class="more button">Shop Performance</span>
+				        </span>
+				    </a>
+				    <div class="block-promo-wrapper block-promo-2columns">
+				        <a href="{{store url=""}}men/tops-men/tees-men.html" class="block-promo mens-t-shirts">
+				            <span class="content">
+				                <strong class="title">Save up to $24!</strong>
+				                <img src="{{media url="wysiwyg/mens/mens-t-shirts.png"}}" alt="" />
+				                <span class="info">Buy 3 Luma tees, get 4 instead</span>
+				                <span class="more icon">Shop Tees</span>
+				            </span>
+				        </a>
+				        <a href="{{store url=""}}men/bottoms-men/pants-men.html" class="block-promo mens-pants">
+				            <img src="{{media url="wysiwyg/mens/mens-pants.jpg"}}" alt="" />
+				            <span class="content">
+				                <strong class="title">Last chance<br />for pants</strong>
+				                <span class="info">Take <span>20% OFF</span>and save bigtime*</span>
+				                <span class="more icon">Shop Pants</span>
+				            </span>
+				        </a>
+				    </div>
+				    <div class="block-promo-wrapper block-promo-3columns">
+				        <a href="{{store url=""}}men/bottoms-men/shorts-men.html" class="block-promo mens-category-shorts">
+				            <span class="content">
+				                <strong class="title">Luma shorts</strong>
+				                <span class="info">Cool it now</span>
+				                <span class="more icon">Shop Shorts</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/mens/mens-category-shorts.jpg"}}" alt="" /></span>
+				        </a>
+				        <a href="{{store url=""}}men/tops-men/tees-men.html" class="block-promo mens-category-tees">
+				            <span class="content">
+				                <strong class="title">Luma tees</strong>
+				                <span class="info">Grab a tee or two!</span>
+				                <span class="more icon">Shop Tees</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/mens/mens-category-tees.jpg"}}" alt="" /></span>
+				        </a>
+				        <a href="{{store url=""}}men/tops-men/hoodies-and-sweatshirts-men.html" class="block-promo mens-category-hoodies">
+				            <span class="content">
+				                <strong class="title">Luma hoodies</strong>
+				                <span class="info">Dress for fitness</span>
+				                <span class="more icon">Shop Hoodies</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/mens/mens-category-hoodies.jpg"}}" alt="" /></span>
+				        </a>
+				    </div>
+				</div>
+				<div class="content-heading">
+				    <h2 class="title">Hot Sellers</h2>
+				    <p class="info">Favorites from Luma shoppers</p>
+				</div>
+				{{widget type="Magento\CatalogWidget\Block\Product\ProductsList" products_per_page="4" products_count="4" template="product/widget/content/grid.phtml" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`()`,`value`:`MT07, MH07, MSH03, MP03`^]^]"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item> 
+		<cms_item>
+			<title>Training Block</title>
+			<identifier>training-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo"> 
+				    <a href="{{store url=""}}training.html" class="block-promo training-main">
+				        <img src="{{media url="wysiwyg/training/training-main.jpg"}}" alt="" />
+				        <span class="content">
+				            <strong class="title">
+				                <span>Motivate</span> yourself.<br />
+				                <span>Reach</span> goals.<br />
+				                <span>Boost</span> ambition.<br />
+				                <span>Max</span> fitness.<br />
+				                <span>Upgrade</span> lifestyle.
+				            </strong>
+				        </span>
+				    </a>
+				    <a href="{{store url=""}}collections/erin-recommends.html" class="block-promo training-erin">
+				        <img src="{{media url="wysiwyg/training/training-erin.jpg"}}" alt="" />
+				        <span class="content">
+				            <strong class="title">Before creating Luma, pro trainer Erin Renny helped world-class athletes reach peak fitness</strong>
+				            <span class="info">Hand-selected by Erin, our training downloads reflect a commitment to yoga, health and wellness.</span>
+				        </span>
+				    </a>
+				    <a href="{{store url=""}}training/training-video.html" class="block-promo training-on-demand">
+				        <span class="content">
+				            <span class="icon download"><span>Download</span></span>
+				            <strong class="title">Training on demand</strong>
+				            <span class="info">Luma downloads to inspire and&nbsp;challenge.<br />Your space, your pace</span>
+				            <span class="more icon">Videos</span>
+				        </span>
+				    </a>
+				</div>
+				<div class="content-heading">
+				    <h2 class="title">Top Videos</h2>
+				    <p class="info">Stream free with subscription</p>
+				</div>
+				{{widget type="Magento\CatalogWidget\Block\Product\ProductsList" products_count="4" template="product/widget/content/grid.phtml" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`()`,`value`:`241-MB08, 240-LV05, 240-LV09, 240-LV07`^]^]"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item> 
+		<cms_item>
+			<title>Women Block</title>
+			<identifier>women-block</identifier>
+			<content><![CDATA[
+				<div class="blocks-promo">
+				    <a href="{{store url=""}}women.html" class="block-promo womens-main">
+				        <img src="{{media url="wysiwyg/womens/womens-main.jpg"}}" alt="" />
+				        <span class="content">
+				            <span class="info">New Luma Yoga Collection</span>
+				            <strong class="title">Yoga is ancient<br />Clothing shouldn’t be</strong>
+				            <span class="more button">Shop New Yoga</span>
+				        </span>
+				    </a>
+				    <div class="block-promo-wrapper block-promo-2columns">
+				        <a href="{{store url=""}}women/tops-women/tees-women.html" class="block-promo womens-t-shirts">
+				            <span class="content">
+				                <strong class="title">You can’t have too many tees</strong>
+				                <img src="{{media url="wysiwyg/womens/womens-t-shirts.png"}}" alt="" />
+				                <span class="info">4 tees for the price of 3. Right now</span>
+				                <span class="more icon">Women’s Tees</span>
+				            </span>
+				        </a>
+				        <a href="{{store url=""}}women/bottoms-women/pants-women.html" class="block-promo womens-pants">
+				            <img src="{{media url="wysiwyg/womens/womens-pants.jpg"}}" alt="" />
+				            <span class="content">
+				                <strong class="title">Hot pants<br />Hot deals</strong>
+				                <span class="info"><span>20% OFF</span>Luma pants when you shop today*</span>
+				                <span class="more icon">Shop Pants</span>
+				            </span>
+				        </a>
+				    </div>
+				    <a href="{{store url=""}}collections/erin-recommends.html" class="block-promo womens-erin">
+				        <span class="content">
+				            <strong class="title">What would Erin wear?</strong>
+				            <span class="info">It’s no secret: see Luma founder Erin Renny’s wardrobe go-to’s</span>
+				            <span class="more icon">Shop Erin Recommends</span>
+				        </span>
+				        <span class="image"><img src="{{media url="wysiwyg/womens/womens-erin.jpg"}}" alt="" /></span>
+				    </a>
+				    <div class="block-promo-wrapper block-promo-3columns">
+				        <a href="{{store url=""}}women/bottoms-women/pants-women.html" class="block-promo womens-category-pants">
+				            <span class="content">
+				                <strong class="title">Luma pants</strong>
+				                <span class="info">Pants for yoga, gym and outdoors</span>
+				                <span class="more icon">Shop Pants</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/womens/womens-category-pants.jpg"}}" alt="" /></span>
+				        </a>
+				        <a href="{{store url=""}}women/bottoms-women/shorts-women.html" class="block-promo womens-category-shorts">
+				            <span class="content">
+				                <strong class="title">Luma shorts</strong>
+				                <span class="info">Exercise comfort</span>
+				                <span class="more icon">Shop Shorts</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/womens/womens-category-shorts.jpg"}}" alt="" /></span>
+				        </a>
+				        <a href="{{store url=""}}women/tops-women/tanks-women.html" class="block-promo womens-category-tanks">
+				            <span class="content">
+				                <strong class="title">Luma Bras<br />Tanks</strong>
+				                <span class="info">Stock up for summer!</span>
+				                <span class="more icon">Shop Now</span>
+				            </span>
+				            <span class="image"><img src="{{media url="wysiwyg/womens/womens-category-tanks.jpg"}}" alt="" /></span>
+				        </a>
+				    </div>
+				</div>
+				<div class="content-heading">
+				    <h2 class="title">Hot Sellers</h2>
+				    <p class="info">Favorites from Luma shoppers</p>
+				</div>
+				{{widget type="Magento\CatalogWidget\Block\Product\ProductsList" products_per_page="4" products_count="4" template="product/widget/content/grid.phtml" conditions_encoded="^[`1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Combine`,`aggregator`:`all`,`value`:`1`,`new_child`:``^],`1--1`:^[`type`:`Magento||CatalogWidget||Model||Rule||Condition||Product`,`attribute`:`sku`,`operator`:`()`,`value`:`WS12, WT09, WH05, WP12`^]^]"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>New Left Menu Block</title>
+			<identifier>new-left-menu-block</identifier>
+			<content><![CDATA[
+				<div class="categories-menu"><strong class="title"><span>New in women's</span></strong>
+					<ul class="items">
+					    <li class="item"><a href="{{store url=""}}women/tops-women/hoodies-and-sweatshirts-women.html">Hoodies & Sweatshirts</a></li>
+					    <li class="item"><a href="{{store url=""}}women/tops-women/jackets-women.html">Jackets</a></li>
+					    <li class="item"><a href="{{store url=""}}women/tops-women/tees-women.html">Tees</a></li>
+					    <li class="item"><a href="{{store url=""}}women/tops-women/tanks-women.html">Bras & Tanks</a></li>
+					    <li class="item"><a href="{{store url=""}}women/bottoms-women/pants-women.html">Pants</a></li>
+					    <li class="item"><a href="{{store url=""}}women/bottoms-women/shorts-women.html">Shorts</a></li>
+					</ul>
+
+					<strong class="title"><span>New in men's</span></strong>
+					<ul class="items">
+					    <li class="item"><a href="{{store url=""}}men/tops-men/hoodies-and-sweatshirts-men.html">Hoodies & Sweatshirts</a></li>
+					    <li class="item"><a href="{{store url=""}}men/tops-men/jackets-men.html">Jackets</a></li>
+					    <li class="item"><a href="{{store url=""}}men/tops-men/tees-men.html">Tees</a></li>
+					    <li class="item"><a href="{{store url=""}}men/tops-men/tanks-men.html">Tanks</a></li>
+					    <li class="item"><a href="{{store url=""}}men/bottoms-men/pants-men.html">Pants</a></li>
+					    <li class="item"><a href="{{store url=""}}men/bottoms-men/shorts-men.html">Shorts</a></li>
+					</ul>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Women Left Menu Block</title>
+			<identifier>women-left-menu-block</identifier>
+			<content><![CDATA[
+				<div class="categories-menu"><strong class="title"><span>Tops</span></strong>
+					<ul class="items">
+					    <li class="item"><a href="{{store url=""}}women/tops-women/hoodies-and-sweatshirts-women.html">Hoodies & Sweatshirts</a></li>
+					    <li class="item"><a href="{{store url=""}}women/tops-women/jackets-women.html">Jackets</a></li>
+					    <li class="item"><a href="{{store url=""}}women/tops-women/tees-women.html">Tees</a></li>
+					    <li class="item"><a href="{{store url=""}}women/tops-women/tanks-women.html">Bras & Tanks</a></li>
+					</ul>
+
+					<strong class="title"><span>Bottoms</span></strong>
+					<ul class="items">
+					    <li class="item"><a href="{{store url=""}}women/bottoms-women/pants-women.html">Pants</a></li>
+					    <li class="item"><a href="{{store url=""}}women/bottoms-women/shorts-women.html">Shorts</a></li>
+					</ul>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Women Left Menu Block</title>
+			<identifier>women-left-menu-block</identifier>
+			<content><![CDATA[
+				<div class="categories-menu"><strong class="title"><span>Tops</span></strong>
+					<ul class="items">
+					    <li class="item"><a href="{{store url=""}}women/tops-women/hoodies-and-sweatshirts-women.html">Hoodies & Sweatshirts</a></li>
+					    <li class="item"><a href="{{store url=""}}women/tops-women/jackets-women.html">Jackets</a></li>
+					    <li class="item"><a href="{{store url=""}}women/tops-women/tees-women.html">Tees</a></li>
+					    <li class="item"><a href="{{store url=""}}women/tops-women/tanks-women.html">Bras & Tanks</a></li>
+					</ul>
+
+					<strong class="title"><span>Bottoms</span></strong>
+					<ul class="items">
+					    <li class="item"><a href="{{store url=""}}women/bottoms-women/pants-women.html">Pants</a></li>
+					    <li class="item"><a href="{{store url=""}}women/bottoms-women/shorts-women.html">Shorts</a></li>
+					</ul>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Men Left Menu Block</title>
+			<identifier>men-left-menu-block</identifier>
+			<content><![CDATA[
+				<div class="categories-menu"><strong class="title"><span>Tops</span></strong>
+				<ul class="items">
+				    <li class="item"><a href="{{store url=""}}men/tops-men/hoodies-and-sweatshirts-men.html">Hoodies & Sweatshirts</a></li>
+				    <li class="item"><a href="{{store url=""}}men/tops-men/jackets-men.html">Jackets</a></li>
+				    <li class="item"><a href="{{store url=""}}men/tops-men/tees-men.html">Tees</a></li>
+				    <li class="item"><a href="{{store url=""}}men/tops-men/tanks-men.html">Tanks</a></li>
+				</ul>
+
+				<strong class="title"><span>Bottoms</span></strong>
+				<ul class="items">
+				    <li class="item"><a href="{{store url=""}}men/bottoms-men/pants-men.html">Pants</a></li>
+				    <li class="item"><a href="{{store url=""}}men/bottoms-men/shorts-men.html">Shorts</a></li>
+				</ul>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Gear Left Menu Block</title>
+			<identifier>gear-left-menu-block</identifier>
+			<content><![CDATA[
+				<div class="categories-menu"><strong class="title"><span></span></strong>
+				<ul class="items">
+				    <li class="item"><a href="{{store url=""}}gear/bags.html">Bags</a></li>
+				    <li class="item"><a href="{{store url=""}}gear/fitness-equipment.html">Fitness Equipment</a></li>
+				    <li class="item"><a href="{{store url=""}}gear/watches.html">Watches</a></li>
+				</ul>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Sale Left Menu Block</title>
+			<identifier>sale-left-menu-block</identifier>
+			<content><![CDATA[
+				<div class="categories-menu"><strong class="title"><span>Women's Deals</span></strong>
+				<ul class="items">
+				    <li class="item"><a href="{{store url=""}}women/tops-women/hoodies-and-sweatshirts-women.html">Hoodies and Sweatshirts</a></li>
+				    <li class="item"><a href="{{store url=""}}women/tops-women/jackets-women.html">Jackets</a></li>
+				    <li class="item"><a href="{{store url=""}}women/tops-women/tees-women.html">Tees</a></li>
+				    <li class="item"><a href="{{store url=""}}women/tops-women/tanks-women.html">Bras & Tanks</a></li>
+				    <li class="item"><a href="{{store url=""}}women/bottoms-women/pants-women.html">Pants</a></li>
+				    <li class="item"><a href="{{store url=""}}women/bottoms-women/shorts-women.html">Shorts</a></li>
+				</ul>
+
+				<strong class="title"><span>Mens's Deals</span></strong>
+				<ul class="items">
+				    <li class="item"><a href="{{store url=""}}men/tops-men/hoodies-and-sweatshirts-men.html">Hoodies and Sweatshirts</a></li>
+				    <li class="item"><a href="{{store url=""}}men/tops-men/jackets-men.html">Jackets</a></li>
+				    <li class="item"><a href="{{store url=""}}men/tops-men/tees-men.html">Tees</a></li>
+				    <li class="item"><a href="{{store url=""}}men/bottoms-men/pants-men.html">Pants</a></li>
+				    <li class="item"><a href="{{store url=""}}men/bottoms-men/shorts-men.html">Shorts</a></li>
+				</ul>
+
+				<strong class="title"><span>Gear Deals</span></strong>
+				<ul class="items">
+				    <li class="item"><a href="{{store url=""}}gear/bags.html">Bags</a></li>
+				    <li class="item"><a href="{{store url=""}}gear/fitness-equipment.html">Fitness Equipment</a></li>
+				</ul>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Sale Left Menu Block</title>
+			<identifier>sale-left-menu-block</identifier>
+			<content><![CDATA[
+				<div class="categories-menu"><strong class="title"><span>Women's Deals</span></strong>
+				<ul class="items">
+				    <li class="item"><a href="{{store url=""}}women/tops-women/hoodies-and-sweatshirts-women.html">Hoodies and Sweatshirts</a></li>
+				    <li class="item"><a href="{{store url=""}}women/tops-women/jackets-women.html">Jackets</a></li>
+				    <li class="item"><a href="{{store url=""}}women/tops-women/tees-women.html">Tees</a></li>
+				    <li class="item"><a href="{{store url=""}}women/tops-women/tanks-women.html">Bras & Tanks</a></li>
+				    <li class="item"><a href="{{store url=""}}women/bottoms-women/pants-women.html">Pants</a></li>
+				    <li class="item"><a href="{{store url=""}}women/bottoms-women/shorts-women.html">Shorts</a></li>
+				</ul>
+
+				<strong class="title"><span>Mens's Deals</span></strong>
+				<ul class="items">
+				    <li class="item"><a href="{{store url=""}}men/tops-men/hoodies-and-sweatshirts-men.html">Hoodies and Sweatshirts</a></li>
+				    <li class="item"><a href="{{store url=""}}men/tops-men/jackets-men.html">Jackets</a></li>
+				    <li class="item"><a href="{{store url=""}}men/tops-men/tees-men.html">Tees</a></li>
+				    <li class="item"><a href="{{store url=""}}men/bottoms-men/pants-men.html">Pants</a></li>
+				    <li class="item"><a href="{{store url=""}}men/bottoms-men/shorts-men.html">Shorts</a></li>
+				</ul>
+
+				<strong class="title"><span>Gear Deals</span></strong>
+				<ul class="items">
+				    <li class="item"><a href="{{store url=""}}gear/bags.html">Bags</a></li>
+				    <li class="item"><a href="{{store url=""}}gear/fitness-equipment.html">Fitness Equipment</a></li>
+				</ul>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Contact us info</title>
+			<identifier>contact-us-info</identifier>
+			<content><![CDATA[
+				<div class="contact-info cms-content">
+				   <p class="cms-content-important">We love hearing from you, our Luma customers. Please contact us about anything at all. Your latest passion, unique health experience or request for a specific product. We’ll do everything we can to make your Luma experience unforgettable every time. Reach us however you like</p>
+				   <div class="block block-contact-info">
+				       <div class="block-title">
+				           <strong>Contact Us Info</strong>
+				       </div>
+				       <div class="block-content">
+				           <div class="box box-phone">
+				               <strong class="box-title">
+				                   <span>Phone</span>
+				               </strong>
+				               <div class="box-content">
+				                   <span class="contact-info-number">1-800-403-8838</span>
+				                   <p>Call the Luma Helpline for concerns, product questions, or anything else. We’re here for you 24 hours a day - 365 days a year.</p>
+				               </div>
+				           </div>
+				           <div class="box box-design-inquiries">
+				               <strong class="box-title">
+				                   <span>Apparel Design Inquiries</span>
+				               </strong>
+				               <div class="box-content">
+				                   <p>Are you an independent clothing designer? Feature your products on the Luma website! Please direct all inquiries via email to: <a href="mailto:cs@luma.com">cs@luma.com</a></p>
+				               </div>
+				           </div>
+				           <div class="box box-press-inquiries">
+				               <strong class="box-title">
+				                   <span>Press Inquiries</span>
+				               </strong>
+				               <div class="box-content">
+				                   <p>Please direct all media inquiries via email to: <a href="mailto:pr@luma.com">pr@luma.com</a></p>
+				               </div>
+				           </div>
+				       </div>
+				   </div>
+				</div> 
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item> 
+		<cms_item>
+			<title>Footer Links Block</title>
+			<identifier>footer_links_block</identifier>
+			<content><![CDATA[
+				<ul class="footer links">
+				    <li class="nav item"><a href="{{store url="about-us"}}">About us</a></li>
+				    <li class="nav item"><a href="{{store url="customer-service"}}">Customer Service</a></li>
+				</ul> 
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>E-Commerce Hosting</title>
+			<identifier>content-hosting</identifier>
+			<content><![CDATA[
+				<div class="wrap-content wrap-hosting">
+					<div class="content-top top-hosting">
+						<div class="col-md-6 col-left">
+							<img src="{{media url="wysiwyg/mag2solution/orther/hosting.jpg"}}" alt="" />
+						</div>
+						<div class="col-md-6 col-right">
+							<strong>e-Commerce Hosting</strong>
+							<p>
+								Completely managed, secure and reliable ecommerce hosting for your online store
+							</p>
+						</div>
+					</div>
+					<div class="content content-hosting">
+						<ul>
+							<li>
+								<strong class="title">Your own domain name</strong>
+								<p>
+									Printshop registers and keeps your domain (yourcompany.com) renewed every year, free of charge! Have your own domain already? No problem! Just point it to us and you’re all set!
+								</p>
+							</li>
+							<li>
+								<strong class="title">Monthly transparent upgrades</strong>
+								<p>
+									To stay competitive, your business needs the latest technology, which is why we’re constantly updating the Printshop platform to give you that edge! You can expect monthly releases that add new functionality to help you stay ahead!
+								</p>
+							</li>
+							<li>
+								<strong class="title">256Bit SSL certificate included</strong>
+								<p>Bank grade security is included with all Printshop plans, ensuring your customer data is safe and secure!
+								</p>
+							</li> 
+							<li>
+								<strong class="title">FTP Access to Files</strong>
+								<p>Easily and quickly access your store's files using file transfer protocol (FTP). Transfer image files, design templates and other site specific files to and from your store's server.
+								</p>
+							</li>
+							<li>
+								<strong class="title">Daily Backups</strong>
+								<p>Your store and website data is secure with Printshop, which includes daily data backups in case you delete or overwrite any file that you might need to restore.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>e-Commerce Service</title>
+			<identifier>content-service</identifier>
+			<content><![CDATA[
+				<div class="wrap-content wrap-services">
+					<div class="content-top top-services">
+						<div class="col-md-6 col-left">
+							<img src="{{media url="wysiwyg/mag2solution/orther/service.jpg"}}" alt="" />
+						</div>
+						<div class="col-md-6 col-right">
+							<strong>e-Commerce Service</strong>
+							<p>
+								Our Printshop will help you to start your online store business the smart way.
+								Too many people get bogged down by the technical aspects of owning a website that they never start. Allow our webmasters to fix that. They will handle the technical side so you can concentrate on what's important, building your business.
+							</p>
+						</div>
+					</div>
+					<div class="content content-services">
+						<ul>
+							<li>
+								<strong class="title">Data entry services</strong>
+								<p>
+									Save yourself the headache of potential import or export issues by having one of our webmasters doing the hard work for you.</br>
+									Whether you don't have the extra time for your data entry tasks or need some help with importing and exporting a lot of data, the myWebmaster team is here to help, exactly when you need it.
+								</p>
+							</li>
+							<li>
+								<strong class="title">Fine-tuning by web design experts</strong>
+								<p>
+									Stand out from the crowd with a personalized store and engage your customer's interest
+									We want your store to be the perfect match for your brand. Whether you need tweaks to your site's HTML or CSS, images resized for consistency, or other changes, our team of experienced web designers and coders can help you realize your online store's ideal look.
+								</p>
+							</li>
+							<li>
+								<strong class="title">Results driven marketing & SEO services</strong>
+								<p>Grow your online presence by improving rankings and turn your visitors into buyers.
+								Printshop's Marketing & Search Engine Optimization (SEO) services consist of fully managed deliverables which are applied to your website in order to provide optimal content and structure for search engines.
+								</p>
+							</li> 
+						</ul>
+					</div>
+				</div>
+
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>E-Commerce Marketing</title>
+			<identifier>content-marketing</identifier>
+			<content><![CDATA[
+				<div class="wrap-content wrap-marketing">
+					<div class="content-top top-marketing">
+						<div class="col-md-6 col-left">
+							<img src="{{media url="wysiwyg/mag2solution/orther/marketing.jpg"}}" alt="" />
+						</div>
+						<div class="col-md-6 col-right">
+							<strong>e-Commerce Marketing</strong>
+							<p>
+								Powerful marketing tools to boost your rankings
+							</p>
+						</div>
+					</div>
+					<div class="content content-marketing">
+						<ul>
+							<li>
+								<strong class="title">Search Engine Optimization (SEO)</strong>
+								<p>
+									Every part of your Printshop store is built with SEO in mind. All the tools you need to rank are at your fingertips, right there in your dashboard.
+								</p>
+							</li>
+							<li>
+								<strong class="title">Social Media Marketing</strong>
+								<p>
+									Printshop's platform makes it easy for you to publicize your products on social media and create enticing promotions that customers will want to share. 
+								</p>
+							</li>
+							<li>
+								<strong class="title">Shopping Feeds</strong>
+								<p>Cutting-edge shopping feed solutions let you reach new audiences and sell in multiple venues with ease, increasing your store's visibility.</p>
+							</li>
+							<li>
+								<strong class="title">Built-in Blog </strong>
+								<p>  
+								  	Nothing grabs Google's attention these days like quality content. Printshop's Built-in Blog feature makes it easy to write and optimize authoritative posts.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Content Privacy</title>
+			<identifier>content-privacy</identifier>
+			<content><![CDATA[
+				<div class="wrap-content wrap-privacy">
+					<div class="content-top top-privacy">
+						<div class="col-md-6 col-left">
+							<img src="{{media url="wysiwyg/mag2solution/orther/privacy.jpg"}}" alt="" />
+						</div>
+						<div class="col-md-6 col-right">
+							<strong>Privacy Policy</strong>
+							<p>
+								TIt is our policy to respect your privacy regarding any information we may collect while operating our website.
+							</p>
+						</div>
+					</div>
+					<div class="content content-privacy">
+						<ul>
+							<li>
+								<strong class="title">Personal information</strong>
+								<p>
+									Before using certain parts of any Printshop.com or ordering Products, you must complete an online registration form. During registration, you will be prompted to provide to us certain personal information, including but not limited to User’s (your/company) name, shipping and billing address, phone number, email address, and credit card number. In addition, we may also ask you for your/Customer’s country of residence and/or organization’s country of operation, so we can comply with applicable laws and regulations, and for your gender. These kinds of personal information are used for billing purposes, to fulfill orders, to communicate about order and Printshop, and for internal marketing purposes. If we encounter a problem when processing the order, your personal information may be used to contact you.</br>
+									By registering at Printshop.com, you agree that all information provided in the registration data is true and accurate and that you will maintain and update this information as required in order to keep it current, complete, and accurate.
+									Printshop may collect statistics about the behavior of visitors to its Site. Printshop may display this information publicly or provide it to others. However, Printshop does not disclose personal information other than as described here. 
+									If you are a registered user of a Printshop Site and have supplied your email address, Printshop may occasionally send you an email to tell you about new features, new Products, solicit your feedback. Printshop takes all measures reasonably necessary to protect against count for any reason, in our sole discretion.
+								</p>
+							</li>
+							<li>
+								<strong class="title">Disclosure of information</strong>
+								<p>
+									We do not sell or rent, your personal information to third parties for their marketing purposes without Your explicit consent. We may disclose personal information to respond to legal requirements, enforce our policies, respond to claims that a content violates other’s rights, or protect anyone’s rights, property, or safety. We may also share personal information with:
+									<span>Service providers who help with our business operations and assist in the delivery of Products or Services to our users. These service providers are under confidentiality agreements with us;
+									</span>
+									<span>Law enforcement or other government officials in order to investigate, prevent, or take action regarding illegal activities, suspected fraud, violations of law, or as otherwise required by law
+									</span>
+
+								</p>
+							</li>
+							<li>
+								<strong class="title">Security</strong>
+								<p>Your account is protected by a password for your privacy and security. You need to prevent unauthorized access to your account and personal information by selecting and protecting your password appropriately and limiting access to your computer and browser by signing off after you have finished accessing your account.</p>
+							</li>
+							<li>
+								<strong class="title">Privacy policy changes </strong>
+								<p>  
+								  	Although most changes are likely to be minor, Printshop may change its Privacy Policy from time to time, and in Printshop’s sole discretion. Printshop encourages you to frequently check this page for any changes to its Privacy Policy. Your continued use of this Site after any change in this Privacy Policy will constitute your acceptance of such change.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Content Terms</title>
+			<identifier>content-terms</identifier>
+			<content><![CDATA[
+				<div class="wrap-content wrap-terms">
+					<div class="content-top top-terms">
+						<div class="col-md-6 col-left">
+							<img src="{{media url="wysiwyg/mag2solution/orther/terms.jpg"}}" alt="" />
+						</div>
+						<div class="col-md-6 col-right">
+				<strong>Terms of Service </strong>
+							<p>
+								The following are the terms and conditions for use of the Services (the " Terms"), along with any amendments thereto and any operating rules or policies that may be published from time to time by Printshop.com. 
+								Please read this Agreement carefully before accessing or using the Website. By accessing or using any part of the web site, you agree to become bound by the terms and conditions of this agreement. If you have any further queries or concerns, you are more than welcome to contact us at support@Printshop.com 
+							</p>
+						</div>
+					</div>
+					<div class="content content-terms">
+						<ul>
+							<li>
+								<strong class="title">Account Point of Contact; Account Ownership</strong>
+								<p>You must register for an account (the "Account") to access and use the Services by providing your full legal name, current address, phone number, a valid email address and certain other information indicated as required. You agree that all such information is current and accurate. We will use the email address that you provide as the primary method of communication, including for billing matters. We may reject your application for an Account for any reason, in our sole discretion.</p>
+							</li>
+							<li>
+								<strong class="title">Responsibility:</strong>
+								<p>We may suspend the Purchased Services to You with or without notice and without liability if: (a) We reasonably believe that You are using the Services in violation of the Agreement; (b) You don't cooperate with Our reasonable investigation of any suspected violation of the Agreement; (c) there is an attack on Your Sites or Your Sites are accessed or manipulated by a third party without Your consent, (d) We are required by law, or a regulatory or government body, to suspend Your Services; or (e) there is another event for which We reasonably believe that the suspension of Services is necessary to protect Our other customers. We will use commercially reasonable efforts to give You advance notice of any such suspension unless We determine that a suspension on shorter notice or without notice is necessary to protect Us or Our other customers from imminent risk.</p>
+							</li>
+							<li>
+								<strong class="title">Content & ownership/ Intellectual Property</strong>
+								<p>Our Services allow You and Your End Users to upload, post, transmit, publish, share, store, or manage content, including, data, graphics, links, photos, music, sound, messages, videos and other materials (altogether, "Your Content"). You are solely responsible for any and all of Your Content. You represent and warrant that (i) You have all necessary rights to distribute Your Content via Our Services and (ii) Your Content does not violate the rights of any third party. You hereby grant Us a worldwide, royalty-free, non-exclusive license to host and use Your Content in order to provide the Services to You. You are responsible for undertaking necessary measures to ensure the security, confidentiality and integrity of all Your Content transmitted through or stored on Our servers. You are responsible for any of Your Content that may be lost or unrecoverable through Your use of the Services.</p>
+							</li>
+							<li>
+								<strong class="title">Paid Services.</strong>
+								<p>  
+								  	<span>Fees Payment.</span>
+										Optional premium ‘Pro’ paid services such as extra storage, Pro themes, and plugins, or Campus Packages are available on the Website. By selecting a premium service you agree to pay Printshop.com the 6 months, 12 month or 24 months subscription fees indicated for that service. Payments will be charged on the day you sign up for a premium service and will cover the use of that service for a monthly or annual period as indicated. Premium service fees are not refundable. 
+									<span>Taxes:</span>
+										All fees are exclusive of all federal, state, and/or other governmental sales, goods, and services, value-added, harmonized or other taxes, fees or charges. Customer shall be responsible for all sales, goods, and services, value-added, harmonized or other taxes, fees or charges. 
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Service Home3</title>
+			<identifier>section-home3</identifier>
+			<content><![CDATA[
+				<div class="section-service section-service3 section-print">
+					<div class="container">
+						<div class="row display-clear">
+							<div class="col-sm-6 col-md-3">
+								<div class="section-service__inner">
+									<div class="section-service__inner--icon">
+										<img src="{{media url=wysiwyg/home01/service1.png}}" alt="" />
+									</div>
+									<div class="section-service__inner--text">
+										<h5>Quality Printing</h5>
+										<p>Provide the best quality</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3">
+								<div class="section-service__inner">
+									<div class="section-service__inner--icon">
+		                                                       <img src="{{media url=wysiwyg/home01/service2.png}}" alt="" />
+									</div>
+									<div class="section-service__inner--text">
+										<h5>Timely Delivery</h5>
+										<p>Always on time without hasse</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3">
+								<div class="section-service__inner">
+									<div class="section-service__inner--icon">
+										<img src="{{media url=wysiwyg/home01/service3.png}}" alt="" />
+									</div>
+									<div class="section-service__inner--text">
+										<h5>Eco-Minded</h5>
+										<p>All our product is eco-friendly</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3">
+								<div class="section-service__inner">
+									<div class="section-service__inner--icon">
+		                                                       <img src="{{media url=wysiwyg/home01/service4.png}}" alt="" />
+									</div>
+									<div class="section-service__inner--text">
+										<h5>Money Back Guaranteed</h5>
+										<p>100% happy customers</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Bestsell Product Home3</title>
+			<identifier>bestsell-product-home3</identifier>
+			<content><![CDATA[
+				{{block class="Netbase\Product\Block\BestsellerMugs" template="Netbase_Product::Bestseller-home3.phtml"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Image  Checkout</title>
+			<identifier>image-checkout</identifier>
+			<content><![CDATA[
+				<img src="{{media url="wysiwyg/checkout/bg.jpg"}}" alt="bg-checkout" />
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item> 
+		<cms_item>
+			<title>Testimonial Home 1</title>
+			<identifier>testimonial_home_1</identifier>
+			<content><![CDATA[
+				<section class="section-print section-testimonial-home1">
+					<div class="container">
+						<div class="heading">
+							<h3>Testimonial</h3>
+							<p>We love out clients</p>
+						</div>
+						<div class="inner owl-carousel">
+						<div class="section-content">
+							<div class="image">
+								<a href="#"><img src="{{media url=testimonial/avata1.png}}" alt="avata1" /></a>
+							</div>
+							<div class="info">
+								<div class="info_content">
+									<i class="icon-quote left"></i><p>If you are looking for a reliable printing house that will get back to you right away then Printshop is the way to 
+										<br> go. Whether it is a rush delivery, quick <br>
+					 estimate, or paper samples, they are always there with 100% enthusiasm to get the job done. </p><i class="icon-quote right"></i>
+								</div>
+								<div class="name">
+									<span>Susan</span>
+								</div>
+								<div class="job"><span>Web Design</span></div>
+							</div>
+						</div>
+						<div class="section-content">
+							<div class="image">
+								<a href="#"><img src="{{media url=testimonial/avata2.png}}" alt="avata2" /></a>
+							</div>
+							<div class="info">
+								<div class="info_content">
+									<i class="icon-quote left"></i><p>If you are looking for a reliable printing house that will get back to you right away then Printshop is the way to 
+										<br> go. Whether it is a rush delivery, quick <br>
+					 estimate, or paper samples, they are always there with 100% enthusiasm to get the job done. </p><i class="icon-quote right"></i>
+								</div>
+								<div class="name">
+									<span>Susan</span>
+								</div>
+								<div class="job"><span>Web Design</span></div>
+							</div>
+						</div>
+						<div class="section-content">
+							<div class="image">
+								<a href="#"><img src="{{media url=testimonial/avata3.png}}" alt="avata3" /></a>
+							</div>
+							<div class="info">
+								<div class="info_content">
+									<i class="icon-quote left"></i><p>If you are looking for a reliable printing house that will get back to you right away then Printshop is the way to 
+										<br> go. Whether it is a rush delivery, quick <br>
+					 estimate, or paper samples, they are always there with 100% enthusiasm to get the job done. </p><i class="icon-quote right"></i>
+								</div>
+								<div class="name">
+									<span>Susan</span>
+								</div>
+								<div class="job"><span>Web Design</span></div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</section>
+				<script type="text/javascript" xml="space">
+				require(['jquery','owlCarousel'], function($) {
+					        jQuery(document).ready(function() {	
+							$('.owl-carousel').owlCarousel({
+							    loop:true,
+							    margin:10,
+							    responsiveClass:true,
+							    navText: ["<i class='icon-left-open'></i>", "<i class='icon-right-open'></i>"],
+								navClass: ['owl-prev', 'owl-next'],
+							    responsive:{
+							        0:{
+							            items:1,
+							            nav:true
+							        },
+							        600:{
+							            items:1,
+							            nav:false
+							        },
+							        1000:{
+							            items:1,
+							            nav:true,
+							            loop:false
+							        }
+							    }
+							});
+					   }); 
+				    });
+				 </script>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>  
+		<cms_item>
+			<title>Image Blog</title>
+			<identifier>image-blog</identifier>
+			<content><![CDATA[
+				<img src="{{media url="wysiwyg/blog/bg_blog_1.jpg"}}" alt="bg_blog_1" />
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item> 
+		<cms_item>
+			<title>Service Contact Us</title>
+			<identifier>service-contact-us</identifier>
+			<content><![CDATA[
+				<div class="contact-inner">
+					<div class="row">
+					  <h1 class="animation-element contact-title">We Are Here To Help You</h1>
+						<p class="animation-element contact-title-nb">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard <br>dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+						<div class="col-xs-12 col-sm-6 col-md-3 contact-service animation-element scroll-zoom-out">
+						   <i class="icon-location-2"></i>
+						   <div class="contact-service-text"><strong>HEAD OFFICEL</strong> <br /> <span>121 King Street, Melbourne </span> <br /> <span>Victoria 3000 Australia</span></div>
+						  </div>
+						  <div class="col-xs-12 col-sm-6 col-md-3 contact-service animation-element scroll-zoom-out">
+						   <i class="icon-soccer-ball"></i>
+						   <div class="contact-service-text"><strong>SUPPORTL</strong> <br /> <span>+0 (899) 123-456789 </span> <br /> <span>+0 (899) 123-456789</span></div>
+						  </div>
+						  <div class="col-xs-12 col-sm-6 col-md-3 contact-service animation-element scroll-zoom-out">
+						   <i class="icon-phone"></i>
+						   <div class="contact-service-text"><strong>BILING</strong> <br /> <span>+0 (899) 123-456789 </span> <br /> <span>+0 (899) 123-456789</span></div>
+						  </div>
+						  <div class="col-xs-12 col-sm-6 col-md-3 contact-service animation-element scroll-zoom-out">
+						   <i class="icon-chat"></i>
+						   <div class="contact-service-text"><strong>LIVE CHAT</strong> <br /> <span>+0 (899) 123-456789 </span> <br /> <span>+0 (899) 123-456789</span></div>
+					  	</div>
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>image Faq</title>
+			<identifier>image-faq</identifier>
+			<content><![CDATA[
+				<img src="{{media url="wysiwyg/mag2solution/faq/faq_bg.jpg"}}" alt="faq_bg" />
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Testimorial Vendor Background</title>
+			<identifier>testimorial-vendor-background</identifier>
+			<content><![CDATA[
+				<img src="{{media url="wysiwyg/mag2solution/testimorial/testimorial_bg.jpg"}}" alt="Testimalrial Background" />
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Contact Map</title>
+			<identifier>contact-map</identifier>
+			<content><![CDATA[
+				<div class="wrapper-map-inner"><iframe style="border: 0;" src="http://www.mapi.ie/create-google-map/map.php?width=100%&amp;height=1920&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=A&amp;output=embed" width="1920" height="600" frameborder="0" allowfullscreen=""></iframe></div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Image Contact</title>
+			<identifier>image-contact</identifier>
+			<content><![CDATA[
+				<img src="{{media url="wysiwyg/mag2solution/contact-us/contact.jpg"}}" alt="" />
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Block Header Top Right</title>
+			<identifier>block_header_top_right</identifier>
+			<content><![CDATA[
+				<ul class="links-service">
+					<li class="get-app"><a> Get the app </a></li>
+					<li class="sell"><a> Sell on Multistore </a></li>
+					<li class="custom"><a> Customer Care </a></li>
+					<li class="track"><a> Track my order </a></li>
+				</ul>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Block Deals Home 3</title>
+			<identifier>block_deals_home3</identifier>
+			<content><![CDATA[
+				{{block class="Netbase\Product\Block\DealsHomeMugs" template="Netbase_Product::Deals-home3.phtml"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Printshop Our Team History</title>
+			<identifier>printshop-our-history</identifier>
+			<content><![CDATA[
+				<div class="container-time">
+					<div class="page-header-time">
+					<h1 id="timeline">Our history</h1>
+					</div>
+					<ul class="timeline">
+					<li class="timeline-year-li">
+					<div class="timeline-year">2014</div>
+					</li>
+					<li class="count-li">
+					<div class="timeline-badge"></div>
+					<div class="timeline-panel animation-element banner-nb-bottom">
+					<div class="img-text"><i class="icon-route"></i></div>
+					<div class="timeline-body">
+					<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+					</div>
+					</div>
+					</li>
+					<li class="timeline-inverted count-li">
+					<div class="timeline-badge"></div>
+					<div class="timeline-panel  animation-element banner-nb-bottom">
+					<div class="img-text"><i class="icon-printer"></i></div>
+					<div class="timeline-body">
+					<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+					</div>
+					</div>
+					</li>
+					<li class="timeline-year-li">
+					<div class="timeline-year">2015</div>
+					</li>
+					<li class="count-li">
+					<div class="timeline-badge"></div>
+					<div class="timeline-panel  animation-element banner-nb-bottom">
+					<div class="img-text"><i class="icon-shop"></i></div>
+					<div class="timeline-body">
+					<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+					</div>
+					</div>
+					</li>
+					<li class="timeline-inverted count-li">
+					<div class="timeline-badge"></div>
+					<div class="timeline-panel  animation-element banner-nb-bottom">
+					<div class="img-text"><i class="icon-head-with-members-hierarchy"></i></div>
+					<div class="timeline-body">
+					<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+					</div>
+					</div>
+					</li>
+					<li class="count-li">
+					<div class="timeline-badge"></div>
+					<div class="timeline-panel  animation-element banner-nb-bottom">
+					<div class="img-text"><i class="icon-trophy-cup-for-number-one"></i></div>
+					<div class="timeline-body">
+					<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+					</div>
+					</div>
+					</li>
+					<li class="timeline-year-li">
+					<div class="timeline-year">2016</div>
+					</li>
+					<li class="timeline-inverted count-li">
+					<div class="timeline-badge"></div>
+					<div class="timeline-panel  animation-element banner-nb-bottom">
+					<div class="img-text"><i class="icon-group"></i></div>
+					<div class="timeline-body">
+					<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+					</div>
+					</div>
+					</li>
+					</ul>
+					</div>
+					<script type="text/javascript" xml="space"> 
+					require(['jquery'], function ($) {
+					  $(document).ready(function($) {
+					  var _width = $(window).width();
+					  var _lengthli = $( ".timeline .count-li" ).size()
+					  $( ".timeline .count-li" ).each(function( index ) {
+					      var _conditionI = index%2;
+					    if (_width <1200) {
+					        if (_conditionI == 1) {
+					          $(this).removeClass('timeline-inverted');
+					        }
+					    } else {
+					        if (_conditionI == 1) {
+					          $(this).addClass('timeline-inverted');
+					        }
+					    }
+					  });
+					});
+					});
+					 </script>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Featured Product Home 3</title>
+			<identifier>featured-product-home3</identifier>
+			<content><![CDATA[
+				{{block class="Netbase\Product\Block\FeaturedHomeMugs" name="featured-pro-only" category_id="39" attribute_id="nb_featured" template="Netbase_Product::featured-product-home3.phtml"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>New Print Templates Home 03</title>
+			<identifier>new_product_home3</identifier>
+			<content><![CDATA[
+				{{block class="Netbase\Product\Block\NewProductHomeMugs" name="new_product" template="Netbase_Product::/new-product-home3.phtml"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>New Print Templates Home 02</title>
+			<identifier>new_product_home2</identifier>
+			<content><![CDATA[
+				{{block class="Netbase\Product\Block\NewProduct" name="new_product" template="Netbase_Product::new-product-home2.phtml"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Our Blog Home 3</title>
+			<identifier>our_blog_home3</identifier>
+			<content><![CDATA[
+				{{block class="Netbaseteam\Blog\Block\Cms\Postlist" template="Netbaseteam_Blog::html/our_blog_home3.phtml" is_new_posts = true}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item> 
+		<cms_item>
+			<title>Design Your Own Personalized Mug</title>
+			<identifier>design_card_home3</identifier>
+			<content><![CDATA[
+				{{block class="Netbaseteam\Onlinedesign\Block\Designlist" template="Netbaseteam_Onlinedesign::design_list.phtml"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Slider Home 3</title>
+			<identifier>slider_03</identifier>
+			<content><![CDATA[
+				{{block class="Nwdthemes\Revslider\Block\Revslider" alias="slider-home3"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>hotline</title>
+			<identifier>nbhotline</identifier>
+			<content><![CDATA[
+				<div class="th-hotline hidden-xs">
+					<i class="icon icon-phone"></i>
+					<div style="float:left">1.866.614.8002</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item> 
+		<cms_item>
+			<title>Slider Home 2</title>
+			<identifier>slider_02</identifier>
+			<content><![CDATA[
+				{{block class="Nwdthemes\Revslider\Block\Revslider" alias="slider-home2"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Online Design Home 2</title>
+			<identifier>online_design_home2</identifier>
+			<content><![CDATA[
+				{{block class="Netbaseteam\Onlinedesign\Block\Designlist" template="Netbaseteam_Onlinedesign::design_list.phtml"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Our Service Home 2</title>
+			<identifier>our_service_home2</identifier>
+			<content><![CDATA[
+				<section class="section-print2 section-our section-our2">
+					<div class="container">
+						<div class="heading">
+							<div class="rule"></div>
+							<h2>Our service </h2>
+							<p>Choose the service that is right for your need</p>
+						</div>
+						<div class="section-content">
+							<div class="section-our__inner section-our2__inner">
+								<div class="box-img">
+		                                                        <img src="{{media url="wysiwyg/home02/our1.jpg"}}" alt="our1" />
+								</div>
+								<div class="box-text">
+									<h4>Great Filters & Effects</h4>
+									<p>Let us design your next print project!</p>
+								</div>
+							</div>
+						
+						
+							<div class="section-our__inner section-our2__inner">
+								<div class="box-img">
+		                                                        <img src="{{media url="wysiwyg/home02/our2.jpg"}}" alt="our2" />
+								</div>
+								<div class="box-text">
+									<h4>Mailing</h4>
+									<p>Delivery, we can hand it all for you! </p>
+								</div>
+							</div>
+						
+							<div class="section-our__inner section-our2__inner">
+								<div class="box-img">
+		                                                        <img src="{{media url="wysiwyg/home02/our3.jpg"}}" alt="our3" />
+								</div>
+								<div class="box-text">
+									<h4>Die Cutting</h4>
+									<p>Get your printed piece into shape! </p>
+								</div>
+							</div>
+						
+							<div class="section-our__inner section-our2__inner">
+								<div class="box-img">
+		                                                        <img src="{{media url="wysiwyg/home02/our4.jpg"}}" alt="our4" />
+								</div>
+								<div class="box-text">
+									<h4>Free file check</h4>
+									<p>We'll if your file is ready to print! </p>
+								</div>
+							</div>
+							<div class="section-our__inner section-our2__inner">
+								<div class="box-img">
+									 <img src="{{media url="wysiwyg/home02/our3.jpg"}}" alt="our5" />
+								</div>
+								<div class="box-text">
+									<h4>Custom Prints</h4>
+									<p>We'll bring your ideas to life! </p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Design your own canvas print home 2</title>
+			<identifier>design_card_home2</identifier>
+			<content><![CDATA[
+				 <section class="section-print2 section-design2">
+					<div class="container">
+						<div class="heading">
+							<div class="rule"></div>
+							<h2>Design your own canvas print</h2>
+						</div>
+						<div class="section-content">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="section-design2__inner section-design2__left">
+		                                                                <img src="{{media url="wysiwyg/home02/design-big.jpg"}}" alt="design-big" />
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="section-design2__inner section-design2__right">
+										<div class="row display-clear">
+											<div class="col-sm-6 col-lg-6">
+												<div class="design-item">
+		                                                                                        <img src="{{media url="wysiwyg/home02/design1.png"}}" alt="design1" />
+													<h4>1. Upload your photos</h4>
+													<p>From your computer, social media, or any device. From your computer, social media, or any device.</p>
+												</div>
+											</div>
+											<div class="col-sm-6 col-lg-6">
+												<div class="design-item">
+		                                                                                        <img src="{{media url="wysiwyg/home02/design2.png"}}" alt="design2" />
+													<h4>2. Create your Canvas Print</h4>
+													<p>Personalise your creation using our ready-made layouts, backgrounds and borders.</p>
+												</div>
+											</div>
+										</div>
+										<div class="row display-clear">
+											<div class="col-sm-6 col-lg-6">
+												<div class="design-item">
+		                                                                                        <img src="{{media url="wysiwyg/home02/design3.png"}}" alt="design3" />
+													<h4>3. Check out easily & securely</h4>
+													<p>Simple and quick payments with all the security you’d expect for worry-free shopping. </p>
+												</div>
+											</div>
+											<div class="col-sm-6 col-lg-6">
+												<div class="design-item">
+		                                                                                        <img src="{{media url="wysiwyg/home02/design4.png"}}" alt="design4" />
+													<h4>4. Delivered to you direct</h4>
+													<p>With a choice of delivery options available, your Canvas Print can be with you in no time. </p>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Our About Team Printshop</title>
+			<identifier>our-about-team</identifier>
+			<content><![CDATA[
+					<div class="row about-our-team">
+						<h2 class="about-our-title">The Leadership Team</h2>
+						<p class="about-our-text">Meet our leadership team – the senior brains behind the brand. Each member of our top team are united by a love <br> of print and great design.</p>
+						<div class="col-sm-6 col-md-3 about-our-content animation-element scroll-zoom-out">
+				<div class="about-our-info-wrap">
+						<a class="about-our-image" href="#">
+							<img src="{{media url="wysiwyg/netbase/aboutus/co.jpg"}}" alt="aboutus" />
+						</a>
+
+						<div class="about-our-info">
+							<p class="about-our-info-text">
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+							</p>
+							<a href="https://www.facebook.com/" target="_blank">
+								<i class="icon-facebook"></i>
+							</a> 
+							<a href="https://twitter.com/" target="_blank">
+								<i class="icon-twitter"></i>
+							</a> 
+							<a href="https://www.linkedin.com/" target="_blank">
+								<i class="icon-linkedin"></i>
+							</a>
+						</div>
+						<div class="about-our-info-name">
+							<strong>Andrew Flintoft</strong>
+							<span>Co-Founder</span>
+						</div>
+				</div>
+						</div>
+						<div class="col-sm-6 col-md-3 about-our-content animation-element scroll-zoom-out">
+				<div class="about-our-info-wrap">
+							<a class="about-our-image" href="#">
+								 <img src="{{media url="wysiwyg/netbase/aboutus/director.jpg"}}" alt="director" />
+							</a>
+
+							<div class="about-our-info">
+								<p class="about-our-info-text">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+								</p>
+								<a href="https://www.facebook.com/" target="_blank">
+									<i class="icon-facebook"></i>
+								</a> 
+								<a href="https://twitter.com/" target="_blank">
+									<i class="icon-twitter"></i>
+								</a> 
+								<a href="https://www.linkedin.com/" target="_blank">
+									<i class="icon-linkedin"></i>
+								</a>
+							</div>
+							<div class="about-our-info-name">
+								<strong>Chris Root</strong> 
+								<span>Managing Director</span>
+							</div>
+				</div>
+						</div>
+						<div class="col-sm-6 col-md-3 about-our-content  animation-element scroll-zoom-out">
+				<div class="about-our-info-wrap">
+							<a class="about-our-image" href="#"> 
+								 <img src="{{media url="wysiwyg/netbase/aboutus/seo.jpg"}}" alt="seo" />
+							</a>
+
+							<div class="about-our-info">
+								<p class="about-our-info-text">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+								</p>
+								<a href="https://www.facebook.com/" target="_blank">
+									<i class="icon-facebook"></i>
+								</a> 
+								<a href="https://twitter.com/" target="_blank">
+									<i class="icon-twitter"></i>
+								</a>
+								<a href="https://www.linkedin.com/" target="_blank">
+									<i class="icon-linkedin"></i>
+								</a>
+							</div>
+							<div class="about-our-info-name">
+								<strong>Panlope Stark</strong>
+								<span>SEO Specialist</span>
+							</div>
+				</div>
+						</div>
+						<div class="col-sm-6 col-md-3 about-our-content  animation-element scroll-zoom-out">
+						<div class="about-our-info-wrap">
+							<a class="about-our-image" href="#">
+								 <img src="{{media url="wysiwyg/netbase/aboutus/business.jpg"}}" alt="business" />
+							</a>
+					
+				<div class="about-our-info">
+								<p class="about-our-info-text">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+								</p>
+								<a href="https://www.facebook.com/" target="_blank">
+									<i class="icon-facebook"></i>
+								</a> 
+								<a href="https://twitter.com/" target="_blank">
+									<i class="icon-twitter"></i>
+								</a> 
+								<a href="https://www.linkedin.com/" target="_blank">
+									<i class="icon-linkedin"></i>
+								</a>
+							</div>
+							<div class="about-our-info-name">
+								<strong>Philip Demarco</strong> 
+								<span>Business Analyst</span>
+							</div>
+						</div>
+					</div>
+					</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Image About</title>
+			<identifier>image-about</identifier>
+			<content><![CDATA[
+				<img src="{{media url="wysiwyg/netbase/aboutus/paging.jpg"}}" alt="paging" />
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Get To About</title>
+			<identifier>get-to-about</identifier>
+			<content><![CDATA[
+				<div class="about-wrap">
+					<div class="row">
+					<h2 class="about-title">Get to know Printshop</h2>
+					<p class="about-text">We’re an online print and design company that is passionate about great design and the <br> difference it can make to our customers and the world.</p>
+					<div class="col-sm-4 each-icon animation-element scroll-zoom-out"><span class="about-box-icon circle spin"><i class="icon-inbox"></i></span> <strong> 35 Million+ </strong> <span class="about-icon-text">Products</span></div>
+					<div class="col-sm-4 each-icon animation-element scroll-zoom-out"><span class="about-box-icon circle spin"><i class="icon-shop"></i></span> <strong> 250,000 </strong> <span class="about-icon-text">Sellers</span></div>
+					<div class="col-sm-4 each-icon animation-element scroll-zoom-out"><span class="about-box-icon circle spin"><i class=" icon-globe"></i></span> <strong> 6000+ </strong> <span class="about-icon-text">Cities</span></div>
+					<h2 class="about-title">Get to know Printshop</h2>
+					<p class="about-text">.Design helps us stand out: from the clothes we wear, to the homes we live in, to the business <br> cards we use. Design tells a story about us and what we stand for.</p>
+					<p class="about-text">But professional-quality design has traditionally been expensive or out of reach for most people; <br> we want to change this. We're passionate about helping people of all abilities design the best <br> looking and highest
+					</p>
+					<p class="about-text">Our company vision is simple but ambitious: "great design for everyone".</p> 
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Printshop About</title>
+			<identifier>printshop-about</identifier>
+			<content><![CDATA[
+				<div class="row about-know-wrap">
+					<div class="col-xs-12 col-md-6 animation-element about-know-banner about-know-banner-left"><img src="{{media url="wysiwyg/netbase/aboutus/about-images.jpg"}}" alt="" />
+					<div class="about-know-nb">
+					<strong class="about-know-title">Who We Are</strong>
+					<p class="about-know-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+					<a class="about-know-link" href="#"> Learn more  <i class="icon-right"></i></a></div>
+					</div>
+					<div class="col-xs-12 col-md-6 animation-element about-know-banner about-know-banner-right"><img src="{{media url="wysiwyg/netbase/aboutus/about-images2.jpg"}}" alt="" />
+					<div class="about-know-nb">
+					<strong class="about-know-title">Connected Commerce</strong>
+					<p class="about-know-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+					<a class="about-know-link" href="#"> Learn more <i class="icon-right"></i> </a></div>
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>feature_brand_1</title>
+			<identifier>feature_brand_1</identifier>
+			<content><![CDATA[
+				{{block class="Netbaseteam\Shopbybrand\Block\Cms\Brandlist" template="Netbaseteam_Shopbybrand::html/brand-feature-home1.phtml" number_brands=6}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Footer Block Bottom</title>
+			<identifier>footer_block_bottom</identifier>
+			<content><![CDATA[
+				<div class="col-sm-6">
+					<div class="footer-bottom__left">
+						<p>Printshop - Copyright © 2017 <a href="#">Cmsmart.net</a> .<span>All Rights Reserved.</span></p>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="footer-bottom__right">
+                        <img src="{{media url="wysiwyg/paypal.png"}}" alt="paypal" />
+                        <img src="{{media url="wysiwyg/master.png"}}" alt="master" />
+                        <img src="{{media url="wysiwyg/visa.png"}}" alt="visa" />
+                        <img src="{{media url="wysiwyg/amex.png"}}" alt="amex" />
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Footer Block Middle</title>
+			<identifier>footer_block_middle</identifier>
+			<content><![CDATA[
+				<div class="row footer-logo"> 
+					<p>Printmart provides fast online printing for both homes and businesses. We provide high quality business cards, postcards, flyers, brochures, stationery and other premium online print products.</p>
+				</div>
+				<div class="row footer-letter">
+					<div class="col-sm-6 letter-left">
+						<div class="info-number">P: 1-877-967-5362</div>
+					</div>
+					<div class="col-sm-6 letter-right">
+						<p>Get the latest scoop! Deals, steals & more!</p>
+					</div>
+				</div>
+				<div class="row footer-letter">
+					<div class="col-sm-6 letter-left">
+						<div class="info-mail">info@cmsmart.net</div>
+						<div class="info-add">102580 Santa Monica BLVD Los  Angeles</div>
+					</div>
+					<div class="col-sm-6 letter-right">
+                                                    {{block class="Magento\Newsletter\Block\Subscribe" name="form.subscribe.footer" as="subscribe_footer" template="subscribe_footer.phtml"}} 
+					</div>
+				</div>
+				<div class="row footer-menu display-clear">
+					<div class="col-sm-6 col-md-3">
+						<div class="footer-menu__item">
+							<h3>Corporate</h3>
+							<ul>
+								<li><a href="{{store url="about-us"}}"><i class="icon-angle-right"></i>About us</a></li>
+								<li><a href="#"><i class="icon-angle-right"></i>Green</a></li>
+								<li><a href="#"><i class="icon-angle-right"></i>Afiliates</a></li>
+								<li><a href="#"><i class="icon-angle-right"></i>Non-profits & Government</a></li>
+								<li><a href="#"><i class="icon-angle-right"></i>Terms of Service</a></li>
+								<li><a href="#"><i class="icon-angle-right"></i>Privacy Policy</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="footer-menu__item">
+							<h3>Support</h3>
+							<ul>
+								<li><a href="{{store url=""}}customer/account/login"><i class="icon-angle-right"></i>My Account</a></li>
+								<li><a href="#"><i class="icon-angle-right"></i>Design Guide</a></li>
+								<li><a href="{{store url="faq"}}"><i class="icon-angle-right"></i>FAQ</a></li>
+								<li><a href="#"><i class="icon-angle-right"></i>Design Services</a></li>
+								<li><a href="{{store url="contact"}}"><i class="icon-angle-right"></i>Contact Us</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="footer-menu__item">
+							<h3>Brands</h3>
+							<ul>
+								<li><a href="{{store url=""}}shopbybrand"><i class="icon-angle-right"></i>All Brands</a></li>
+								<li><a href="{{store url=""}}shopbybrand/index/view/id/2/"><i class="icon-angle-right"></i>Brands 1</a></li>
+								<li><a href="{{store url=""}}shopbybrand/index/view/id/3/"><i class="icon-angle-right"></i>Brands 2</a></li>
+								<li><a href="{{store url=""}}shopbybrand/index/view/id/4/"><i class="icon-angle-right"></i>Brands 3</a></li>
+								<li><a href="{{store url=""}}shopbybrand/index/view/id/5/"><i class="icon-angle-right"></i>Brands 4</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="footer-menu__item">
+							<h3>Connect with us</h3>
+							<p>Stay up to date with all the actions that we are saved for all our customers.</p>
+							<div class="social">
+								<a href="https://www.facebook.com/groups/658839177553154/about/"><i class="icon-facebook"></i></a>
+								<a href="https://twitter.com/twister?lang=en"><i class="icon-twitter"></i></a>
+								<a href="https://www.pinterest.com/"><i class="icon-pinterest"></i></a>
+								<a href="https://www.linkedin.com/"><i class="icon-linkedin"></i></a>
+								<a href="https://plus.google.com"><i class="icon-gplus"></i></a>
+							</div>
+						</div>
+					</div> 
+				</div> 
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Footer Block Top</title>
+			<identifier>footer_block_top</identifier>
+			<content><![CDATA[
+				<div class="row display-clear">
+			<div class="col-sm-6 col-md-3">
+						<div class="section-service__inner">
+							<div class="section-service__inner--icon">
+								<img src="{{media url="wysiwyg/home01/service1.png"}}" alt="service1" />
+							</div>
+							<div class="section-service__inner--text">
+								<h5>Quality Printing</h5>
+								<p>Provide the best quality</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="section-service__inner">
+							<div class="section-service__inner--icon">
+                                                        <img src="{{media url="wysiwyg/home01/service2.png"}}" alt="service2" />
+							</div>
+							<div class="section-service__inner--text">
+								<h5>Timely Delivery</h5>
+								<p>Always on time without hassle</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="section-service__inner">
+							<div class="section-service__inner--icon">
+								<img src="{{media url="wysiwyg/home01/service3.png"}}" alt="service3" />
+							</div>
+							<div class="section-service__inner--text">
+								<h5>Eco-Minded</h5>
+								<p>All our product is eco-friendly</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-md-3">
+						<div class="section-service__inner">
+							<div class="section-service__inner--icon">
+                                                       <img src="{{media url="wysiwyg/home01/service4.png"}}" alt="service4" />
+							</div>
+							<div class="section-service__inner--text">
+								<h5>Money Back Guaranteed</h5>
+								<p>100% happy customers</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Lastest Post Blog Home 1</title>
+			<identifier>lastest_post_blog_home1</identifier>
+			<content><![CDATA[
+				{{block class="Netbaseteam\Blog\Block\Cms\Postlist" template="Netbaseteam_Blog::html/lastest_post.phtml" is_new_posts = true number_post = 3}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Online Design Home 1</title>
+			<identifier>online_design_home1</identifier>
+			<content><![CDATA[
+				{{block class="Netbaseteam\Onlinedesign\Block\Designlist" template="Netbaseteam_Onlinedesign::design_list.phtml"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Our Service Home 1</title>
+			<identifier>our_service_home1</identifier>
+			<content><![CDATA[
+				<section class="section-print section-our">
+				<div class="container">
+				<div class="heading">
+				<h3>Our service</h3>
+				<p>Choose the service that is right for your need</p>
+				</div>
+				<div class="section-content">
+				<div class="row display-clear">
+				<div class="col-sm-6 col-md-3">
+				<div class="section-our__inner">
+				<div class="box-img"><img src="{{media url="wysiwyg/home01/block/our1.jpg"}}" alt="our1" /></div>
+				<div class="box-text">
+				<h4>Graphic Design</h4>
+				<p>Get a design you’ll love</p>
+				</div>
+				</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+				<div class="section-our__inner">
+				<div class="box-img"><img src="{{media url="wysiwyg/home01/block/our2.jpg"}}" alt="our2" /></div>
+				<div class="box-text">
+				<h4>Mailing</h4>
+				<p>Delivery, we can hand it all for you!</p>
+				</div>
+				</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+				<div class="section-our__inner">
+				<div class="box-img"><img src="{{media url="wysiwyg/home01/block/our3.jpg"}}" alt="our3" /></div>
+				<div class="box-text">
+				<h4>Custom Prints</h4>
+				<p>We'll bring your ideas to life!</p>
+				</div>
+				</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+				<div class="section-our__inner">
+				<div class="box-img"><img src="{{media url="wysiwyg/home01/block/our4.jpg"}}" alt="our4" /></div>
+				<div class="box-text">
+				<h4>Free file check</h4>
+				<p>We'll if your file is ready to print!</p>
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
+				</section>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item> 
+		<cms_item>
+			<title>Design your own business card</title>
+			<identifier>design_card</identifier>
+			<content><![CDATA[
+				<section class="section-design section-print">
+					<div class="container">
+						<div class="heading">
+							<h3>Design your own business card </h3>
+							<p>Choose the right option for you before uploading file</p>
+						</div>
+						<div class="section-content">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="section-design__img">
+										<img src="{{media url="wysiwyg/home01/block/design1.png"}}" alt="design1" />
+									</div>
+									
+								</div>
+								<div class="col-md-6">
+									<div class="section-design__inner">
+										<div class="box-item">
+											<div class="box-icon">
+												<div class="display-flex">
+													<img src="{{media url="wysiwyg/home01/block/design-icon1.png"}}" alt="design-icon1" />
+												</div>
+											</div>
+											<div class="box-text">
+												<h4>1. Select Options</h4>
+												<p>Choose options that you want for your prints.We will make you happy with your choices.</p>
+											</div>
+										</div>
+										<div class="box-item">
+											<div class="box-icon">
+												<div class="display-flex">
+													<img src="{{media url="wysiwyg/home01/block/design-icon2.png"}}" alt="design2" />
+												</div>
+											</div>
+											<div class="box-text">
+												<h4>2. Upload your design</h4>
+												<p>Upload your finished design here and we'll print it for you with your choices</p>
+											</div>
+										</div>
+										<div class="box-item">
+											<div class="box-icon">
+												<div class="display-flex">
+													<img src="{{media url="wysiwyg/home01/block/design-icon3.png"}}" alt="design3" />
+												</div>
+											</div>
+											<div class="box-text">
+												<h4>3. Checkout & Order</h4>
+												<p>Checkout and finish your order very easy with one step checkout extension.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>New Print Templates</title>
+			<identifier>new_product_home1</identifier>
+			<content><![CDATA[
+				{{block class="Netbase\Product\Block\NewProduct" name="new_product" template="Netbase_Product::new-product.phtml"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Block Sales Off</title>
+			<identifier>banner_block_sales_off</identifier>
+			<content><![CDATA[
+				<section class="section-print section-banner">
+				<div class="container-fluid">
+				<div class="row">
+				<div class="col-sm-6 col-md-4 banner-item">
+				<div class="section-banner__bg"><img src="{{media url="wysiwyg/home01/block/banner/bg1.jpg"}}" alt="banner01" />
+				<div class="section-banner__inner">
+				<h4>Business Cards</h4>
+				<h2>Get 25 % off</h2>
+				<p>Traditional, high-quality card stock. Ideal for simple, text-heavy designs. 14-pt standard and 16-pt premium paper weights. </p>
+				<a class="button" href="#">shop now!</a></div>
+				</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4 banner-item">
+				<div class="section-banner__bg"><img src="{{media url="wysiwyg/home01/block/banner/bg2.jpg"}}" alt="banner02" />
+				<div class="section-banner__inner">
+				<h4>Folded Business Cards</h4>
+				<h2>Get 5 % off</h2>
+				<p>Folded card format gives you twice the space. Customize inside and out with text and design. Full-color printing on matte. </p>
+				<a class="button" href="#">shop now!</a></div>
+				</div></div>
+
+				<div class="col-sm-6 col-md-4 banner-item">
+				<div class="section-banner__bg"><img src="{{media url="wysiwyg/home01/block/banner/bg3.jpg"}}" alt="banner03" />
+				<div class="section-banner__inner">
+				<h4>Square Business Cards</h4>
+				<h2>Get 10 % off </h2>
+				<p>Measure 2.5" x 2.5". A unique look, great for featuring logos or photos. Work as product tags, coupons, 
+				instructions and more. </p>
+				<a class="button" href="#">shop now!</a></div>
+				</div></div>
+
+				</div>
+				</div>
+				</section>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Slider Home 1</title>
+			<identifier>slider_01</identifier>
+			<content><![CDATA[
+				{{block class="Nwdthemes\Revslider\Block\Revslider" alias="slider-home1"}}
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>
+		<cms_item>
+			<title>Social top header right</title>
+			<identifier>social_top_right</identifier>
+			<content><![CDATA[
+				<ul class="social-top list">
+					<li><a href="http://facebook.com"> <i class="icon-facebook"></i> </a></li>
+					<li><a href="#"> <i class="icon-twitter"></i> </a></li>
+					<li><a href="#"> <i class="icon-linkedin-1"></i> </a></li>
+					<li><a href="#"> <i class="icon-pinterest"></i> </a></li>
+					<li><a href="#"> <i class="icon-gplus-1"></i> </a></li>
+				</ul>
+			]]></content>
+			<is_active>1</is_active>
+		</cms_item>                                      
+	</blocks>
+</root>

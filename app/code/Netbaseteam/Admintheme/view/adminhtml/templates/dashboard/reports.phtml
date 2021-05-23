@@ -1,0 +1,52 @@
+<?php
+	$productInCart = $block->getCountProductInCart();
+	$productLowStock = $block->getCountProductLowStock();
+	$customerCount = $block->getAllCustomer();
+	$refundTotal = $block->getRefundTotal();
+
+	$_currencyCode = $block->getCurrency();
+?>
+<div class="product-in-cart col-m-3">
+	<div class="dashboard-report">
+		<div class="info">
+			<span class="number"><?php echo $productInCart; ?></span>
+			<span class="text"><?php echo __('Product in cart'); ?></span>
+		</div>
+		<div class="icon">
+			<span class="pe-7s-cart"></span>
+		</div>
+	</div>
+</div>
+<div class="low-stock col-m-3">
+	<div class="dashboard-report">
+		<div class="info">
+			<span class="number"><?php echo $productLowStock; ?></span>
+			<span class="text"><?php echo __('Low Stock'); ?></span>
+		</div>
+		<div class="icon">
+			<span class="pe-7s-attention"></span>
+		</div>
+	</div>
+</div>
+<div class="all-customer col-m-3">
+	<div class="dashboard-report">
+		<div class="info">
+			<span class="number"><?php echo $customerCount; ?></span>
+			<span class="text"><?php echo __('All customer'); ?></span>
+		</div>
+		<div class="icon">
+			<span class="pe-7s-pen"></span>
+		</div>
+	</div>
+</div>
+<div class="refunded col-m-3">
+	<div class="dashboard-report">
+		<div class="info">
+			<span class="number"><?php echo $_currencyCode.$refundTotal; ?></span>
+			<span class="text"><?php echo __('Product Refuned'); ?></span>
+		</div>
+		<div class="icon">
+			<span class="pe-7s-piggy"></span>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body> 
+        <referenceContainer name="content">
+            <container name="product.info.wrapper.actions" htmlTag="div" htmlClass="product-info-main-wrapper product info detailed" after = "product.info.media" />
+        </referenceContainer>
+        <move element="page.main.title" destination="product.info.main" before="-" />
+        <move element="product.info.stock.sku" destination="product.info.main" after = "product.info.price" />
+        <move element="product.info.overview" destination="product.info.main" after = "product.info.stock.sku" />
+        <move element="product.info" destination="product.info.wrapper.actions" before="-" /> 
+        <!-- Detail not option -->
+        <referenceBlock name="product.info.form.content">
+            <container name="product.info.not.option" as="product.info.not.option" label="" htmlTag="div" htmlClass="product-options-bottom col-md-6 col-xs-12">
+                <container name="nb.option" as="nb-option" label="nb-option" htmlTag="div" htmlClass="nb-option">
+                    <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart" as="addtocart" template="Magento_Catalog::product/view/addtocart.phtml"/>
+                    <block class="Magento\Catalog\Block\Product\View" name="product.info.form.content.addto.option"  template="Magento_Catalog::product/view/addto.phtml" after="-">
+                        <block class="Magento\Catalog\Block\Product\View\AddTo\Compare" name="product.info.form.content.addto.compare" after ="product.info.form.content.addto.wishlist"
+                                 template="Magento_Catalog::product/view/addto/compare.phtml" />
+                        <block class="Magento\Catalog\Block\Product\View" name="product.info.form.content.addto.mailto" template="Magento_Catalog::product/view/mailto.phtml" after="product.info.form.content.addto.compare"/>
+                        <block class="Magento\Catalog\Block\Product\View" name="product.info.form.content.addto.socialBtn" template="Magento_Catalog::product/view/social-share.phtml" after="-">
+                            <arguments>
+                                <argument name="css_class" xsi:type="string">btn btn-product-share</argument>
+                                <argument name="title" translate="true" xsi:type="string">Share: </argument>
+                                <argument name="share_link" xsi:type="string">{{baseUrl}}</argument>
+                            </arguments>
+                        </block>
+                    </block>
+                </container>
+            </container>
+        </referenceBlock>
+        <!-- Detail include option -->
+        <referenceBlock name="product.info.options.wrapper.bottom">
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart.additional" as="product.info.addtocart" template="Magento_Catalog::product/view/addtocart.phtml"/>
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.addto" as="addto" template="Magento_Catalog::product/view/addto.phtml" after="-">
+                <block class="Magento\Catalog\Block\Product\View\AddTo\Compare" name="view.addto.compare" after="view.addto.wishlist"
+                         template="Magento_Catalog::product/view/addto/compare.phtml" />
+                <block class="Magento\Catalog\Block\Product\View" name="product.info.mailto" template="Magento_Catalog::product/view/mailto.phtml" after="view.addto.compare"/>
+                <block class="Magento\Catalog\Block\Product\View" name="social.share.product" template="Magento_Catalog::product/view/social-share.phtml" after="product.info.addtocart">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">btn btn-product-share</argument>
+                        <argument name="title" translate="true" xsi:type="string">Share: </argument>
+                        <argument name="share_link" xsi:type="string">{{baseUrl}}</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceBlock> 
+        <referenceBlock name="product.info" >
+            <container name="product.info.nb_additional" as="product_info_nb_additional" htmlTag="div" htmlClass="nb-additional col-md-6 col-xs-12" after="-" />
+        </referenceBlock>
+    </body>
+</page>

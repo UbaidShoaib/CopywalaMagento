@@ -1,0 +1,168 @@
+<?php
+/**
+* Copyright © 2016 SW-THEMES. All rights reserved.
+*/
+use Magento\Framework\App\Action\Action;
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+	$showWishlist = true;
+    $showCompare = true;
+	$_helper = $this->helper('Netbase\Product\Helper\Data');
+	$config = $_helper->getConfig("pro_deal/general");
+	$categories = explode(',', $config['categories']);
+	$title = $_helper->getTitle('pro_deal/general/title');
+	$backgroundUrl = $_helper->getBanner('pro_deal/general/banner');
+	$currentSymbol = $_helper->getCurrencySymbol(); 
+	$start_date = $block->getStartDate();
+	$end_date = $block->getEndDate();
+	$tabs = $_helper->getAllTabs('pro_deal/general/categories','deal-tab-');  
+?>
+<section class="deal-product slide-left container">  
+	<div class="inner-block">
+		<div class="row">
+			
+			<div class="col-md-4 home-product-tab-title"> 
+				<div class="banner">
+					<img src="<?php echo $block->getViewFileUrl('images/banner1.jpg'); ?>" alt="<?php echo __('banner1') ?>" /> 
+				</div>
+			</div> 
+			<div class="col-md-4 home-product-tab-content">  
+				 
+				<?php
+					$j = 1; foreach($categories as $categoryId): 
+					
+				?>
+				<div id="deal-tab-<?php echo $j; ?>" class="tab-content <?php if($j == 1){ echo 'show loaded';} ?>" data-rev="<?php echo $categoryId ?>">
+					<?php if ($j==1): ?>
+
+						<?php $productCollection = $block->getDealsProducts($categoryId);?>
+
+						<div class="home-product-slider products-grid nb-list">
+						<?php
+							$i=0; foreach($productCollection as $_product):
+						?>
+							<div class="item item<?php echo $i?>">
+								<div class="product-item-info" data-container="product-grid">
+									<?php      
+										$originalPrice = $_product->getPrice();  //200 
+										$specialPrice = $_product->getSpecialPrice();  
+									?>
+									<?php if(($specialPrice)&&($specialPrice <= $originalPrice)){?>	
+										<div class="sale">
+											<span> 	
+												<?php
+													$saleof= abs(($specialPrice/($originalPrice))*100-100);
+													echo '- ';    
+													print_r(floor($saleof));
+													echo '%'; 
+												?>									 
+											</span> 
+										</div>
+									<?php } ?>
+						            <?php
+									    $image = 'category_page_grid' or 'category_page_list';
+									    $_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+									    $productImage = $_imagehelper->init($_product, $image)->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(160)->getUrl();
+									?>
+						 			<div class="item-top">
+							 			<a href="<?php echo $_product->getProductUrl() ?>" class="product photo product-item-photo" tabindex="-1">
+							 				<img src="<?php echo $block->getViewFileUrl('images/banner2.jpg'); ?>" alt="<?php echo __('banner2') ?>" />
+										</a> 
+										<div class="countdown-outer">
+											<div class="countdown-inner">
+												<div class="deal-countdown" data-date="<?php echo $end_date; ?>" data-options="{&quot;time&quot;: { &quot;Hours&quot;: { &quot;show&quot;: true }, &quot;Minutes&quot;: { &quot;show&quot;: true }, &quot;Seconds&quot;: { &quot;show&quot;: true }}}"></div> 
+											</div>
+										</div>
+		                            </div>
+									<div class="product details product-item-details">
+										<div class="inner-product">
+											<?php
+												$originalPrice = $_product->getData('price')+0;
+												$finalPrice = $_product->getData('special_price')+0; 
+											?>
+											<a title="<?php echo $_product->getName(); ?>" href="<?php echo $_product->getProductUrl() ?>" class="product-item-link">
+								                <?php echo substr($_product->getName(),0,30); ?>
+								            </a> 
+											<?php $ratingSummary = $this->getRatingSummary($_product);  ?>
+											<div class="price-home <?php if($finalPrice){ echo 'price-sale'; } ?>">
+                                                <?php
+                                               		if ($originalPrice) {
+                                                    	echo "<span class='normal'>".$_helper->getFormatPrice($originalPrice, 2)."</span>";
+                                                    }; 
+                                                    if ($finalPrice) {
+                                                    	echo "<span class='special'>".$_helper->getFormatPrice($finalPrice, 2)."</span>";
+                                                    };
+                                                    //
+                                                    
+                                                    ?>
+                                            </div>
+											
+							            </div>
+							        </div>
+						        </div> 
+						    </div>
+						<?php
+							if ($i == 8) {
+								break;
+							}
+							$i++; endforeach;
+						?>
+					</div>
+					 	
+					<?php endif ?> 
+					
+				</div>
+				<?php $j++; endforeach; ?>
+			</div>
+			<div class="col-md-4 home-product-tab-title"> 
+				<div class="banner">
+					<img src="<?php echo $block->getViewFileUrl('images/banner3.jpg'); ?>" alt="<?php echo __('banner2') ?>" /> 
+				</div>
+			</div>
+		</div>
+	 </div>
+</section>
+
+<script type="text/javascript"> 
+    //Product owl carousel slider
+    require(['jquery','owlCarousel','TimeCircles'], function($) {  
+		$(".deal-countdown").TimeCircles({
+			circle_bg_color: "rgba(0,0,0.0)",
+			fg_width: 0,
+			bg_width: 10,
+			use_background: false,
+			text_size: 1,
+			number_size: 1,
+			total_duration: "Auto",
+			direction: "Counter-clockwise",
+			use_top_frame: false,
+			start_angle: 0,
+			time: {
+				Days: {
+					show: true,
+					text: "Days",
+					color: "#000"
+				},
+				Hours: {
+					show: true,
+					text: "Hours",
+					color: "#000"
+				},
+				Minutes: {
+					show: true,
+					text: "Minutes",
+					color: "#000"
+				},
+				Seconds: {
+					show: true,
+					text: "Seconds",
+					color: "#000"
+				}
+			}
+
+		});
+         
+    });
+</script>

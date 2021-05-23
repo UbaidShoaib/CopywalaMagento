@@ -1,0 +1,114 @@
+<div id="body-overlay"><div><img src="<?php echo $this->getViewFileUrl('Netbaseteam_Themeconfig/images/loading.gif');?>" width="64px" height="64px"/></div></div>
+
+<div id="content_main_div">
+	<div class="layout-area">
+
+		<div class="row admin_group-field-menu">
+			<h2 class="title"><?php echo __("Menu Position"); ?></h2>
+			<div class="admin__field-control field-admin-radio">
+				<div class="col l12">
+					<input type="radio" id="vertical_menu" name="vertical_menu" value="vertical" onClick="getMenuType(this); return false;" /> <span>Vertical Menu ( New )</span>
+				</div>
+				<div class="col l12">
+					<input type="radio" id="vertical_menu_df" name="vertical_menu_df" value="vertical_df" onClick="getMenuType(this); return false;" /> <span>Vertical Menu ( Default )</span>
+				</div>
+				<div class="col l12">
+					<input type="radio" id="horizontal_menu" name="horizontal_menu" value="horizontal" onClick="getMenuType(this); return false;" /> <span>Horizontal Menu</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row admin_group-field-menu wrap-change-icon-menu">
+			<div class="col l12 m12 s12">
+				<h2 class="title"><?php echo __("Change Menu Icon"); ?></h2>
+				<div class="admin__field-control field-admin-radio">
+					<div class="col l3 m12 s12 full-width">
+						<div id="sample_icon"></div>
+						<div class="admin__field-control styled-select slate">
+							<select id="adm_menu" class="admin-field-select">
+								<option value=""><?php echo __("Please select menu"); ?></option>
+							</select>
+						</div>
+					</div>
+					<div class="col l9 m12 s12 full-width">
+						<?php
+						echo $this->getLayout()->createBlock('Netbaseteam\Themeconfig\Block\Adminhtml\Themeconfig')
+						->setTemplate('Netbaseteam_Themeconfig::menu_icon.phtml')->toHtml(); 
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<?php 
+$url_process_menutype = $this->getUrl('themeconfig/menu/menu', ['_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+$helper = $this->helper('\Netbaseteam\Themeconfig\Helper\Data');
+?>
+
+<script type="text/javascript">
+	function getMenuType(element) {
+		require([
+			'jquery'
+			], function($){
+				<?php if ($helper->getIsAllowed('Netbaseteam_Themeconfig::menu_position')) { ?>
+					var elm = $(element);
+					var formData = new FormData();
+					var form_key = FORM_KEY;
+					formData.append('form_key', form_key);
+					$.ajax({
+						url: '<?php echo $url_process_menutype ?>' + 'type/'+elm.val(),
+						type: "POST",
+						beforeSend: function(){$("#body-overlay").show();},
+						contentType: false,
+						processData: false,
+						cache: false,
+						data: formData,
+						success: function(data) {
+							$("#targetLayerLogo").css('opacity', '1');
+							setInterval(function() {$("#body-overlay").hide(); },500);
+							window.location.reload(true);
+						},
+						error: function() {
+							console.log("Error");
+						} 	        
+					});
+					$("#vertical_menu").removeAttr("checked");
+					$("#vertical_menu_df").removeAttr("checked");
+					$("#horizontal_menu").removeAttr("checked");
+					elm.attr("checked", "checked");
+				<?php } else { ?>
+					alert('No permission!');
+				<?php } ?>
+			});
+	}
+
+	require([
+		'jquery'
+		], function($){
+			$(document).ready(function() {
+
+				var elm_item_class = "";
+				$("#nav > .level-0 > a > span").each(function( index ) {
+					var parent_class = $(this).parents("li").attr("class").split(" ");	
+					var newOption = $('<option value="'+ parent_class[0] +'">'+ $(this).text() +'</option>');
+					$('#adm_menu').append(newOption);
+				});
+
+				$('#adm_menu').change(function(){
+					$("#sample_icon").html("");
+					$("#nav > .level-0 > a > span").each(function( index ) {
+						var parent_class = $(this).parents("li").attr("class").split(" ");	
+						$("."+parent_class[0]).css("border", "none");
+					});
+					if($(this).val() != "") {
+						$("."+$(this).val()).css("border", "1px solid red");
+					}
+					elm_item_class = $(this).val();
+				});
+
+			});
+		});
+	</script>

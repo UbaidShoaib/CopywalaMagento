@@ -1,0 +1,18 @@
+<?php
+$checked = 0;
+$arr_config = $this->getConfig();
+if (count($arr_config)>0 && $this->getKey()!='no') {
+	if(isset($arr_config[$this->getKey()])) {
+		$checked = $arr_config[$this->getKey()];
+	}
+}
+?>
+<div class="col no-padding <?php echo $this->getWrapClass(); ?>">
+	<div class="pretty p-icon p-curve p-has-indeterminate">
+		<input type="checkbox" <?php foreach ($this->getAttributes() as $k => $v) {
+			echo "$k='$v' ";
+		} ?> <?php echo ($checked==1?'checked="checked"':''); ?>><div class="state"><i class="icon mdi mdi-check"></i>
+			<label><?php echo __($this->getLabel()); ?></label>
+		</div>
+	</div>
+</div>

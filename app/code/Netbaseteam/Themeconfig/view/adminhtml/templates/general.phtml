@@ -1,0 +1,518 @@
+<?php
+$helper = $this->helper('\Netbaseteam\Themeconfig\Helper\Data');
+$arr_google_font = $helper->getFontsList();
+$arr_font_weight = array('thin 100'=>'100', 'extra-light 200'=>'200', 'light 300'=>'300', 'regular 400'=>'400', 'medium 500'=>'500', 'semi-bold 600'=>'600', 'bold 700'=>'700', 'extra-bold 800'=>'800', 'black 900'=>'900');
+
+$bgr_color_when_hover = "";
+
+$schemer_color = 'default';
+$arr_config = array();
+$content_config_custom = $helper->_readFile('Netbaseteam_Themeconfig/config/custom.json');
+if(isset($content_config_custom) && $content_config_custom != "") {
+    $arr_config = json_decode($content_config_custom, true);
+    if (isset($arr_config['schemer_color'])) {
+        $schemer_color = $arr_config['schemer_color'];
+    }
+}
+
+$arr_scheme_color = array();
+$content_scheme_color = $helper->_readFile('Netbaseteam_Themeconfig/config/color_scheme.json');
+if(isset($content_scheme_color) && $content_scheme_color != "") {
+    $arr_scheme_color = json_decode($content_scheme_color, true);
+}
+?>
+
+<div id="body-overlay"><div><img src="<?php echo $this->getViewFileUrl('Netbaseteam_Themeconfig/images/loading.gif');?>" width="64px" height="64px"/></div></div>
+
+<div id="content_main_div">
+    <div class="layout-area">
+        <form class="frm-admin-config" action="upload.php" method="post">
+            <input type="hidden" id="schemer_color" name="schemer_color" value="<?php echo $schemer_color; ?>">
+            <div class="row">
+                <h2 class="title"><?php echo __("General Settings"); ?></h2>
+                <div class="col no-padding minh5">
+
+                    <div class="admin_group-field">
+                        <h3><?php echo __("Predefined Color Schemes"); ?></h3>
+                        <?php 
+                        if (count($arr_scheme_color)>0) {
+                            foreach ($arr_scheme_color as $k => $v) {
+                                $arr_color = explode('|', $v);
+                                ?>
+                                <div class="color-option col l6 m6 s6 <?php echo ($schemer_color==$k?'selected':''); ?>">
+                                    <table class="color-palette" data-scheme="<?php echo $k; ?>" data-color="<?php echo $v; ?>">
+                                        <tbody>
+                                            <tr>
+                                                <?php for ($i=0; $i < count($arr_color); $i++) { ?>
+                                                    <td style="background-color: <?php echo $arr_color[$i]; ?>">&nbsp;</td>
+                                                <?php } ?>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php }} ?>
+                        </div>
+
+                        <div class="admin_group-field">
+                            <h3><?php echo __("Button Style"); ?></h3>
+                            <div class="admin_group-field">
+                                <?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l6 m6 s12')->setAttributes(array('id'=>'cb_use_df_style_button', 'name'=>'cb_use_df_style_button', 'value'=>1))->setKey('cb_use_df_style_button')->setConfig($arr_config)->setLabel('Use default style')->setTemplate("Netbaseteam_Themeconfig::field/checkbox.phtml")->toHtml(); ?>
+
+                                <?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l6 m6 s12')->setAttributes(array('id'=>'cb_use_style_button_login_form', 'name'=>'cb_use_style_button_login_form', 'value'=>1))->setKey('cb_use_style_button_login_form')->setConfig($arr_config)->setLabel('Use style for button login')->setTemplate("Netbaseteam_Themeconfig::field/checkbox.phtml")->toHtml(); ?>
+                            </div>
+
+                            <div class="button_left_area">
+                              <div class="admin_group-field">
+                                <label class="col no-padding l6 m6 s12"><?php echo __("Background Button Color:"); ?></label>
+                                <div class="admin__field-control field-pick-color col no-padding l6 m6 s12">
+                                    <div class="selected-color"></div>
+                                    <input class="admin_control-text" type="text" name="bgcolor_button" id="bgcolor_button" value="<?php echo (isset($arr_config['button_background_color'])?$arr_config['button_background_color']:'#ffffff'); ?>" autocomplete="off" data-css="background-color" data-target="#adm_preview_btn">
+                                </div>
+                            </div>
+
+                            <div class="admin_group-field col l12 m12 s12 no-padding">
+                                <label class="col no-padding l6 m6 s12"><?php echo __("Text Button Color:"); ?></label>
+                                <div class="admin__field-control field-pick-color col no-padding l6 m6 s12">
+                                    <div class="selected-color"></div>
+                                    <input class="admin_control-text" type="text" name="text_color_button" id="text_color_button" value="<?php echo (isset($arr_config['button_text_color'])?$arr_config['button_text_color']:'#ffffff'); ?>" autocomplete="off" data-css="color" data-target="#adm_preview_btn span">
+                                </div>
+                            </div>
+
+                            <div class="admin_group-field">
+                                <label class="col no-padding l6 m6 s12"><?php echo __("Border Button Color:"); ?></label>
+                                <div class="admin__field-control field-pick-color col no-padding l6 m6 s12">
+                                    <div class="selected-color"></div>
+                                    <input class="admin_control-text" type="text" name="border_color_button" id="border_color_button" value="<?php echo (isset($arr_config['button_border_color'])?$arr_config['button_border_color']:'#ffffff'); ?>" autocomplete="off" data-css="border-color" data-target="#adm_preview_btn">
+                                </div>
+                            </div>
+
+                            <div class="admin_group-field">
+                                <label class="col no-padding l6 m6 s12"><?php echo __("Border Size:"); ?></label>
+                                <div class="admin__field-control col no-padding l6 m6 s12">
+                                    <input class="admin_control-text field-simple-text" type="number" name="border_size_button" id="border_size_button" value="<?php echo (isset($arr_config['button_border_width'])?$arr_config['button_border_width']:0); ?>">
+                                </div>
+                            </div>
+
+                            <div class="admin_group-field">
+                                <label class="col no-padding l6 m6 s12"><?php echo __("Border Radius (px):"); ?></label>
+                                <div class="admin__field-control col no-padding l6 m6 s12">
+                                    <input class="admin_control-text field-simple-text" type="number" name="border_radius_button" id="border_radius_button" value="<?php echo (isset($arr_config['button_border_radius'])?$arr_config['button_border_radius']:0); ?>">
+                                </div>
+                            </div>
+
+                            <div class="admin_group-field">
+                                <label class="col no-padding l6 m6 s12"><?php echo __("Background Button Color When Hover:"); ?></label>
+                                <div class="admin__field-control field-pick-color col no-padding l6 m6 s12">
+                                    <div class="selected-color"></div>
+                                    <input class="admin_control-text" type="text" name="bgcolor_button_hover" id="bgcolor_button_hover" value="<?php echo (isset($arr_config['button_background_color_hover'])?$arr_config['button_background_color_hover']:'#ffffff'); ?>" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="adm_preview_btn" title="<?php echo __("Button Sample"); ?>" type="button" class="action- scalable primary col l12 m12 s12">
+                            <span><?php echo __("Button Preview"); ?></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col no-padding minh5 offset-l1">
+
+                    <div class="admin_group-field">
+                        <h3><?php echo __("Color Custom"); ?></h3>
+
+                        <div class="field-extend fill-icon col l6 m6 s12">
+                            <label><?php echo __("Background Color"); ?></label>
+                            <div class="admin__field-control field-pick-color">
+                                <div class="selected-color"></div>
+                                <input class="admin_control-text" type="text" name="bgcolor_body" id="bgcolor_body" value="<?php echo (isset($arr_config['background_color_content'])?$arr_config['background_color_content']:'#ffffff'); ?>" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="field-extend font-icon col l6 m6 s12">
+                            <label><?php echo __("Text Color"); ?></label>
+                            <div class="admin__field-control field-pick-color">
+                                <div class="selected-color"></div>
+                                <input class="admin_control-text" type="text" name="text_color_body" id="text_color_body" value="<?php echo (isset($arr_config['text_color_body'])?$arr_config['text_color_body']:'#ffffff'); ?>" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="field-extend code-icon col l6 m6 s12">
+                            <label><?php echo __("Heading Color"); ?></label>
+                            <div class="admin__field-control field-pick-color">
+                                <div class="selected-color"></div>
+                                <input class="admin_control-text" type="text" name="heading_color_body" id="heading_color_body" value="<?php echo (isset($arr_config['heading_color_body'])?$arr_config['heading_color_body']:'#ffffff'); ?>" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="field-extend link-icon col l6 m6 s12">
+                            <label><?php echo __("Link Color"); ?></label>
+                            <div class="admin__field-control field-pick-color">
+                                <div class="selected-color"></div>
+                                <input class="admin_control-text" type="text" name="link_color_body" id="link_color_body" value="<?php echo (isset($arr_config['link_color_body'])?$arr_config['link_color_body']:'#ffffff'); ?>" autocomplete="off">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="admin_group-field">
+                        <h3><?php echo __("Configurations Fonts"); ?></h3>
+
+                        <div class="field-extend font-google col l6 m6 s12">
+                            <label><?php echo __("Base Font"); ?></label>
+                            
+                            <select id="base_font" name="base_font" class="admin__field-control select-google-font">
+                                <?php foreach ($arr_google_font as $k => $v) { ?>
+                                    <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="field-extend font-weight col l6 m6 s12">
+                            <label><?php echo __("Base Font Weight"); ?></label>
+                            
+                            <select id="base_font_weight" name="base_font_weight" class="admin__field-control field-select2">
+                                <?php foreach ($arr_font_weight as $k => $v) { ?>
+                                    <option value="<?php echo $v; ?>"><?php echo $k; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="field-extend font-size col l6 m6 s12">
+                            <label><?php echo __("Base Font Size"); ?></label>
+                            
+                            <div class="col no-padding l12 m12 s12">
+                                <input class="admin_control-text field-simple-text-2" type="text" name="base_font_size" id="base_font_size" value="" />
+                            </div>
+                        </div>
+
+                        <div class="field-extend line-height col l6 m6 s12">
+                            <label><?php echo __("Base Line Height"); ?></label>
+                            
+                            <div class="col no-padding l12 m12 s12">
+                                <input class="admin_control-text field-simple-text-2" type="text" name="base_line_height" id="base_line_height" value="" />
+                            </div>
+                        </div>
+
+                        <div class="field-extend font-google col l6 m6 s12">
+                            <label><?php echo __("Heading Font"); ?></label>
+                            
+                            <select id="heading_font" name="heading_font" class="admin__field-control select-google-font">
+                                <?php foreach ($arr_google_font as $k => $v) { ?>
+                                    <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="field-extend font-weight col l6 m6 s12">
+                            <label><?php echo __("Heading Font Weight"); ?></label>
+                            
+                            <select id="heading_font_weight" name="heading_font_weight" class="admin__field-control field-select2">
+                                <?php foreach ($arr_font_weight as $k => $v) { ?>
+                                    <option value="<?php echo $v; ?>"><?php echo $k; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="field-extend line-height col l6 m6 s12">
+                            <label><?php echo __("Heading Line Height"); ?></label>
+                            
+                            <div class="col no-padding l12 m12 s12">
+                                <input class="admin_control-text field-simple-text-2" type="text" name="heading_line_height" id="heading_line_height" value="" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row page-actions-buttons remarg-btn">
+                <button id="adm_add_logo" title="<?php echo __("Save Change On General Setting"); ?>" type="submit" class="action- scalable primary" <?php if (!$helper->getIsAllowed('Netbaseteam_Themeconfig::general_setting')) { ?> disabled="disabled" <?php } ?>>
+                    <span><?php echo __("Save Change On General Setting"); ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php
+$url_process_setting = $this->getUrl('themeconfig/general/setting', ['_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+?>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'spectrum',
+        'select2'
+        ], function($) {
+            $(document).ready(function() {
+                try {
+                    $('#link_color_body').val(rgb2hex($('nav .level-0._active>a').css('color')));
+                    $('#text_color_body').val(rgb2hex($('body').css('color')));
+                    var bgcolor_body = rgb2hex($('.page-wrapper').css('background-color'));
+                    if ($.type(bgcolor_body)!=='undefined') {
+                        $('#bgcolor_body').val(bgcolor_body);
+                    }
+                    var heading_color_body = rgb2hex($('h2').css('color'));
+                    if ($.type(heading_color_body)!=='undefined') {
+                        $('#heading_color_body').val(heading_color_body);
+                    }
+
+                    var font_body = $('body').css('font-family').split(",");
+                    $('select#base_font').val((font_body[1].indexOf("sans-serif") !=-1?font_body[0].replace(/"/g,''):$('body').css('font-family').replace(/"/g,'')));
+                    $('#base_font_size').val($('body').css('font-size'));
+                    $('#base_line_height').val($('body').css('line-height'));
+                    $('select#base_font_weight').val($('body').css('font-weight'));
+
+                    $('#heading_line_height').val($('h2').css('line-height'));
+                    $('select#heading_font_weight').val($('h2').css('font-weight'));
+                    var font_head = $('h2').css('font-family').split(",");
+                    $('select#heading_font').val((font_head[1].indexOf("sans-serif") !=-1?font_head[0].replace(/"/g,''):$('h2').css('font-family').replace(/"/g,'')));
+                } catch(error) {
+                    console.log(error.message);
+                }
+
+                $(".select-google-font").select2({templateResult: formatFont}).on('change', function (e) {
+                    updateSelectFontStyle($(this));
+                });
+
+                $(".field-select2").select2();
+
+                updateSelectFontStyle($(".select-google-font"));
+
+                $('.color-option').click(function(event) {
+                    $('.color-option').removeClass('selected');
+                    $(this).addClass('selected');
+                    $('input#schemer_color').val($(this).children('.color-palette').attr('data-scheme'));
+                    var scheme = $(this).children('.color-palette').attr('data-color').split("|");
+                    var str = '';
+                    if (scheme.length==4) {
+                        if ($(this).children('.color-palette').attr('data-scheme')!='default') {
+                            var color1 = scheme[0];
+                            var color2 = scheme[1];
+                            var color3 = scheme[2];
+                            var color4 = scheme[3];
+                        } else {
+                            var color1 = color3 = scheme[0];
+                            var color2 = '#f25322';
+                            var color4 = '#db4c16';
+                            if ($('body').hasClass('horizontal_menu')) {
+                                color2 = '#000000';
+                            }
+                        }
+
+                        $('.page-wrapper .page-header, footer.page-footer').css('background', color1);
+
+                        str+='.vertical_menu .page-wrapper .page-header, .horizontal_menu .page-wrapper .page-header, footer.page-footer { background: '+color1+' !important; }';
+                        str+='nav .level-0._active>a, nav .level-0:hover>a,nav [class*="level-"]:not(.level-0) a:hover, nav.admin__menu a.active { color: '+color2+' !important;}';
+                        str+='.vertical_menu .menu-wrapper .level-0._active>a { border-left: 3px solid '+color2+' !important; }';
+                        str+='button#adm_preview_btn { background-color: '+color3+' !important; border-color: #ffffff !important; }';
+                        str+='button#adm_preview_btn:hover, button#adm_preview_btn:active { background-color: '+color4+' !important; }';
+                        $('#bgcolor_button').val(color3);
+                        $('#bgcolor_button').siblings('.selected-color').css({
+                            'background': color3
+                        });
+
+                        $('#border_color_button').val('#ffffff');
+                        $('#border_color_button').siblings('.selected-color').css({
+                            'background': '#ffffff'
+                        });
+
+                        $('#bgcolor_button_hover').val(color4);
+                        $('#bgcolor_button_hover').siblings('.selected-color').css({
+                            'background': color4
+                        });
+
+                        if($('head style#inject_scheme').length>0) {
+                            $('head style#inject_scheme').replaceWith('<style id="inject_scheme" type="text/css">'+str+'</style>');
+                        } else {
+                            $('head').append('<style id="inject_scheme" type="text/css">'+str+'</style>');
+                        }
+
+                        $('nav .level-0._active>a').attr({
+                            'style': 'color: '+color2+' !important;'
+                        });
+
+                        var link_color = rgb2hex($('nav .level-0._active>a').css('color'));
+                        $('#link_color_body').val(link_color);
+                        $('#link_color_body').siblings('.selected-color').css({
+                            'background': link_color
+                        });
+                    }
+                });
+
+                if($("#cb_use_df_style_button").is(":checked")) {
+                    $("#cb_use_style_button_login_form, .button_left_area .field-pick-color .admin_control-text").attr({
+                        'disabled': 'disabled'
+                    });
+                    $(".button_left_area .field-pick-color").spectrum("disable");
+                } else {
+                    $("#cb_use_style_button_login_form, .button_left_area .field-pick-color .admin_control-text").removeAttr('disabled');
+                    $(".button_left_area .field-pick-color").spectrum("enable");
+                }
+
+                $("#cb_use_df_style_button").change(function(event) {
+                    if($(this).is(":checked")) {
+                        // $("#cb_use_style_button_login_form, .button_left_area .admin_control-text").attr({
+                        //     'disabled': 'disabled'
+                        // });
+                        $(".button_left_area .field-pick-color").spectrum("disable");
+
+                        $(".button_left_area .field-pick-color .selected-color").css('background', '#f25322');
+                        $(".button_left_area .field-pick-color .admin_control-text").val('#f25322');
+
+                        $(".button_left_area .admin_group-field:nth-child(2) .field-pick-color .selected-color").css('background', '#ffffff');
+                        $(".button_left_area .admin_group-field:nth-child(2) .field-pick-color .admin_control-text").val('#ffffff');
+
+                        $("input#border_size_button").val(1);
+                        $("input#border_radius_button").val(5);
+                    } else {
+                        // $("#cb_use_style_button_login_form, .button_left_area .admin_control-text").removeAttr('disabled');
+                        $(".button_left_area .field-pick-color").spectrum("enable");
+                    }
+                });
+
+                $(".field-pick-color").each(function() {
+                    var $el = $(this);
+                    $el.children('.selected-color').css({
+                        'background': $el.children('.admin_control-text').val()
+                    });
+                    $el.children('.admin_control-text').css({
+                        'width': $el.width() - $el.children('.selected-color').width() - 45
+                    });
+
+                    try {
+                        var bgcolor = rgb2hex($($el.children('.admin_control-text').attr('data-target')).css($el.children('.admin_control-text').attr('data-css')));
+                        $el.children('.admin_control-text').val(bgcolor);
+                        $el.children('.selected-color').css({
+                            'background': bgcolor
+                        });
+                    } catch(error) {
+                        console.log(error.message);
+                    }
+
+                    $el.spectrum({
+                        allowEmpty:true,
+                        color: $el.children('.admin_control-text').val(),
+                        showInput: true,
+                        showInitial: true,
+                        showAlpha: true,
+                        showSelectionPalette: true,
+                        preferredFormat: "hex",
+                        showButtons: false,
+                        move: function(color) {
+                            if($("#cb_use_df_style_button").is(":checked")===false) {
+                                $el.children('.selected-color').css({
+                                    'background': color.toHexString()
+                                });
+                                $el.children('.admin_control-text').val(color.toHexString());
+                                try {
+                                    $($el.children('.admin_control-text').attr('data-target')).css($el.children('.admin_control-text').attr('data-css'), color.toHexString());
+                                } catch(err) {
+                                    console.log(err.message);
+                                }
+                            }
+                        },
+                        change: function(color) {
+                            if($("#cb_use_df_style_button").is(":checked")===false) {
+                                $el.children('.selected-color').css({
+                                    'background': color.toHexString()
+                                });
+                                $el.children('.admin_control-text').val(color.toHexString());
+                                try {
+                                    $($el.children('.admin_control-text').attr('data-target')).css($el.children('.admin_control-text').attr('data-css'), color.toHexString());
+                                } catch(err) {
+                                    console.log(err.message);
+                                }
+                            }
+                        }
+                    });
+
+                });
+
+                var boder_width = $('#adm_preview_btn').css("border-width").split("px");
+                var radius_btn = $('#adm_preview_btn').css("border-radius").split("px");
+
+                $("#border_size_button").val(boder_width[0]);
+                $("#border_radius_button").val(radius_btn[0]);
+
+                /********* button **********/
+                $(".frm-admin-config").on('submit',(function(e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+                    var form_key = FORM_KEY;
+                    formData.append('form_key', form_key);
+                    $.ajax({
+                        url: '<?php echo $url_process_setting ?>',
+                        type: "POST",
+                        beforeSend: function(){$("#body-overlay").show();},
+                        data:  formData,
+                        contentType: false,
+                        processData: false,
+                        cache: false,
+                        success: function(data) {
+                            window.location.reload(true);
+                            $("#body-overlay").hide();
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError);
+                        }
+                    });
+                }));
+
+                $("#border_radius_button").bind('keyup mouseup', function () {
+                    $("#adm_preview_btn").css('border-radius',  $("#border_radius_button").val() + 'px');
+                });
+
+                $("#border_size_button").bind('keyup mouseup', function () {
+                    $("#adm_preview_btn").css('border-width',  $("#border_size_button").val() + 'px');
+                });
+
+                $("#adm_preview_btn").on('mouseenter',function(){
+                    $("#adm_preview_btn").css("background-color", $("#bgcolor_button_hover").val());
+                });
+
+                $("#adm_preview_btn").on('mouseleave',function(){
+                    if($("#bgcolor_button").val() == "") {
+                        $("#adm_preview_btn").css("background-color", "#ee3020");
+                    } else {
+                        $("#adm_preview_btn").css("background-color", $("#bgcolor_button").val());
+                    }
+                });
+
+            });
+
+function formatFont(opt) {
+    if (!opt.id) {
+        return opt.text;
+    }
+    var $state = $('<span style="font-family:\'' + opt.element.value + '\';"> ' + opt.text + '</span>');
+    return $state;
+}
+
+function updateSelectFontStyle($el) {
+    var font = $el.val();
+    var id = '#select2-' + $el.attr("id") + '-container';
+    $(id).css("font-family", "'" + font + "'");
+}
+
+});
+
+var hexDigits = new Array
+("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f");
+
+function rgb2hex(rgb) {
+    try {
+        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    } catch (err) {
+        console.log(err.message);
+    }
+    if(rgb)
+        return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    return;
+}
+
+function hex(x) {
+    return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+}
+</script>

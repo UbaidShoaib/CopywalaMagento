@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body> 
+        <referenceContainer name="page.wrapper"> 
+            <container name="container.wrapper.breadcrumbs" htmlClass="wrapper-breadcrumbs" htmlTag="div" after="sun_header" />
+            <container name="wrapper.map" htmlClass="wrapper-map" after="content" htmlTag="div"> 
+            </container>  
+        </referenceContainer>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">home</item>
+                    <item name="label" xsi:type="string">Home</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">login</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Login</item>
+                     <item name="label" xsi:type="string">Login </item>
+                </argument>
+            </action> 
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">create-account</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Create Account</item>
+                     <item name="label" xsi:type="string">Create Account </item>
+                </argument>
+            </action> 
+        </referenceBlock>
+        <referenceContainer name="content">
+            <container name="customer.form.register.wrap" htmlClass="customer-form-register-wrap" htmlTag="div">
+                 <container name="customer.form.register.inner" htmlClass="customer-form-register-inner" htmlTag="div">
+                 
+                </container>  
+            </container>  
+        </referenceContainer>
+        <move element="page.main.title" destination="customer.form.register.inner" before="-"/>
+        <move element="customer_form_register" destination="customer.form.register.inner" after="page.main.title"/> 
+    </body>
+</page>

@@ -1,0 +1,329 @@
+
+& when (@media-common = true) { 
+    .category-page {
+        .lib-css (padding-top, @indent__xxl);
+        .column.main { 
+            #layer-product-list {
+                .toolbar-top {
+                    .toolbar.toolbar-products {
+                        .modes {
+                            float: right;
+                        }
+                        .toolbar-sorter.sorter {
+                            select {
+                                .border-radius(5px);
+                                .lib-css(padding-left, ceil(0.3 * @indent__s));
+                                .lib-css(margin-left, @indent__s);
+                            }
+                        }
+                        .field.limiter {
+                            .lib-css (margin-right, @indent__l);
+                            .lib-css (padding-bottom, @indent__base);
+                            .control {
+                                select {
+                                    .border-radius(5px);
+                                    .lib-css(padding-left, ceil(0.3 * @indent__s));
+                                    .lib-css(margin-left, @indent__s);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+& when (@media-common = true) {
+    .page-products {
+        .columns {
+            padding-top: 60px;
+            z-index: 1;
+        }
+    } 
+    .toolbar-products{
+        select{
+            line-height: 30px;
+            height: 30px;
+        }
+    }
+    .modes-mode{ 
+        .lib-css(color, @text__color__muted);
+        border: 1px solid @border-color__mode-toolbar; 
+        float: left;
+        font-weight: @font-weight__regular;
+        line-height: 30px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+
+        .modes-label + & {
+            border-radius:@button__border-radius;
+        }   
+        &:last-child {
+            border-radius:@button__border-radius;
+            border-right: 1px solid @border-color__mode-toolbar;
+        }
+        .toolbar-products & { 
+            &:hover { 
+                background: @theme_color_hover;
+                border-color: @theme_color_hover;
+                &:before{
+                    .lib-css(color, @color-white); 
+                }
+            }
+            &:before{
+                line-height: 28px;
+            }
+        }
+        &.active { 
+            background: @theme_color_active;
+            border-color: @theme_color_active;
+            &:before{ 
+                .lib-css(color, @color-white);
+            } 
+        } 
+
+        .lib-icon-font(
+            @icon-grid,
+            @_icon-font-size: @toolbar-mode-icon-font-size,
+            @_icon-font-text-hide: true,
+            @_icon-font-vertical-align: false,
+            @_icon-font-color: @text__color__muted,
+            @_icon-font-color-hover: @text__color__muted, 
+            @_icon-font-line-height: @toolbar-mode-icon-line-height
+            ) 
+    }
+    .mode-list {
+        .lib-css(margin-left, 10px);
+        &:before {
+            content: @icon-list;
+        }
+    } 
+    .toolbar {
+        &:extend(.abs-add-clearfix all);
+        margin-bottom: @indent__l;
+        text-align: center;
+        .catalog-category-view &{
+            margin-top: 45px;
+        }  
+        select {
+            .lib-css(background-color, @color-white); 
+            border-radius: @button__border-radius;
+        }
+        label{
+            .lib-css(color,@toolbar-label-color); 
+            .lib-css(font-weight,500); 
+        }
+        &-amount {
+            left: 0;
+            line-height: @toolbar-mode-icon-font-size + 2;
+            margin: 0;
+            padding: 11px 0;
+            position: absolute;
+            text-align: left;
+            top: 0;
+            vertical-align: middle; 
+            .products.wrapper ~ .toolbar & {
+                display: none;
+            }
+        }
+
+        .page-with-filter & {
+            &-amount {
+                position: static;
+            }
+        }
+
+        &-products {
+            .lib-css(background-color, @toolbar-background); 
+            .pages {
+                display: none; 
+                .products.wrapper ~ & {
+                    display: block;
+                }
+            }
+        } 
+        .pages {
+            margin-bottom: @indent__m;
+        }
+    } 
+    .sorter {
+        .lib-css(margin-right, @indent__l);
+        .page-products & {
+            position: static; 
+            float: right;
+        } 
+        .products.wrapper ~ .toolbar & {
+            display: none;
+        }
+        &-options { 
+            width: auto;
+            min-width: 190px;
+            .lib-css (margin-left, ceil(1.67 * @indent__s));
+        } 
+        &-action { 
+            display: none; 
+        }
+    } 
+    .modes {
+        display: inline-block;
+        float: left; 
+        .products.wrapper ~ .toolbar & {
+            display: none;
+        }
+        &-label{
+            display: none;
+        }
+    }
+    .each-category-name{
+        float: left;
+        .products.wrapper ~ .toolbar & {
+            display: none;
+        } 
+        .textCapitalize{
+            .lib-css(font-weight,600);
+            font-size: @font-size__l;
+            line-height: 32px;
+            float: left;
+            color: @theme_color_444;
+            text-transform: uppercase;
+            padding-right: @indent__base;
+        }
+    }
+    .limiter {  
+        display: none;
+        float: right;
+        margin-right: 30px;
+        .toolbar-top .toolbar & { 
+            display: block;
+        }
+        &-options { 
+            width: auto;
+            min-width: 102px;
+        }
+
+        &-label {
+
+            .lib-css (font-weight, @font-weight__400);
+        }
+        &-text{
+         display: none; 
+     }
+
+     .control {
+        display: inline-block;
+    }
+} 
+.modes-label {
+    &:extend(.abs-visually-hidden-desktop all);
+}  
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+& when (@media-common = true),
+(@media-target = 'all') {
+    @media only screen and (max-width: (@screen__s)) {
+        .media-width('max', @screen__s); 
+        .toolbar-products {
+            margin-bottom: 0;
+        }
+
+        .toolbar {
+            .toolbar-sorter {
+                right: 0px;
+            }
+        } 
+    }
+}
+& when (@media-common = true),
+(@media-target = 'all') {
+    @media only screen and (min-width: (@screen__m)) {
+        .media-width('min', @screen__m); 
+        .page-products {
+            .columns {
+                padding-top: 0;
+                z-index: 1;
+            }
+        } 
+        .toolbar-amount {
+            float: right;
+            display: block; 
+            position: static;
+        }
+
+        .toolbar {
+            .products.wrapper ~ & .pages { 
+                margin-bottom: 0;
+            }
+        } 
+    }
+}
+& when (@media-common = true),
+(@media-target = 'all') {
+    @media only screen and (max-width: (@screen__l - 1)) {
+        .media-width('max', @screen__l);  
+        #layer-product-list {
+            .toolbar-top {
+                .toolbar.toolbar-products {
+                    .toolbar-amount {
+                        display: none;
+                    }
+                }
+            }
+        }   
+
+        .toolbar {
+            .toolbar-sorter {
+                position: relative;
+                margin-right: 16px;
+                right: -17px;
+            }
+        }  
+    }
+}
+& when (@media-common = true),
+(@media-target = 'all') {
+    @media only screen and (max-width: (@screen__m - 1)) {
+        .media-width('max', @screen__m);  
+        .pages {
+            float: inherit;
+            margin: auto;
+        } 
+        .page-products .columns {
+            padding-top: 15px;
+        }
+    }
+}
+
+& when (@media-common = true),
+(@media-target = 'all') {
+    @media only screen and (max-width: (@screen__s - 1)) {
+        .media-width('max', @screen__s);  
+        .toolbar-top {
+            .toolbar-sorter.sorter, .field.limiter {
+                clear: both;
+                padding-top: @indent__base;
+                margin: auto;
+                text-align: center;
+                float: left;
+            }
+
+        } 
+    }
+}
+& when (@media-common = true),
+(@media-target = 'all') {
+    @media only screen and (max-width: (@screen__s)) {
+        .media-width('max', @screen__s + 1);  
+        .toolbar-top {
+            .toolbar .limiter {
+                padding-top: @indent__base;
+            }
+        } 
+    }
+}
+
+

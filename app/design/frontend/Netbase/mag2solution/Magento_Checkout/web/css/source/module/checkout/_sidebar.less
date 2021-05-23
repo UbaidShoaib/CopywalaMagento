@@ -1,0 +1,16 @@
+/* Variables */
+@checkout-sidebar__margin: @indent__base;
+@checkout-sidebar__margin__xl: 46px;
+@checkout-sidebar__columns: 4;
+//  Desktop
+//  _____________________________________________
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (min-width: (@screen__m)) {
+        .media-width('min', @screen__m);
+	    .opc-sidebar {
+	        .lib-css(margin, @checkout-sidebar__margin__xl 0 @checkout-sidebar__margin);
+	        .lib-layout-column(2, 2, @checkout-sidebar__columns);
+	    }
+	}
+}

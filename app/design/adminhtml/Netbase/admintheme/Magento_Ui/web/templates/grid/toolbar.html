@@ -1,0 +1,25 @@
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="admin__data-grid-header" afterRender="$data.setToolbarNode">
+    <div class="admin__data-grid-header-row">
+        <div class="admin__data-grid-actions-wrap" each="getRegion('dataGridActions')" render=""/>
+        <each args="getRegion('dataGridFilters')" render=""/>
+    </div>
+    <div class="admin__data-grid-header-row row row-gutter">
+        <div class="col-m-2 col-xs-12 nb-header-action-left" if="hasChild('listing_massaction')" ko-scope="requestChild('listing_massaction')" render=""/>
+        <div css="
+            'col-m-10 col-xs-12': hasChild('listing_massaction'),
+            'col-xs-12': !hasChild('listing_massaction')" class="nb-header-action-right" id="nb-header-action-right">
+            <div class="row nb-header-pager-row" ko-scope="requestChild('listing_paging')">
+                <div class="col-xs-3 nb-header-pager-total" render="totalTmpl"/>
+                <div class="col-xs-9 nb-header-pager-page" render=""/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<render args="stickyTmpl" if="$data.sticky"/>

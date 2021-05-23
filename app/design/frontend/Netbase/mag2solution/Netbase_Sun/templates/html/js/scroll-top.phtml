@@ -1,0 +1,42 @@
+<!--Scroll to top button-->
+<a id="yt-totop" href="javascript:void(0)" title="Go to Top" >
+	<i class="icon-up-open"></i>
+	<span><?php echo __('Top') ?></span>
+</a>
+
+<script type="text/javascript">
+	require(['jquery'], function($) { 
+		jQuery(document).ready(function() {
+  
+		  	var btn = $('#yt-totop');
+
+	  		$(window).scroll(function() {
+			    if ($(window).scrollTop() > 300) {
+			      btn.addClass('show');
+			    } else {
+			      btn.removeClass('show');
+			    }
+			  });
+
+		  	btn.on('click', function(e) {
+		    e.preventDefault();
+		    $('html, body').animate({scrollTop:0}, '300');
+		  }); 
+		});
+		/*$(document).ready(function() {
+			$('#yt-totop').hide();
+			$('#yt-totop').click(function(){
+				$('body').scrollTop(0,0);
+			});
+
+			$('body').scroll(function(){
+				cosole.log(document.body.scrollTop);
+				if (document.body.scrollTop>$(this).height()/2) {
+					$('#yt-totop').show();
+				}else{
+					$('#yt-totop').hide();
+				}
+			});
+		}); */  
+    });
+</script>

@@ -1,0 +1,97 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct();?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()): ?>
+    <div class="box-tocart">
+        <div class="fieldset">
+            <?php if ($block->shouldRenderQuantity()): ?>
+                <div class="field qty">
+                    <label class="label" for="qty"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></label>
+                    <div class="control">
+                        <button class="minus">-</button>
+                        <input type="number"
+                               name="qty"
+                               id="qty"
+                               value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>"
+                               maxlength="12"
+                               title="<?php echo __('Qty') ?>"
+                               class="input-text qty"
+                               data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                        />
+                        <button class="add">+</button>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <div class="actions">
+                <button type="submit"
+                        title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
+                        class="action primary tocart"
+                        id="product-addtocart-button">
+                    <span><?php /* @escapeNotVerified */ echo $buttonTitle ?></span>
+                </button>
+                <?php echo $block->getChildHtml('', true) ?>
+            </div>
+        </div>
+        <?php
+        if($_product->getTypeId() != 'virtual' && $_product->getTypeId() != 'downloadable') {
+            /* integrate calculate shipping */
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $helper = $objectManager->get('\Netbaseteam\Calculatorshipping\Helper\Data');
+            echo $helper->showShippingEstimate();
+        }
+        ?>
+    </div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/product/view/validation": {
+                "radioCheckboxClosest": ".nested"
+            }
+        }
+    }
+</script>
+<script>
+    require([
+            'jquery',
+        ],
+        function ($) {
+            $('.add').on('click',function(e){
+                var $qty=$(this).closest('.control').find('#qty');
+                var currentVal = parseInt($qty.val());
+                if (!isNaN(currentVal)) {
+                    $qty.val(currentVal + 1);
+                }
+                e.preventDefault();
+            });
+            $('.minus').on('click',function(e){
+                var $qty=$(this).closest('.control').find('#qty');
+                var currentVal = parseInt($qty.val());
+                if (!isNaN(currentVal) && currentVal > 0) {
+                    $qty.val(currentVal - 1);
+                }
+                e.preventDefault();
+            });
+        });
+</script>
+<?php if (!$block->isRedirectToCartEnabled()) : ?>
+    <script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "catalogAddToCart": {
+                "bindSubmit": false
+            }
+        }
+    }
+</script>
+<?php endif; ?>
+

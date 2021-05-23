@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="calculatorshipping" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Calculatorshipping</label>
+            <tab>cmsmart</tab>
+            <resource>Netbaseteam_Calculatorshipping::config_calculatorshipping</resource>
+            <group id="view" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Calculatorshipping View Settings</label>
+                
+				<field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Calculatorshipping On Frontend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				
+				<field id="popup_title" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Estimate Shipping Popup Title</label>
+					<depends>
+						<field id="calculatorshipping/view/enabled">1</field>
+					</depends>
+					<comment>Please note short popup title. Example: Estimate Shipping</comment>
+                </field>
+				
+				<field id="est_btn_title" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Estimate Button Title</label>
+					<depends>
+						<field id="calculatorshipping/view/enabled">1</field>
+					</depends>
+					<comment>Please note short title. Example: Estimate Shipping</comment>
+                </field>
+				
+				<field id="show_est_cateogry" translate="label" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Calculatorshipping On The Category Page</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="calculatorshipping/view/enabled">1</field>
+					</depends>
+				</field>
+				
+				<field id="auto_ip" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Detect IP</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="calculatorshipping/view/enabled">1</field>
+					</depends>
+				</field>
+				
+				<!--<field id="show_include_cart" translate="label" type="select" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Include Cart Control For Estimate Shipping</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="calculatorshipping/view/enabled">1</field>
+					</depends>
+				</field>-->
+            </group>
+        </section>
+    </system>
+</config>

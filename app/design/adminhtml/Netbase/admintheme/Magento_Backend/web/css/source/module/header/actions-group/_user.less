@@ -1,0 +1,120 @@
+// /**
+//  * Copyright © 2016 Magento. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Page header -> Actions group -> User menu
+//  _____________________________________________
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@user-account__padding-bottom: .4rem;
+@user-account__padding-left: 4rem;
+@user-account__padding-top: .7rem;
+@user-account__padding-right: 2.8rem;
+
+@user-account-menu__min-width: 20rem;
+@user-account-menu__z-index: @notifications-action-menu__z-index - 10; // Should be lower than notifications
+@user-account-menu__hover__background-color: @action__hover__background-color;
+@user-account-menu__active__background-color: darken(@color-blue-clear-sky, 5%);
+
+@user-account-action__color: @color-white;
+@user-account-action__hover__color: @color-white;
+
+//
+
+.admin-user {
+    float: right;
+    line-height: @line-height__base; // ToDo UI: Delete with admin scope
+    margin-left: 30px;
+    z-index: @user-account-menu__z-index;
+    margin-right: 5px;
+
+    &._active,
+    &.active {
+        //  User account action
+        .admin__action-dropdown {
+            // border-color: @action-dropdown__active__border-color;
+            // box-shadow: @component__box-shadow__base;
+        }
+    }
+
+    //  User account action
+    .admin__action-dropdown {
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        line-height: 35px;
+        padding: 0;
+        // border: 1px solid @user-account-action__color;
+        border-radius: 100%;
+        background-color: transparent;
+        &:before {
+            @_icon-user__size: 3rem;
+            &:extend(.abs-icon all);
+            color: @user-account-action__color;
+            content: @icon-account__content;
+            font-size: @_icon-user__size !important;
+            margin: 0;
+            right: -5px;
+            bottom: -13px;
+            position: relative;
+        }
+
+        &:after{
+            display: none;
+        }
+    }
+    //  User account menu
+    .admin__action-dropdown-menu {
+        @_user-menu__indent-side: 1rem;
+        top: 60px;
+        min-width: @user-account-menu__min-width;
+        padding-left: @_user-menu__indent-side;
+        padding-right: @_user-menu__indent-side;
+
+        > li {
+            > a {
+                padding-left: .5em;
+                padding-right: (@user-account__padding-right - @_user-menu__indent-side);
+                transition: @smooth__background-color;
+                white-space: nowrap;
+
+                &:hover {
+                    color: @nb-color-active;
+                }
+
+                &:active {
+                    background-color: @user-account-menu__active__background-color;
+                    bottom: -1px;
+                    position: relative;
+                }
+            }
+        }
+
+        .admin-user-name {
+            .lib-text-overflow-ellipsis();
+            display: inline-block;
+            max-width: @user-account-menu__min-width;
+            overflow: hidden;
+            vertical-align: top;
+        }
+    }
+
+    .admin__action-dropdown-text{
+        display: none;
+    }
+}
+
+.admin-user-account-text {
+    .lib-text-overflow-ellipsis();
+    display: inline-block;
+    max-width: @user-account-menu__min-width - @user-account__padding-left - @user-account__padding-right - 2rem;
+}
+
+.admin__action-dropdown:hover, .admin__action-dropdown:focus {
+    background: transparent;
+}

@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Netbaseteam Team
+ * @copyright Copyright (c) 2018 Cmsmart (http://www.cmsmart.net)
+ * @package Netbaseteam_Onestepcheckout
+ */
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/guest-carts/:cartId/payment-information" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GuestPaymentInformationManagementInterface" method="savePaymentInformationAndPlaceOrder"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/carts/mine/payment-information" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\PaymentInformationManagementInterface" method="savePaymentInformationAndPlaceOrder"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Gift Messages -->
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/:cartId/gift-message" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GiftMessageInformationManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/guest-carts/:cartId/gift-message" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GuestGiftMessageInformationManagementInterface" method="update"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/mine/gift-message" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GiftMessageInformationManagementInterface" method="update"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Gift Wrap -->
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/:cartId/gift-wrap" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GiftWrapInformationManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/guest-carts/:cartId/gift-wrap" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GuestGiftWrapInformationManagementInterface" method="update"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/mine/gift-wrap" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GiftWrapInformationManagementInterface" method="update"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Delivery -->
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/:cartId/delivery" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\DeliveryInformationManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/guest-carts/:cartId/delivery" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GuestDeliveryInformationManagementInterface" method="update"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/mine/delivery" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\DeliveryInformationManagementInterface" method="update"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Remove Item -->
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/:cartId/remove-item" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\ItemManagementInterface" method="remove"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/guest-carts/:cartId/remove-item" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GuestItemManagementInterface" method="remove"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/mine/remove-item" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\ItemManagementInterface" method="remove"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Update Item -->
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/:cartId/update-item" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\ItemManagementInterface" method="update"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/guest-carts/:cartId/update-item" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GuestItemManagementInterface" method="update"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/mine/update-item" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\ItemManagementInterface" method="update"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <!-- subsrice newsletter -->
+
+    <route url="/V1/netbaseteam_onestepcheckout/guest-carts/:cartId/newsletter" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\GuestNewsletterManagementInterface" method="subscribe"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/netbaseteam_onestepcheckout/carts/mine/newsletter" method="POST">
+        <service class="Netbaseteam\Onestepcheckout\Api\NewsletterManagementInterface" method="subscribe"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+</routes>

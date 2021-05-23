@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author Netbaseteam Team
+ * @copyright Copyright (c) 2018 Cmsmart (http://www.cmsmart.net)
+ * @package Netbaseteam_Onestepcheckout
+ */
+?>
+<?php /** @var \Netbaseteam\Onestepcheckout\Block\Sales\Order\Info\Delivery $block */?>
+<?php if ($fields = $block->getDeliveryDateFields()): ?>
+    <div class="delivery">
+    <?php foreach ($fields as $field): ?>
+        <div class="delivery-field">
+            <?= __($field['label']); ?>: <?= $field['value']; ?>
+        </div>
+    <?php endforeach; ?>
+    </div>
+<?php endif ?>

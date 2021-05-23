@@ -1,0 +1,113 @@
+<div class="section-container">
+    <p class="section-title"><input class="nbd-ip-readonly" value="<?php echo __('Sides/Pages'); ?>" readonly=""></p>
+    <div class="nbd-section-wrap">
+        <div class="nbd-field-info"> 
+            <div class="nbd-field-info-1">
+                <label><b><?php echo __('Enabled'); ?></b> <nbd-tip  data-tip="<?php echo __('Choose whether the option is enabled or not.'); ?>" ></nbd-tip></label>
+            </div>
+            <div class="nbd-field-info-2">
+                <select name="options[side][enable]" ng-model="options.side.enable">
+                    <option value="y"><?php echo __('Yes'); ?></option>
+                    <option value="n"><?php echo __('No'); ?></option>
+                </select>
+            </div>                                                    
+        </div>
+        <div class="nbd-field-wrap" ng-show="options.side.enable == 'y'" style="margin-bottom: 0;">
+            <div class="nbd-nav">
+                <div>
+                    <ul nbd-tab>
+                        <li class="nbd-field-tab active" data-target="tab-general"><?php echo __('General') ?></li>
+                        <li class="nbd-field-tab" data-target="tab-opdesign"><?php echo __('Design setting') ?></li>
+                        <li class="nbd-field-tab" data-target="tab-appearance"><?php echo __('Appearance') ?></li>
+                    </ul>                                                    
+                </div>  
+                <div class="clear"></div>                                                    
+            </div>
+            <div>
+                <div class="tab-general nbd-field-content active">
+                    <div class="nbd-field-info">
+                        <div class="nbd-field-info-1">
+                            <label>
+                                <b><?php echo __('Price type'); ?></b>
+                                <nbd-tip data-tip="<?php echo __('1- Fixed amount: This is an flat increase or decrease added to the product price. 2- Percent of the original price: This is a percentage increase or decrease of the initial product price. 3- Percent of the original price + options: This is a percentage increase or decrease of the initial product price plus all of the other options that are not of this type. 4- Current value * price: This will multiply field value by the Price you set.'); ?>" ></nbd-tip>
+                            </label>
+                        </div>  
+                        <div class="nbd-field-info-2">
+                            <select name="options[side][price_type]" ng-model="options.side.price_type">
+                                <option value="f"><?php echo __('Fixed amount '); ?></option>
+                                <option value="p"><?php echo __('Percent of the original price'); ?></option>
+                                <option value="p+"><?php echo __('Percent of the original price + options'); ?></option>
+                                <option value="c"><?php echo __('Current value * price'); ?></option>
+                            </select>
+                        </div>      
+                    </div>
+                    <div class="nbd-field-info"> 
+                        <div class="nbd-field-info-1">
+                            <label><b><?php echo __('Depend quantity breaks'); ?></b></label>
+                        </div>  
+                        <div class="nbd-field-info-2">
+                            <select name="options[side][depend_quantity]" ng-model="options.side.depend_quantity">
+                                <option value="y"><?php echo __('Yes'); ?></option>
+                                <option value="n"><?php echo __('No'); ?></option>
+                            </select>
+                        </div> 
+                    </div>                                              
+                    <div class="nbd-field-info"> 
+                        <div class="nbd-field-info-1">
+                            <label><b><?php echo __('Dynamic number of sides / pages'); ?></b></label>
+                        </div>  
+                        <div class="nbd-field-info-2">
+                            <select name="options[side][dynamic]" ng-model="options.side.dynamic">
+                                <option value="y"><?php echo __('Yes'); ?></option>
+                                <option value="n"><?php echo __('No'); ?></option>
+                            </select>
+                        </div>
+                    </div>      
+                    <div class="nbd-field-info"> 
+                        <div class="nbd-field-info-1">
+                            <label><b><?php echo __('Number of sides / pages'); ?></b></label>
+                        </div>  
+                        <div class="nbd-field-info-2">
+                            <div class="nbd-table-wrap" style="overflow: hidden;">
+                                <div class="nbd-table-wrap">
+                                    <table class="nbd-table">
+                                        <tr ng-show="options.quantity_breaks.length > 1 && options.side.depend_quantity == 'y'">
+                                            <th></th>
+                                            <th></th>
+                                            <th ng-repeat="break in options.quantity_breaks">{{break.val}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th><?php echo __('Actions'); ?></th>
+                                            <th><?php echo __('Side name'); ?></th>
+                                            <th ng-repeat="break in options.quantity_breaks" ng-hide="options.side.depend_quantity != 'y' && $index > 0"><?php echo __('Price'); ?></th>
+                                        </tr>                                                                
+                                        <tr ng-repeat="op in options.side.options">
+                                            <td>
+                                                <div style="display: flex;">
+                                                    <a style="margin-right: 3px;" class="button nbd-mini-btn"  title="<?php echo __('Delete'); ?>"><span class="dashicons dashicons-no-alt"></span></a>
+                                                </div>    
+                                            </td>
+                                            <td>
+                                                <input class="nbd-medium-ip" type="text" ng-model="op.name"/>
+                                            </td>
+                                            <td ng-repeat="break in options.quantity_breaks" ng-hide="options.side.depend_quantity != 'y' && $index > 0">
+                                                <input class="nbd-short-ip" type="text" ng-model="op.price[$index]"/>
+                                            </td>                                                                            
+                                        </tr>
+                                    </table>
+                                </div>     
+                            </div>
+                            <div style="margin-top: 5px;"><a class="button" title="<?php echo __('Add more'); ?>"><span class="dashicons dashicons-plus"></span> <?php echo __('Add more'); ?></a></div>
+                        </div> 
+                    </div> 
+                </div> 
+                <div class="tab-opdesign nbd-field-content">
+                    opdesign
+                </div>
+                <div class="tab-appearance nbd-field-content">
+                    appearance
+                </div>                                                
+            </div>  
+        </div>     
+    </div>        
+</div> 

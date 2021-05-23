@@ -1,0 +1,30 @@
+<?php 
+	$text = "If you have one or more than two items to sell, there are no place than Antique, this is an exactly place for you to earn much money.";
+	$linkTxt = "Sell Now";
+	$linkIc = 'icon-angle-double-right';
+	$isSec = 'true';
+	$labelText = !empty($block->getLabelText()) ? $block->getLabelText() : $text;
+	$linkTitle = !empty($block->getLinkTitle()) ? $block->getLinkTitle() : $linkTxt;
+	$linkIcon = !empty($block->getLinkIcon()) ? $block->getLinkIcon() : $linkIc;
+	$isSection = !empty($block->getIsSection()) ? $block->getIsSection() : $isSec;
+?>
+<?php if ($isSection == 'true'): ?>
+<section class="seller-link-02">
+  	<div class="seller-link__bg">
+  	</div>	
+	<div class="seller-link__content">
+	 <p>
+	 	<span><?php echo __($labelText); ?></span>
+	    <a href="<?php echo $block->getUrl('customer/account'); ?>" class="seller-link"><?php echo __($linkTitle); ?> <i class="<?php echo $linkIcon; ?>"></i></a> 
+	 </p>
+	</div>	  
+</section>
+<?php else: ?>
+	<div class="seller-link__content">
+			
+         <p>
+         	<span><?php echo __($labelText); ?></span>
+            <a href="<?php echo $block->getUrl('customer/account'); ?>" class="seller-link"><?php echo __($linkTitle); ?> <i class="<?php echo $linkIcon; ?>"></i></a> 
+         </p>
+    </div>
+<?php endif ?>

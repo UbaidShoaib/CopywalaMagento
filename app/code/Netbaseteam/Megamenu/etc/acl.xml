@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Netbaseteam_Megamenu::megamenu" title="Megamenu" sortOrder="40">
+                    <resource id="Netbaseteam_Megamenu::manage" title="Manage Menu" sortOrder="10"/>
+                    <resource id="Netbaseteam_Megamenu::config" title="Config Megamenu" sortOrder="20"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

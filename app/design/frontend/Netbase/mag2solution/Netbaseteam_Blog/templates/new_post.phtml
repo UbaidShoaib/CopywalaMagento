@@ -1,0 +1,48 @@
+<?php 
+
+$helper = $this->helper('Netbaseteam\Blog\Helper\Data');
+$postNews = $block->getNewPosts();
+?>
+<div class="blog-slider slider"> 
+	<div class="blog-slider-content owl-carousel">
+		<?php foreach ($postNews as $post): ?>
+			<div class="item">
+				<div> 
+					<a href="<?php echo $helper->getPreBlogUrl().'/'.$post->getIdentifier(); ?>">
+						<?php if ($post->getFeatureImage()): ?> 
+							<img src="<?php echo $helper->resizeImg($post->getFeatureImage(),'feature_image',260,350); ?>" alt="<?php echo __($post->getFeatureImage()); ?>" />
+						<?php endif ?>
+						
+					</a>
+				</div>
+				<p class="blog-category"><?php echo $post->getTag(); ?></p>
+				<a class="blog-name" href="<?php echo $helper->getPreBlogUrl().'/'.$post->getIdentifier(); ?>"><?php echo $post->getTitle(); ?></a>
+				<div class="blog-desc">
+				<?php if ($post->getCreationTime()): ?>
+					<div class="blog-create-time"> 
+							<span><?php echo __($helper->getFormatDate($post->getCreationTime())); ?></span> 
+					</div>
+				<?php endif ?>
+				<!-- <?php if ($post->getAuthorName()): ?>
+					<div class="blog-author"> 
+							<span><?php echo __('by '.$post->getAuthorName()); ?></span> 
+					</div>
+				<?php endif ?>  -->
+				<div class="blog-num-comments">
+					<span> 
+						<?php if($post->getNumComments()<2): ?>
+							<span><?php echo __($post->getNumComments()); ?></span>
+							<span>Comment</span>
+						<?php else:?>
+							<span><?php echo __($post->getNumComments()); ?></span>
+							<span>Comments</span>
+						<?php endif;?>
+					</span>
+				</div>
+				</div>
+
+			</div> 
+		<?php endforeach ?>
+	</div>
+</div>
+

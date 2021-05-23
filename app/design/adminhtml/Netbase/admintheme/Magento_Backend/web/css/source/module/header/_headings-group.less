@@ -1,0 +1,67 @@
+// /**
+//  * Copyright © 2016 Magento. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Page header -> Headings group
+//  _____________________________________________
+
+//
+//  Imports
+//  ---------------------------------------------
+
+//  @import 'headings-group/_breadcrumbs.less'; // Component exist only in design
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@page-title__color: @nb-color-second;
+@page-title__font-size: 2rem;
+
+//  Breadcrumbs component not included in common styles, but title used it
+@page-title-breadcrumbs__min-height: round(@page-title-breadcrumb__font-size * @line-height__base, 1);
+@page-title-breadcrumb__font-size: @font-size__s;
+
+//
+@page-button-menu__font-size: 2.2rem;
+
+.page-header-hgroup {
+    padding-right: @content__indent / 2;
+    .button-menu-mobile {
+        &:before {
+            &:extend(.abs-icon all);
+            content: @icon-import__content;
+            font-size: @page-button-menu__font-size;
+            color: @color-white;
+        }
+        &:hover {
+            color: transparent;
+        }
+    }
+}
+.page-header-actions {
+    padding-top: 0px !important;
+    .menu-icon {
+        display: inline-block;
+    }
+}
+//
+//  Page title
+//  ---------------------------------------------
+
+.page-title-wrapper {
+    margin-top: 0;
+}
+
+.page-title {
+    color: @page-title__color;
+    font-size: @page-title__font-size;
+    margin-bottom: 0;
+    border: 1px solid @page-title__color;
+    padding: 7px 20px;
+    float: left;
+    text-transform: uppercase;
+    margin-top: 5px;
+}

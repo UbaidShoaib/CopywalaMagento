@@ -1,0 +1,352 @@
+<?php if($this->_EnableModule()) : ?>
+    <?php
+        $country_code = ""; $region_name = "";
+        $region_code = ""; $region_id = ""; $zip_code = "";
+
+        if($this->_getAutoIp()) {
+
+            $address = $this->_getLocation();
+            if(isset($address['country_code'])) {
+                $country_code = strtoupper($address['country_code']);
+            }
+
+            if(isset($address['region_name'])) {
+                $region_name = $address['region_name'];
+            }
+
+            if(isset($address['region_code'])) {
+                $region_code = $address['region_code'];
+            }
+
+            if(isset($address['zip_code'])) {
+                $zip_code = $address['zip_code'];
+            }
+
+            $region_id = $this->_getRegionId($region_code);
+
+        }
+    ?>
+    <div class="wrap-shipping" id="wrap-shipping">
+        <div id="nb-estshipping-cost-loading" class="blockestshipping-cost-popup-none" style="display: none;"></div>
+        <div id="estimaste-body" class="estimaste-body">
+            <div id="btn-close" class="btn-close"><i class="icon-cancel"></i></div>
+            <div class="est-description">
+                <p><strong><?php echo __("Calculator Shipping") ?></strong></p>
+                <p><?php echo __("Enter destination to get a shipping cost.") ?></p>
+            </div>
+
+            <div id="shipping-input-form" class="detail-form-fields">
+                <ul>
+                    <input type="hidden" name="shipping_cost_product_id" id="shipping_cost_product_id"/>
+                    <input type="hidden" name="shipping_cost_product_qty" id="shipping_cost_product_qty"/>
+                    <li class="item li_estimate_country_id">
+                        <label class="label" for="country">
+                            <span><?php echo __("Country") ?><span class="my-require">*</span></span>
+                        </label>
+
+                        <div class="control">
+                            <select name="estimate[country_id]" id="estimate_country" class="js-country-placeholder-single" title="<?php echo __("Country") ?>">
+                                <option value=""><?php echo __("Please select country") ?></option>
+                                <?php
+                                $countries = $block->getAvailableCountries();
+
+                                foreach ($countries as $country) {
+                                    if(strtoupper($country->getCountryId()) == $country_code){
+                                        $selected = "selected = 'selected'";
+                                    } else {
+                                        $selected = "";
+                                    }
+                                ?>
+                                <option value="<?php echo $country->getCountryId(); ?>" <?php echo $selected; ?>><?php echo $country->getName(); ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </li>
+
+                    <li class="item li_estimate_region_id">
+                        <label class="label" for="estimate_region_id">
+                            <span><?php echo __("State/Province") ?><span class="my-require">*</span></span>
+                        </label>
+
+                        <div class="control">
+                            <select id="estimate_region_id" name="estimate[region_id]" title="<?php echo __("State/Province") ?>" class="js-state-placeholder-single">
+                               <option value=""><?php echo __("Please select State/Province") ?></option>
+                            </select>
+
+                            <input type="text" name="estimate[region]" id="input_region_id" value="<?php echo $region_name; ?>" class="input-text">
+                        </div>
+                    </li>
+
+                    <li class="item zip-code">
+                        <label class="label" for="Zip/Postal Code">
+                            <span><?php echo __("Zip/Postal Code") ?><span class="my-require">*</span></span>
+                        </label>
+                        <div class="control">
+                            <input type="text" name="estimate[post_code]" id="estimate_postcode" value="<?php echo $zip_code; ?>" title="<?php echo __("Zip/Postal Code") ?>">
+                        </div>
+                    </li>
+
+                    <?php if($this->_getAutoIp()) : ?>
+                    <li class = "item">
+                         <a href="javascript:void(0)" id="auto_ip"><?php echo __("Get informations from IP address."); ?></a>
+                    </li>
+                    <?php endif; ?>
+
+                    <?php /*if($this->_getIncludeCart()): */?><!--
+                        <li class = "item">
+                             <input type="checkbox" id="include_cart" name="include_cart" value="1" checked><?php /*echo __("Include items in the cart."); */?>
+                        </li>
+                    --><?php /*endif; */?>
+
+                    <li class="item">
+                        <div class="primary">
+                            <button type="button" title="<?php echo $block->_getButtonTitle(); ?>" id="calculate-shipping" class="action submit primary btn-primary-estimate"><span><?php echo $block->_getButtonTitle(); ?></span></button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Shipping Rate -->
+            <div class="est-description">
+                <p><strong><?php echo __("Shipping Rates") ?></strong></p>
+                <p><?php echo __("Please enter above informations and click calculate button to show estimate shipping results.") ?></p>
+                <div id="shipping-result-form"></div>
+            </div>
+        </div>
+        <div id="shipping-cost-url" class="no-display"><?php echo $this->getUrl('calculatorshipping/index/rate', ['ajax' => true]) ?></div>
+    </div>
+    <script>
+    require([
+        'jquery',
+        'select2'
+        ], function($){
+            var is_auto_ip = "<?php echo $this->_getAutoIp(); ?>";
+            $(document).on('change','#estimate_country', function() {
+                if(is_auto_ip) {
+                    getRegion(this, true);
+                } else {
+                    getRegion(this, false);
+                }
+            });
+
+            $(document).ready(function() {
+                $("#input_region_id").val("");
+                $("#input_region_id").css("display", "none");
+                getRegion($('#estimate_country'), true);
+                $('#estimate_country').trigger("change");
+                $('.js-state-placeholder-single').attr('disabled','disabled');
+            });
+
+            $("#auto_ip").click(function() {
+                $('#estimate_country').val('<?php echo $country_code; ?>').trigger('change');
+                $('#estimate_region_id').val('<?php echo $region_id; ?>').trigger('change');
+                $("#input_region_id").val("<?php echo $region_name; ?>");
+                $("#estimate_postcode").val("<?php echo $zip_code; ?>");
+                $("#input_region_id").val("<?php echo $region_name; ?>");
+                $("#estimate_postcode").val("<?php echo $zip_code; ?>");
+                $('#estshippingcost_content_option_product').animate({scrollTop: $("#shipping-input-form").offset().top}, 'slow');
+            });
+
+            $(".js-state-placeholder-single").select2({
+                placeholder: "Select A State/Province",
+                allowClear: true
+            });
+
+            $(".js-country-placeholder-single").select2({
+                placeholder: "Select A Country",
+                allowClear: true
+            });
+
+            function getRegion(element, isDocumentReady) {
+                if( $('option:selected', element).index() ) {
+                    var option = null;
+                    var select = $('#estimate_region_id');
+
+                    $('.js-state-placeholder-single').attr('disabled','disabled');
+                    $('#input_region_id').attr('disabled','disabled');
+                    $('#estimate_postcode').attr('disabled','disabled');
+
+                    var select2_state = $('.li_estimate_region_id .select2');
+                    var param = 'country='+$('#estimate_country').val();
+                    $.ajax({
+                        url: "<?php echo $this->getUrl('calculatorshipping/index/region') ?>",
+                        data: param,
+                        type: "POST",
+                        dataType: 'json'
+                    }).done(function (data) {
+                        var region = data.value;
+                        if(region.length > 0) {
+                            $(".li_estimate_region_id .select2-selection.select2-selection--single").css("display", "block");
+                            select.css("display", "block");
+                            select2_state.css("display", "block");
+                            $("#input_region_id").val("");
+                            $("#input_region_id").css("display", "none");
+                            $('option', select).remove();
+                            option = new Option("<?php echo __("Please select State/Province") ?>", "");
+                            select.append($(option));
+                            $.each(region, function(text, key) {
+                                option = new Option(key.name, key.region_id);
+                                select.append($(option));
+                            });
+
+                            select.val('<?php echo $region_id; ?>').trigger('change');
+                        } else {
+                            if(isDocumentReady) {
+                                $("#input_region_id").val("<?php echo $region_name; ?>");
+                                $("#estimate_postcode").val("<?php echo $zip_code; ?>");
+                            } else {
+                                $("#input_region_id").val("");
+                                $("#estimate_postcode").val("");
+                            }
+                            $(".li_estimate_region_id .select2-selection.select2-selection--single").css("display", "none");
+                            $("#input_region_id").css("display", "block");
+                            select.css("display", "none");
+                            select2_state.css("display", "none");
+                        }
+
+                        $('.js-state-placeholder-single').removeAttr("disabled");
+                        $('#input_region_id').removeAttr("disabled");
+                        $('#estimate_postcode').removeAttr("disabled");
+                    });
+                }
+            }
+    });
+    </script>
+    <script>
+        require([
+                'jquery',
+                'uiComponent',
+                'Magento_Customer/js/customer-data',
+                'jquery',
+                'ko',
+                'underscore',
+                'sidebar',
+                'Magento_Catalog/product/view/validation'
+            ],
+            function($){
+                "use strict";
+
+                $(document).ready(function(){
+                    var estimateUrl = $('#shipping-cost-url').text();
+                    var please_wait = $('#nb-estshipping-cost-loading');
+                    var popup_success = $('#est-shipping-cost');
+                    please_wait.hide();
+                    popup_success.hide();
+                    var please_wait = $('#nb-estshipping-cost-loading');
+                    var popup_success = $('#est-shipping-cost');
+                    popup_success.hide();
+
+                    $(document).on('click','#calculate-shipping',function(e) {
+
+                        if($(".li_estimate_country_id .select2-selection__placeholder").length) {
+                            alert("Please choose Country");
+                            $(".li_estimate_country_id .select2").addClass("validate-my-input");
+                            return false;
+                        } else {
+                            $(".li_estimate_country_id .select2").removeClass("validate-my-input");
+                        }
+
+                        if($("#input_region_id").css('display') == 'block' && $("#input_region_id").val() == "") {
+                            alert("Please choose State/Province");
+                            $("#input_region_id").focus();
+                            $("#input_region_id").addClass("validate-my-input");
+                            return false;
+                        } else {
+                            $("#input_region_id").removeClass("validate-my-input");
+                        }
+
+                        if($("#estimate_region_id").css('display') == 'block' && $(".li_estimate_region_id .select2-selection__placeholder").length) {
+                            alert("Please choose State/Province");
+                            $("#input_region_id").focus();
+                            $(".li_estimate_region_id .select2").addClass("validate-my-input");
+                            return false;
+                        } else {
+                            $(".li_estimate_region_id .select2").removeClass("validate-my-input");
+                        }
+
+                        if($("#estimate_postcode").val() == "") {
+                            alert("Please choose Zip/Postal Code");
+                            $("#estimate_postcode").focus();
+                            $("#estimate_postcode").addClass("validate-my-input");
+                            return false;
+                        } else {
+                            $("#estimate_postcode").removeClass("validate-my-input");
+                        }
+
+                        please_wait.show();
+                        $('#estshipping-cost-shadow').show();
+                        e.preventDefault();
+                        e.stopImmediatePropagation();
+                        $.ajax({
+                            url: estimateUrl+"ajax/1/utype/detail-add",
+                            data: {
+                                product_id: $('#shipping_cost_product_id').val(),
+                                qty: $('#shipping_cost_product_qty').val(),
+                                country_id: $('#estimate_country').find(":selected").attr('value'),
+                                region_id: $('#estimate_region_id').find(":selected").attr('value'),
+                                region: $('#input_region_id').val(),
+                                post_code: $('#estimate_postcode').val(),
+                                include_cart: $('#include_cart').val(),
+                            },
+                            type: 'post',
+                            dataType: 'json',
+                            beforeSend: function() {
+
+                            },
+                            success: function(res) {
+                                if(res["error"]==0){
+                                    $('#shipping-result-form').addClass("shipping-result-form-border");
+                                    $('#shipping-result-form').html(res["shipping_estimaste"]);
+                                    please_wait.hide();
+                                    $('#estshipping-cost-shadow').hide();
+                                }else{
+                                    $('#shipping-result-form').removeClass("shipping-result-form-border");
+                                    $('#estshipping-cost-shadow').hide();
+                                }
+                                $('html,body').animate({scrollTop: $("#shipping-result-form").offset().top}, 'slow');
+                            },
+                            error: function (response) {
+                                please_wait.hide();
+                            }
+                        });
+                        e.preventDefault();
+                        return false;
+                    });
+                    $('#btn-shipping').click(function(){
+                        if($('#wrap-shipping').hasClass("show")){
+                            $('#wrap-shipping').removeClass("show");
+                        }else{
+                            $('#wrap-shipping').addClass("show");
+                        }
+                        var qty_detail = $('#product_addtocart_form .box-tocart #btn-shipping').length ?
+                            $(this).closest('#product_addtocart_form .box-tocart').find('#qty').val() :
+                            1;
+                        $('#shipping-input-form #shipping_cost_product_id').val($(this).attr('product-id'));
+                        $('#shipping-input-form #shipping_cost_product_qty').val(qty_detail);
+                    });
+                    $('.netbase-calculator-button').each(function() {
+                        $(this).click(function(){
+                            if($('#wrap-shipping').hasClass("show")){
+                                $('#wrap-shipping').removeClass("show");
+                            }else{
+                                $('#wrap-shipping').addClass("show");
+                            }
+                            var qty_detail = $('#product_addtocart_form .box-tocart #btn-shipping').length ?
+                                $(this).closest('#product_addtocart_form .box-tocart').find('#qty').val() :
+                                1;
+                            $('#shipping-input-form #shipping_cost_product_id').val($(this).attr('data-product-id'));
+                            $('#shipping-input-form #shipping_cost_product_qty').val(qty_detail);
+                        });
+                    });
+
+                    $('.wrap-shipping #btn-close').click(function(){
+                        if($('#wrap-shipping').hasClass("show")){
+                            $('#wrap-shipping').removeClass("show");
+                        }else{
+                            $('#wrap-shipping').addClass("show");
+                        }
+                    });
+                });
+            });
+    </script>
+<?php endif; ?>

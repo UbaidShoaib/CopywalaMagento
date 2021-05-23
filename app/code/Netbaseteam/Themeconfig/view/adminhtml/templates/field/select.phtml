@@ -1,0 +1,24 @@
+<?php
+$selected = '';
+$arr_config = $this->getConfig();
+if (count($arr_config)>0 && $this->getKey()!='no') {
+	if(isset($arr_config[$this->getKey()])) {
+		$selected = $arr_config[$this->getKey()];
+	}
+}
+?>
+<div class="admin__field-control styled-select slate col no-padding <?php echo $this->getWrapClass(); ?>">
+	<div class="overlay-select"></div>
+	<select <?php foreach ($this->getAttributes() as $k => $v) {
+		echo "$k='$v' ";
+	} ?>>
+	<?php foreach ($this->getDataBind() as $bs) { ?>
+		<option value="<?php echo $bs ?>" <?php echo ($selected==$bs?'selected="selected"':''); ?>><?php echo $bs ?></option>
+	<?php } ?>
+</select>
+<ul class="fs-scrollbar-content">
+	<?php foreach ($this->getDataBind() as $bs) { ?>
+		<li><?php echo $bs ?></li>
+	<?php } ?>
+</ul>
+</div>

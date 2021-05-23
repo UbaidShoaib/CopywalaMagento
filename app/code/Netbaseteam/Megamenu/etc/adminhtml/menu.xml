@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Netbaseteam_Megamenu::megamenu" title="Megamenu" module="Netbaseteam_Megamenu" sortOrder="30" resource="Netbaseteam_Megamenu::megamenu" parent="Netbase_Sun::nb_all" />
+        <add id="Netbaseteam_Megamenu::megamenu_manage" title="Manage Menu" module="Netbaseteam_Megamenu" sortOrder="10" parent="Netbaseteam_Megamenu::megamenu" action="megamenu/index/" resource="Netbaseteam_Megamenu::manage"/>
+		<add id="Netbaseteam_Megamenu::config_megamenu" title="Configurations"
+             module="Netbaseteam_Megamenu" sortOrder="30" parent="Netbaseteam_Megamenu::megamenu"
+             action="adminhtml/system_config/edit/section/megamenu"
+             resource="Netbaseteam_Megamenu::config_megamenu" />
+	</menu>
+</config>

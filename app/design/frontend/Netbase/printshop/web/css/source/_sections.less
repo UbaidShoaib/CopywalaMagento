@@ -1,0 +1,39 @@
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .product.data.items {
+        .lib-data-accordion();
+        margin-bottom: @indent__base;
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (min-width: (@screen__m)) {
+        .media-width('min', @screen__m);
+        .product.data.items {
+            .lib-data-tabs(
+                @_tab-content-border-top-status: true
+            );
+        }
+    }
+}
+//
+//  Mobile
+//  _____________________________________________
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__m)) {
+        .media-width('max', @screen__m);
+        .product.data.items {
+            .lib-data-accordion();
+            .data.item {
+                display: block;
+            }
+        }
+    }
+}

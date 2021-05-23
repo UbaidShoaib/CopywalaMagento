@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="Magento_Swatches::css/swatches.css"/>
+        <remove src="Netbaseteam_Promotion::css/promotion.css"/>
+		<remove src="Netbaseteam_Promotion::js/owcarousel/owl.carousel.css"/>
+    </head> 
+</page>
+
+

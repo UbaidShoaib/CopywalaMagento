@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<columns name="product_columns" class="Magento\Catalog\Ui\Component\Listing\Columns">
+		<argument name="data" xsi:type="array">
+			<item name="config" xsi:type="array">
+				<item name="component" xsi:type="string">Netbaseteam_Themeconfig/js/grid/listing_product</item>
+			</item>
+		</argument>
+		<column name="status_id" class="Netbaseteam\Themeconfig\Ui\Component\Listing\Column\StatusProductID">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="componentDisabled" xsi:type="boolean">true</item>
+					<item name="visible" xsi:type="boolean">false</item>
+					<item name="label" xsi:type="string" translate="true">Status ID</item>
+				</item>
+			</argument>
+		</column>
+	</columns>
+</listing>

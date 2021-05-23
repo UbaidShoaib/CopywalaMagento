@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="PricingOptionFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Netbaseteam\PricingOption\Api\Data\OptionInterface" type="Netbaseteam\PricingOption\Model\Option" />
+    <virtualType name="OptionDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Netbaseteam\PricingOption\Model\Resource\Option\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">PricingOptionFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Netbaseteam\PricingOption\Model\ResourceModel\Option\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">netbaseteam_pricingoption_option</argument>
+            <argument name="resourceModel" xsi:type="string">Netbaseteam\PricingOption\Model\ResourceModel\Option</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="netbaseteam_pricingoption_option_listing_data_source" xsi:type="string">Netbaseteam\PricingOption\Model\ResourceModel\Option\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Checkout\Model\Cart">
+        <plugin disabled="false" name="check_pricing_option_add_to_cart" sortOrder="1" type="Netbaseteam\PricingOption\Plugin\Checkout\Cart\Add"/>
+    </type>
+
+    <type name="Magento\Wishlist\Controller\Index\Cart">
+        <plugin disabled="false" name="check_wishlist_pricing_option_add_to_cart" sortOrder="1" type="Netbaseteam\PricingOption\Plugin\Wishlist\Cart\Add"/>
+    </type>
+
+    <type name="Magento\Sales\Block\Adminhtml\Items\Column\Name">
+        <plugin name="sales_items_column_name_override_template" type="Netbaseteam\PricingOption\Block\Adminhtml\Sales\Items\Column\Name" />
+    </type>
+
+    <type name="Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer">
+        <plugin name="pricing_option_order_view_frontend" sortOrder="0" type="Netbaseteam\PricingOption\Plugin\Order\Item\Renderer" />
+    </type>
+
+    <type name="Magento\Checkout\Block\Cart\Item\Renderer">
+        <plugin name="pricing_option_cart_view_frontend" sortOrder="0" type="Netbaseteam\PricingOption\Plugin\Cart\Item\Renderer" />
+    </type>
+</config>

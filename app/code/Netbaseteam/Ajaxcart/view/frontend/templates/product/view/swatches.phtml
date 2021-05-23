@@ -1,0 +1,36 @@
+<?php
+/**
+ * @category   Netbaseteam
+ * @package    Netbaseteam_Ajaxcart
+ * @copyright  Copyright (c) 2018 Netbaseteam
+ */
+?>
+<?php /** @var $block \Magebuzz\Ajaxcart\Block\Product\Renderer\Configurable */ ?>
+<?php $checkVerson =$this->helper('Netbaseteam\Ajaxcart\Helper\Data')->checkVerson(); ?>
+<link rel="stylesheet" type="text/css" href="<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('Magento_Swatches::css/swatches.css') ?>"/>
+
+<div class="swatch-opt" data-role="swatch-options"></div>
+
+<script type="text/javascript">
+    var checkVerson = '<?php echo $checkVerson;?>';
+    var swatchUrl  = 'swatchRenderer';
+
+    if(checkVerson!=0){
+        swatchUrl = 'swatchRenderer01';
+    }
+    require([
+        'jquery',
+        'mage/mage',
+        'swatchRenderer'
+    ], function ($) {
+        $('[data-role=swatch-options]').SwatchRenderer({
+            "jsonConfig": <?php /* @escapeNotVerified */ echo $swatchOptions = $block->getJsonConfig(); ?>,
+            "jsonSwatchConfig": <?php /* @escapeNotVerified */
+                echo $swatchOptions = $block->getJsonSwatchConfig(); ?>,
+            "selectorProduct": '#ajaxcart_content_option_product',
+            "mediaCallback": "<?php /* @escapeNotVerified */ echo $block->getMediaCallback() ?>",
+            "onlyMainImg": <?php /* @escapeNotVerified */ echo $block->getVar('change_only_base_image',
+                'Magento_Swatches') ?: 'false'; ?>
+        });
+    });
+</script>

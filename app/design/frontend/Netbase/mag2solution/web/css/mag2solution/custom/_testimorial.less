@@ -1,0 +1,116 @@
+// /**
+//  * Copyright © 2016 Magento. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+& when (@media-common = true) { 
+    //testimorial-list
+    .testimorial-02 {
+        .lib-css(padding, @indent__l 0 0 0);
+        .content-box {
+            padding-top: @indent__xl;
+            .testimorial-list {
+                text-align: center;
+                position: relative;
+                .lib-css(margin-bottom, ceil(2 * @indent__xl));
+                .lib-css(margin-top, @indent__xxl);
+                .testimorial-list {
+                    &__bg {
+                        position: relative;
+                        border: solid 1px @theme_color_f4; 
+                        .lib-css(background, @theme_bg_mute__color);
+                        .testimorial-list__item {
+                            .lib-css(margin-bottom, -@indent__l); 
+                            top: -60px;
+                            position: inherit;  
+                            .customer-image {
+                                img {
+                                    display: block;
+                                    margin: auto;
+                                }
+                                i {
+                                    .lib-css(color, @theme_color);
+                                    .lib-css(font-size, @h1__font-size);
+                                    .lib-css(margin, ceil(1.4 * @indent__s) 0 @indent__s 0);
+                                    display: block;
+                                }
+                            }
+                            .vendor-info {
+                                strong {
+                                    display: block;
+                                    .lib-css(color, @theme_color_444);
+                                    .lib-css(font-size, @font-size__l);
+                                    .lib-css(margin-top, ceil(1.3 * @indent__s));
+                                }
+                                span {
+                                    .lib-css(color, @theme_color);
+                                    .lib-css(font-size, @font-size__s);
+                                    padding-top: 5px;
+                                    display: block;
+                                }
+                            }
+                            .review-content {
+                                .lib-css(padding, 0 ceil(0.8 * @indent__l));
+                                p {
+                                    .lib-css(color, @theme_color_silver);
+
+                                }
+                            }                                  
+                        }
+                    }                                
+                } 
+            }
+        }
+    }
+    // feature-brand
+    .feature-brand {
+        width: 100%;
+        float: left;
+        padding-bottom: @indent__l;
+        .list-brand {
+            position: relative;
+            margin: 0;
+            .owl-nav {
+                position: relative;
+                .owl-prev, .owl-next {
+                    position: absolute;
+                    top: -87px;
+                    width: 40px;
+                    height: 40px;
+                    text-align: center;
+                    z-index: 2;
+                    color: #2e3945 !important;
+                    line-height: 38px;
+                    .lib-css(font-size, 20px);
+                    &:hover {
+                        i {
+                            color: @theme_color;
+                        } 
+                    }
+                }
+                .owl-prev {
+                    left: -87px;
+                    .lib-css(margin-left, @indent__l);
+                }
+                .owl-next {
+                    right: -87px;
+                    .lib-css(margin-right, @indent__l);
+                }
+            }
+            &__item {
+                padding: 6px;
+                a {
+                    img{
+                        .opacity(0.65);
+                        transition: .5s;
+                    } 
+                    &:hover {
+                        img{
+                            transform: scale(1.1);
+                        } 
+                    }
+                }
+            }
+        }
+    }
+}

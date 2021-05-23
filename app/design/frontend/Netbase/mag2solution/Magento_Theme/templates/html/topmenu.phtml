@@ -1,0 +1,124 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+?>
+<?php $columnsLimit = $block->getColumnsLimit() ?: 0; ?>
+<?php $_menu = $block->getHtml('level-top', 'submenu', $columnsLimit) ?>
+
+<nav class="navigation" data-action="navigation">
+    <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+		<li>
+			<span>home</span>
+		    <ul class="block">
+				<li>
+					<a href="#" title="home1">home 1</a>
+				</li>
+				<li>
+					<a href="#" title="home2">home 2</a>
+				</li>
+				<li>
+					<a href="#" title="home3">home 3</a>
+				</li>
+			</ul>
+		</li>
+        <?= /* @escapeNotVerified */ $_menu ?>
+        <?= /* @escapeNotVerified */ $block->getChildHtml() ?>
+        <li>
+			<span>Header</span>
+		    <ul class="block">
+				<li>
+					<a href="#" title="Header1">Header 1</a>
+				</li>
+				<li>
+					<a href="#" title="Header2">Header 2</a>
+				</li>
+				<li>
+					<a href="#" title="Header3">Header 3</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<span>Feature</span>
+		    <ul class="block">
+				<li>
+					<a href="#" title="multiple-vendor">Multiple Vendor</a>
+				</li>
+				<li>
+					<a href="#" title="vtiger">Vtiger CRM</a>
+				</li>
+				<li>
+					<a href="#" title="one-step-checkout">One Step Checkout</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<span>Online Design</span>
+		</li>
+
+		<li>
+			<span>Pages</span>
+		    <ul class="block">
+				<li>
+					<a href="#" title="Affiliate">Affiliate</a>
+				</li>
+				<li>
+					<a href="#" title="Profits &amp; Government">Profits &amp;Government</a>
+				</li>
+				<li>
+					<a href="#" title="FAQ">FAQ</a>
+				</li>
+				<li>
+					<a href="#" title="About us">About us</a>
+				</li>
+				<li>
+					<a href="#" title="Term &amp; Service">Term &amp; Service</a>
+				</li>
+				<li>
+					<a href="#" title="Privacy Policy">Privacy Policy</a>
+				</li>
+			</ul>
+		</li>
+
+		<li>
+			<span>Blog</span>
+		    <ul class="block">
+				<li>
+					<a href="#" title="single">Single</a>
+				</li>
+				<li>
+					<a href="#" title="archive">Archive</a>
+				</li> 
+			</ul>
+		</li>
+
+		<li>
+			<span>Header</span>
+		    <ul class="block">
+				<li>
+					<a href="#" title="Contact us">Contact us</a>
+				</li>
+				<li>
+					<a href="#" title="Chat message">Chat message</a>
+				</li>
+				<li>
+					<a href="#" title="Video tutorial">Video tutorial</a>
+				</li>
+	            <li>
+					<a href="#" title="Option">Option</a>
+				</li>
+			</ul>
+		</li>
+    </ul> 
+</nav>

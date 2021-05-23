@@ -1,0 +1,68 @@
+<?php
+/**
+ * Copyright 2017 Netbaseteam, Inc. All rights reserved.
+ */
+?>
+<?php /** @var $block \Netbaseteam\Shopbybrand\Block\Cms\Brandlist */ ?>
+
+<?php
+	$_collection = $this->getCollection(); 
+	$_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface');
+	$currentStore = $storeManager->getStore();
+	$store_id = $currentStore->getId();
+	$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+	$logopath = $this->getViewFileUrl('Netbaseteam_Shopbybrand::images/logo.png');
+	$featBrands = $block->getBrandList(); 
+?>
+
+<?php if (!empty($featBrands)): ?>
+	<section class="feature-brand section-antique">
+		<div class="container">
+			<div class="content-box">
+				<ul class="list-brand row owl-carousel">
+					<?php foreach ($featBrands as $key => $brand): ?> 
+						<?php	
+							$path = $mediaUrl.'Shopbybrand'.'/'.$brand->getLogo(); 
+						?>
+						<li class="list-brand__item">
+							<a href="<?php echo $this->getUrl('shopbybrand/index/view',array('id'=>$brand->getbrand_id()));?>" class="Featured-Brands-item-a display-flex">
+								<?php if ($brand->getLogo() == ''): ?>
+									<img src="<?php echo  $logopath;?>" class='Featured-Brands-img'  alt="Brand logo"/>
+								<?php else: ?>
+									<img src="<?php echo $path;?>" class='Featured-Brands-img' alt="Brand logo" />
+								<?php endif ?>	 
+							</a>
+						</li>
+					<?php endforeach ?>
+				</ul>
+			</div>
+		</div>
+	</section>
+<?php endif ?>
+<script type="text/javascript" xml="space"> 
+	require(['jquery','owlCarousel'], function ($) {
+		jQuery('.feature-brand .owl-carousel').owlCarousel({
+	        loop:true,
+	        margin:60,
+	        responsiveClass:true,
+	        navText: ["<i class='icon-left-open'></i>", "<i class='icon-right-open'></i>"],
+	        navClass: ['owl-prev', 'owl-next'],
+	        responsive:{
+	            0:{
+	                items:1,
+	                nav:true
+	            },
+	            600:{
+	                items:3,
+	                nav:false
+	            },
+	            1000:{
+	                items:6,
+	                nav:true,
+	                loop:false
+	            }
+	        }      
+	    });
+	});
+ </script> 

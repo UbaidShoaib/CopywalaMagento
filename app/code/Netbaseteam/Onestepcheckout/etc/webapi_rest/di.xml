@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Netbaseteam Team
+ * @copyright Copyright (c) 2018 Cmsmart (http://www.cmsmart.net)
+ * @package Netbaseteam_Onestepcheckout
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Magento\Quote\Model\Quote\Address">
+        <plugin name="Netbaseteam_Onestepcheckout::QuoteAddress" type="Netbaseteam\Onestepcheckout\Plugin\Quote\Address" />
+    </type>
+    <type name="\Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="Netbaseteam_Onestepcheckout::FillAddressData" type="Netbaseteam\Onestepcheckout\Plugin\AddressData" />
+    </type>
+</config>

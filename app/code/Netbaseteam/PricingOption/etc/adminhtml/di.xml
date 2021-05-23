@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Cms\Controller\Adminhtml\Wysiwyg\Images\Index">
+        <plugin name="pricingoption_image_insert" type="Netbaseteam\PricingOption\Controller\Adminhtml\Wysiwyg\Images\Index" sortOrder="1"/>
+    </type>
+    <type name="Magento\Cms\Controller\Adminhtml\Wysiwyg\Images\OnInsert">
+        <plugin name="pricingoption_image_oninsert" type="Netbaseteam\PricingOption\Controller\Adminhtml\Wysiwyg\Images\OnInsert" sortOrder="1"/>
+    </type>
+</config>

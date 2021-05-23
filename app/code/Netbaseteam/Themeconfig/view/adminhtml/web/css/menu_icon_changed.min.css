@@ -1,0 +1,8 @@
+.admin__menu .item-themeconfig>a:before {content: '\e666' !important;}
+.admin__menu .item-marketing>a:before {content: '\e908' !important;}
+.admin__menu .item-customer>a:before {content: '\e6ad' !important;}
+.admin__menu .item-dashboard>a:before {content: '\e904' !important;}
+.admin__menu .item-sales>a:before {content: '\e903' !important;}
+.admin__menu .item-catalog>a:before {content: '\e906' !important;}
+.admin__menu .item-content>a:before {content: '\e656' !important;}
+.admin__menu .item-manage>a:before {content: '\e907' !important;}

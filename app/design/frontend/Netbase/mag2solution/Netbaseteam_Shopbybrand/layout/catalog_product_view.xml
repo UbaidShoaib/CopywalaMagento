@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <remove src="Netbaseteam_Shopbybrand::css/product_brand.css" /> 
+        <remove src="Netbaseteam_Shopbybrand::css/related.css" /> 
+
+    </head>
+    <body>
+    	<referenceContainer name="wrap.catalog.product.brand" remove="true" />
+    </body>
+</page>

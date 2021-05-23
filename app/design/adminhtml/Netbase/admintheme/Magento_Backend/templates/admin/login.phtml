@@ -1,0 +1,67 @@
+<?php $helper = $this->helper('\Netbaseteam\Themeconfig\Helper\Data'); ?>
+<style id="style_config" type="text/css">
+<?php
+$content_css_config = $helper->_readFile('Netbaseteam_Themeconfig/css/style_config.min.css');
+echo $content_css_config;
+?>
+</style>
+
+<form method="post" action="" id="login-form" data-mage-init='{"form": {}, "validation": {}}' autocomplete="off">
+  <fieldset class="admin__fieldset">
+    <input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */ echo $block->getFormKey() ?>" />
+    <div class="admin__field _required field-username">
+      <div class="admin__field-control">
+        <div class="i-user">
+          <i class="pe-7s-users"></i>
+        </div>
+        <input id="username"
+        class="admin__control-text"
+        type="text"
+        name="login[username]"
+        autofocus
+        value=""
+        data-validate="{required:true}"
+        placeholder="<?php /* @escapeNotVerified */ echo __('User name') ?>"
+        autocomplete="off"
+        />
+      </div>
+    </div>
+    <div class="admin__field _required field-password">
+      <div class="admin__field-control">
+        <div class="i-pass">
+          <i class="pe-7s-key"></i>
+        </div>
+        <input id="login"
+        class="admin__control-text"
+        type="password"
+        name="login[password]"
+        data-validate="{required:true}"
+        value=""
+        placeholder="<?php /* @escapeNotVerified */ echo __('Password') ?>"
+        autocomplete="off"
+        />
+      </div>
+    </div>
+    <?php echo $block->getChildHtml('form.additional.info'); ?>
+    <div class="form-actions">
+      <?php echo $block->getChildHtml('form.buttons'); ?>
+    </div>
+  </fieldset>
+</form>
+
+<script type="text/javascript">
+  require([
+    'jquery'
+    ], function($) {
+      var cw = 0;
+      var w = window.screen.width;
+      $(document).ready(function() {
+        for (var link of document.querySelectorAll("link[rel=stylesheet]")) {
+          var reload_link = link.href.replace(/\?.*|$/, "?ts=" + new Date().getTime());
+          if (reload_link.indexOf('style_config.min.css')!==-1) {
+            link.href = reload_link;
+          }
+        }
+      });
+    });
+  </script>

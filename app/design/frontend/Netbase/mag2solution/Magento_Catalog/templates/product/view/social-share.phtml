@@ -1,0 +1,35 @@
+<?php
+$_product = $block->getProduct();
+$productUrl = $_product->getProductUrl();
+$blTitle = $block->getTitle();
+$cssClass = $block->getCssClass();
+$shareLink = $block->getShareLink();
+?>
+
+<div class="<?php echo __($cssClass); ?>">
+    <span class="title"><?php echo __($blTitle); ?></span>
+    <ul class="social-list">
+        <li class="social-item">
+            <a class="circle spin" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $productUrl; ?>">
+                <i class="icon-facebook-1"></i>
+            </a>
+        </li>
+        <li class="social-item">
+            <a class="circle spin" href="https://twitter.com/home?status=<?php echo $productUrl; ?>"> <i
+                        class="icon-twitter"></i> </a>
+        </li>
+        <li class="social-item">
+            <a class="circle spin" href="https://pinterest.com/pin/create/button/?url=<?php echo $productUrl; ?>"> <i
+                        class="icon-pinterest-circled"></i> </a>
+        </li>
+        <li class="social-item">
+            <a class="circle spin"
+               href="https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=<?php echo $productUrl; ?>">
+                <i class="icon-linkedin-1"></i> </a>
+        </li>
+        <li class="social-item">
+            <a class="circle spin" href="https://plus.google.com/share?url=<?php echo $productUrl; ?>"> <i
+                        class="icon-print"></i> </a>
+        </li>
+    </ul>
+</div>

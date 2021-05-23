@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="Netbaseteam_PricingOption::css/frontend-options.css"/>
+    </head>
+    <body>
+        <referenceContainer name="product.info.form.content">
+            <block class="Netbaseteam\PricingOption\Block\Product\View\Options" name="product.info.options.pricing" as="product_options_pricing" template="Netbaseteam_PricingOption::product/view/options/pricing.phtml" before="-"/>
+        </referenceContainer>
+
+        <referenceBlock name="product.info.form.options">
+            <block class="Netbaseteam\PricingOption\Block\Product\View\Options" name="product.info.options.pricing.additional" as="product_options_pricing_additional" template="Netbaseteam_PricingOption::product/view/options/pricing.phtml" after="product_options_wrapper"/>
+        </referenceBlock>
+    </body>
+</page>

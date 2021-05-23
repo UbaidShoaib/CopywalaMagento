@@ -1,0 +1,38 @@
+& when (@media-common = true) { 
+	.pgheader {
+		float: left;
+		width: 100%;
+		padding: 60px 0 0 0;
+	    text-align: center;
+    	margin: 0 auto;
+    	&-item {
+    		margin-bottom: 45px;
+    		h3 {
+    			font-size: 20px;
+			    text-transform: uppercase;
+			    font-weight: 700;
+			    letter-spacing: 1px;
+			    color: #444444;
+			    margin: 15px 0;
+    		}
+    	}
+    	&-img {
+    		.box-shadow(0px 2px 10px 0 rgba(0, 0, 0, 0.19));
+    		img {
+    			width: 100%;
+    		}    
+    				
+    	}
+	}
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__s)) {
+        .media-width('max', @screen__s); 
+		.pgheader-item {
+			h3 {
+				font-size: 18px;
+			}
+		}		
+    }
+}

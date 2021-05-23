@@ -1,0 +1,19 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var \Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Info $block */
+
+/* @var \Magento\Wishlist\Model\Item $item */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product_id=$this->getItem()->getProduct()->getId();
+$product = $objectManager->create('Magento\Catalog\Model\Product')->load($product_id);
+?>
+<p class="product-item-shortdescription">
+    <?php echo $block->escapeHtml($product->getshortDescription()) ?>
+</p>

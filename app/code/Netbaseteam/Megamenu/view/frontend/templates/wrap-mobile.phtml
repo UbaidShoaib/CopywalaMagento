@@ -1,0 +1,29 @@
+<?php
+	$objectManagerr = \Magento\Framework\App\ObjectManager::getInstance();
+	$helper = $objectManagerr->get('\Netbaseteam\Megamenu\Helper\Data'); 
+	$mobilestatus = $helper->getMobileEnable(); 
+	$mobileposition = $helper->getMobilePosition();   
+	if(!$helper->getMobilePosition()) {
+		$mobileposition = 1; /* top menu for default */
+	} else {
+		$mobileposition = $helper->getMobilePosition();
+	}
+	
+if($helper->isEnable()){ ?>
+	<div id = "nb_mn_mobile">
+		<?php
+			if($mobileposition == \Netbaseteam\Megamenu\Model\Config\Source\Menumobiletype::HORIZONTAL) {
+				echo $this->getLayout()->createBlock('Netbaseteam\Megamenu\Block\Navigation')
+						->setTemplate('Netbaseteam_Megamenu::topmenu_mobile.phtml')->toHtml();
+			} 
+		?>
+		<?php
+			if($mobileposition == \Netbaseteam\Megamenu\Model\Config\Source\Menumobiletype::VERTICAL) { 
+				echo $this->getLayout()->createBlock('Netbaseteam\Megamenu\Block\Navigation')
+						->setTemplate('Netbaseteam_Megamenu::vertical_mobile.phtml')->toHtml();
+			} 
+		?> 
+	</div> 
+<?php } ?>
+
+

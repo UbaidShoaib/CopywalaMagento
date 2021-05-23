@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-login" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles" />
+    <!-- <head>
+        <link src="Netbaseteam_Admintheme::js/jquery-1.10.2.min.js"/>
+    	<link src="Netbaseteam_Admintheme::js/jquery.backstretch.min.js"/>
+    </head> -->
+    <body>
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_image_src" xsi:type="string">images/login-logo.png</argument>
+            </arguments>
+        </referenceBlock>
+        <!-- @todo ui: - delete after bugfix -->
+        <referenceContainer name="legal" remove="true"/>
+        <referenceContainer name="page.menu" remove="true"/>
+        <referenceContainer name="header" remove="true"/>
+        <referenceBlock name="page.title" remove="true"/>
+        <referenceBlock name="user" remove="true"/>
+
+        <referenceBlock name="global.search" remove="true"/>
+        <referenceBlock name="notification.messages" remove="true"/>
+        <!-- @todo ui: - end -->
+
+        <move element="messages" destination="login.content" before="-"/>
+        <move element="copyright" destination="login.footer" before="-"/>
+        <move element="logo" destination="login.header" before="-"/>
+        <referenceContainer name="login.footer">
+            <block class="Magento\Framework\View\Element\Template" name="login_background" template="Netbaseteam_Admintheme::admin/login_after_footer.phtml" after="-"/>
+        </referenceContainer>
+    </body>
+</page>

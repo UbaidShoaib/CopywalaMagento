@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright 2017 Netbaseteam, Inc. All rights reserved.
+ */
+?>
+<?php /** @var $block Netbase\Sun\Block\Categorylist */ ?>
+<?php
+  $categories = $block->getEnableCategories();
+  $categoryHelper = $this->getCategoryHelper();
+  $col = 4;
+  $subNum = 4;
+?>
+<?php if (!empty($categories)): ?>
+    <div class="categories-list row">
+        <?php $count = 0; ?>
+        <?php foreach ($categories as $category): ?>
+            <?php if ($category->getLevel() == 2): ?>
+                <?php if ($col == $count) break; ?>
+                <div class="category-list__item col-md-3">
+                    <div class="category-parent">
+                        <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a>
+                    </div>
+                    <?php if ($subcategories = $category->getChildrenCategories()): ?>
+                        <ul class="child-category">
+                          <?php $ch = 0 ?>
+                          <?php foreach ($subcategories as  $sub):  ?>
+                              
+                              <?php if ($sub->getLevel() == 3): $ch ++; ?>
+                                <li class="child_item">
+                                   <a href="<?php echo $categoryHelper->getCategoryUrl($sub) ?>"><?php echo $sub->getName() ?></a>
+                                </li>
+                              <?php endif ?>
+                              <?php if ($ch == $subNum) break; ?>
+                          <?php endforeach ?>
+                        </ul>
+                    <?php endif ?>
+                </div>
+                <?php $count ++; ?>
+            <?php endif ?>
+           
+        <?php endforeach; ?>
+    </div>
+<?php endif ?>

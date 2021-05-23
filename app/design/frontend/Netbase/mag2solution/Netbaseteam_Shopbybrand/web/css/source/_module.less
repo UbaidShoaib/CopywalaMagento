@@ -1,0 +1,465 @@
+& when (@media-common = true) {
+// =============== SHOP BY BRAND ===============//
+    .shopbybrand-index-index {
+        .sidebar .block-wishlist{
+            margin-top: 30px;
+        }
+        .Featured-Brands-h3 {
+            padding-top: 15px;
+        }
+        .title-brand{
+            margin-top: 30px;
+        }
+        .columns {
+            .lib-css(padding, @indent__xxl 0);
+            clear: both;
+            .seachbox {
+                padding: @indent__l;
+                background: @theme_color;
+                .border-radius(5px);
+                .seachboxform {
+                    position: relative;
+                    .seachboxspan {
+                        input {
+                            .border-radius(5px);
+                            height: 60px;
+                            padding-left: @indent__xl;
+                        }
+                    }
+                    span {
+                        button {
+                            position: absolute;
+                            top: 4px;
+                            right: 20px;
+                            border: none;
+                            .border-radius(0);
+                            color: #394351;
+                            background: none;
+                            font-size: 30px;
+                        }
+                    }
+                }
+            }
+            h3{
+                text-transform: uppercase;
+                .lib-css(font-size, @font-size__l);
+                font-weight: 600;
+                line-height: 1.75;
+                color: #394351;
+                padding-top: @indent__l;
+                margin: 0;
+            }
+            .Featured-Brands {
+                text-align: center;
+                .mySlides {
+                    .Featured-Brands {
+                        &-h3 {
+                            padding-top: @indent__base;
+                        }
+                    }
+                }
+                &-ul {
+                    margin-top: 20px;
+                    position: relative;
+                    .owl-stage-outer {
+                        padding-bottom: @indent__base;
+                    }
+                    .owl-nav {
+                        .owl-prev {
+                            left: 18px;
+                        }
+                        .owl-next {
+                            right: 18px; 
+                        }
+                        .owl-prev, .owl-next {
+                            top: 27%;
+                            background: @theme_color_silver;
+                            padding: 11px 0px;
+                            text-align: center;
+                            position: absolute;
+                            color: @theme_color__white;
+                            &:hover {
+                                background: @theme_color;
+                            }
+                        }
+                    }
+                }   
+            }
+            .ALL-Brands {
+                text-align: center;
+                .lib-css (padding-top, @indent__s);
+                .ALL-Brands-ul {
+                    li {
+                        display: inline-block;
+                        float: left;
+                        &:first-child {
+                            padding-right: 0;
+                        }
+                        &:last-child {
+                            display: block;
+                        }
+                        button{
+                            .border-radius(0);
+                            border: 1px solid @form-element-input__border-color;
+                            background: none;
+                            color: #394351;
+                            padding: 11px 16px;
+                            border: solid 1px #ececec;
+                            &:hover {
+                                .lib-css(background, @theme_color);
+                                .lib-css(color, @theme_color__white);
+                            }
+                        }
+                    }
+                }
+                .ALL-Brands-2 {
+                    li {
+                        display: inline-block;
+                        width: 25%;
+                        float: left;
+                    }
+                    .nb-brands-items {
+                        &-h3 {
+                            padding-top: @indent__base;
+                        }
+                    }
+                }
+            }
+        }
+        .Featured-Brands, .ALL-Brands {
+            img {
+                border: 1px solid @border-color__menu;
+                padding: 25px;
+                &:hover {
+                    .opacity(0.5);
+                }
+            }
+        }
+    }
+
+    .nb-brand {
+        background-color: @theme_color_eee;
+        padding: @indent__l @indent__base;
+        .Featured-Brands-tittle {
+            text-transform: uppercase;
+            border-bottom: solid 1px @border-color__menu;
+            .lib-css(padding-bottom, ceil(.5 * @indent__s));
+            .lib-css(color, @theme_color_444);
+            .lib-css(font-weight, @font-weight__700);
+            .lib-css(font-size, @font-size__l);
+            line-height: 1.75;
+        }
+        .Featured-Brands {
+            text-align: center;
+            padding: @indent__l 0;
+            &-li {
+                &-div {
+                    &-div {
+                        a {
+                            display: table-cell;
+                        }
+                        a.name_brand {
+                            .lib-css(padding-left, @indent__s);
+                        }
+                    }
+                }
+            }
+            &-li-div-div {
+                .imgs {
+                    width: 90px;
+                    height: 90px;
+                    img {
+                        border: 1px solid @border-color__menu; 
+                        padding: @indent__base;
+                        background: @theme_color__white;
+                    }
+                }
+            }
+            &-li {
+                margin-bottom: 5px;
+            }
+        }
+        .viewall {
+            button {
+                text-transform: uppercase;
+                padding: 9px 25px;
+            }
+        }
+    }
+    .sidebar-additional {
+        .block.block-wishlist {
+            .block-title {
+                text-transform: uppercase;
+            }
+            .block-content {
+                .product-items {
+                    .product-item {
+                        .product-item-info {
+                            position: inherit;
+                            .product-item-photo {
+                                display: table-cell;
+                                vertical-align: top;
+                                width: auto;
+                                position: inherit;
+                                float: inherit;
+                            }
+                            .product-item-details {
+                                display: table-cell;
+                                vertical-align: middle;
+                                padding-left: ceil(0.7 * @indent__s);
+                                .product-item-name {
+                                    text-align: left;
+                                    .lib-css(padding, 0 @indent__s 0 0);
+                                }
+                                .product-item-actions {
+                                    .actions-secondary {
+                                        a {
+                                            &:before {
+                                                .lib-css(color, @theme_color_silver);
+                                                .lib-css(font-size, @font-size__l);
+                                                top: 10px;
+                                            }
+                                            &:hover {
+                                                background: none;
+                                                .lib-css(color, @theme_color);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .actions-toolbar {
+                    .primary {
+                        .action.details {
+                            background: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .owl-carousel .owl-item img {
+        margin:auto;
+    }
+
+// =============== SHOP BY BRAND ITEM ===============//
+    .shopbybrand-index-view {
+        .columns {
+            .lib-css(padding, @indent__xxl 0);
+            .info-brand {
+                margin: @indent__l 0;
+                float: left;
+                width: 100%;
+                margin-bottom: 53px;
+                .logo {
+                    img {
+                        float: left;
+                        .lib-css(margin-right, @indent__s);
+                    }
+                }
+                .description {
+                    .lib-css(padding-top, @indent__s);
+                }
+            }
+            .inner-products {
+                clear: both;
+                .title-products {
+                    text-transform: uppercase;
+                    .lib-css(padding, 0 @indent__s);
+                }
+                .products-grid {
+                    .items {
+                        float: left;
+                        width: 33.3%;
+                        text-align: center;
+                        .lib-css(padding, 0 @indent__s);
+                        .lib-css(margin-bottom, @indent__l);
+                            .product-item-details{
+                            text-align: left;
+                        }
+                    } 
+                    .product-item-actions {
+                        .lib-css(margin-top, ceil(0.3 * @indent__s));
+                        .actions-primary {
+                            width: 100%;
+                            button {
+                                .lib-css(padding, ceil(0.7 * @indent__s) ceil(1.3 * @indent__s));
+                            }
+                        }
+                    } 
+                }
+            }
+        }
+    }
+// =============== SHOP BY BRAND SEARCH ===============//
+    .shopbybrand-index-search {
+        .columns {
+            .lib-css(padding-top, @indent__xl);
+            clear: both;
+            .seachbox {
+                .seachboxform {
+                    position: relative;
+                    .lib-css(margin-bottom, @indent__l);
+                    .seachboxspan {
+                        input {
+                            .border-radius(0);
+                        }
+                    }
+                    span {
+                        button {
+                            position: absolute;
+                            top: 4px;
+                            right: 0;
+                            border: none;
+                            .border-radius(0);
+                            background: none;
+                        }
+                    }
+                }
+            }
+            .abc.ALL-Brands-2-li {
+                list-style: none;
+                display: inline-block;
+                float: left;
+                padding-right: @indent__l;
+                text-align: center;
+            }
+        }
+    } 
+}
+// -------------shop by brand--------------//
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__1200 - 1)) {
+        .media-width('max', @screen__1200);
+        .shopbybrand-index-index .columns .Featured-Brands-ul .owl-nav {
+            .owl-next {
+                right: 0;
+            }
+            .owl-prev {
+                left: 0;
+            }
+        }
+    }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__l - 1)) {
+        .media-width('max', @screen__l);
+        .shopbybrand-index-index .columns {
+           .ALL-Brands .ALL-Brands-2 li {
+                width: 50%;
+            } 
+        }  
+    }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media (max-width: (@screen__l)) and (min-width: (@screen__m )){
+        .nb-brand {
+            padding: @indent__l 0;
+            .Featured-Brands {
+                &-li {
+                    &-div {
+                        &-div {
+                            float: left;
+                            width: 100%;
+                            a {
+                                .img_logo_brand {
+                                    width: 50px;
+                                    height: 50px;
+                                    padding: 5px;
+                                }
+                            }
+                            a.name_brand {
+                                padding-left: 0;
+                            }
+                        } 
+                    }
+                }
+                &-tittle {
+                    padding-left: @indent__base;
+                }
+            }
+            .viewall {
+                text-align: center;
+            }
+        }
+    }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__m - 1)) {
+        .media-width('max', @screen__m);
+        .shopbybrand-index-index .columns {
+            .ALL-Brands .ALL-Brands-ul li {
+                float: inherit;
+                &:last-child {
+                    display: inline-block;
+                }
+            }
+        }  
+    }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__xs - 1)) {
+        .media-width('max', @screen__xs);
+        .shopbybrand-index-index .columns {
+           .ALL-Brands .ALL-Brands-2 li {
+                width: 100%;
+            } 
+
+        }  
+    }
+}
+// -------------shop by brand view--------------//
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__l - 1)) {
+        .media-width('max', @screen__l);
+        .shopbybrand-index-view .columns {
+            .inner-products {
+                .products-grid .items {
+                    width: 50%;
+                }
+            }
+        } 
+    }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__m - 1)) {
+        .media-width('max', @screen__m);
+        .shopbybrand-index-view .columns {
+            .info-brand {
+                .logo {
+                    margin: auto;
+                    img{
+                        float: inherit;
+                        margin: auto;
+                        display: block;
+                    }
+                }
+            }
+            
+        } 
+
+    }
+}
+
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__xs - 1)) {
+        .media-width('max', @screen__xs);
+        .shopbybrand-index-view .columns {
+            .inner-products {
+                .products-grid .items {
+                    width: 100%;
+                }
+            }
+        } 
+    }
+}

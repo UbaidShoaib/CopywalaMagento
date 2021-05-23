@@ -1,0 +1,8 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">	
+	<preference for="Magento\Contact\Controller\Index\Post" type="Netbase\Sun\Controller\Contact\Post" /> 
+	
+	<type name="Magento\Config\Model\Config">
+        <plugin name="admin_system_config_save_plugin" type="Netbase\Sun\Plugin\ConfigPlugin" />
+    </type>
+
+</config>

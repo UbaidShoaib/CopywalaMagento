@@ -1,0 +1,456 @@
+<?php
+$themeDetails = $block->getThemeDetails();
+$configData = (array)$block->getConfigData();
+
+$configTypoGeneral = $configData['typo_general'];
+$configColorGeneral = $configData['color_general'];
+$configColorGraysGeneral = $configData['color_grays_general'];
+$configComponentsGeneral = $configData['components_general'];
+
+?>
+<form id="general-config" action="<?php echo $this->getUrl("netbasesun/generalsetting/save", ['_secure' => $this->getRequest()->isSecure()]); ?>">
+	<div class="wrap-config-sun">
+		<div class="col-lg-3">
+			<div id="page:left" class="side-col">
+			<div id="system_config_tabs" class="config-nav">
+			<div class="config-nav-block admin__page-nav _collapsed _hide">
+				<ul id="menu-general" class="admin__page-nav-items items">
+				<li class="admin__page-nav-item item _active">
+					<a class="admin__page-nav-link" href="#general-typography">Typography</a>
+				</li>
+				<li class="admin__page-nav-item item">
+					<a class="admin__page-nav-link" href="#general-color">Colors</a>
+				</li> 
+				<li class="admin__page-nav-item item">
+					<a class="admin__page-nav-link" href="#general-color-grays">Colors Grays</a>
+				</li>
+				<li class="admin__page-nav-item item">
+					<a class="admin__page-nav-link" href="#general-components">Components</a>
+				</li>
+				</ul>
+			</div>
+			</div>
+			</div>
+		</div>
+		<div class="col-lg-9">
+			<span class="label_title">Current theme data</span>
+			<select name="current_theme_path" id="current_theme_path">
+				<?php 
+				$currentTheme = $this->getRequest()->getParam('current_theme_path');
+				if(!$currentTheme) {
+					$currentTheme = 'Magento/blank';
+				}
+				?>
+				<?php foreach($themeDetails as $theme):?>
+					<option <?php echo $theme['theme_path'] == $currentTheme ? __('selected') : __("")?> value="<?php echo $theme['theme_path']?>"><?php echo $theme['theme_title']?></option>
+				<?php endforeach;?>
+			</select>
+			<!-- begin typography -->
+		  	<div id="general-typography" class="main-col general-typography tab-content show-config">
+		      <div class="admin__scope-old"> 
+	              <div class="accordion">
+	                  <div class="entry-edit form-inline">
+	                      <div class="section-config">
+	                          <div class="entry-edit-head admin__collapsible-block"> 
+	                              <fieldset class="config admin__collapsible-block">
+	                                  <table cellspacing="0" class="form-list">
+	                                      <tbody>
+											<?php foreach ($configTypoGeneral as $key => $config): 
+                                                        $config = (array)$config;
+                                                    ?> 
+
+	                                          <tr>
+	                                              <td class="label">
+	                                                  <label>Font Family base</label>
+	                                              </td>
+	                                              <td class="value">
+	                                                   <?php echo $block->render_google_font_option( 'font-family-name__base', 'typo_general['.$key.'][font-family-name__base]', 'select font-family-name__base admin__control-select', 'typo_general|font-family-name__base', isset($config['font-family-name__base']) ? $config['font-family-name__base'] : '' ); ?> 
+	                                                   <p class="note"><span>Selects the default font for text, apply to tags (body, p, li, ...) @font-family-name__base</span></p>
+	                                              </td>
+	                                          </tr> 
+	                                          <tr>    
+	                                              <td class="label">
+	                                                 <label>Font Size base</label>
+	                                              </td>
+	                                              <td class="value">
+	                                                   <input type="text" data-name="typo_general|font-size__base" id="font-size__base" name="typo_general[<?php echo $key; ?>][font-size__base]" value="<?php if(!empty($config['font-size__base'])){echo trim($config['font-size__base']);}?>" class="font-size__base admin__control-number" /> 
+	                                                   <p class="note"><span>Basic font size for content  @font-size__base (unit rem)</span></p>
+	                                              </td>
+	                                          </tr>
+	                                          <tr>
+	                                              <td class="label">
+	                                                  <label>Scale Font</label>
+	                                              </td>
+	                                              <td class="value">
+	                                                  <input type="text" data-name="typo_general|font-size__scale" id="font-size__scale" name="typo_general[<?php echo $key; ?>][font-size__scale]" value="<?php if(!empty($config['font-size__scale'])){echo trim($config['font-size__scale']);}?>" class="font-size__scale admin__control-number" /> 
+														<p class="note"><span>Scale ratio for element @heading-size-h6 = @font-size__base * @font-size__scale,  @heading-size-h5 = @heading-size-h6 * @font-size__scale, ...  @font-size__scale (unit rem)</span></p>
+	                                              </td>
+	                                          </tr>
+	                                          <tr>
+	                                              <td class="label">
+	                                                   <label>Line Height Scale Base</label>
+	                                              </td>
+	                                              <td class="value">
+	                                                  <input type="text" data-name="typo_general|scale__line-height__base" id="scale__line-height__base" name="typo_general[<?php echo $key; ?>][scale__line-height__base]" value="<?php if(!empty($config['scale__line-height__base'])){echo trim($config['scale__line-height__base']);}?>" class="scale__line-height__base admin__control-number" />
+	                                                  <p class="note"><span>Scale line height for element  @scale__line-height__base (unit rem)</span></p>
+	                                              </td>
+	                                          </tr>
+	                                          <tr>
+	                                              <td class="label">
+	                                                   <label>BaseLine</label>
+	                                              </td>
+	                                              <td class="value">
+	                                                   <input type="text" data-name="typo_general|base__line" id="base__line" name="typo_general[<?php echo $key; ?>][base__line]" value="<?php if(!empty($config['base__line'])){echo trim($config['base__line']);}?>" class="base__line admin__control-number" />
+	                                                   <p class="note"><span>Defines the size - the horizontal lines for the text and aligns the elements @base__line (unit rem)</span></p>
+	                                              </td>
+	                                          </tr>
+	                                          <tr>
+	                                              <td class="label">
+	                                                  <label>Font Family Heading base</label>
+	                                              </td>
+	                                              <td class="value">
+	                                                   <?php echo $block->render_google_font_option( 'heading__font-family__base', 'typo_general['.$key.'][heading__font-family__base]', 'select heading__font-family__base admin__control-select', 'typo_general|heading__font-family__base', isset($config['heading__font-family__base']) ? $config['heading__font-family__base'] : '' ); ?>
+	                                                   <p class="note"><span>Selects the default font for Headings, apply to tags (h1, h2, h3, h4, h5, h6) @heading__font-family__base</span></p>
+	                                                   	 
+	                                              </td>
+	                                          </tr> 
+	                                          <tr>
+	                                              <td class="label">
+	                                                  <label>Scale linehight Heading Base </label>
+	                                              </td>
+	                                              <td class="value">
+	                                                  <input type="text" data-name="typo_general|scale__heading__line-height__base" id="scale__heading__line-height__base" name="typo_general[<?php echo $key; ?>][scale__heading__line-height__base]" value="<?php if(!empty($config['scale__heading__line-height__base'])){echo trim($config['scale__heading__line-height__base']);}?>" class="scale__heading__line-height__base admin__control-number" />
+	                                                   <p class="note"><span>Scale line height for element  @scale__line-height__base @scale__heading__line-height__base (unit rem)</span></p>
+	                                                  
+	                                              </td>
+	                                          </tr> 
+	                                          <tr>
+	                                              <td class="label">
+	                                                  <label>Baseline Heading Base</label>
+	                                              </td>
+	                                              <td class="value">
+	                                                   <input type="text" data-name="typo_general|base__line-heading__line-height__base" id="base__line-heading__line-height__base" name="typo_general[<?php echo $key; ?>][base__line-heading__line-height__base]" value="<?php if(!empty($config['base__line-heading__line-height__base'])){echo trim($config['base__line-heading__line-height__base']);}?>" class="base__line-heading__line-height__base admin__control-number" />
+	                                                   <p class="note"><span>Defines the size Heading - the horizontal lines for the text and aligns the elements @base__line-heading__line-height__base (unit rem)</span></p>
+	                                              </td>
+	                                          </tr> 
+	                                       <?php endforeach; ?>
+	                                      </tbody>
+	                                  </table>
+	                              </fieldset>
+	                          </div>
+	                      </div>
+	                  </div>
+	              </div> 
+		      </div>
+		  	</div> 
+		  	<!-- end typography -->
+		  	<!-- begin general color -->
+            <div id="general-color" class="main-col general-color tab-content hidden-config">
+                <div class="admin__scope-old">
+                    <div class="accordion">
+                        <div class="entry-edit form-inline">
+                            <div class="section-config">
+                                <div class="entry-edit-head admin__collapsible-block"> 
+                                    <fieldset class="config admin__collapsible-block"> 
+                                        <table cellspacing="0" class="form-list">
+                                            <tbody>
+<?php foreach ($configColorGeneral as $key => $config): 
+                                                        $config = (array)$config;
+                                                    ?> 
+
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Main Color</label> 
+                                                    </td>
+                                                    <td class="value"> 
+                                                        <input type="text" data-name="color_general|main_color__general" id="main_color__general" name="color_general[<?php echo $key; ?>][main_color__general]" value="<?php if(!empty($config['main_color__general'])){echo trim($config['main_color__general']);}?>" class="input-color main_color__general admin__control-number" /> 
+                                                        <p class="note"><span>Defines the main color variable - Usually applies to brand color - @main_color__general 60%	</span></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>    
+                                                    <td class="label">
+                                                        <label>Accent Color</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="text" data-name="color_general|main_color__accent" id="main_color__accent" name="color_general[<?php echo $key; ?>][main_color__accent]" value="<?php if(!empty($config['main_color__accent'])){echo trim($config['main_color__accent']);}?>" class="input-color main_color__accent admin__control-number" /> 
+                                                        <p class="note"><span>Defines the accent color variable - Usually applies to components color that need to be emphasis or in the current state @main_color__accent about 10%	</span></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Hover Color</label>
+                                                    </td>
+                                                    <td class="value"> 
+                                                        <input type="text" data-name="color_general|color_hover__general" id="color_hover__general" name="color_general[<?php echo $key; ?>][color_hover__general]" value="<?php if(!empty($config['color_hover__general'])){echo trim($config['color_hover__general']);}?>" class="input-color color_hover__general admin__control-number" />
+                                                        <p class="note"><span>Defines the hover color variable - Usually applies to hover status @color_hover__general </span></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Secondary Color</label>
+                                                    </td>
+                                                    <td class="value"> 
+                                                        <input type="text" data-name="color_general|secondary_color__general" id="secondary_color__general" name="color_general[<?php echo $key; ?>][secondary_color__general]" value="<?php if(!empty($config['secondary_color__general'])){echo trim($config['secondary_color__general']);}?>" class="input-color secondary_color__general admin__control-number" />
+                                                        <p class="note"><span>Defines the secondary color variable - Usually applies to brand color - @secondary_color__general about 30%</span></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Text Color</label>
+                                                    </td>
+                                                    <td class="value"> 
+                                                        <input type="text" data-name="color_general|text_color__general" id="text_color__general" name="color_general[<?php echo $key; ?>][text_color__general]" value="<?php if(!empty($config['text_color__general'])){echo trim($config['text_color__general']);}?>" class="input-color text_color__general admin__control-number" />
+                                                        <p class="note"><span>Defines the text color variable - Usually applies to normal text - @text_color__general</span></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>link Color</label>
+                                                    </td>
+                                                    <td class="value"> 
+                                                        <input type="text" data-name="color_general|link_color__general" id="link_color__general" name="color_general[<?php echo $key; ?>][link_color__general]" value="<?php if(!empty($config['link_color__general'])){echo trim($config['link_color__general']);}?>" class="input-color link_color__general admin__control-number" />
+                                                        <p class="note"><span>Defines the link color variable - Usually applies to link element - @link_color__general</span></p>
+                                                    </td>
+                                                </tr>  
+                                             <?php endforeach; ?>
+                                            </tbody>
+                                        </table> 
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end general color --> 
+            <!-- begin general color Grays-->
+            <div id="general-color-grays" class="main-col general-color-grays tab-content hidden-config">
+                <div class="admin__scope-old">
+                    <div class="accordion">
+                        <div class="entry-edit form-inline">
+                            <div class="section-config">
+                                <div class="entry-edit-head admin__collapsible-block"> 
+                                    <fieldset class="config admin__collapsible-block"> 
+                                        <table cellspacing="0" class="form-list">
+                                            <tbody>
+                                            	<?php foreach ($configColorGraysGeneral as $key => $config): 
+                                                        $config = (array)$config;
+                                                    ?> 
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Main Color Grays</label> 
+                                                    </td>
+                                                    <td class="value"> 
+                                                        <input type="text" data-name="color_grays_general|main_color_grays__general" id="main_color_grays__general" name="color_grays_general[<?php echo $key; ?>][main_color_grays__general]" value="<?php if(!empty($config['main_color_grays__general'])){echo trim($config['main_color_grays__general']);}?>" class="input-color main_color_grays__general admin__control-number" />
+                                                        <p class="note"><span>Defines the basic gray value - Usually applies to text element on light background - @main_color_grays__general</span></p>
+                                                          
+                                                    </td>
+                                                </tr>
+                                                 <?php endforeach; ?> 
+                                            </tbody>
+                                        </table> 
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end general Grays color -->  
+             <!-- begin general Components -->
+            <div id="general-components" class="main-col general-components tab-content hidden-config">
+                <div class="admin__scope-old"> 
+                    <div class="accordion">
+                        <div class="entry-edit form-inline">
+                            <div class="section-config">
+                                <div class="entry-edit-head admin__collapsible-block"> 
+                                    <fieldset class="config admin__collapsible-block">
+                                        <table cellspacing="0" class="form-list">
+                                            <tbody> 
+                                            	<?php foreach ($configComponentsGeneral as $key => $config): 
+                                                        $config = (array)$config;
+                                                    ?>
+                                                <tr>    
+                                                    <td class="label">
+                                                         <label>Gutter Layout Base</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|gutter__layout" id="gutter__layout" name="components_general[<?php echo $key; ?>][gutter__layout]" value="<?php if(!empty($config['gutter__layout'])){echo trim($config['gutter__layout']);}?>" class="gutter__layout admin__control-number" step="any"/>
+                                                        <p class="note"><span>Defines the distance between vertical columns in the grid system  @gutter__layout (unit Rem)</span></p>
+                                                         
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                         <label>Vertical Padding Small</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|vertical__padding_small" id="vertical__padding_small" name="components_general[<?php echo $key; ?>][vertical__padding_small]" value="<?php if(!empty($config['vertical__padding_small'])){echo trim($config['vertical__padding_small']);}?>" class="vertical__padding_small admin__control-number" step="any"/> 
+                                                        <p class="note"><span>Defines the small padding top and bottom distance (border to content) for the small element (button, menu item,...) @vertical__padding_small (unit PX)</span></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Vertical Padding Base</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|vertical__padding_base" id="vertical__padding_base" name="components_general[<?php echo $key; ?>][vertical__padding_base]" value="<?php if(!empty($config['vertical__padding_base'])){echo trim($config['vertical__padding_base']);}?>" class="vertical__padding_base admin__control-number" step="any"/>
+                                                        <p class="note"><span>Defines the normal padding top and bottom distance (border to content) for the normal element (button, menu item,...)	 @vertical__padding_base (unit PX)</span></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                         <label>Vertical Padding Large</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|vertical__padding_large" id="vertical__padding_large" name="components_general[<?php echo $key; ?>][vertical__padding_large]" value="<?php if(!empty($config['vertical__padding_large'])){echo trim($config['vertical__padding_large']);}?>" class="vertical__padding_large admin__control-number" step="any"/>
+                                                        <p class="note"><span>Defines the large padding top and bottom distance (border to content) for the large element (button, menu item,...)	@vertical__padding_large (unit PX)</span></p> 
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Horizontal Padding Small</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|horizontal__padding_small" id="horizontal__padding_small" name="components_general[<?php echo $key; ?>][horizontal__padding_small]" value="<?php if(!empty($config['horizontal__padding_small'])){echo trim($config['horizontal__padding_small']);}?>" class="horizontal__padding_small admin__control-number" step="any"/>
+                                                        <p class="note"><span>Defines the small padding left and right distance (border to content) for the small element (button, menu item,...)	@horizontal__padding_small (unit PX)</span></p>  
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Horizontal Padding Base</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|horizontal__padding_base" id="horizontal__padding_base" name="components_general[<?php echo $key; ?>][horizontal__padding_base]" value="<?php if(!empty($config['horizontal__padding_base'])){echo trim($config['horizontal__padding_base']);}?>" class="horizontal__padding_base admin__control-number" step="any"/>
+                                                        <p class="note"><span>Defines the base padding left and right distance (border to content) for the small element (button, menu item,...)	@horizontal__padding_base (unit PX)</span></p>  
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Horizontal Padding Large</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|horizontal__padding_large" id="horizontal__padding_large" name="components_general[<?php echo $key; ?>][horizontal__padding_large]" value="<?php if(!empty($config['horizontal__padding_large'])){echo trim($config['horizontal__padding_large']);}?>" class="horizontal__padding_large admin__control-number" step="any"/> 
+                                                        <p class="note"><span>Defines the large padding left and right distance (border to content) for the small element (button, menu item,...)	@horizontal__padding_large (unit PX)</span></p> 
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Border Radius Small</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|border-radius__small" id="border-radius__small" name="components_general[<?php echo $key; ?>][border-radius__small]" value="<?php if(!empty($config['border-radius__small'])){echo trim($config['border-radius__small']);}?>" class="border-radius__small admin__control-number" step="any"/> 
+                                                        <p class="note"><span>Defines the size of border radius small items (button, menu item, box, ...)	@border-radius__small (unit PX)</span></p> 
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td class="label">
+                                                        <label>Border Radius Base</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|border-radius-base" id="border-radius-base" name="components_general[<?php echo $key; ?>][border-radius-base]" value="<?php if(!empty($config['border-radius-base'])){echo trim($config['border-radius-base']);}?>" class="border-radius-base admin__control-number" step="any"/> 
+                                                        <p class="note"><span>Defines the size of border radius normal items (button, menu item, box, ...)	@border-radius-base (unit PX)</span></p> 
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Border Radius Large</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|border-radius-large" id="border-radius-large" name="components_general[<?php echo $key; ?>][border-radius-large]" value="<?php if(!empty($config['border-radius-large'])){echo trim($config['border-radius-large']);}?>" class="border-radius-large admin__control-number" step="any"/> 
+                                                        <p class="note"><span>Defines the size of border radius normal items (button, menu item, box, ...)	@border-radius-base (unit PX)</span></p>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td class="label">
+                                                        <label>Border Width Base</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="number" data-name="components_general|border-width__base" id="border-width__base" name="components_general[<?php echo $key; ?>][border-width__base]" value="<?php if(!empty($config['border-width__base'])){echo trim($config['border-width__base']);}?>" class="border-width__base admin__control-number" step="any"/>
+                                                        <p class="note"><span>Defines the default border width size for UI components @border-width__base (unit PX)</span></p>
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label>Border Color Base</label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input type="text" data-name="components_general|border-color__base" id="border-color__base" name="components_general[<?php echo $key; ?>][border-color__base]" value="<?php if(!empty($config['border-color__base'])){echo trim($config['border-color__base']);}?>" class="input-color border-color__base admin__control-number" /> 
+                                                        <p class="note"><span>Defines the default border Color for UI components @border-color__base</span></p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <?php endforeach; ?> 
+                                        </table>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <!-- end general Components -->
+			
+			<span class="label_title">Theme select to save data</span>
+			<select name="theme_path" id="theme_path">
+				<?php foreach($themeDetails as $theme):?>
+					<option value="<?php echo $theme['theme_path']?>"><?php echo $theme['theme_title']?></option>
+				<?php endforeach;?>
+			</select>
+		</div>
+	</div>
+	<div class="primary btn_primary">
+		<button type="submit" class="action submit primary"><span>Submit</span></button>
+	</div>
+</form>
+
+<script>
+	require(['jquery','colorpicker'], function($){
+		var url = window.location.href; 
+		$( "#current_theme_path" ).change(function() {
+			var newSrc = $("#current_theme_path :selected").val();
+			<?php if(!$this->getRequest()->getParam('current_theme_path')):?>
+				var newUrl = url+'?current_theme_path='+newSrc;
+			<?php else:?>
+				var newUrl = url.replace(/(current_theme_path=).*?(&)/,'$1' + newSrc + '$2');
+			<?php endif;?>
+			window.location.href = newUrl;
+		}); 
+		$(document).ready( function() { 
+			/* Create Tab */ 
+			$("#menu-general a").click(function(event) {
+		        event.preventDefault();
+		        $(this).parent().addClass("_active");
+		        $(this).parent().siblings().removeClass("_active");
+		        var tab = $(this).attr("href");
+		        $(".tab-content").not(tab).css("display", "none");
+		        $(tab).fadeIn();
+		    });
+		    /* Color Picker */
+	     	$('.input-color').each( function() {
+		        $(this).minicolors({  
+		          	control: $(this).attr('data-control') || 'hue',
+		          	defaultValue: $(this).attr('data-defaultValue'),
+		          	format: $(this).attr('data-format') || 'hex',
+		          	keywords: $(this).attr('data-keywords') || '',
+		          	inline: $(this).attr('data-inline') === 'true',
+		          	letterCase: $(this).attr('data-letterCase') || 'lowercase',
+		          	opacity: $(this).attr('data-opacity'),
+		         	position: $(this).attr('data-position') || 'bottom right',
+		          	swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+			        change: function(value, opacity) {
+			          	$(this).css('backgroundColor', '#' + value);
+			            if( !value ) return;
+			            if( opacity ) value += ', ' + opacity;
+			            if( typeof console === 'object' ) {
+			              	console.log(value);
+			            }
+			          },
+		          theme: 'bootstrap'
+		        }); 
+		    });
+		    /* add selected to select option */ 
+	    });
+	});
+</script>

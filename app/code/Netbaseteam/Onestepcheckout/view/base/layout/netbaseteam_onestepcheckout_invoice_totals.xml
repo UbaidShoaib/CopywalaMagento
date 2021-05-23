@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Netbaseteam Team
+ * @copyright Copyright (c) 2018 Cmsmart (http://www.cmsmart.net)
+ * @package Netbaseteam_Onestepcheckout
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="invoice_totals">
+            <block class="Netbaseteam\Onestepcheckout\Block\Sales\Order\Fee" name="netbaseteam_onestepcheckout_fee"/>
+        </referenceBlock>
+    </body>
+</page>

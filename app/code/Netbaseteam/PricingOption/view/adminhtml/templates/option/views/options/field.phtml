@@ -1,0 +1,1098 @@
+<?php
+$jsonHelper = $this->helper('Magento\Framework\Json\Helper\Data');
+$max_input_vars = abs( intval( ini_get( 'max_input_vars' ) ) );
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$resource = $objectManager->get('\Magento\Framework\Module\ResourceInterface');
+$version = $resource->getDbVersion('Netbaseteam_PricingOption');
+$options = $this->getPricingOptions();
+$default_field = $this->getDefaultConfigField();
+$imageHelper = $objectManager->get('Magento\Catalog\Helper\Image');
+$helperConfig = $objectManager->get('Netbaseteam\PricingOption\Helper\Config');
+$placeholder = $imageHelper->getDefaultPlaceholderUrl('image');
+
+$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$currency = $storeManager->getStore()->getCurrentCurrencyCode();
+?>
+<div class="nbd-field-wrap" ng-repeat="(fieldIndex, field) in options.fields" id="{{field.id}}">
+    <div class="nbd-nav">
+        <div ng-dblclick="toggleExpandField($index, $event)" style="cursor: pointer;" title="<?php echo __('Double click to expand option') ?>">
+            <ul nbd-tab ng-class="field.isExpand ? '' : 'left'" class="nbd-tab-nav">
+                <li class="nbd-field-tab active" data-target="tab-general"><?php echo __('General') ?></li>
+                <li class="nbd-field-tab" data-target="tab-conditional"><?php echo __('Conditional') ?></li>
+                <li class="nbd-field-tab" data-target="tab-appearance"><?php echo __('Appearance') ?></li>
+                <li ng-if="field.nbd_type" class="nbd-field-tab" data-target="tab-online-design"><?php echo __('Online design'); ?></li>
+                <li ng-if="field.nbe_type" class="nbd-field-tab" data-target="tab-extra-options"><?php echo __('Extra options'); ?></li>
+            </ul>
+            <input ng-hide="true" ng-model="field.id" name="options[fields][{{fieldIndex}}][id]"/>
+            <span class="nbd-field-name" ng-class="[{true: '', false: 'left'}[field.isExpand], {'n': 'nbo_blur'}[field.general.enabled.value]]">
+                <span>{{field.general.title.value}}</span>
+                <span style="color: #0085ba;">{{get_field_group_name( field.id )}}</span>
+            </span>
+            <span class="nbdesigner-right field-action">
+                <span class="nbo-type-label-wrap"><span class="nbo-type-label" ng-class="get_field_class((field.nbd_type != '' && field.nbd_type != null) ? field.nbd_type : field.nbpb_type)">{{get_field_type( (field.nbd_type != '' && field.nbd_type != null) ? field.nbd_type : ( (field.nbpb_type != '' && field.nbpb_type != null) ? field.nbpb_type : field.nbe_type ) )}}</span></span>
+                <span class="nbo-sort-group">
+                    <span ng-click="sort_field($index, 'up')" class="dashicons dashicons-arrow-up nbo-sort-up nbo-sort" title="<?php echo __('Up') ?>"></span>
+                    <span ng-click="sort_field($index, 'down')" class="dashicons dashicons-arrow-down nbo-sort-down nbo-sort" title="<?php echo __('Down') ?>"></span>
+                </span>
+                <a class="nbd-field-btn nbd-mini-btn button" ng-click="delete_field($index)" title="<?php echo __('Delete'); ?>"><span class="dashicons dashicons-no-alt"></span></a>
+                <a class="nbd-field-btn nbd-mini-btn button" ng-click="copy_field($index)" title="<?php echo __('Copy'); ?>"><span class="dashicons dashicons-admin-page"></span></a>
+                <a class="nbd-field-btn nbd-mini-btn button" ng-click="toggleExpandField($index, $event)" title="<?php echo __('Expand'); ?>"><span ng-show="!field.isExpand" class="dashicons dashicons-arrow-down"></span><span ng-show="field.isExpand" class="dashicons dashicons-arrow-up"></span></a>
+            </span>
+        </div>   
+        <div class="clear"></div>
+    </div>
+    <div ng-show="field.isExpand">
+        <div class="tab-general nbd-field-content active">
+            <div class="nbd-field-info">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Option name'); ?></b></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <input required type="text" name="options[fields][{{fieldIndex}}][general][title]" ng-model="field.general.title.value">
+                    </div>
+                </div>
+            </div>
+            <div class="nbd-field-info">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Description'); ?></b></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <textarea name="options[fields][{{fieldIndex}}][general][description]" ng-model="field.general.description.value"></textarea>
+                    </div>
+                </div>
+            </div> 
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.data_type)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Data type'); ?></b></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <select name="options[fields][{{fieldIndex}}][general][data_type]" ng-model="field.general.data_type.value" ng-change="update_price_type(fieldIndex)" >
+                            <option ng-repeat="op in field.general.data_type.options" value="{{op.key}}">{{op.text}}</option>
+                        </select>                        
+                    </div>
+                </div>
+            </div>
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.input_type)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Input type'); ?></b></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <select name="options[fields][{{fieldIndex}}][general][input_type]" ng-model="field.general.input_type.value" >
+                            <option ng-repeat="op in field.general.input_type.options" value="{{op.key}}">{{op.text}}</option>
+                        </select>                        
+                    </div>
+                </div>
+            </div> 
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.input_option)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Input option'); ?></b></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <table class="nbd-table">
+                            <tr>
+                                <th><?php echo __('Min'); ?></th>
+                                <th><?php echo __('Max'); ?></th>
+                                <th><?php echo __('Step'); ?></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="nbd-short-ip" type="text" string-to-number ng-model="field.general.input_option.value.min" name="options[fields][{{fieldIndex}}][general][input_option][min]"/>
+                                </td>
+                                <td>
+                                    <input class="nbd-short-ip" type="text" string-to-number ng-model="field.general.input_option.value.max" name="options[fields][{{fieldIndex}}][general][input_option][max]"/>
+                                </td>
+                                <td>
+                                    <input class="nbd-short-ip" type="text" string-to-number ng-model="field.general.input_option.value.step" name="options[fields][{{fieldIndex}}][general][input_option][step]"/>
+                                </td>                                
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.text_option)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Text option'); ?></b></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <table class="nbd-table">
+                            <tr>
+                                <th><?php echo __('Min length'); ?></th>
+                                <th><?php echo __('Max length'); ?></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="nbd-short-ip" type="text" string-to-number ng-model="field.general.text_option.value.min" name="options[fields][{{fieldIndex}}][general][text_option][min]"/>
+                                </td>
+                                <td>
+                                    <input class="nbd-short-ip" type="text" string-to-number ng-model="field.general.text_option.value.max" name="options[fields][{{fieldIndex}}][general][text_option][max]"/>
+                                </td>                               
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.upload_option)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Upload file option'); ?></b></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <table class="nbd-table">
+                            <tr>
+                                <th><?php echo __('Min size'); ?></th>
+                                <th><?php echo __('Max size'); ?></th>
+                                <th><?php echo __('Allow type'); ?></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="nbd-short-ip" type="text" string-to-number ng-model="field.general.upload_option.value.min_size" name="options[fields][{{fieldIndex}}][general][upload_option][min_size]"/> MB
+                                </td>
+                                <td>
+                                    <input class="nbd-short-ip" type="text" string-to-number ng-model="field.general.upload_option.value.max_size" name="options[fields][{{fieldIndex}}][general][upload_option][max_size]"/> MB
+                                </td>  
+                                <td>
+                                    <input class="nbd-short-ip" type="text" ng-model="field.general.upload_option.value.allow_type" name="options[fields][{{fieldIndex}}][general][upload_option][allow_type]"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="nbd-field-info">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Enabled'); ?></b> <nbd-tip data-tip="<?php echo __('Choose whether the option is enabled or not.'); ?>" ></nbd-tip></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <select name="options[fields][{{fieldIndex}}][general][enabled]" ng-model="field.general.enabled.value">
+                            <option ng-repeat="op in field.general.enabled.options" value="{{op.key}}">{{op.text}}</option>
+                        </select>                        
+                    </div>
+                </div>
+            </div>
+            <div class="nbd-field-info">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Published'); ?></b> <nbd-tip data-tip="<?php echo __('Choose whether the option show in summary options or not.'); ?>" ></nbd-tip></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <select name="options[fields][{{fieldIndex}}][general][published]" ng-model="field.general.published.value">
+                            <option ng-repeat="op in field.general.published.options" value="{{op.key}}">{{op.text}}</option>
+                        </select>                        
+                    </div>
+                </div>
+            </div>
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.required)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Required'); ?></b> <nbd-tip data-tip="<?php echo __('Choose whether the option is required or not.'); ?>" ></nbd-tip></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <select name="options[fields][{{fieldIndex}}][general][required]" ng-model="field.general.required.value">
+                            <option ng-repeat="op in field.general.required.options" value="{{op.key}}">{{op.text}}</option>
+                        </select>                        
+                    </div>
+                </div>
+            </div>
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.price_type)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Price type'); ?></b> <nbd-tip data-tip="<?php echo __('Here you can choose how the price is calculated. Depending on the field there various types you can choose.'); ?>" ></nbd-tip></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <select name="options[fields][{{fieldIndex}}][general][price_type]" ng-model="field.general.price_type.value">
+                            <option ng-repeat="op in field.general.price_type.options" ng-if="check_option_depend(fieldIndex, op.depend)" value="{{op.key}}">{{op.text}}</option>
+                        </select>                        
+                    </div>
+                </div>
+            </div> 
+            <div class="nbd-field-info">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Depend quantity'); ?></b> <nbd-tip data-tip="<?php echo __('If choose No additional price will be apply as cart fee or fixed amount which independently with the quantity.'); ?>" ></nbd-tip></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <select name="options[fields][{{fieldIndex}}][general][depend_qty]" ng-model="field.general.depend_qty.value">
+                            <option ng-repeat="op in field.general.depend_qty.options" value="{{op.key}}">{{op.text}}</option>
+                        </select>                        
+                    </div>
+                </div>
+            </div>
+            <div class="nbd-field-info">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Depend quantity breaks'); ?></b></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <select name="options[fields][{{fieldIndex}}][general][depend_quantity]" ng-model="field.general.depend_quantity.value">
+                            <option ng-repeat="op in field.general.depend_quantity.options" value="{{op.key}}">{{op.text}}</option>
+                        </select>                        
+                    </div>
+                </div>
+            </div>            
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.price)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Additional Price'); ?></b> <nbd-tip data-tip="<?php echo __('Enter the price for this field or leave it blank for no price.'); ?>" ></nbd-tip></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div>
+                        <input class="nbd-short-ip" type="text" name="options[fields][{{fieldIndex}}][general][price]" ng-model="field.general.price.value">
+                    </div>
+                </div>
+            </div> 
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.price_breaks)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Price depend quantity breaks'); ?></b></label></div>
+                </div>
+                <div class="nbd-field-info-2">
+                    <div class="nbd-table-wrap">
+                        <table class="nbd-table">
+                            <tr>
+                                <th><?php echo __('Quantity break'); ?></th>
+                                <th ng-repeat="break in options.quantity_breaks">{{break.val}}</th>
+                            </tr>
+                            <tr>
+                                <td><?php echo __('Additional Price'); ?></td>
+                                <td ng-repeat="break in options.quantity_breaks">
+                                    <input class="nbd-short-ip" type="text" ng-model="field.general.price_breaks.value[$index]" name="options[fields][{{fieldIndex}}][general][price_breaks][{{$index}}]" />
+                                </td>
+                            </tr>
+                        </table>                        
+                    </div>
+                </div>
+            </div>  
+            <div class="nbd-field-info" ng-show="check_depend(field.general, field.general.attributes)">
+                <div class="nbd-field-info-1">
+                    <div><label><b><?php echo __('Attributes'); ?></b> <nbd-tip data-tip="<?php echo __('Attributes let you define extra product data, such as size or color.'); ?>" ></nbd-tip></label></div>
+                </div>  
+                <div class="nbd-field-info-2">
+                    <div>
+                        <div ng-repeat="(opIndex, op) in field.general.attributes.options" class="nbd-attribute-wrap">
+                            <div ng-show="op.isExpand" class="nbd-attribute-img-wrap">
+                                <div><?php echo __('Swatch type'); ?> <!--<sup class="nbs-sup-des">1</sup>--></div>
+                                <div>
+                                    <select ng-model="op.preview_type" style="width: 110px;" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][preview_type]">
+                                        <option value="i"><?php echo __('Image'); ?></option>
+                                        <option value="c"><?php echo __('Color'); ?></option>                                                                    
+                                    </select>   
+                                </div>
+                                <div class="nbd-attribute-img-inner" ng-show="op.preview_type == 'i'">
+                                    <?php $unique = uniqid('option-image-');?>
+                                    <span class="dashicons dashicons-no remove-attribute-img" ng-click="remove_attribute_image(fieldIndex, $index, 'image', 'image_url')"></span>
+                                    <input id="<?php echo $unique?>-{{fieldIndex}}-{{$index}}" ng-hide="true" ng-model="op.image" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][image]" ng-change="attach_attribute_image(fieldIndex, opIndex, 'image', 'image_url')"/>
+                                    <img title="<?php echo __('Click to change image'); ?>" ng-click="set_attribute_image(fieldIndex, $index, 'image', 'image_url', '<?php echo $block->getUrl('cms/wysiwyg_images/index').'element_name/pricingoption-image/target_element_id/'.$unique?>')" ng-src="{{op.image != 0 ? op.image : '<?php echo $placeholder ?>'}}" />
+                                </div>
+                                <div class="nbd-attribute-color-inner" ng-show="op.preview_type == 'c'">
+                                    <input type="text" name="options[fields][{{fieldIndex}}][general][attributes][options][{{$index}}][color]" ng-model="op.color" class="nbd-color-picker" style="width: 110px" nbd-color-picker="op.color"/>
+                                    <span class="add-color2" ng-click="add_remove_second_color(fieldIndex, $index)"><span ng-show="!op.color2">+</span><span ng-show="op.color2">-</span></span>
+                                    <input ng-if="op.color2" type="text" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][color2]" ng-model="op.color2" class="nbd-color-picker" nbd-color-picker="op.color2"/>
+                                </div>
+                                <div ng-if="field.appearance.change_image_product.value == 'y'">
+                                    <?php $unique = uniqid('option-image-');?>
+                                    <div><?php echo __('Product image'); ?>  <!--<sup class="nbs-sup-des">2</sup>--></div>
+                                    <div class="nbd-attribute-img-inner">
+                                        <span class="dashicons dashicons-no remove-attribute-img" ng-click="remove_attribute_image(fieldIndex, $index, 'product_image', 'product_image_url')"></span>
+                                        <input id="<?php echo $unique?>-{{fieldIndex}}-{{$index}}" ng-hide="true" ng-model="op.product_image" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][product_image]" ng-change="attach_attribute_image(fieldIndex, opIndex, 'product_image', 'product_image_url')"/>
+                                        <img title="<?php echo __('Click to change image'); ?>" ng-click="set_attribute_image(fieldIndex, $index, 'product_image', 'product_image_url', '<?php echo $block->getUrl('cms/wysiwyg_images/index').'element_name/pricingoption-image/target_element_id/'.$unique?>')" ng-src="{{op.product_image ? op.product_image : '<?php echo $placeholder ?>'}}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="op.isExpand" class="nbd-attribute-content-wrap">
+                                <div><?php echo __('Title'); ?></div>
+                                <div class="nbd-attribute-name">
+                                    <input required type="text" value="{{op.name}}" ng-model="op.name" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][name]"/>
+                                    <label><input type="checkbox" name="options[fields][{{fieldIndex}}][general][attributes][options][{{$index}}][selected]" ng-checked="op.selected" ng-click="seleted_attribute(fieldIndex, 'attributes', $index)"/> <?php echo __('Default'); ?></label>
+                                </div>
+                                <div class="nbd-margin-10"></div>
+                                <div><?php echo __('Description'); ?></div>
+                                <div class="nbd-attribute-name">
+                                    <textarea placeholder="<?php echo __('Description'); ?>" value="{{op.des}}" ng-model="op.des" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][des]"></textarea>
+                                </div> 
+                                <div class="nbd-margin-10"></div>
+                                <div><?php echo __('Price'); ?></div>
+                                <div ng-show="field.general.depend_quantity.value != 'y'">
+                                    <div><?php echo __('Additional Price'); ?></div>
+                                    <div>
+                                        <input name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][price][0]" class="nbd-short-ip" type="text" ng-model="op.price[0]"/>
+                                    </div>
+                                </div>
+                                <div class="nbd-table-wrap" ng-show="field.general.depend_quantity.value == 'y'" >
+                                    <table class="nbd-table">
+                                        <tr>
+                                            <th><?php echo __('Quantity break'); ?></th>
+                                            <th ng-repeat="break in options.quantity_breaks">{{break.val}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo __('Additional Price'); ?></td>
+                                            <td ng-repeat="break in options.quantity_breaks">
+                                                <input name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][price][{{$index}}]" class="nbd-short-ip" type="text" ng-model="op.price[$index]"/>
+                                            </td>
+                                        </tr>                                                                        
+                                    </table>
+                                </div> 
+                                <div class="nbd-margin-10"></div>
+                                <div class="nbd-enable-subattribute" ng-hide="field.nbd_type != '' && field.nbd_type != null">
+                                    <label><input ng-click="toggle_enable_subattr(fieldIndex, $index)" type="checkbox" name="options[fields][{{fieldIndex}}][general][attributes][options][{{$index}}][enable_subattr]" ng-true-value="'on'" ng-false-value="'off'" ng-model="op.enable_subattr" ng-checked="op.enable_subattr" /> <?php echo __('Enable sub attributes'); ?></label>
+                                </div>
+                                <div class="nbd-margin-10"></div>
+                                <div class="nbd-subattributes-wrapper" ng-if="op.enable_subattr === true || op.enable_subattr == 'on'">
+                                    <div class="nbd-field-info">
+                                        <div class="nbd-field-info-1">
+                                            <div><label><b><?php echo __('Sub attributes type'); ?></b></label></div>
+                                        </div>
+                                        <div class="nbd-field-info-2">
+                                            <div>
+                                                <select style="width: 150px;" name="options[fields][{{fieldIndex}}][general][attributes][options][{{$index}}][sattr_display_type]" ng-model="op.sattr_display_type" >
+                                                    <option value="d"><?php echo __('Dropdown'); ?></option>
+                                                    <option value="r"><?php echo __('Radio button'); ?></option>
+                                                    <option value="s"><?php echo __('Swatch'); ?></option>
+                                                    <option value="l"><?php echo __('Label'); ?></option>
+                                                </select>                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-repeat="(sopIndex, sop) in op.sub_attributes" class="nbd-subattributes-wrap">
+                                        <div ng-show="sop.isExpand" class="nbd-attribute-img-wrap">
+                                            <div><?php echo __('Swatch type'); ?></div>
+                                            <div>
+                                                <select ng-model="sop.preview_type" style="width: 110px;" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][sub_attributes][{{sopIndex}}][preview_type]">
+                                                    <option value="i"><?php echo __('Image'); ?></option>
+                                                    <option value="c"><?php echo __('Color'); ?></option>                                                                    
+                                                </select>   
+                                            </div>
+                                            <div class="nbd-attribute-img-inner" ng-show="sop.preview_type == 'i'">
+                                                <?php $unique = uniqid('option-image-');?>
+                                                <span class="dashicons dashicons-no remove-attribute-img" ng-click="remove_sub_attribute_image(fieldIndex, opIndex, sopIndex)"></span>
+                                                <input id="<?php echo $unique?>-{{fieldIndex}}-{{opIndex}}-{{sopIndex}}" ng-hide="true" ng-model="sop.image" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][sub_attributes][{{sopIndex}}][image]" ng-change="attach_sub_attribute_image(fieldIndex, opIndex, sopIndex)"/>
+                                                <img title="<?php echo __('Click to change image'); ?>" ng-click="set_sub_attribute_image(fieldIndex, opIndex, sopIndex, '<?php echo $block->getUrl('cms/wysiwyg_images/index').'element_name/pricingoption-image/target_element_id/'.$unique?>')" ng-src="{{sop.image != 0 ? sop.image : '<?php echo $placeholder ?>'}}" />
+                                            </div>
+                                            <div class="nbd-attribute-color-inner" ng-show="sop.preview_type == 'c'">
+                                                <input type="text" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][sub_attributes][{{sopIndex}}][color]" ng-model="sop.color" class="nbd-color-picker" nbd-color-picker="sop.color"/>
+                                            </div>
+                                        </div>
+                                        <div ng-show="sop.isExpand" class="nbd-attribute-content-wrap">
+                                            <div><?php echo __('Title'); ?></div>
+                                            <div class="nbd-attribute-name">
+                                                <input required type="text" value="{{sop.name}}" ng-model="sop.name" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][sub_attributes][{{sopIndex}}][name]"/>
+                                                <label><input type="checkbox" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][sub_attributes][{{sopIndex}}][selected]" ng-checked="sop.selected" ng-click="seleted_sub_attribute(fieldIndex, 'attributes', opIndex, sopIndex)"/> <?php echo __('Default'); ?></label>
+                                            </div>
+                                            <div class="nbd-margin-10"></div>
+                                            <div><?php echo __('Description'); ?></div>
+                                            <div class="nbd-attribute-name">
+                                                <textarea placeholder="<?php echo __('Description'); ?>" value="{{sop.des}}" ng-model="sop.des" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][sub_attributes][{{sopIndex}}][des]"></textarea>
+                                            </div>
+                                            <div><?php echo __('Price'); ?></div>
+                                            <div ng-show="field.general.depend_quantity.value != 'y'">
+                                                <div><?php echo __('Additional Price'); ?></div>
+                                                <div>
+                                                    <input name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][sub_attributes][{{sopIndex}}][price][0]" class="nbd-short-ip" type="text" ng-model="sop.price[0]"/>
+                                                </div>
+                                            </div>
+                                            <div class="nbd-table-wrap" ng-show="field.general.depend_quantity.value == 'y'" >
+                                                <table class="nbd-table">
+                                                    <tr>
+                                                        <th><?php echo __('Quantity break'); ?></th>
+                                                        <th ng-repeat="break in options.quantity_breaks">{{break.val}}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><?php echo __('Additional Price'); ?></td>
+                                                        <td ng-repeat="break in options.quantity_breaks">
+                                                            <input name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][sub_attributes][{{sopIndex}}][price][{{$index}}]" class="nbd-short-ip" type="text" ng-model="sop.price[$index]"/>
+                                                        </td>
+                                                    </tr>                                                                        
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div ng-show="!sop.isExpand" class="nbd-attribute-name-preview">{{sop.name}}</div>
+                                        <div class="nbd-attribute-action">
+                                            <span class="nbo-sort-group">
+                                                <span ng-click="sort_sub_attribute(fieldIndex, opIndex, sopIndex, 'up')" class="dashicons dashicons-arrow-up nbo-sort-up nbo-sort" title="<?php echo __('Up') ?>"></span>
+                                                <span ng-click="sort_sub_attribute(fieldIndex, opIndex, sopIndex, 'down')" class="dashicons dashicons-arrow-down nbo-sort-down nbo-sort" title="<?php echo __('Down') ?>"></span>
+                                            </span>
+                                            <a class="button nbd-mini-btn"  ng-click="remove_sub_attribute(fieldIndex, opIndex, sopIndex)" title="<?php echo __('Delete'); ?>"><span class="dashicons dashicons-no-alt"></span></a>
+                                            <a class="button nbd-mini-btn"  ng-click="toggle_expand_sub_attribute(fieldIndex, opIndex, sopIndex)" title="<?php echo __('Expend'); ?>">
+                                                <span ng-show="sop.isExpand" class="dashicons dashicons-arrow-up"></span>
+                                                <span ng-show="!sop.isExpand" class="dashicons dashicons-arrow-down"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div><a class="button" ng-click="add_sub_attribute(fieldIndex, opIndex)"><span class="dashicons dashicons-plus"></span> <?php echo __('Add sub attribute'); ?></a></div>
+                                    <div class="nbd-margin-10"></div>
+                                </div>
+                            </div> 
+                            <div ng-show="!op.isExpand" class="nbd-attribute-name-preview">{{op.name}}</div>
+                            <div class="nbd-attribute-action">
+                                <span class="nbo-sort-group">
+                                    <span ng-click="sort_attribute(fieldIndex, $index, 'up')" class="dashicons dashicons-arrow-up nbo-sort-up nbo-sort" title="<?php echo __('Up') ?>"></span>
+                                    <span ng-click="sort_attribute(fieldIndex, $index, 'down')" class="dashicons dashicons-arrow-down nbo-sort-down nbo-sort" title="<?php echo __('Down') ?>"></span>
+                                </span>
+                                <a class="button nbd-mini-btn"  ng-click="remove_attribute(fieldIndex, 'attributes', $index)" title="<?php echo __('Delete'); ?>"><span class="dashicons dashicons-no-alt"></span></a>
+                                <a class="button nbd-mini-btn"  ng-click="toggle_expand_attribute(fieldIndex, opIndex)" title="<?php echo __('Expend'); ?>">
+                                    <span ng-show="op.isExpand" class="dashicons dashicons-arrow-up"></span>
+                                    <span ng-show="!op.isExpand" class="dashicons dashicons-arrow-down"></span>
+                                </a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div><a class="button" ng-click="add_attribute(fieldIndex, 'attributes')"><span class="dashicons dashicons-plus"></span> <?php echo __('Add attribute'); ?></a></div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-conditional nbd-field-content">
+            <div class="nbd-field-info">
+                <div class="nbd-field-info-1">
+                    <div><b><?php echo __('Field Conditional Logic'); ?></b> <nbd-tip data-tip="<?php echo __('Enable conditional logic for showing or hiding this field.'); ?>"></nbd-tip></div>
+                </div>  
+                <div class="nbd-field-info-2">
+                    <div>
+                        <select ng-model="field.conditional.enable" style="width: 100px;" name="options[fields][{{fieldIndex}}][conditional][enable]">
+                            <option value="n"><?php echo __('No'); ?></option>
+                            <option value="y"><?php echo __('Yes'); ?></option>
+                        </select>
+                    </div>
+                    <div ng-if="field.conditional.enable == 'y'">
+                        <div style="margin-top: 10px;">
+                            <select ng-model="field.conditional.show" style="width: inherit;" name="options[fields][{{fieldIndex}}][conditional][show]">
+                                <option value="y"><?php echo __('Show'); ?></option>
+                                <option value="n"><?php echo __('Hide'); ?></option>
+                            </select>
+                            <?php echo __('this field if'); ?>
+                            <select ng-model="field.conditional.logic" style="width: inherit;" name="options[fields][{{fieldIndex}}][conditional][logic]">
+                                <option value="a"><?php echo __('all'); ?></option>
+                                <option value="o"><?php echo __('any'); ?></option>
+                            </select>  
+                            <?php echo __('of these rules match:'); ?>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <div ng-repeat="(cdIndex, con) in field.conditional.depend">
+                                <select ng-change="update_condition_qty( fieldIndex )" ng-model="con.id" style="width: 200px;" name="options[fields][{{fieldIndex}}][conditional][depend][{{cdIndex}}][id]">
+<!--                                    <option ng-repeat="cf in options.fields | filter: { id: '!' + field.id }" value="{{cf.id}}">{{cf.general.title.value}}</option>-->
+                                    <option ng-repeat="cf in options.fields | filter: { id: field.id }:excludeField" value="{{cf.id}}">{{cf.general.title.value}}</option>
+                                    <option value="qty"><?php echo __('Quantity'); ?></option>
+                                </select>
+                                <select ng-model="con.operator" style="width: 120px;" name="options[fields][{{fieldIndex}}][conditional][depend][{{cdIndex}}][operator]">
+                                    <option ng-if="con.id != 'qty'" value="i"><?php echo __('is'); ?></option>
+                                    <option ng-if="con.id != 'qty'" value="n"><?php echo __('is not'); ?></option>
+                                    <option ng-if="con.id != 'qty'" value="e"><?php echo __('is empty'); ?></option>
+                                    <option ng-if="con.id != 'qty'" value="ne"><?php echo __('is not empty'); ?></option>
+                                    <option ng-if="con.id == 'qty'" value="eq"><?php echo __('equal'); ?></option>
+                                    <option ng-if="con.id == 'qty'" value="gt"><?php echo __('great than'); ?></option>
+                                    <option ng-if="con.id == 'qty'" value="lt"><?php echo __('less than'); ?></option>
+                                </select>
+                                <select ng-if="(con.operator == 'i' || con.operator == 'n') && con.id != 'qty'" ng-model="con.val" ng-repeat="vf in options.fields | filter: {id: con.id}:includeField"  
+                                    name="options[fields][{{fieldIndex}}][conditional][depend][{{cdIndex}}][val]" style="width: 200px;">
+                                    <option ng-repeat="vop in vf.general.attributes.options" value="{{$index}}">{{vop.name}}</option>
+                                </select> 
+                                <input ng-if="con.id == 'qty'" type="text" ng-model="con.val" name="options[fields][{{fieldIndex}}][conditional][depend][{{cdIndex}}][val]" style="width: 200px !important; vertical-align: middle;"/>
+                                <a class="nbd-field-btn nbd-mini-btn button" ng-click="add_condition(fieldIndex)"><span class="dashicons dashicons-plus"></span></a>
+                                <a class="nbd-field-btn nbd-mini-btn button" ng-click="delete_condition(fieldIndex, cdIndex)"><span class="dashicons dashicons-no-alt"></span></a>
+                            </div>
+                        </div>
+                    </div>    
+                </div>  
+            </div>     
+        </div>
+        <div class="tab-appearance nbd-field-content">
+            <div class="nbd-field-info" ng-repeat="(key, data) in field.appearance">
+                <div class="nbd-field-info-1">
+                    <div><label><b>{{data.title}}</b> <nbd-tip ng-if="data.description != ''" data-tip="{{data.description}}" ></nbd-tip></label></div>
+                </div> 
+                <div class="nbd-field-info-2">
+                    <div ng-if="data.type == 'dropdown'">
+                        <select name="options[fields][{{fieldIndex}}][appearance][{{key}}]" ng-model="data.value">
+                            <option ng-repeat="op in data.options" value="{{op.key}}">{{op.text}}</option>
+                        </select>        
+                    </div>    
+                    <div ng-if="data.type == 'dropdown_group'">
+                        <select name="options[fields][{{fieldIndex}}][appearance][{{key}}]" ng-model="data.value">
+                            <optgroup ng-repeat="gr in data.options" label={{gr.title}}>
+                                <option ng-repeat="op in gr.value" value="{{op.key}}">{{op.text}}</option>
+                            </optgroup>
+                        </select>        
+                    </div>                                                      
+                </div>
+            </div>
+        </div>
+        <div class="tab-online-design nbd-field-content" ng-if="field.nbd_type">
+            <input ng-hide="true" name="options[fields][{{fieldIndex}}][nbd_type]" ng-model="field.nbd_type">
+            <ng-include src="field.nbd_template"></ng-include>
+        </div>
+        <div class="tab-product-builder nbd-field-content" ng-if="field.nbpb_type">
+            <input ng-hide="true" name="options[fields][{{fieldIndex}}][nbpb_type]" ng-model="field.nbpb_type">
+            <ng-include src="field.nbd_template"></ng-include>
+        </div>
+        <div class="tab-extra-options nbd-field-content" ng-if="field.nbe_type">
+            <input ng-hide="true" name="options[fields][{{fieldIndex}}][nbe_type]" ng-model="field.nbe_type">
+            <ng-include src="field.nbd_template"></ng-include>
+        </div>
+    </div>
+</div>
+<div style="display: flex; justify-content: space-between;">
+    <a style="background: rgba(170, 0, 0, 0.75);color: #fff;border-color: rgba(170, 0, 0, 0.75);" class="button" ng-click="clear_all_fields()"><span class="dashicons dashicons-no-alt"></span> <?php echo __('Clear All Fields'); ?></a>
+    <a class="button button-primary" ng-click="add_field()"><span class="dashicons dashicons-plus"></span> <?php echo __('Add Field'); ?></a>
+</div>
+<?php echo '<script type="text/ng-template" id="nbd.page">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div>
+                <b><?php echo __('Auto select all pages/sides'); ?></b>
+                <nbd-tip data-tip="<?php echo __('Automatically select all pages/sides if choose Yes. In other side, the Default page/side or the first page/side will be selected.'); ?>" ></nbd-tip>
+            </div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][auto_select_page]" ng-model="field.general.auto_select_page">
+                <option value="y"><?php echo __('Yes'); ?></option>
+                <option value="n"><?php echo __('No'); ?></option>
+            </select>
+        </div>
+    </div>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Page display'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][page_display]" ng-model="field.general.page_display">
+                <option value="1"><?php echo __('Each page on a design stage'); ?></option>
+                <option value="2"><?php echo __('Two pages on a design stage'); ?></option>
+            </select>
+        </div>
+    </div>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Exclude page'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][exclude_page]" ng-model="field.general.exclude_page">
+                <option value="0"><?php echo __('None'); ?></option>
+                <option value="2"><?php echo __('Cover pages'); ?></option>
+            </select>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.page1">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Page display'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][page_display]" ng-model="field.general.page_display">
+                <option value="1"><?php echo __('Each page on a design stage'); ?></option>
+                <option value="2"><?php echo __('Two pages on a design stage'); ?></option>
+            </select>
+        </div>
+    </div>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Exclude page'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][exclude_page]" ng-model="field.general.exclude_page">
+                <option value="0"><?php echo __('None'); ?></option>
+                <option value="2"><?php echo __('Cover pages'); ?></option>
+            </select>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.page2">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div>
+                <b><?php echo __('Auto select all pages/sides'); ?></b>
+                <nbd-tip data-tip="<?php echo __('Automatically select all pages/sides if choose Yes. In other side, the Default page/side or the first page/side will be selected.'); ?>" ></nbd-tip>
+            </div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][auto_select_page]" ng-model="field.general.auto_select_page">
+                <option value="y"><?php echo __('Yes'); ?></option>
+                <option value="n"><?php echo __('No'); ?></option>
+            </select>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.page3">'; ?>
+
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.color">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Background type'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][attributes][bg_type]" ng-model="field.general.attributes.bg_type">
+                <option value="i"><?php echo __('Image'); ?></option>
+                <option value="c"><?php echo __('Color'); ?></option>
+            </select>
+        </div>
+    </div>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Number of sides'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <input class="nbd-short-ip" name="options[fields][{{fieldIndex}}][general][attributes][number_of_sides]" string-to-number type="number" min="1" step="1" ng-model="field.general.attributes.number_of_sides" />
+        </div>
+    </div>
+    <div class="nbd-field-info" ng-if="field.general.attributes.bg_type == 'c'">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Backgrund sides'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="nbd-table-wrap">
+                <table class="nbd-table" style="text-align: center;">
+                    <tbody>
+                        <tr ng-repeat="(opIndex, op) in field.general.attributes.options">
+                            <th>{{op.name}}</th>
+                            <td>
+                                <input type="text" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][bg_color]" ng-model="op.bg_color" class="nbd-color-picker" nbd-color-picker="op.bg_color"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="nbd-field-info" ng-if="field.general.attributes.bg_type == 'i'">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Sides background'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="nbd-table-wrap">
+                <table class="nbd-table" style="text-align: center;">
+                    <tbody>
+                        <tr ng-repeat="(opIndex, op) in field.general.attributes.options">
+                            <th>{{op.name}}</th>
+                            <td ng-repeat="n in [] | range:field.general.attributes.number_of_sides">
+                                <?php $unique = uniqid('option-image-');?>
+                                <input id="<?php echo $unique?>-{{fieldIndex}}-{{opIndex}}-{{n}}" ng-hide="true" ng-model="op.bg_image[n]" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][bg_image][{{n}}]" ng-change="attach_attribute_image(fieldIndex, opIndex, 'image', 'image_url', n)"/>
+                                <img class="bg_od_preview" title="<?php echo __('Click to change image'); ?>" ng-click="set_attribute_image(fieldIndex, opIndex, 'bg_image', 'bg_image_url', '<?php echo $block->getUrl('cms/wysiwyg_images/index').'element_name/pricingoption-image/target_element_id/'.$unique?>', n)" ng-src="{{op.bg_image[n] != 0 ? op.bg_image[n] : '<?php echo $placeholder ?>'}}" />  
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.size">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div>
+                <label>
+                    <b><?php echo __('Use a same online design config'); ?></b>
+                    <nbd-tip data-tip="<?php echo __('All attributes have a same online design config ( product width, height, area design width, height, left, top ).'); ?>" ></nbd-tip>
+                </label>
+            </div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][attributes][same_size]" ng-model="field.general.attributes.same_size">
+                <option value="y"><?php echo __('Yes'); ?></option>
+                <option value="n"><?php echo __('No'); ?></option>
+            </select>
+        </div>
+    </div>
+    <div class="nbd-field-info" ng-if="field.general.attributes.same_size == 'n'">
+        <div><b><?php echo __('Online design config:'); ?></b></div>
+        <div class="nbd-table-wrap">
+            <table class="nbd-table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><?php echo __('Product width'); ?></th>
+                        <th><?php echo __('Product height'); ?></th>
+                        <th><?php echo __('Design width'); ?></th>
+                        <th><?php echo __('Design height'); ?></th>
+                        <th><?php echo __('Design top'); ?></th>
+                        <th><?php echo __('Design left'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(opIndex, op) in field.general.attributes.options">
+                        <th>{{op.name}}</th>
+                        <td><input string-to-number required class="nbd-short-ip" ng-model="op.product_width" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][product_width]" /></td>
+                        <td><input string-to-number required class="nbd-short-ip" ng-model="op.product_height" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][product_height]" /></td>
+                        <td><input string-to-number required class="nbd-short-ip" ng-model="op.real_width" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][real_width]" /></td>
+                        <td><input string-to-number required class="nbd-short-ip" ng-model="op.real_height" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][real_height]" /></td>
+                        <td><input string-to-number required class="nbd-short-ip" ng-model="op.real_top" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][real_top]" /></td>
+                        <td><input string-to-number required class="nbd-short-ip" ng-model="op.real_left" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][real_left]" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<script type="text/ng-template" id="nbd.dpi">
+</script>
+<script type="text/ng-template" id="nbd.area">
+</script>
+<script type="text/ng-template" id="nbd.orientation">
+</script>
+<?php echo '<script type="text/ng-template" id="nbd.dimension">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Dimension range:'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <table class="nbd-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><?php echo __('Min'); ?></th>
+                        <th><?php echo __('Max'); ?></th>
+                        <th><?php echo __('Step'); ?></th>
+                        <th><?php echo __('Default value'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><?php echo __('Width'); ?></th>
+                        <td><input string-to-number class="nbd-short-ip" ng-model="field.general.min_width" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][min_width]" /></td>
+                        <td><input string-to-number class="nbd-short-ip" ng-model="field.general.max_width" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][max_width]" /></td>
+                        <td><input string-to-number class="nbd-short-ip" ng-model="field.general.step_width" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][step_width]" /></td>
+                        <td><input string-to-number class="nbd-short-ip" ng-model="field.general.default_width" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][default_width]" /></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __('Height'); ?></th>
+                        <td><input string-to-number class="nbd-short-ip" ng-model="field.general.min_height" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][min_height]" /></td>
+                        <td><input string-to-number class="nbd-short-ip" ng-model="field.general.max_height" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][max_height]" /></td>
+                        <td><input string-to-number class="nbd-short-ip" ng-model="field.general.step_height" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][step_height]" /></td>
+                        <td><input string-to-number class="nbd-short-ip" ng-model="field.general.default_height" type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][default_height]" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="nbd-field-info" style="margin-top: 10px;">
+        <div class="nbd-field-info-1">
+            <div>
+                <label>
+                    <b><?php echo __('Enable measure price base on design area'); ?></b>
+                    <nbd-tip data-tip="<?php echo __('Measure price base on design area.'); ?>" ></nbd-tip>
+                </label>
+            </div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][mesure]" ng-model="field.general.mesure">
+                <option value="y"><?php echo __('Yes'); ?></option>
+                <option value="n"><?php echo __('No'); ?></option>
+            </select>
+        </div>
+    </div>
+    <div class="nbd-field-info" style="margin-top: 10px;" ng-if="field.general.mesure == 'y'">
+        <div class="nbd-field-info-1">
+            <div>
+                <label>
+                    <b><?php echo __('Calculate additional price base on '); ?></b>
+                </label>
+            </div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][mesure_type]" ng-model="field.general.mesure_type">
+                <option value="u"><?php echo __('Price per Unit'); ?></option>
+                <option value="r"><?php echo __('Area breaks ( area range )'); ?></option>
+            </select>
+        </div>
+    </div>
+    <div class="nbd-field-info" ng-if="field.general.mesure == 'y'">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Price base on design area:'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <table class="nbd-table nbo-measure-range">
+                <thead>
+                    <tr>
+                        <th class="check-column">
+                            <input class="nbo-measure-range-select-all" type="checkbox" ng-click="select_all_measurement_range(fieldIndex, $event)">
+                        </th>
+                        <th class="range-column" style="padding-right: 30px;">
+                            <span class="column-title" data-text="<?php echo __( 'Measurement Range'); ?>"><?php echo __( 'Measurement Range'); ?></span>
+                            <nbd-tip data-tip="<?php echo __( 'Configure the starting-ending range, inclusive, of measurements to match this rule.  The first matched rule will be used to determine the price.  The final rule can be defined without an ending range to match all measurements greater than or equal to its starting range.'); ?>" ></nbd-tip>
+                        </th>
+                        <th class="price-column">
+                            <span ng-show="field.general.mesure_type == 'u'"><?php echo __('Price per Unit'); ?> <?php echo ' ('.$currency . '/' . $helperConfig->getUnit().'<sup>2</sup>)'; ?></span>
+                            <span ng-show="field.general.mesure_type == 'r'"><?php echo __('Fixed amount'); ?></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(mrIndex, mr) in field.general.mesure_range">
+                        <td>
+                            <input type="checkbox" class="nbo-measure-range-checkbox" ng-model="mr[3]">
+                        </td>                
+                        <td>
+                            <span>
+                                <span class="nbd-table-price-label"><?php echo __('From'); ?></span>
+                                <input string-to-number type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][mesure_range][{{mrIndex}}][0]" ng-model="mr[0]" class="nbd-short-ip">
+                            </span>   
+                            <span>
+                                <span class="nbd-table-price-label" style="margin-left: 10px;"><?php echo __('To'); ?></span>
+                                <input string-to-number type="number" min="0" step="any" name="options[fields][{{fieldIndex}}][general][mesure_range][{{mrIndex}}][1]" ng-model="mr[1]" class="nbd-short-ip">
+                            </span>                       
+                        </td>
+                        <td>
+                            <input string-to-number type="number" step="any" name="options[fields][{{fieldIndex}}][general][mesure_range][{{mrIndex}}][2]" ng-model="mr[2]" class="nbd-short-ip">
+                        </td>                
+                    </tr> 
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3">
+                            <button ng-click="add_measurement_range(fieldIndex)" style="float: left;" type="button" class="button button-primary nbd-pricing-table-add-rule"><?php echo __('Add Rule'); ?></button>
+                            <button ng-click="delete_measurement_ranges(fieldIndex, $event)" style="float: right;" type="button" class="button button-secondary nbd-pricing-table-delete-rules"><?php echo __('Delete Selected'); ?></button>
+                        </th>
+                    </tr>
+                </tfoot> 
+            </table>
+        </div>
+    </div>
+    <div class="nbd-field-info" style="margin-top: 10px;" ng-if="field.general.mesure == 'y'">
+        <div class="nbd-field-info-1">
+            <div>
+                <label>
+                    <b><?php echo __('Calculate price base on number of sides/pages'); ?></b>
+                </label>
+            </div>
+        </div>
+        <div class="nbd-field-info-2">
+            <select name="options[fields][{{fieldIndex}}][general][mesure_base_pages]" ng-model="field.general.mesure_base_pages">
+                <option value="y"><?php echo __('Yes'); ?></option>
+                <option value="n"><?php echo __('No'); ?></option>
+            </select>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.padding">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Padding value'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="nbd-table-wrap">
+                <table class="nbd-table" style="text-align: center;">
+                    <thead>
+                        <tr><th><?php echo __('Option'); ?></th><th><?php echo __('Value'); ?></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(opIndex, op) in field.general.attributes.options">
+                            <td>{{op.name}}</td>
+                            <td>
+                                <input type="text" class="nbd-short-ip" ng-model="op.padding" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][padding]"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.rounded_corner">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Rounded corners radius'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="nbd-table-wrap">
+                <table class="nbd-table" style="text-align: center;">
+                    <thead>
+                        <tr><th><?php echo __('Option'); ?></th><th><?php echo __('Value'); ?></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(opIndex, op) in field.general.attributes.options">
+                            <td>{{op.name}}</td>
+                            <td>
+                                <input type="text" class="nbd-short-ip" ng-model="op.radius" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][radius]"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.nbpb_com">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Views'); ?></b><nbd-tip data-tip="<?php echo __('Add product view/side, example: Front, Back, Top, Inside... and use them for all product components.'); ?>" ></nbd-tip></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="nbd-table-wrap">
+                <table class="nbd-table" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th><?php echo __('View name'); ?></th>
+                            <th><?php echo __('View base'); ?></th>
+                            <th><?php echo __('Action'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(vIndex, view) in options.views">
+                            <td><input style="width: 150px;" ng-model="view.name" type="text"/></td>
+                            <td>
+                                <div class="image-icon-wrap">
+                                    <span class="dashicons dashicons-no remove-image-icon" ng-click="remove_view_base(vIndex)"></span>
+                                    <img ng-click="set_view_base(vIndex)" ng-src="{{view.base != 0 ? view.base_url : '<?php echo $placeholder ?>'}}" />
+                                </div>
+                            </td>
+                            <td>
+                                <a class="button btn-primary nbd-mini-btn" ng-click="removeView(vIndex)" title="<?php echo __('Delete View'); ?>"><span class="dashicons dashicons-no-alt"></span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr><td colspan="3"><a class="button btn-primary" ng-click="addView()"><?php echo __('Add View'); ?></a></td></tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Component icon'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="image-icon-wrap">
+                <span class="dashicons dashicons-no remove-image-icon" ng-click="remove_component_icon(fieldIndex)"></span>
+                <input ng-hide="true" ng-model="field.general.component_icon" name="options[fields][{{fieldIndex}}][general][component_icon]"/>
+                <img ng-click="set_component_icon(fieldIndex)" ng-src="{{field.general.component_icon != 0 ? field.general.component_icon_url : '<?php echo $placeholder ?>'}}" />
+            </div>
+        </div>
+    </div>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div>
+                <b><?php echo __('Component configurations'); ?></b>
+                <nbd-tip data-tip="<?php echo __('All images in the same view must have the same size.'); ?>" ></nbd-tip>
+            </div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="nbd-table-wrap">
+                <table class="nbd-table" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th rowspan="2"><?php echo __('Attribute'); ?></th>
+                            <th rowspan="2"><?php echo __('Sub attribute'); ?></th>
+                            <th colspan="{{options.views.length}}"><?php echo __('View'); ?></th>
+                        </tr>
+                        <tr>
+                            <th ng-repeat="view in options.views">{{view.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="pbcon in field.general.pb_config_flat">
+                            <td ng-if="pbcon.attr_rowspan > 0" rowspan="{{pbcon.attr_rowspan}}">{{field.general.attributes.options[pbcon.attr_index].name}}</td>
+                            <td>{{pbcon.has_sattr ? field.general.attributes.options[pbcon.attr_index].sub_attributes[pbcon.sattr_index].name : ''}}</td>
+                            <td ng-repeat="view in options.views" style="text-align: left;">
+                                <label class="view-config">
+                                    <?php echo __('Show in view'); ?>
+                                    <input ng-model="field.general.pb_config[pbcon.attr_index][pbcon.sattr_index].views[$index].display" name="options[fields][{{fieldIndex}}][general][pb_config][{{pbcon.attr_index}}][{{pbcon.sattr_index}}][views][{{$index}}][display]" type="checkbox" />
+                                </label>
+                                <label class="view-config view-config-image">
+                                    <?php echo __('Image'); ?>
+                                    <div class="image-icon-wrap">
+                                        <input ng-model="field.general.pb_config[pbcon.attr_index][pbcon.sattr_index].views[$index].image" name="options[fields][{{fieldIndex}}][general][pb_config][{{pbcon.attr_index}}][{{pbcon.sattr_index}}][views][{{$index}}][image]" ng-hide="true" />
+                                        <span class="dashicons dashicons-no remove-image-icon" ng-click="remove_view_config_image(fieldIndex, pbcon.attr_index, pbcon.sattr_index, $index)"></span>
+                                        <img ng-click="set_view_config_image(fieldIndex, pbcon.attr_index, pbcon.sattr_index, $index)" ng-src="{{field.general.pb_config[pbcon.attr_index][pbcon.sattr_index].views[$index].image != 0 ? field.general.pb_config[pbcon.attr_index][pbcon.sattr_index].views[$index].image_url : '<?php echo $placeholder ?>'}}" />
+                                    </div>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.nbpb_image">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Show in view'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="nbd-table-wrap">
+                <table class="nbd-table" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="view in options.views">{{view.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="view in options.views">
+                                <input ng-model="field.general.nbpb_image_configs.views[$index].display" name="options[fields][{{fieldIndex}}][general][nbpb_image_configs][views][{{$index}}][display]" type="checkbox" />
+                            </td>
+                        </tr>    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.delivery">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Delivery'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="nbd-table-wrap">
+                <table class="nbd-table" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th><?php echo __('Option'); ?></th>
+                            <th><?php echo __('Days'); ?></th>
+                            <th><?php echo __('Max quantity'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(opIndex, op) in field.general.attributes.options">
+                            <td>{{op.name}}</td>
+                            <td>
+                                <input type="text" class="nbd-short-ip" ng-model="op.delivery" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][delivery]"/>
+                            </td>
+                            <td>
+                                <input type="text" class="nbd-short-ip" ng-model="op.max_qty" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][max_qty]"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php echo '</script>'; ?>
+<?php echo '<script type="text/ng-template" id="nbd.actions">'; ?>
+    <div class="nbd-field-info">
+        <div class="nbd-field-info-1">
+            <div><b><?php echo __('Artwork actions'); ?></b></div>
+        </div>
+        <div class="nbd-field-info-2">
+            <div class="nbd-table-wrap">
+                <table class="nbd-table" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th><?php echo __('Option'); ?></th>
+                            <th><?php echo __('Mapping action'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(opIndex, op) in field.general.attributes.options">
+                            <td>{{op.name}}</td>
+                            <td>
+                                <select ng-model="op.action" name="options[fields][{{fieldIndex}}][general][attributes][options][{{opIndex}}][action]">
+                                    <option value="n"><?php echo __('No action'); ?></option>
+                                    <option value="u"><?php echo __('Upload design'); ?></option>
+                                    <option value="c"><?php echo __('Create design online'); ?></option>
+                                    <option value="h"><?php echo __('Hire designer'); ?></option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php echo '</script>';

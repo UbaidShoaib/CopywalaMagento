@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Netbaseteam_Themeconfig::css/grid.css"/>
+        <css src="Netbaseteam_Themeconfig::js/spectrum/css/spectrum.css"/>
+		<css src="Netbaseteam_Themeconfig::js/select2/css/select2.min.css"/>
+        <css src="Netbaseteam_Themeconfig::css/style.css"/>
+    </head>
+	
+	<body>
+        <referenceContainer name="content">
+            <block class="Netbaseteam\Themeconfig\Block\Adminhtml\General" name="admin.general.grid"/>
+        </referenceContainer>
+    </body>
+</page>

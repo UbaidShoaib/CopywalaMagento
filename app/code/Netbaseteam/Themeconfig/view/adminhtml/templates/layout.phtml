@@ -1,0 +1,1229 @@
+<?php 
+$helper = $this->helper('\Netbaseteam\Themeconfig\Helper\Data');
+
+$arr_bgsize = array('auto','length','percentage','cover','contain');
+$arr_bgrepeat = array('no-repeat','repeat-x','repeat-y','repeat');
+$arr_bgposition = array('keyword'=>'keyword', 'percent'=>'percent', 'pixel'=>'pixel');
+$arr_bg_poshkey = array('left','center','right');
+$arr_bg_posvkey = array('top','center','bottom');
+$arr_yn = array('yes','no');
+$arr_br_style = array('solid','dotted','dashed','double','hidden','ridge','inset','outset');
+$arr_shadow_type = array('outset','inset');
+
+$content_config_custom = $helper->_readFile('Netbaseteam_Themeconfig/config/custom.json');
+$arr_config = array();
+if (isset($content_config_custom) && $content_config_custom!='') {
+	$arr_config = json_decode($content_config_custom, true);
+}
+?>
+<div id="body-overlay"><div><img src="<?php echo $this->getViewFileUrl('Netbaseteam_Themeconfig/images/loading.gif');?>" width="64px" height="64px"/></div></div>
+
+<div id="content_main_div">
+	<div class="layout-area">
+
+		<ul class="collapsible">
+			<!-- BEGIN HEADER -->
+			<li class="active">
+				<div class="collapsible-header"><?php echo __("HEADER"); ?></div>
+				<div class="collapsible-body">
+					<?php 
+					$url_process_header = $this->getUrl('themeconfig/layout/header', ['layout' => true, '_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+					?>
+					<form class="frm-admin-config" action="<?php echo $url_process_header; ?>" method="post">
+						<div class="row">
+							<div class="col no-padding minh5">
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12 repadd"><?php echo __("Background Color:"); ?></label>
+									<div class="admin__field-control field-pick-color col no-padding l7 m7 s12 repadd">
+										<div class="selected-color"></div>
+										<input class="admin_control-text" type="text" name="bgcolor_header" id="bgcolor_header" value="<?php echo (isset($arr_config['background_color_header'])?$arr_config['background_color_header']:'#ffffff'); ?>" autocomplete="off">
+									</div>
+								</div>
+								
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Background Image:"); ?></label>
+									<div class="admin__field-control field-upload-image col no-padding l7 m7 s12">
+										<input type="button" class="button-upload" value="<?php echo __("Choose file"); ?>" />
+										<img src="" class="upload-preview" data-show=".config_only_bgimage_head" />
+										<input class="admin_control-text" type="file" name="bgimage_header" id="bgimage_header" onchange="showPreviewImage(this);">
+										<button class="remove-image" type="button" title="Remove Image"></button>
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<div class="col no-padding l5 m5 s6">
+										<div class="pretty p-icon p-curve p-has-indeterminate">
+											<input type="checkbox" name="cb_use_footer" <?php echo (isset($arr_config['cb_use_footer']) && $arr_config['cb_use_footer']==1?'checked="checked"':''); ?>><div class="state"><i class="icon mdi mdi-check"></i>
+												<label><?php echo __("Use footer"); ?></label>
+											</div>
+										</div>
+									</div>
+									<div class="col no-padding l7 m7 s6">
+										<div class="pretty p-icon p-curve p-has-indeterminate">
+											<input type="checkbox" name="cb_use_content" <?php echo (isset($arr_config['cb_use_content']) && $arr_config['cb_use_content']==1?'checked="checked"':''); ?>><div class="state"><i class="icon mdi mdi-check"></i>
+												<label><?php echo __("Use content"); ?></label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="wrap_config_only_bgimage">
+
+									<div class="admin_group-field">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Background size:"); ?></label>
+										<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12')->setAttributes(array('id'=>'sl_bgsize', 'name'=>'sl_bgsize', 'class'=>'admin-field-select select-size-bgimg'))->setDataBind($arr_bgsize)->setKey('sl_bgsize_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml(); ?>
+									</div>
+
+									<div class="config_size_bgimg">
+
+										<div class="admin_group-field">
+											<label class="col no-padding l5 m5 s12"><?php echo __("Image width:"); ?></label>
+											<div class="admin__field-control col no-padding l7 m7 s12">
+												<input class="admin_control-text field-simple-text" type="number" name="img_width_header" id="img_width_header" value="<?php echo (isset($arr_config['img_width_header'])?$arr_config['img_width_header']:0); ?>">
+											</div>
+										</div>
+
+										<div class="admin_group-field">
+											<label class="col no-padding l5 m5 s12"><?php echo __("Image height:"); ?></label>
+											<div class="admin__field-control col no-padding l7 m7 s12">
+												<input class="admin_control-text field-simple-text" type="number" name="img_height_header" id="img_height_header" value="<?php echo (isset($arr_config['img_height_header'])?$arr_config['img_height_header']:0); ?>">
+											</div>
+										</div>
+
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Background Repeat:"); ?></label>
+										<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12')->setAttributes(array('id'=>'sl_bgrepeat', 'name'=>'sl_bgrepeat', 'class'=>'admin-field-select'))->setDataBind($arr_bgrepeat)->setKey('background_repeat_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml(); ?>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Background Position:"); ?></label>
+										<div class="admin__field-control field-admin-radio col no-padding l7 m7 s12">
+											<?php foreach ($arr_bgposition as $k => $v) { ?>
+												<input type="radio" name="bg_postype" value="<?php echo $k ?>" <?php echo (isset($arr_config['bg_postype_header']) && $arr_config['bg_postype_header']==$k?'checked="checked"':''); ?> /> <span><?php echo $v ?></span>
+											<?php } ?>
+										</div>
+									</div>
+
+									<div class="admin_group-field config-position-header">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Horizontal - x:"); ?></label>
+										<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12 po-keyword')->setAttributes(array('id'=>'bg_poshkey', 'name'=>'bg_poshkey', 'class'=>'admin-field-select'))->setDataBind($arr_bg_poshkey)->setKey('bg_poshkey_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml(); ?>
+
+										<div class="admin__field-control col no-padding l7 m7 s12 po-pixel">
+											<input id="bg_poshpx" name="bg_poshpx" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_poshpx_header'])?$arr_config['bg_poshpx_header']:0); ?>"> px
+										</div>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-percent">
+											<input id="bg_poshper" name="bg_poshper" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_poshper_header'])?$arr_config['bg_poshper_header']:0); ?>"> %
+										</div>
+									</div>
+
+									<div class="admin_group-field config-position-header">
+										<label class="col no-padding l5 m5"><?php echo __("Vertical - y:"); ?></label>
+										<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12 po-keyword')->setAttributes(array('id'=>'bg_posvkey', 'name'=>'bg_posvkey', 'class'=>'admin-field-select'))->setDataBind($arr_bg_posvkey)->setKey('bg_posvkey_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml(); ?>
+										
+										<div class="admin__field-control col no-padding l7 m7 s12 po-pixel">
+											<input id="bg_posvpx" name="bg_posvpx" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_posvpx_header'])?$arr_config['bg_posvpx_header']:0); ?>"> px
+										</div>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-percent">
+											<input id="bg_posvper" name="bg_posvper" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_posvper_header'])?$arr_config['bg_posvper_header']:0); ?>"> %
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="col no-padding minh5 offset-l1">
+								
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12 repadd"><?php echo __("Border:"); ?></label>
+									<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12 repadd')->setAttributes(array('id'=>'use_border', 'name'=>'use_border', 'class'=>'admin-field-select'))->setDataBind($arr_yn)->setKey('use_border_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml(); ?>
+									
+									<div class="admin__field-control col no-padding offset-l1 l3 m3 s12 repadd">
+										<input class="admin_control-text field-simple-text border_w_general" type="number" name="border_w_header" id="border_w_header" value="">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Border Style:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12')->setAttributes(array('id'=>'border-style-header', 'name'=>'border-style-header', 'class'=>'admin-field-select border_style_general'))->setDataBind($arr_br_style)->setKey('no')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									
+									<div class="admin__field-control field-pick-color col no-padding offset-l1 l3 m3 s12">
+										<div class="selected-color"></div>
+										<input class="admin_control-text border_color_general" type="text" name="brcolor-header" id="brcolor-header" value="#ffffff" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<div class="col no-padding l12 m12 s12">
+										<div class="pretty p-icon p-curve p-has-indeterminate">
+											<input type="checkbox" class="cb_individual"><div class="state"><i class="icon mdi mdi-check"></i>
+												<label><?php echo __("Individual"); ?></label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="config_extend_border_header">
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Top:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brtop" name="brtop" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brtop_header'])?$arr_config['brtop_header']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brtop_style_header', 'name'=>'brtop_style_header', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brtop_style_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brtop_color_header" id="brtop_color_header" value="<?php echo (isset($arr_config['brtop_color_header'])?$arr_config['brtop_color_header']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Right:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brright" name="brright" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brright_header'])?$arr_config['brright_header']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brright_style_header', 'name'=>'brright_style_header', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brright_style_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brright_color_header" id="brright_color_header" value="<?php echo (isset($arr_config['brright_color_header'])?$arr_config['brright_color_header']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Bottom:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brbottom" name="brbottom" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brbottom_header'])?$arr_config['brbottom_header']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brbottom_style_header', 'name'=>'brbottom_style_header', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brbottom_style_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brbottom_color_header" id="brbottom_color_header" value="<?php echo (isset($arr_config['brbottom_color_header'])?$arr_config['brbottom_color_header']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Left:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brleft" name="brleft" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brleft_header'])?$arr_config['brleft_header']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brleft_style_header', 'name'=>'brleft_style_header', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brleft_style_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brleft_color_header" id="brleft_color_header" value="<?php echo (isset($arr_config['brleft_color_header'])?$arr_config['brleft_color_header']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12')->setAttributes(array('id'=>'use_shadow_header', 'name'=>'use_shadow_header', 'class'=>'admin-field-select'))->setDataBind($arr_yn)->setKey('use_shadow_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									
+									<div class="admin__field-control field-pick-color col no-padding offset-l1 l3 m3 s12">
+										<div class="selected-color"></div>
+										<input class="admin_control-text" type="text" name="shadow_color_header" id="shadow_color_header" value="<?php echo (isset($arr_config['shadow_color_header'])?$arr_config['shadow_color_header']:'#ffffff'); ?>" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Type:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m6 s12')->setAttributes(array('id'=>'shadow_type_header', 'name'=>'shadow_type_header', 'class'=>'admin-field-select'))->setDataBind($arr_shadow_type)->setKey('shadow_type_header')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("XY position:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s5">
+										<input class="admin_control-text field-input-slider" type="text" name="xposition_header" id="xposition_header" value="<?php echo (isset($arr_config['xposition_header'])?$arr_config['xposition_header']:0); ?>" data-min="-50" data-max="50" autocomplete="off">
+									</div>
+									<div class="admin__field-control col no-padding offset-l1 l1 m1 s5">
+										<input class="admin_control-text field-input-slider" type="text" name="yposition_header" id="yposition_header" value="<?php echo (isset($arr_config['yposition_header'])?$arr_config['yposition_header']:0); ?>" data-min="-50" data-max="50" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field row">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Fade:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s12">
+										<input class="admin_control-text field-input-slider" type="text" name="shadow_fade_header" id="shadow_fade_header" value="<?php echo (isset($arr_config['shadow_fade_header'])?$arr_config['shadow_fade_header']:0); ?>" data-min="0" data-max="100" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Spread:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s12">
+										<input class="admin_control-text field-input-slider" type="text" name="shadow_spread_header" id="shadow_spread_header" value="<?php echo (isset($arr_config['shadow_spread_header'])?$arr_config['shadow_spread_header']:0); ?>" data-min="0" data-max="100" autocomplete="off">
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="row page-actions-buttons repadd-btn">
+							<button title="<?php echo __("Save Change On Header"); ?>" type="submit" class="action- scalable primary" <?php if (!$helper->getIsAllowed('Netbaseteam_Themeconfig::layout_header')) { ?> disabled="disabled" <?php } ?>>
+								<span><?php echo __("Save Change On Header"); ?></span>
+							</button>
+						</div>
+					</form>
+				</div>
+			</li>
+			<!-- END HEADER -->
+
+			<!-- BEGIN CONTENT -->
+			<li class="active">
+				<div class="collapsible-header"><?php echo __("CONTENT"); ?></div>
+				<div class="collapsible-body">
+					<?php 
+					$url_process_content = $this->getUrl('themeconfig/layout/content', ['layout' => true, '_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+					?>
+					<form class="frm-admin-config" action="<?php echo $url_process_content; ?>" method="post">
+						<div class="row">
+							<div class="col no-padding minh5">
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12 repadd"><?php echo __("Background Color:"); ?></label>
+									<div class="admin__field-control field-pick-color col no-padding l7 m7 s12 repadd">
+										<div class="selected-color"></div>
+										<input class="admin_control-text" type="text" name="bgcolor_content" id="bgcolor_content" value="<?php echo (isset($arr_config['background_color_content'])?$arr_config['background_color_content']:'#ffffff'); ?>" autocomplete="off">
+									</div>
+								</div>
+								
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Background Image:"); ?></label>
+									<div class="admin__field-control field-upload-image col no-padding l7 m7 s12">
+										<input type="button" class="button-upload" value="<?php echo __("Choose file"); ?>" />
+										<img src="<?php echo (isset($arr_config['background_image_content'])?$arr_config['background_image_content']:''); ?>" class="upload-preview" data-show=".config_only_bgimage_content" />
+										<input class="admin_control-text" type="file" name="bgimage_content" id="bgimage_content" onchange="showPreviewImage(this);">
+										<button class="remove-image" type="button" title="Remove Image"></button>
+									</div>
+								</div>
+								
+								<div class="wrap_config_only_bgimage">
+
+									<div class="admin_group-field">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Background size:"); ?></label>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12')->setAttributes(array('id'=>'sl_bgsize_content', 'name'=>'sl_bgsize_content', 'class'=>'admin-field-select select-size-bgimg'))->setDataBind($arr_bgsize)->setKey('sl_bgsize_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+									</div>
+
+									<div class="config_size_bgimg">
+
+										<div class="admin_group-field">
+											<label class="col no-padding l5 m5 s12"><?php echo __("Image width:"); ?></label>
+											<div class="admin__field-control col no-padding l7 m7 s12">
+												<input class="admin_control-text field-simple-text" type="number" name="img_width_content" id="img_width_content" value="<?php echo (isset($arr_config['img_width_content'])?$arr_config['img_width_content']:0); ?>">
+											</div>
+										</div>
+
+										<div class="admin_group-field">
+											<label class="col no-padding l5 m5 s12"><?php echo __("Image height:"); ?></label>
+											<div class="admin__field-control col no-padding l7 m7 s12">
+												<input class="admin_control-text field-simple-text" type="number" name="img_height_content" id="img_height_content" value="<?php echo (isset($arr_config['img_height_content'])?$arr_config['img_height_content']:0); ?>">
+											</div>
+										</div>
+
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Background Repeat:"); ?></label>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12')->setAttributes(array('id'=>'sl_bgrepeat_content', 'name'=>'sl_bgrepeat_content', 'class'=>'admin-field-select'))->setDataBind($arr_bgrepeat)->setKey('background_repeat_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Background Position:"); ?></label>
+										<div class="admin__field-control field-admin-radio col no-padding l7 m7 s12">
+											<?php foreach ($arr_bgposition as $k => $v) { ?>
+												<input type="radio" name="bg_postype_content" value="<?php echo $k ?>" <?php echo (isset($arr_config['bg_postype_content']) && $arr_config['bg_postype_content']==$k?'checked="checked"':''); ?> /> <span><?php echo $v ?></span>
+											<?php } ?>
+										</div>
+									</div>
+
+									<div class="admin_group-field config-position-header">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Horizontal - x:"); ?></label>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12 po-keyword')->setAttributes(array('id'=>'bg_poshkey_content', 'name'=>'bg_poshkey_content', 'class'=>'admin-field-select'))->setDataBind($arr_bg_poshkey)->setKey('bg_poshkey_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-pixel">
+											<input id="bg_poshpx_content" name="bg_poshpx_content" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_poshpx_content'])?$arr_config['bg_poshpx_content']:0); ?>"> px
+										</div>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-percent">
+											<input id="bg_poshper_content" name="bg_poshper_content" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_poshper_content'])?$arr_config['bg_poshper_content']:0); ?>"> %
+										</div>
+									</div>
+
+									<div class="admin_group-field config-position-header">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Vertical - y:"); ?></label>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12 po-keyword')->setAttributes(array('id'=>'bg_posvkey_content', 'name'=>'bg_posvkey_content', 'class'=>'admin-field-select'))->setDataBind($arr_bg_posvkey)->setKey('bg_posvkey_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-pixel">
+											<input id="bg_posvpx_content" name="bg_posvpx_content" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_posvpx_content'])?$arr_config['bg_posvpx_content']:0); ?>"> px
+										</div>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-percent">
+											<input id="bg_posvper_content" name="bg_posvper_content" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_posvper_content'])?$arr_config['bg_posvper_content']:0); ?>"> %
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="col no-padding minh5 offset-l1">
+								
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12 repadd"><?php echo __("Border:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12 repadd')->setAttributes(array('id'=>'use_border_content', 'name'=>'use_border_content', 'class'=>'admin-field-select'))->setDataBind($arr_yn)->setKey('use_border_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									<div class="admin__field-control col no-padding offset-l1 l3 m3 s12 repadd">
+										<input class="admin_control-text field-simple-text border_w_general" type="number" name="border_w_content" id="border_w_content" value="">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Border Style:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12')->setAttributes(array('id'=>'border-style-content', 'name'=>'border-style-content', 'class'=>'admin-field-select border_style_general'))->setDataBind($arr_br_style)->setKey('no')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									<div class="admin__field-control field-pick-color col no-padding offset-l1 l3 m3 s12">
+										<div class="selected-color"></div>
+										<input class="admin_control-text border_color_general" type="text" name="brcolor-content" id="brcolor-content" value="#ffffff" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<div class="col no-padding l12 m12 s12">
+										<div class="pretty p-icon p-curve p-has-indeterminate">
+											<input type="checkbox" class="cb_individual"><div class="state"><i class="icon mdi mdi-check"></i>
+												<label><?php echo __("Individual"); ?></label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="config_extend_border_header">
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Top:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brtop_content" name="brtop_content" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brtop_content'])?$arr_config['brtop_content']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brtop_style_content', 'name'=>'brtop_style_content', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brtop_style_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brtop_color_content" id="brtop_color_content" value="<?php echo (isset($arr_config['brtop_color_content'])?$arr_config['brtop_color_content']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Right:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brright_content" name="brright_content" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brright_content'])?$arr_config['brright_content']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brright_style_content', 'name'=>'brright_style_content', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brright_style_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brright_color_content" id="brright_color_content" value="<?php echo (isset($arr_config['brright_color_content'])?$arr_config['brright_color_content']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Bottom:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brbottom_content" name="brbottom_content" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brbottom_content'])?$arr_config['brbottom_content']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brbottom_style_content', 'name'=>'brbottom_style_content', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brbottom_style_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brbottom_color_content" id="brbottom_color_content" value="<?php echo (isset($arr_config['brbottom_color_content'])?$arr_config['brbottom_color_content']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Left:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brleft_content" name="brleft_content" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brleft_content'])?$arr_config['brleft_content']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brleft_style_content', 'name'=>'brleft_style_content', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brleft_style_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brleft_color_content" id="brleft_color_content" value="<?php echo (isset($arr_config['brleft_color_content'])?$arr_config['brleft_color_content']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12')->setAttributes(array('id'=>'use_shadow_content', 'name'=>'use_shadow_content', 'class'=>'admin-field-select'))->setDataBind($arr_yn)->setKey('use_shadow_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									<div class="admin__field-control field-pick-color col no-padding offset-l1 l3 m3 s12">
+										<div class="selected-color"></div>
+										<input class="admin_control-text" type="text" name="shadow_color_content" id="shadow_color_content" value="<?php echo (isset($arr_config['shadow_color_content'])?$arr_config['shadow_color_content']:'#ffffff'); ?>" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Type:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m6 s12')->setAttributes(array('id'=>'shadow_type_content', 'name'=>'shadow_type_content', 'class'=>'admin-field-select'))->setDataBind($arr_shadow_type)->setKey('shadow_type_content')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("XY position:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s5">
+										<input class="admin_control-text field-input-slider" type="text" name="xposition_content" id="xposition_content" value="<?php echo (isset($arr_config['xposition_content'])?$arr_config['xposition_content']:0); ?>" data-min="-50" data-max="50" autocomplete="off">
+									</div>
+									<div class="admin__field-control col no-padding offset-l1 l1 m1 s5">
+										<input class="admin_control-text field-input-slider" type="text" name="yposition_content" id="yposition_content" value="<?php echo (isset($arr_config['yposition_content'])?$arr_config['yposition_content']:0); ?>" data-min="-50" data-max="50" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field row">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Fade:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s12">
+										<input class="admin_control-text field-input-slider" type="text" name="shadow_fade_content" id="shadow_fade_content" value="<?php echo (isset($arr_config['shadow_fade_content'])?$arr_config['shadow_fade_content']:0); ?>" data-min="0" data-max="100" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Spread:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s12">
+										<input class="admin_control-text field-input-slider" type="text" name="shadow_spread_content" id="shadow_spread_content" value="<?php echo (isset($arr_config['shadow_spread_content'])?$arr_config['shadow_spread_content']:0); ?>" data-min="0" data-max="100" autocomplete="off">
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="row page-actions-buttons repadd-btn">
+							<button title="<?php echo __("Save Change On Content"); ?>" type="submit" class="action- scalable primary" <?php if (!$helper->getIsAllowed('Netbaseteam_Themeconfig::layout_content')) { ?> disabled="disabled" <?php } ?>>
+								<span><?php echo __("Save Change On Content"); ?></span>
+							</button>
+						</div>
+					</form>
+				</div>
+			</li>
+			<!-- END CONTENT -->
+
+			<!-- BEGIN FOOTER -->
+			<li class="active">
+				<div class="collapsible-header"><?php echo __("FOOTER"); ?></div>
+				<div class="collapsible-body">
+					<?php 
+					$url_process_footer = $this->getUrl('themeconfig/layout/footer', ['layout' => true, '_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+					?>
+					<form class="frm-admin-config" action="<?php echo $url_process_footer; ?>" method="post">
+						<div class="row">
+							<div class="col no-padding minh5">
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12 repadd"><?php echo __("Background Color:"); ?></label>
+									<div class="admin__field-control field-pick-color col no-padding l7 m7 s12 repadd">
+										<div class="selected-color"></div>
+										<input class="admin_control-text" type="text" name="bgcolor_footer" id="bgcolor_footer" value="<?php echo (isset($arr_config['background_color_footer'])?$arr_config['background_color_footer']:'#ffffff'); ?>" autocomplete="off">
+									</div>
+								</div>
+								
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Background Image:"); ?></label>
+									<div class="admin__field-control field-upload-image col no-padding l7 m7 s12">
+										<input type="button" class="button-upload" value="<?php echo __("Choose file"); ?>" />
+										<img src="<?php echo (isset($arr_config['background_image_footer'])?$arr_config['background_image_footer']:''); ?>" class="upload-preview" data-show=".config_only_bgimage_footer" />
+										<input class="admin_control-text" type="file" name="bgimage_footer" id="bgimage_footer" onchange="showPreviewImage(this);">
+										<button class="remove-image" type="button" title="Remove Image"></button>
+									</div>
+								</div>
+								
+								<div class="wrap_config_only_bgimage">
+
+									<div class="admin_group-field">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Background size:"); ?></label>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12')->setAttributes(array('id'=>'sl_bgsize_footer', 'name'=>'sl_bgsize_footer', 'class'=>'admin-field-select select-size-bgimg'))->setDataBind($arr_bgsize)->setKey('sl_bgsize_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+									</div>
+
+									<div class="config_size_bgimg">
+
+										<div class="admin_group-field">
+											<label class="col no-padding l5 m5 s12"><?php echo __("Image width:"); ?></label>
+											<div class="admin__field-control col no-padding l7 m7 s12">
+												<input class="admin_control-text field-simple-text" type="number" name="img_width_footer" id="img_width_footer" value="<?php echo (isset($arr_config['img_width_footer'])?$arr_config['img_width_footer']:0); ?>">
+											</div>
+										</div>
+
+										<div class="admin_group-field">
+											<label class="col no-padding l5 m5 s12"><?php echo __("Image height:"); ?></label>
+											<div class="admin__field-control col no-padding l7 m7 s12">
+												<input class="admin_control-text field-simple-text" type="number" name="img_height_footer" id="img_height_footer" value="<?php echo (isset($arr_config['img_height_footer'])?$arr_config['img_height_footer']:0); ?>">
+											</div>
+										</div>
+
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Background Repeat:"); ?></label>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12')->setAttributes(array('id'=>'sl_bgrepeat_footer', 'name'=>'sl_bgrepeat_footer', 'class'=>'admin-field-select'))->setDataBind($arr_bgrepeat)->setKey('background_repeat_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Background Position:"); ?></label>
+										<div class="admin__field-control field-admin-radio col no-padding l7 m7 s12">
+											<?php foreach ($arr_bgposition as $k => $v) { ?>
+												<input type="radio" name="bg_postype_footer" value="<?php echo $k ?>" <?php echo (isset($arr_config['bg_postype_footer']) && $arr_config['bg_postype_footer']==$k?'checked="checked"':''); ?> /> <span><?php echo $v ?></span>
+											<?php } ?>
+										</div>
+									</div>
+
+									<div class="admin_group-field config-position-header">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Horizontal - x:"); ?></label>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12 po-keyword')->setAttributes(array('id'=>'bg_poshkey_footer', 'name'=>'bg_poshkey_footer', 'class'=>'admin-field-select'))->setDataBind($arr_bg_poshkey)->setKey('bg_poshkey_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-pixel">
+											<input id="bg_poshpx_footer" name="bg_poshpx_footer" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_poshpx_footer'])?$arr_config['bg_poshpx_footer']:0); ?>"> px
+										</div>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-percent">
+											<input id="bg_poshper_footer" name="bg_poshper_footer" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_poshper_footer'])?$arr_config['bg_poshper_footer']:0); ?>"> %
+										</div>
+									</div>
+
+									<div class="admin_group-field config-position-header">
+										<label class="col no-padding l5 m5 s12"><?php echo __("Vertical - y:"); ?></label>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m7 s12 po-keyword')->setAttributes(array('id'=>'bg_posvkey_footer', 'name'=>'bg_posvkey_footer', 'class'=>'admin-field-select'))->setDataBind($arr_bg_posvkey)->setKey('bg_posvkey_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-pixel">
+											<input id="bg_posvpx_footer" name="bg_posvpx_footer" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_posvpx_footer'])?$arr_config['bg_posvpx_footer']:0); ?>"> px
+										</div>
+										<div class="admin__field-control col no-padding l7 m7 s12 po-percent">
+											<input id="bg_posvper_footer" name="bg_posvper_footer" class="field-simple-text no-full-width" type="number" size="3" value="<?php echo (isset($arr_config['bg_posvper_footer'])?$arr_config['bg_posvper_footer']:0); ?>"> %
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="col no-padding minh5 offset-l1">
+								
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12 repadd"><?php echo __("Border:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12 repadd')->setAttributes(array('id'=>'use_border_footer', 'name'=>'use_border_footer', 'class'=>'admin-field-select'))->setDataBind($arr_yn)->setKey('use_border_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									<div class="admin__field-control col no-padding offset-l1 l3 m3 s12 repadd">
+										<input class="admin_control-text field-simple-text border_w_general" type="number" name="border_w_footer" id="border_w_footer" value="">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Border Style:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12')->setAttributes(array('id'=>'border-style-footer', 'name'=>'border-style-footer', 'class'=>'admin-field-select border_style_general'))->setDataBind($arr_br_style)->setKey('no')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									<div class="admin__field-control field-pick-color col no-padding offset-l1 l3 m3 s12">
+										<div class="selected-color"></div>
+										<input class="admin_control-text border_color_general" type="text" name="brcolor-footer" id="brcolor-footer" value="#ffffff" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<div class="col no-padding l12 m12 s12">
+										<div class="pretty p-icon p-curve p-has-indeterminate">
+											<input type="checkbox" class="cb_individual"><div class="state"><i class="icon mdi mdi-check"></i>
+												<label><?php echo __("Individual"); ?></label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="config_extend_border_header">
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Top:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brtop_footer" name="brtop_footer" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brtop_footer'])?$arr_config['brtop_footer']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brtop_style_footer', 'name'=>'brtop_style_footer', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brtop_style_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brtop_color_footer" id="brtop_color_footer" value="<?php echo (isset($arr_config['brtop_color_footer'])?$arr_config['brtop_color_footer']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Right:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brright_footer" name="brright_footer" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brright_footer'])?$arr_config['brright_footer']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brright_style_footer', 'name'=>'brright_style_footer', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brright_style_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brright_color_footer" id="brright_color_footer" value="<?php echo (isset($arr_config['brright_color_footer'])?$arr_config['brright_color_footer']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Bottom:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brbottom_footer" name="brbottom_footer" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brbottom_footer'])?$arr_config['brbottom_footer']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brbottom_style_footer', 'name'=>'brbottom_style_footer', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brbottom_style_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brbottom_color_footer" id="brbottom_color_footer" value="<?php echo (isset($arr_config['brbottom_color_footer'])?$arr_config['brbottom_color_footer']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 s12"><?php echo __("Border Left:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brleft_footer" name="brleft_footer" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brleft_footer'])?$arr_config['brleft_footer']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brleft_style_footer', 'name'=>'brleft_style_footer', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brleft_style_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brleft_color_footer" id="brleft_color_footer" value="<?php echo (isset($arr_config['brleft_color_footer'])?$arr_config['brleft_color_footer']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12')->setAttributes(array('id'=>'use_shadow_footer', 'name'=>'use_shadow_footer', 'class'=>'admin-field-select'))->setDataBind($arr_yn)->setKey('use_shadow_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									<div class="admin__field-control field-pick-color col no-padding offset-l1 l3 m3 s12">
+										<div class="selected-color"></div>
+										<input class="admin_control-text" type="text" name="shadow_color_footer" id="shadow_color_footer" value="<?php echo (isset($arr_config['shadow_color_footer'])?$arr_config['shadow_color_footer']:'#ffffff'); ?>" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Type:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m6 s12')->setAttributes(array('id'=>'shadow_type_footer', 'name'=>'shadow_type_footer', 'class'=>'admin-field-select'))->setDataBind($arr_shadow_type)->setKey('shadow_type_footer')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("XY position:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s5">
+										<input class="admin_control-text field-input-slider" type="text" name="xposition_footer" id="xposition_footer" value="<?php echo (isset($arr_config['xposition_footer'])?$arr_config['xposition_footer']:0); ?>" data-min="-50" data-max="50" autocomplete="off">
+									</div>
+									<div class="admin__field-control col no-padding offset-l1 l1 m1 s5">
+										<input class="admin_control-text field-input-slider" type="text" name="yposition_footer" id="yposition_footer" value="<?php echo (isset($arr_config['yposition_footer'])?$arr_config['yposition_footer']:0); ?>" data-min="-50" data-max="50" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field row">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Fade:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s12">
+										<input class="admin_control-text field-input-slider" type="text" name="shadow_fade_footer" id="shadow_fade_footer" value="<?php echo (isset($arr_config['shadow_fade_footer'])?$arr_config['shadow_fade_footer']:0); ?>" data-min="0" data-max="100" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Spread:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s12">
+										<input class="admin_control-text field-input-slider" type="text" name="shadow_spread_footer" id="shadow_spread_footer" value="<?php echo (isset($arr_config['shadow_spread_footer'])?$arr_config['shadow_spread_footer']:0); ?>" data-min="0" data-max="100" autocomplete="off">
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="row page-actions-buttons repadd-btn">
+							<button title="<?php echo __("Save Change On Footer"); ?>" type="submit" class="action- scalable primary" <?php if (!$helper->getIsAllowed('Netbaseteam_Themeconfig::layout_footer')) { ?> disabled="disabled" <?php } ?>>
+								<span><?php echo __("Save Change On Footer"); ?></span>
+							</button>
+						</div>
+					</form>
+				</div>
+			</li>
+			<!-- END FOOTER -->
+
+			<!-- BEGIN MENU -->
+			<li class="active">
+				<div class="collapsible-header"><?php echo __("MENU"); ?></div>
+				<div class="collapsible-body">
+					<?php 
+					$url_process_menu = $this->getUrl('themeconfig/layout/menu', ['layout' => true, '_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+					?>
+					<form class="frm-admin-config" action="<?php echo $url_process_menu; ?>" method="post">
+						<div class="row">
+							<div class="col no-padding minh5">
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12 repadd"><?php echo __("Background Color:"); ?></label>
+									<div class="admin__field-control field-pick-color col no-padding l7 m7 s12 repadd">
+										<div class="selected-color"></div>
+										<input class="admin_control-text" type="text" name="bgcolor_menu" id="bgcolor_menu" value="<?php echo (isset($arr_config['background_color_menu'])?$arr_config['background_color_menu']:'#ffffff'); ?>" autocomplete="off">
+									</div>
+								</div>
+								
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Border:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12')->setAttributes(array('id'=>'use_border_menu', 'name'=>'use_border_menu', 'class'=>'admin-field-select'))->setDataBind($arr_yn)->setKey('use_border_menu')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									<div class="admin__field-control col no-padding offset-l1 l3 m3 s12">
+										<input class="admin_control-text field-simple-text border_w_general" type="number" name="border_w_menu" id="border_w_menu" value="">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Border Style:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12')->setAttributes(array('id'=>'border-style-menu', 'name'=>'border-style-menu', 'class'=>'admin-field-select border_style_general'))->setDataBind($arr_br_style)->setKey('no')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									<div class="admin__field-control field-pick-color col no-padding offset-l1 l3 m3 s12">
+										<div class="selected-color"></div>
+										<input class="admin_control-text border_color_general" type="text" name="brcolor-menu" id="brcolor-menu" value="#ffffff" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<div class="col no-padding l12 m12 s12">
+										<div class="pretty p-icon p-curve p-has-indeterminate">
+											<input type="checkbox" class="cb_individual"><div class="state"><i class="icon mdi mdi-check"></i>
+												<label><?php echo __("Individual"); ?></label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="config_extend_border_header">
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Top:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brtop_menu" name="brtop_menu" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brtop_menu'])?$arr_config['brtop_menu']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brtop_style_menu', 'name'=>'brtop_style_menu', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brtop_style_menu')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brtop_color_menu" id="brtop_color_menu" value="<?php echo (isset($arr_config['brtop_color_menu'])?$arr_config['brtop_color_menu']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Right:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brright_menu" name="brright_menu" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brright_menu'])?$arr_config['brright_menu']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brright_style_menu', 'name'=>'brright_style_menu', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brright_style_menu')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brright_color_menu" id="brright_color_menu" value="<?php echo (isset($arr_config['brright_color_menu'])?$arr_config['brright_color_menu']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Bottom:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brbottom_menu" name="brbottom_menu" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brbottom_menu'])?$arr_config['brbottom_menu']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brbottom_style_menu', 'name'=>'brbottom_style_menu', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brbottom_style_menu')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brbottom_color_menu" id="brbottom_color_menu" value="<?php echo (isset($arr_config['brbottom_color_menu'])?$arr_config['brbottom_color_menu']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="admin_group-field">
+										<label class="col no-padding l12 m12 s12"><?php echo __("Border Left:"); ?></label>
+										<div class="admin__field-control col no-padding l3 m3 s12">
+											<input id="brleft_menu" name="brleft_menu" class="field-simple-text no-full-width field-border-w" type="number" size="3" value="<?php echo (isset($arr_config['brleft_menu'])?$arr_config['brleft_menu']:0); ?>"> px
+										</div>
+										<?php 
+										echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('offset-l1 l3 m3 s12')->setAttributes(array('id'=>'brleft_style_menu', 'name'=>'brleft_style_menu', 'class'=>'admin-field-select field-border-style'))->setDataBind($arr_br_style)->setKey('brleft_style_menu')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+										?>
+										<div class="admin__field-control field-pick-color col no-padding offset-l1 l4 m4 s12">
+											<div class="selected-color"></div>
+											<input class="admin_control-text field-border-color" type="text" name="brleft_color_menu" id="brleft_color_menu" value="<?php echo (isset($arr_config['brleft_color_menu'])?$arr_config['brleft_color_menu']:'#ffffff'); ?>" autocomplete="off">
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col no-padding minh5 offset-l1">
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12 repadd"><?php echo __("Shadow:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l3 m3 s12 repadd')->setAttributes(array('id'=>'use_shadow_menu', 'name'=>'use_shadow_menu', 'class'=>'admin-field-select'))->setDataBind($arr_yn)->setKey('use_shadow_menu')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+									<div class="admin__field-control field-pick-color col no-padding offset-l1 l3 m3 s12 repadd">
+										<div class="selected-color"></div>
+										<input class="admin_control-text" type="text" name="shadow_color_menu" id="shadow_color_menu" value="<?php echo (isset($arr_config['shadow_color_menu'])?$arr_config['shadow_color_menu']:'#ffffff'); ?>" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Type:"); ?></label>
+									<?php 
+									echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setWrapClass('l7 m6 s12')->setAttributes(array('id'=>'shadow_type_menu', 'name'=>'shadow_type_menu', 'class'=>'admin-field-select'))->setDataBind($arr_shadow_type)->setKey('shadow_type_menu')->setConfig($arr_config)->setTemplate("Netbaseteam_Themeconfig::field/select.phtml")->toHtml();
+									?>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("XY position:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s5">
+										<input class="admin_control-text field-input-slider" type="text" name="xposition_menu" id="xposition_menu" value="<?php echo (isset($arr_config['xposition_menu'])?$arr_config['xposition_menu']:0); ?>" data-min="-50" data-max="50" autocomplete="off">
+									</div>
+									<div class="admin__field-control col no-padding offset-l1 l1 m1 s5">
+										<input class="admin_control-text field-input-slider" type="text" name="yposition_menu" id="yposition_menu" value="<?php echo (isset($arr_config['yposition_menu'])?$arr_config['yposition_menu']:0); ?>" data-min="-50" data-max="50" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field row">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Fade:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s12">
+										<input class="admin_control-text field-input-slider" type="text" name="shadow_fade_menu" id="shadow_fade_menu" value="<?php echo (isset($arr_config['shadow_fade_menu'])?$arr_config['shadow_fade_menu']:0); ?>" data-min="0" data-max="100" autocomplete="off">
+									</div>
+								</div>
+
+								<div class="admin_group-field">
+									<label class="col no-padding l5 m5 s12"><?php echo __("Shadow Spread:"); ?></label>
+									<div class="admin__field-control col no-padding l1 m1 s12">
+										<input class="admin_control-text field-input-slider" type="text" name="shadow_spread_menu" id="shadow_spread_menu" value="<?php echo (isset($arr_config['shadow_spread_menu'])?$arr_config['shadow_spread_menu']:0); ?>" data-min="0" data-max="100" autocomplete="off">
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="row page-actions-buttons repadd-btn remarg-ft">
+							<button title="<?php echo __("Save Change On Menu"); ?>" type="submit" class="action- scalable primary" <?php if (!$helper->getIsAllowed('Netbaseteam_Themeconfig::layout_menu')) { ?> disabled="disabled" <?php } ?>>
+								<span><?php echo __("Save Change On Menu"); ?></span>
+							</button>
+						</div>
+					</form>
+				</div>
+			</li>
+			<!-- END MENU -->
+		</ul>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+	var $curr;
+	require([
+		'jquery',
+		'spectrum',
+		'inputslider',
+		'materialize'
+		], function($){
+			$(document).ready(function() {
+
+				$(".collapsible-header").addClass("active");
+				$(".collapsible").collapsible({accordion: false});
+
+				$('form.frm-admin-config').each(function() {
+					if ($.type($(this).find('.field-admin-radio input[type=radio]:checked').val()) === "undefined") {
+						$(this).find('.field-admin-radio input[type=radio]:nth(0)').attr('checked',true);
+					}
+
+					$(this).find('.po-'+$(this).find('.field-admin-radio input[type=radio]:checked').val()).show('slow');
+				});
+
+				$('form.frm-admin-config .field-admin-radio input[type=radio]').change(function(event) {
+					$(this).parents('form.frm-admin-config').find('.po-'+$(this).val()).siblings().not('label').hide();
+					$(this).parents('form.frm-admin-config').find('.po-'+$(this).val()).show();
+				});
+
+				setInterval(function() {
+					$(".field-upload-image").each(function() {
+						if($(this).children('.upload-preview').attr('src')!='') {
+							$(this).children('.remove-image').show();
+							$(this).parents('form.frm-admin-config').find('.wrap_config_only_bgimage').show();
+
+							if ($(this).children('.upload-preview').width()>$(this).width()) {
+								$(this).children('.remove-image').css('left', $(this).width()-20);
+							} else {
+								$(this).children('.remove-image').css('left', $(this).children('.upload-preview').width()+20);
+							}
+
+							$(this).children('.upload-preview').show();
+						} else {
+							$(this).children('.upload-preview').hide();
+						}
+					});
+				}, 1000);
+
+				$("body").on('click', '.admin__field-control.styled-select.slate .overlay-select', function(event) {
+					event.preventDefault();
+					if ($(this).siblings('.fs-scrollbar-content').is(':visible')==false) {
+						$('.fs-scrollbar-content').hide();
+						$(this).siblings('.fs-scrollbar-content').show('fast');
+					} else {
+						$(this).siblings('.fs-scrollbar-content').hide('fast');
+					}
+				});
+
+				$(".fs-scrollbar-content li").click(function(event) {
+					$(this).parents('.admin__field-control.styled-select.slate').children('.admin-field-select').val($(this).text());
+					$(this).parents('.admin__field-control.styled-select.slate').children('.admin-field-select').trigger("change");
+					$(this).parents('.admin__field-control.styled-select.slate').children('.fs-scrollbar-content').hide();
+					if($(this).text()=='length' || $(this).text()=='percentage') {
+						$(this).parents('.wrap_config_only_bgimage').children('.config_size_bgimg').show();
+					} else {
+						$(this).parents('.wrap_config_only_bgimage').children('.config_size_bgimg').hide();
+					}
+				});
+
+				$(window).on("click.Bst", function(event) {		
+					if($('.styled-select').has(event.target).length == 0 && !$('.styled-select').is(event.target)) {
+						$('.fs-scrollbar-content').hide();
+					}
+				});
+
+				$(".field-upload-image .remove-image").click(function(event) {
+					$(this).hide();
+					$(this).siblings('input[type=file]').val('');
+					$(this).siblings('.upload-preview').attr('src','');
+					$(this).parents('form.frm-admin-config').find('.wrap_config_only_bgimage').hide();
+					$(this).siblings('.upload-preview').hide();
+				});
+
+				$(".border_w_general").each(function(index, el) {
+					$(this).val($(this).parents('form.frm-admin-config').find('.config_extend_border_header .field-border-w').val());
+				});
+
+				$(".border_style_general").each(function(index, el) {
+					$(this).val($(this).parents('form.frm-admin-config').find('.config_extend_border_header .field-border-style').val());
+				});
+
+				$(".border_color_general").each(function(index, el) {
+					$(this).val($(this).parents('form.frm-admin-config').find('.config_extend_border_header .field-border-color').val());
+				});
+
+				$(".field-pick-color").each(function() {
+					var $el = $(this);
+					var color_izone = '#ffffff';
+					$el.children('.selected-color').css({
+						'background': $el.children('.admin_control-text').val()
+					});
+					$el.children('.admin_control-text').css({
+						'width': $el.width() - $el.children('.selected-color').width() - 45
+					});
+
+					$el.spectrum({
+						allowEmpty:true,
+						color: $el.children('.admin_control-text').val(),
+						showInput: true,
+						showInitial: true,
+						showAlpha: true,
+						showSelectionPalette: true,
+						preferredFormat: "hex",
+						showButtons: false,
+						move: function(color) {
+							try {
+								color_izone = color.toHexString();
+							} catch(error) {
+								color_izone = '#ffffff';
+							}
+							setPickColor($el, color_izone);
+						},
+						change: function(color) {
+							try {
+								color_izone = color.toHexString();
+							} catch(error) {
+								color_izone = '#ffffff';
+							}
+							setPickColor($el, color_izone);
+						}
+
+					});
+				});
+
+				if ($('#cb_individual').is(":checked")) {
+					$('.config_extend_border_header').show();
+				} else {
+					$('.config_extend_border_header').hide();
+				}
+
+				$(".field-upload-image .button-upload").click(function(event) {
+					event.preventDefault();
+					$(this).siblings('.admin_control-text').click();
+					$curr = $(this).siblings('img.upload-preview');
+				});
+
+				$("select.select-size-bgimg").each(function() {
+					if($(this).val()=='length' || $(this).val()=='percentage') {
+						$(this).parents('.wrap_config_only_bgimage').children('.config_size_bgimg').show();
+					} else {
+						$(this).parents('.wrap_config_only_bgimage').children('.config_size_bgimg').hide();
+					}
+				});
+
+				$(".cb_individual").change(function(event) {
+					if ($(this).is(":checked")) {
+						$(this).parents('form.frm-admin-config').find('.config_extend_border_header').show();
+					} else {
+						$(this).parents('form.frm-admin-config').find('.config_extend_border_header').hide();
+					}
+				});
+
+				$(".border_w_general").on("input", function(e) {
+					var input = $(this);
+					var val = input.val();
+					input.parents('form.frm-admin-config').find('.config_extend_border_header .field-border-w').val(val);
+				});
+
+				$(".border_style_general").change(function(event) {
+					$(this).parents('form.frm-admin-config').find('.config_extend_border_header .field-border-style').val($(this).val());
+				});
+
+				$(".field-input-slider").each(function() {
+					var $el = $(this);
+					$el.iSlider({
+						min: parseInt($el.attr('data-min')),
+						max: parseInt($el.attr('data-max'))
+					}).on("change", function() {
+						$el.val(this.value);
+					});
+
+					$('.field-input-slider').keyup(function() {
+						var num = ($el.val()!='-'?parseInt($el.val()):'-');
+						if (Number.isInteger(num)) {
+							if (num>=$el.attr('data-min') && num<=$el.attr('data-max')) {
+								$el.val(num);
+							} else {
+								$el.val(0);
+							}
+						} else {
+							if (num=='-') {
+								$el.val(num);
+							} else {
+								$el.val(0);
+							}
+						}
+					});
+
+				});
+
+			});
+
+$("form.frm-admin-config").on('submit',(function(e) {
+	e.preventDefault();
+	var formData = new FormData(this);
+	var form_key = FORM_KEY;
+	formData.append('form_key', form_key);
+	if ($(this).find('.field-upload-image .upload-preview').length>0) {
+		var curr_url_image = $(this).find('.field-upload-image .upload-preview').attr('src');
+		if (curr_url_image!='') {
+			formData.append('curr_url_image', curr_url_image);
+		}
+	}
+
+	$.ajax({
+		url: $(this).attr('action'),
+		type: "POST",
+		data:  formData,
+		beforeSend: function(){$("#body-overlay").show();},
+		contentType: false,
+		processData: false,
+		cache: false,
+		success: function(data)
+		{
+			$("#body-overlay").hide();
+			window.location.reload(true);
+		},
+		error: function() {} 	        
+	});
+}));
+
+<?php if (isset($_GET['comp_css']) && $_GET['comp_css']==1) { ?>
+	$('form.frm-admin-config:nth(0)').submit();
+<?php } ?>
+
+});
+
+function setPickColor($el, color) {
+	$el.children('.selected-color').css({
+		'background': color
+	});
+	$el.children('.admin_control-text').val(color);
+	if ($el.children('.admin_control-text').hasClass('border_color_general')) {
+		$el.parents('form.frm-admin-config').find('.config_extend_border_header .field-border-color').val(color);
+		$el.parents('form.frm-admin-config').find('.config_extend_border_header .field-border-color').siblings('.selected-color').css({
+			'background': color
+		});
+	}
+}
+
+function showPreviewImage(objFileInput) {
+	require([
+		'jquery'
+		], function($){
+			if (objFileInput.files[0]) {
+				var fileReader = new FileReader();
+				fileReader.onload = function (e) {
+					var image = new Image();
+					image.src = fileReader.result;
+					image.onload = function() {
+						if (image.width>$curr.parent('.field-upload-image').width()) {
+							$curr.siblings('.remove-image').css('left', $curr.parent('.field-upload-image').width()-19);
+						} else {
+							$curr.siblings('.remove-image').css('left', image.width+19);
+						}
+					};
+
+					$curr.attr('src', e.target.result);
+					$curr.parents('form.frm-admin-config').find('.wrap_config_only_bgimage').show('slow');
+					$curr.siblings('.remove-image').show();
+					$curr.show();
+				}
+				fileReader.readAsDataURL(objFileInput.files[0]);
+			}
+		});
+}
+</script>

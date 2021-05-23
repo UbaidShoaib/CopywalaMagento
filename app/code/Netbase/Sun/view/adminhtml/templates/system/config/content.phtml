@@ -1,0 +1,546 @@
+<?php
+$themeDetails = $block->getThemeDetails();
+$configData = (array)$block->getConfigData();
+
+$configDataHeader = $configData['content'];
+$configDataFooter = $configData['footer'];
+?>
+<form id="content-config" action="<?php echo $this->getUrl("netbasesun/content/save", ['_secure' => $this->getRequest()->isSecure()]); ?>">
+    <div class="wrap-content-sun">
+        <div class="col-lg-3">
+            <div id="page:left" class="side-col">
+            <div id="system_config_tabs" class="config-nav">
+            <div id="menu-design" class="config-nav-block admin__page-nav _collapsed _hide">
+                <ul class="admin__page-nav-items items"> 
+                    <li class="admin__page-nav-item item _active">
+                        <a class="admin__page-nav-link" href="#design-header">Config Header</a>
+                    </li> 
+                    <li class="admin__page-nav-item item">
+                        <a class="admin__page-nav-link" href="#design-footer">Config Footer</a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <span class="label_title">Current theme data</span>
+            <select name="current_theme_path" id="current_theme_path">
+                <?php foreach($themeDetails as $theme):?>
+                    <option <?php echo $theme['theme_path'] == $this->getRequest()->getParam('current_theme_path') ? __('selected') : __("")?> value="<?php echo $theme['theme_path']?>"><?php echo $theme['theme_title']?></option>
+                <?php endforeach;?>
+            </select> 
+            <!-- begin Header -->
+                <div id="design-header" class="main-col design-header tab-content show-config">
+                  <div class="admin__scope-old"> 
+                      <div class="accordion">
+                          <div class="entry-edit form-inline">
+                              <div class="section-config">
+                                  <div class="entry-edit-head admin__collapsible-block"> 
+                                      <fieldset class="config admin__collapsible-block">
+                                          <table cellspacing="0" class="form-list">
+                                                <tbody class="bodyappend">
+                                                    <tr>
+                                                        <td>
+                                                            <button class="action primary">
+                                                                <span class='add-header'>Add Skill</span>
+                                                            </button>
+                                                        </td> 
+                                                    </tr> 
+                                                    <?php foreach ($configDataHeader as $key => $config): 
+                                                        $config = (array)$config;
+                                                    ?> 
+                                                    <tr class="select_custom_header" data-id="div_">
+                                                        <td class="label"> 
+                                                            Config Elemet Header 
+                                                        </td>
+                                                        <td>
+                                                            <table> 
+                                                                <tr>
+                                                                    <td class="label">
+                                                                        <label>Class List Append</label>
+                                                                    </td>
+                                                                    <td class="value">
+                                                                        <input type="text" data-name="content|class_list_header" name="content[<?php echo $key; ?>][class_list_header]" value="<?php if(!empty($config['class_list_header'])){echo trim($config['class_list_header']);}?>" class="class_list_header" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="select_custom">
+                                                                    <td class="label">Custom Font Family</td>
+                                                                    <td class="value">
+                                                                        <select data-name="content|custom__fontfamily__header" name="content[<?php echo $key; ?>][custom__fontfamily__header]" class="select custom__fontfamily__header admin__control-select admin__control-select__design" onchange="config.add( this )">
+                                                                            <option <?php echo isset($config['custom__fontfamily__header']) && $config['custom__fontfamily__header'] == "usedefault" ? "selected" : '' ?> value="usedefault">Use Default</option> 
+                                                                            <option <?php echo isset($config['custom__fontfamily__header']) && $config['custom__fontfamily__header'] == "custom" ? "selected" : '' ?> value="custom">Custom</option> 
+                                                                        </select>  
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="show_element">
+                                                                    <td class="label"> </td>
+                                                                    <td>
+                                                                        <table>
+                                                                            <tbody>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Header Font Family Element</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <?php echo $block->render_google_font_option( 'element__font-family__header', 'content['.$key.'][element__font-family__header]', 'select element__font-family__header admin__control-select', 'content|element__font-family__header', isset($config['element__font-family__header']) ? $config['element__font-family__header'] : '' ); ?>
+
+                                                                                    </td>
+                                                                                </tr> 
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Header Font Family Heading</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <?php echo $block->render_google_font_option( 'heading__font-family__header', 'content['.$key.'][heading__font-family__header]', 'select heading__font-family__header admin__control-select', 'content|heading__font-family__header', isset($config['heading__font-family__header']) ? $config['heading__font-family__header'] : '' ); ?> 
+                                                                                    </td>
+                                                                                </tr> 
+                                                                                <tr>
+                                                                                    <td class="label">
+                                                                                        <label>Header Font Family Link</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <?php echo $block->render_google_font_option( 'a__font-family__header', 'content['.$key.'][a__font-family__header]', 'select a__font-family__header admin__control-select', 'content|a__font-family__header', isset($config['a__font-family__header']) ? $config['a__font-family__header'] : '' ); ?>  
+                                                                                    </td> 
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr> 
+                                                                <tr class="select_custom">
+                                                                    <td class="label">Custom Font Size</td>
+                                                                    <td class="value">
+                                                                        <select id="custom__font-size__header" data-name="content|custom__font-size__header" name="content[<?php echo $key; ?>][custom__font-size__header]" class="select custom__font-size__header admin__control-select admin__control-select__design" onchange="config.add( this )">
+                                                                            <option <?php echo isset($config['custom__font-size__header']) && $config['custom__font-size__header'] == "usedefault" ? "selected" : '' ?> value="usedefault">Use Default</option> 
+                                                                            <option <?php echo isset($config['custom__font-size__header']) && $config['custom__font-size__header'] == "custom" ? "selected" : '' ?> value="custom">Custom</option> 
+                                                                        </select>  
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="show_element">
+                                                                    <td class="label"> </td>
+                                                                    <td>
+                                                                        <table>
+                                                                            <tbody>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Font Size Element</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <input type="text" data-name="content|font-size__element__header" id="font-size__element__header" name="content[<?php echo $key; ?>][font-size__element__header]" value="<?php if(!empty($config['font-size__element__header'])){echo trim($config['font-size__element__header']);}?>" class="font-size__element__header admin__control-number" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Font Size Heading</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <input type="text" data-name="content|font-size__heading__header" id="font-size__heading__header" name="content[<?php echo $key; ?>][font-size__heading__header]" value="<?php if(!empty($config['font-size__heading__header'])){echo trim($config['font-size__heading__header']);}?>" class="font-size__heading__header admin__control-number" />
+                                                                                    </td>
+                                                                                </tr> 
+                                                                                <tr>
+                                                                                    <td class="label">
+                                                                                        <label>Font Size Link</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                       <input type="text" data-name="content|font-size__link__header" id="font-size__link__header" name="content[<?php echo $key; ?>][font-size__link__header]" value="<?php if(!empty($config['font-size__link__header'])){echo trim($config['font-size__link__header']);}?>" class="font-size__link__header admin__control-number" />
+                                                                                    </td> 
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr> 
+                                                                <tr class="select_custom">
+                                                                    <td class="label">Custom Line Height</td>
+                                                                    <td class="value">
+                                                                        <select id="custom__line-height__header" data-name="content|custom__line-height__header" name="content[<?php echo $key; ?>][custom__line-height__header]" class="select custom__line-height__header admin__control-select admin__control-select__design" onchange="config.add( this )">
+                                                                            <option <?php echo isset($config['custom__line-height__header']) && $config['custom__line-height__header'] == "usedefault" ? "selected" : '' ?> value="usedefault">Use Default</option> 
+                                                                            <option <?php echo isset($config['custom__line-height__header']) && $config['custom__line-height__header'] == "custom" ? "selected" : '' ?> value="custom">Custom</option> 
+                                                                        </select>  
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="show_element">
+                                                                    <td class="label"> </td>
+                                                                    <td>
+                                                                        <table>
+                                                                            <tbody>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Line Height Element</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <input type="text" data-name="content|line-height__element__header" id="line-height__element__header" name="content[<?php echo $key; ?>][line-height__element__header]" value="<?php if(!empty($config['line-height__element__header'])){echo trim($config['line-height__element__header']);}?>" class="line-height__element__header admin__control-number" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Line Height Heading</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <input type="text" data-name="content|line-height__heading__header" id="line-height__heading__header" name="content[<?php echo $key; ?>][line-height__heading__header]" value="<?php if(!empty($config['line-height__heading__header'])){echo trim($config['line-height__heading__header']);}?>" class="line-height__heading__header admin__control-number" />
+                                                                                    </td>
+                                                                                </tr> 
+                                                                                <tr>
+                                                                                    <td class="label">
+                                                                                        <label>Line Height Link</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                       <input type="text" data-name="content|line-height__link__header" id="line-height__link__header" name="content[<?php echo $key; ?>][line-height__link__header]" value="<?php if(!empty($config['line-height__link__header'])){echo trim($config['line-height__link__header']);}?>" class="line-height__link__header admin__control-number" />
+                                                                                    </td> 
+                                                                                </tr> 
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr> 
+                                                                <tr>
+                                                                    <td>
+                                                                        <button class="action primary remove">
+                                                                            <span class='remove' onclick='config.remove_header(this)'>Remove</span>
+                                                                        </button> 
+                                                                    </td>
+                                                                </tr>
+                                                            </table> 
+                                                        </td> 
+                                                    
+                                                    <?php endforeach; ?>
+                                                    </tr> 
+                                                </tbody>
+                                          </table>
+                                      </fieldset>
+                                  </div>
+                              </div>
+                          </div>
+                      </div> 
+                  </div>
+                </div> 
+            <!-- end Header -->  
+            <!-- begin Footer -->
+                <div id="design-footer" class="main-col design-header tab-content hidden-config">
+                  <div class="admin__scope-old"> 
+                      <div class="accordion">
+                          <div class="entry-edit form-inline">
+                              <div class="section-config">
+                                  <div class="entry-edit-head admin__collapsible-block"> 
+                                      <fieldset class="config admin__collapsible-block">
+                                          <table cellspacing="0" class="form-list">
+                                                <tbody class="bodyappend">
+                                                    <tr>
+                                                        <td>
+                                                            <button class="action primary">
+                                                                <span class='add-footer'>Add Skill</span>
+                                                            </button>
+                                                        </td> 
+                                                    </tr> 
+                                                    <?php foreach ($configDataFooter as $key => $config): 
+                                                        $config = (array)$config;
+                                                    ?> 
+                                                    <tr class="select_custom_footer" data-id="div_">
+                                                        <td class="label"> 
+                                                            Config Elemet Footer 
+                                                        </td>
+                                                        <td>
+                                                            <table> 
+                                                                <tr>
+                                                                    <td class="label">
+                                                                        <label>Class List Append</label>
+                                                                    </td>
+                                                                    <td class="value">
+                                                                        <input type="text" data-name="footer|class_list_footer" name="footer[<?php echo $key; ?>][class_list_footer]" value="<?php if(!empty($config['class_list_footer'])){echo trim($config['class_list_footer']);}?>" class="class_list_footer" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="select_custom">
+                                                                    <td class="label">Custom Font Family</td>
+                                                                    <td class="value">
+                                                                        <select data-name="footer|custom__fontfamily__footer" name="footer[<?php echo $key; ?>][custom__fontfamily__footer]" class="select custom__fontfamily__footer admin__control-select admin__control-select__design" onchange="config.add( this )">
+                                                                            <option <?php echo isset($config['custom__fontfamily__footer']) && $config['custom__fontfamily__footer'] == "usedefault" ? "selected" : '' ?> value="usedefault">Use Default</option> 
+                                                                            <option <?php echo isset($config['custom__fontfamily__footer']) && $config['custom__fontfamily__footer'] == "custom" ? "selected" : '' ?> value="custom">Custom</option> 
+                                                                        </select>  
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="show_element">
+                                                                    <td class="label"> </td>
+                                                                    <td>
+                                                                        <table>
+                                                                            <tbody>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Footer Font Family Element</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <?php echo $block->render_google_font_option( 'element__font-family__footer', 'footer['.$key.'][element__font-family__footer]', 'select element__font-family__footer admin__control-select', 'footer|element__font-family__footer', isset($config['element__font-family__footer']) ? $config['element__font-family__footer'] : '' ); ?>  
+                                                                                    </td>
+                                                                                </tr> 
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Footer Font Family Heading</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <?php echo $block->render_google_font_option( 'heading__font-family__footer', 'footer['.$key.'][heading__font-family__footer]', 'select heading__font-family__footer admin__control-select', 'footer|heading__font-family__footer', isset($config['heading__font-family__footer']) ? $config['heading__font-family__footer'] : '' ); ?>  
+                                                                                    </td>
+                                                                                </tr> 
+                                                                                <tr>
+                                                                                    <td class="label">
+                                                                                        <label>Footer Font Family Link</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <?php echo $block->render_google_font_option( 'a__font-family__footer', 'footer['.$key.'][a__font-family__footer]', 'select a__font-family__footer admin__control-select', 'footer|a__font-family__footer', isset($config['a__font-family__footer']) ? $config['a__font-family__footer'] : '' ); ?> 
+                                                                                    </td> 
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr> 
+                                                                <tr class="select_custom">
+                                                                    <td class="label">Custom Font Size</td>
+                                                                    <td class="value">
+                                                                        <select id="custom__font-size__footer" data-name="footer|custom__font-size__footer" name="footer[<?php echo $key; ?>][custom__font-size__footer]" class="select custom__font-size__footer admin__control-select admin__control-select__design" onchange="config.add( this )">
+                                                                            <option <?php echo isset($config['custom__font-size__footer']) && $config['custom__font-size__footer'] == "usedefault" ? "selected" : '' ?> value="usedefault">Use Default</option> 
+                                                                            <option <?php echo isset($config['custom__font-size__footer']) && $config['custom__font-size__footer'] == "custom" ? "selected" : '' ?> value="custom">Custom</option> 
+                                                                        </select>  
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="show_element">
+                                                                    <td class="label"> </td>
+                                                                    <td>
+                                                                        <table>
+                                                                            <tbody>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Font Size Element</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <input type="text" data-name="footer|font-size__element__footer" id="font-size__element__footer" name="footer[<?php echo $key; ?>][font-size__element__footer]" value="<?php if(!empty($config['font-size__element__footer'])){echo trim($config['font-size__element__footer']);}?>" class="font-size__element__footer admin__control-number" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Font Size Heading</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <input type="text" data-name="footer|font-size__heading__footer" id="font-size__heading__footer" name="footer[<?php echo $key; ?>][font-size__heading__footer]" value="<?php if(!empty($config['font-size__heading__footer'])){echo trim($config['font-size__heading__footer']);}?>" class="font-size__heading__footer admin__control-number" />
+                                                                                    </td>
+                                                                                </tr> 
+                                                                                <tr>
+                                                                                    <td class="label">
+                                                                                        <label>Font Size Link</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                       <input type="text" data-name="footer|font-size__link__footer" id="font-size__link__footer" name="footer[<?php echo $key; ?>][font-size__link__footer]" value="<?php if(!empty($config['font-size__link__footer'])){echo trim($config['font-size__link__footer']);}?>" class="font-size__link__footer admin__control-number" />
+                                                                                    </td> 
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr> 
+                                                                <tr class="select_custom">
+                                                                    <td class="label">Custom Line Height</td>
+                                                                    <td class="value">
+                                                                        <select id="custom__line-height__footer" data-name="footer|custom__line-height__footer" name="footer[<?php echo $key; ?>][custom__line-height__footer]" class="select custom__line-height__footer admin__control-select admin__control-select__design" onchange="config.add( this )">
+                                                                            <option <?php echo isset($config['custom__line-height__footer']) && $config['custom__line-height__footer'] == "usedefault" ? "selected" : '' ?> value="usedefault">Use Default</option> 
+                                                                            <option <?php echo isset($config['custom__line-height__footer']) && $config['custom__line-height__footer'] == "custom" ? "selected" : '' ?> value="custom">Custom</option> 
+                                                                        </select>  
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="show_element">
+                                                                    <td class="label"> </td>
+                                                                    <td>
+                                                                        <table>
+                                                                            <tbody>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Line Height Element</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <input type="text" data-name="footer|line-height__element__footer" id="line-height__element__footer" name="footer[<?php echo $key; ?>][line-height__element__footer]" value="<?php if(!empty($config['line-height__element__footer'])){echo trim($config['line-height__element__footer']);}?>" class="line-height__element__footer admin__control-number" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr> 
+                                                                                    <td class="label">
+                                                                                        <label>Line Height Heading</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                        <input type="text" data-name="footer|line-height__heading__footer" id="line-height__heading__footer" name="footer[<?php echo $key; ?>][line-height__heading__footer]" value="<?php if(!empty($config['line-height__heading__footer'])){echo trim($config['line-height__heading__footer']);}?>" class="line-height__heading__footer admin__control-number" />
+                                                                                    </td>
+                                                                                </tr> 
+                                                                                <tr>
+                                                                                    <td class="label">
+                                                                                        <label>Line Height Link</label>
+                                                                                    </td>
+                                                                                    <td class="value">
+                                                                                       <input type="text" data-name="footer|line-height__link__footer" id="line-height__link__footer" name="footer[<?php echo $key; ?>][line-height__link__footer]" value="<?php if(!empty($config['line-height__link__footer'])){echo trim($config['line-height__link__footer']);}?>" class="line-height__link__footer admin__control-number" />
+                                                                                    </td> 
+                                                                                </tr> 
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <button class="action primary remove">
+                                                                            <span class='remove' onclick='config.remove_footer(this)'>Remove</span>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr> 
+                                                            </table> 
+                                                        </td> 
+                                                    <?php endforeach; ?>
+                                                    </tr> 
+                                                    
+                                                </tbody>
+                                          </table>
+                                      </fieldset>
+                                  </div>
+                              </div>
+                          </div>
+                      </div> 
+                  </div>
+                </div> 
+            <!-- end Footer -->
+            <span class="label_title">Theme select to save data</span>
+            <select name="theme_path" id="theme_path">
+                <?php foreach($themeDetails as $theme):?>
+                    <option value="<?php echo $theme['theme_path']?>"><?php echo $theme['theme_title']?></option>
+                <?php endforeach;?>
+            </select>
+        </div>
+    </div>
+    <div class="primary btn_primary">
+        <button type="submit" class="action submit primary"><span>Submit</span></button>
+    </div>
+</form>
+<script>
+    require(['jquery','colorpicker'], function($){
+        var url = window.location.href; 
+        $( "#current_theme_path" ).change(function() {
+            var newSrc = $("#current_theme_path :selected").val();
+            <?php if(!$this->getRequest()->getParam('current_theme_path')):?>
+                var newUrl = url+'?current_theme_path='+newSrc;
+            <?php else:?>
+                var newUrl = url.replace(/(current_theme_path=).*?(&)/,'$1' + newSrc + '$2');
+            <?php endif;?>
+            window.location.href = newUrl;
+        }); 
+        $(document).ready( function() { 
+            var configData = <?php echo json_encode($configData); ?>;
+            /* Create Tab */ 
+            $("#menu-design a").click(function(event) {
+                event.preventDefault();
+                $(this).parent().addClass("_active");
+                $(this).parent().siblings().removeClass("_active");
+                var tab = $(this).attr("href");
+                $(".tab-content").not(tab).css("display", "none");
+                $(tab).fadeIn();
+            });
+            /* Color Picker */
+            $('.input-color').each( function() {
+                $(this).minicolors({  
+                    control: $(this).attr('data-control') || 'hue',
+                    defaultValue: $(this).attr('data-defaultValue'),
+                    format: $(this).attr('data-format') || 'hex',
+                    keywords: $(this).attr('data-keywords') || '',
+                    inline: $(this).attr('data-inline') === 'true',
+                    letterCase: $(this).attr('data-letterCase') || 'lowercase',
+                    opacity: $(this).attr('data-opacity'),
+                    position: $(this).attr('data-position') || 'bottom right',
+                    swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+                    change: function(value, opacity) {
+                    $(this).css('backgroundColor', '#' + value);
+                    if( !value ) return;
+                    if( opacity ) value += ', ' + opacity;
+                    if( typeof console === 'object' ) {
+                      console.log(value);
+                    }
+                  },
+                  theme: 'bootstrap'
+                });
+            }); 
+            /* add selected option select */ 
+        });
+        
+        $.each($('.admin__control-select__design'), function(){
+            if($(this).val()  != 'custom' ) {
+                $(this).parents('.select_custom').next('.show_element').hide();
+            }
+        }); 
+        $('.admin__control-select__design').change(function(){
+            if($(this).val() == 'custom') {
+                $(this).parents('.select_custom').next('.show_element').show(); 
+            } else {
+                $(this).parents('.select_custom').next('.show_element').hide();
+            } 
+        }); 
+        window.config = {
+            add: function( e ){
+                $.each($('.admin__control-select__design'), function(){
+                    if($(this).val()  != 'custom' ) {
+                        $(this).parents('.select_custom').next('.show_element').hide();
+                    }
+                }); 
+                if($(e).val() == 'custom') {
+                    $(e).parents('.select_custom').next('.show_element').show(); 
+                } else {
+                    $(e).parents('.select_custom').next('.show_element').hide();
+                } 
+            },
+            remove_header: function(e){
+                $(e).parents('#design-header .select_custom_header').remove();
+            },
+            remove_footer: function(e){
+                $(e).parents('#design-footer .select_custom_footer').remove();
+            }
+        };
+        $(document).ready(function($){ 
+            // Add new element
+            $(".add-header").click(function(){ 
+                // Finding total number of elements added
+                var total_element = $(".select_custom_header").length;
+                var max = 5;
+                // last <div> with element class id
+                // Check total number elements
+                if(total_element < max ){ 
+                    // Adding element to <div> 
+                    var clone = $("#design-header .select_custom_header").first().clone(); 
+                    clone.appendTo("#design-header .bodyappend"); 
+                    $.each( $("#design-header .select_custom_header"), function( index, value ){
+                        var _id = $(this).attr('data-id');
+                        $(this).attr('id', _id + index);
+                        $.each( $(this).find('input, select'), function(){
+                            var __name = $(this).attr('data-name');
+                            var _name = __name.split("|"); 
+                            $(this).attr('name', _name[0] + '[' + index + '][' + _name[1] + ']');                           
+                        } );
+
+                    } )
+                }
+                else{ 
+                    $( ".add" ).parent().css( "display", "none" ); 
+                }
+            });
+             $(".add-footer").click(function(){ 
+                // Finding total number of elements added
+                var total_element = $(".select_custom_footer").length;
+                var max = 5;
+                // last <div> with element class id
+                // Check total number elements
+                if(total_element < max ){ 
+                    // Adding element to <div> 
+                    var clone = $("#design-footer .select_custom_footer").first().clone(); 
+                    clone.appendTo("#design-footer .bodyappend"); 
+                    $.each( $("#design-footer .select_custom_footer"), function( index, value ){
+                        var _id = $(this).attr('data-id');
+                        $(this).attr('id', _id + index);
+                        $.each( $(this).find('input, select'), function(){
+                            var __name = $(this).attr('data-name');
+                            var _name = __name.split("|"); 
+                            $(this).attr('name', _name[0] + '[' + index + '][' + _name[1] + ']');                           
+                        } );
+
+                    } )
+                }
+                else{ 
+                    $( ".add" ).parent().css( "display", "none" ); 
+                } 
+            });   
+        });
+    }); 
+</script>
+</script>

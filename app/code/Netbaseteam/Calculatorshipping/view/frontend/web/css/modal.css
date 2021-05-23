@@ -1,0 +1,60 @@
+/* .detail-form-fields {
+    border-top: 1px solid #ccc;
+    margin-top: 15px;
+} */
+
+#shipping-result-form-bo {
+	/* margin-top: 15px;
+	border: 1px dotted red;
+    padding: 10px; */
+}
+
+.shipping-result-form-border {
+	margin-top: 15px;
+	border: 1px dotted red;
+    padding: 10px;
+}
+
+.shipping-method-title {
+	margin-left: 25px !important;
+}
+
+.detail-form-fields ul {
+    margin-top: 15px;
+    padding-left: 0;
+}
+
+.detail-form-fields ul li {
+    list-style: none;
+}
+
+.my-require {
+    color: red;
+    margin-left: 5px;
+}
+
+.validate-my-input {
+    border: 1px dashed red !important;
+}
+
+.validate-my-input-none {
+    border: 1px solid #c2c2c2;
+}
+
+/* *********************** */
+
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+}
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+}
+.custom-combobox-input {
+	margin: 0;
+	padding: 5px 10px;
+}

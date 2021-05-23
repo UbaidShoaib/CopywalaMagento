@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * New Customer block template
+ *
+ * @var $block \Magento\Customer\Block\Form\Login\Info
+ */
+?>
+<?php if ($block->getRegistration()->isAllowed()): ?>
+<div class="block block-new-customer">
+    <div class="block-title">
+        <strong id="block-new-customer-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo __('New Customers') ?></strong>
+    </div>
+    <div class="block-content" aria-labelledby="block-new-customer-heading">
+        <div class="field note">
+            <?php /* @escapeNotVerified */ echo __('Creating an account has many benefits:') ?>
+        </div>
+        <div class="field customer-service">
+            <ul>
+                <li><i class="icon-record"></i><span><?php echo __('Check out faster') ?></span></li>
+                <li><i class="icon-record"></i><span><?php echo __('Keep more than one address') ?></span></li>
+                <li><i class="icon-record"></i><span><?php echo __('Track orders') ?></span></li>
+                <li><i class="icon-record"></i><span><?php echo __('Track wishlist and more') ?></span></li>
+            </ul>
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <span class="infor-ask"><?php echo __('Dont have an account?') ?></span> 
+                <a href="<?php /* @escapeNotVerified */ echo $block-> getCreateAccountUrl() ?>" class="action create primary"><span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+</div>

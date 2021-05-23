@@ -1,0 +1,245 @@
+<?php
+$arr_position_logo = array('left','center','right');
+
+$helper = $this->helper('\Netbaseteam\Themeconfig\Helper\Data');
+
+/************ logo ************/
+$logo = $helper->getMediaUrl()."logo/";	
+$logo_folder = $helper->getBaseDir()."/logo/";
+$load_logo_url = ""; $load_logo_file = "";
+
+/* read folder ../media/Themeconfig/logo */
+if(file_exists($logo_folder)) {
+	$files = array_diff(scandir($logo_folder), array('.', '..'));
+	foreach($files as $file) {
+		$load_logo_file =  $file;
+		$load_logo_url = $logo.$file;
+		break;
+	}
+}
+// if($load_logo_url == "") $load_logo_url = $this->getViewFileUrl('Netbaseteam_Themeconfig/images/default.jpg');
+
+$userData = $helper->getAdminUserData();
+/************ avanta ************/
+$avanta = $helper->getMediaUrl()."avanta/".$userData["username"]."/";	
+$avanta_folder = $helper->getBaseDir()."/avanta/".$userData["username"]."/";
+$load_avanta_url = "";$load_logo_file = "";
+
+/* read folder ../media/Themeconfig/avanta */
+if(file_exists($avanta_folder)) {
+	$files = array_diff(scandir($avanta_folder), array('.', '..'));
+	foreach($files as $file) {
+		$load_logo_file =  $file;
+		$load_avanta_url = $avanta.$file;
+		break;
+	}
+}
+// if($load_avanta_url == "") $load_avanta_url = $this->getViewFileUrl('Netbaseteam_Themeconfig/images/default.jpg');
+
+$content_config_custom = $helper->_readFile('Netbaseteam_Themeconfig/config/custom.json');
+$arr_config = array();
+if (isset($content_config_custom) && $content_config_custom!='') {
+	$arr_config = json_decode($content_config_custom, true);
+}
+
+$url_process_main = $this->getUrl('themeconfig/main/uploadavt', ['main' => true, '_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+?>
+
+<div id="body-overlay"><div><img src="<?php echo $this->getViewFileUrl('Netbaseteam_Themeconfig/images/loading.gif');?>" width="64px" height="64px"/></div></div>
+
+<div id="content_main_div">
+	<div class="layout-area">
+		<form class="frm-admin-config" action="<?php echo $url_process_main; ?>" method="post">
+			<div class="row">
+				<h2 class="title">Configuration Main Area</h2>
+				<div class="admin_group-field">
+					<div class="col no-padding l12 m12 s12">
+						<label class="col no-padding l2 m3 s12"><?php echo __("Change Logo:"); ?></label>
+						<div class="admin__field-control field-upload-image col no-padding l2 m3 s12">
+							<input type="button" class="button-upload" value="<?php echo __("Choose file"); ?>" />
+							<img src="<?php echo (isset($load_logo_url)?$load_logo_url:''); ?>" class="upload-preview" data-show=".wrap-position-logo" />
+							<input class="admin_control-text" type="file" name="logo_main" id="logo_main" onchange="showPreviewImage(this);">
+							<button class="remove-image" type="button" title="Remove Image"></button>
+						</div>
+					</div>
+				</div>
+
+				<div class="admin_group-field wrap-position-logo">
+					<label class="col no-padding l2 m3 s12"><?php echo __("Position of logo:"); ?></label>
+					<div class="admin__field-control field-admin-radio col no-padding l7 s12">
+						<?php foreach ($arr_position_logo as $v) { ?>
+							<input type="radio" name="position_logo" value="<?php echo $v ?>" <?php echo (isset($arr_config['position_logo_header']) && $arr_config['position_logo_header']==$v?'checked="checked"':''); ?> /> <span><?php echo $v ?></span>
+						<?php } ?>
+					</div>
+				</div>
+
+				<div class="admin_group-field">
+					<div class="col no-padding l12 m12 s12">
+						<label class="col no-padding l2 m3 s12"><?php echo __("Change Avatar:"); ?></label>
+						<div class="admin__field-control field-upload-image col no-padding l2 m3 s12">
+							<input type="button" class="button-upload" value="<?php echo __("Choose file"); ?>" />
+							<img src="<?php echo (isset($load_avanta_url)?$load_avanta_url:''); ?>" class="upload-preview" />
+							<input class="admin_control-text" type="file" name="avanta_main" id="avanta_main" onchange="showPreviewImage(this);">
+							<button class="remove-image" type="button" title="Remove Image"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row page-actions-buttons remarg-btn">
+				<button title="<?php echo __("Save Change On Main Area"); ?>" type="submit" class="action- scalable primary" <?php if (!$helper->getIsAllowed('Netbaseteam_Themeconfig::main_area')) { ?> disabled="disabled" <?php } ?>>
+					<span><?php echo __("Save Change On Main Area"); ?></span>
+				</button>
+			</div>
+
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var $curr;
+	require([
+		'jquery'
+		], function($){
+			$(document).ready(function() {
+				
+				$('form.frm-admin-config').each(function() {
+					if ($.type($(this).find('.field-admin-radio input[type=radio]:checked').val()) === "undefined") {
+						$(this).find('.field-admin-radio input[type=radio]:nth(0)').attr('checked',true);
+					}
+				});
+				
+				$(".field-upload-image").each(function() {
+					if($(this).children('.upload-preview').attr('src')!='') {
+						$(this).children('.upload-preview').show();
+						showHideWrap($(this).children('.upload-preview'),'show');
+						$(this).children('.remove-image').show();
+						if ($(this).children('.upload-preview').width()>$(this).width()) {
+							$(this).children('.remove-image').css('left', $(this).width()-20);
+						} else {
+							$(this).children('.remove-image').css('left', $(this).children('.upload-preview').width()+20);
+						}
+					} else {
+						$(this).children('.upload-preview').hide();
+						showHideWrap($(this).children('.upload-preview'),'hide');
+					}
+				});
+
+				$(".field-upload-image .remove-image").click(function(event) {
+					$(this).hide();
+					$(this).siblings('input[type=file]').val('');
+					$(this).siblings('.upload-preview').attr('src','');
+					$(this).siblings('.upload-preview').hide();
+					showHideWrap($(this).siblings('.upload-preview'),'hide');
+					if ($(this).siblings('input[type=file]').attr('id')=='logo_main') {
+						$('input[name="position_logo"]').removeAttr('checked');
+						$('input[name="position_logo"][value="center"]').attr('checked', 'checked');
+					}
+				});
+
+				$("form.frm-admin-config").on('submit',(function(e) {
+					e.preventDefault();
+					var formData = new FormData(this);
+					var form_key = FORM_KEY;
+                    formData.append('form_key', form_key);
+					var element = document.querySelectorAll('form.frm-admin-config .field-upload-image .upload-preview');
+					if (element.length>0) {
+						for(var i=0; i<element.length; i++) {
+							var curr_url_image = element[i].getAttribute('src');
+							if (curr_url_image!='') {
+								formData.set('curr_'+element[i].nextElementSibling.id, curr_url_image);
+							}
+						}
+					}
+
+					$.ajax({
+						url: $(this).attr('action'),
+						type: "POST",
+						data:  formData,
+						beforeSend: function(){$("#body-overlay").show();},
+						contentType: false,
+						processData: false,
+						cache: false,
+						success: function(data)
+						{
+							// if(data.inject!='') {
+							// 	if($('head style#inject').length>0) {
+							// 		$('head style#inject').replaceWith('<style id="inject" type="text/css">'+data.inject+'</style>');
+							// 	} else {
+							// 		$('head').append('<style id="inject" type="text/css">'+data.inject+'</style>');
+							// 	}
+							// }
+							// if (data.logo!='') {
+							// 	$('.logo .logo-img').attr('src', data.logo);
+							// } else {
+							// 	$('.logo .logo-img').attr('src', $('.logo .logo-img').attr('data-default'));
+							// }
+							// for (var link of document.querySelectorAll("link[rel=stylesheet]")) {
+							// 	var reload_link = link.href.replace(/\?.*|$/, "?ts=" + new Date().getTime());
+							// 	if (reload_link.indexOf('style_config.css')!==-1) {
+							// 		link.href = reload_link;
+							// 	}
+							// }
+							
+							$("#body-overlay").hide();
+							window.location.reload(true);
+						},
+						error: function() {} 	        
+					});
+
+				}));
+
+			});
+
+			$(".field-upload-image .button-upload").click(function(event) {
+				event.preventDefault();
+				$(this).siblings('.admin_control-text').click();
+				$curr = $(this).siblings('img.upload-preview');
+			});
+
+		});
+
+	function showHideWrap(element, status) {
+		require([
+			'jquery'
+			], function($){
+				try {
+					if (status=='show') {
+						$(element.attr('data-show')).show();
+					} else {
+						$(element.attr('data-show')).hide();
+					}
+				} catch(error) {
+					console.log(error.message);
+				}
+			});
+	}
+
+	function showPreviewImage(objFileInput) {
+		require([
+			'jquery'
+			], function($){
+				if (objFileInput.files[0]) {
+					var fileReader = new FileReader();
+					fileReader.onload = function (e) {
+						var image = new Image();
+						image.src = fileReader.result;
+						image.onload = function() {
+							console.log(image.width);
+							if (image.width>$curr.parent('.field-upload-image').width()) {
+								$curr.siblings('.remove-image').css('left', $curr.parent('.field-upload-image').width()-19);
+							} else {
+								$curr.siblings('.remove-image').css('left', image.width+19);
+							}
+						};
+
+						$curr.attr('src', e.target.result);
+						$curr.show();
+						$curr.siblings('.remove-image').show();
+						showHideWrap($curr,'show');
+					}
+					fileReader.readAsDataURL(objFileInput.files[0]);
+				}
+			});
+	}
+</script>

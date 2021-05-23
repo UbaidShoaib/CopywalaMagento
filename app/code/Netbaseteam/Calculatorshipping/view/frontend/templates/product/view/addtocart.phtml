@@ -1,0 +1,93 @@
+
+<?php
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+
+/*Create add to cart box: button Add to Cart...., qty, */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php if ($_product->isSaleable()): ?>
+<?php 
+	$helper = $this->helper('Netbaseteam\Calculatorshipping\Helper\Data');
+	$buttonTitle = $helper->getButtonTitle();
+?>
+<div class="box-tocart">
+	<input id="pid-estimaste" name="pid-estimaste" type="hidden" value = "<?php echo $_product->getId(); ?>" >
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()): ?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></label>
+            <div class="control">
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       maxlength="12"
+                       value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>"
+                       title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                       data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+            </div>
+        </div>
+        <?php endif; ?>
+		
+		<div style="clear: both"></div>
+		
+		<?php
+		echo $this->getLayout()->createBlock('Netbaseteam\Calculatorshipping\Block\Calculatorshipping')
+							->setTemplate('Netbaseteam_Calculatorshipping::view.phtml')->toHtml(); 
+		?>
+		
+        <div class="actions">
+            <button type="submit"
+                    title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
+                    class="action primary tocart ajax-popup-to-cart"
+                    id="product-addtocart-button">
+                <span><?php /* @escapeNotVerified */ echo $buttonTitle ?></span>
+            </button>
+            <?php echo $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
+<script>
+    /*
+        Require option field and submit popup
+    */
+
+    require([
+        'jquery',
+        'mage/mage',
+        'Magento_Catalog/product/view/validation'
+    ], function ($) {
+        'use strict';
+
+        $('.ajax-popup-to-cart').closest('#product_addtocart_form').mage('validation');
+
+        var please_wait = $('#nb-estshipping-cost-loading');
+        var popup_success = $('#est-shipping-cost');
+        popup_success.hide(); 
+
+        $('#product_addtocart_form').on('submit', function(e) {     
+            var isValid = $(this).validation('isValid');
+            if(isValid){
+				$("#calculate-shipping").trigger("click");
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                return false;
+            } else {
+				$('#estshippingcost_content_option_product .est_option_content').scrollTop(0);
+			}
+        });
+		
+		$('#estshippingcost_cancel').click(function(){
+			$('#estshippingcost_content_option_product').hide();
+			$('#estshippingcost_content_option_product .est_option_content').empty();
+			$('#estshipping-cost-shadow').hide();
+			return false;
+			
+		});
+    });
+
+</script>

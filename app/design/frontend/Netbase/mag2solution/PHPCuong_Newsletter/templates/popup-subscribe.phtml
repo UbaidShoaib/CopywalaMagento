@@ -1,0 +1,98 @@
+<?php 
+    /**
+     * @var \PHPCuong\Newsletter\Block\Subscribe $block
+     * @see \PHPCuong\Newsletter\Block\Subscribe
+     */
+?>
+
+<?php
+    $imgUrl =  $block->getViewFileUrl('images/cms/new_letter.jpg');
+    $shareLink = $block->getUrl();
+?>
+
+<div class="popup-letter" data-role="popup-letter">
+    <div class="messages">
+        <div class="message message-error error">
+            <div></div>
+        </div>
+    </div>
+    <div class="popup-wrapper">
+        <div class="wrapper-header">
+            <button class="action-close" data-role="closeBtn" type="button">
+                <span>Close</span>
+            </button>
+        </div>
+        <div class="wrapper-content">
+            <div class="row">
+                <div class="wrapper-content__gallery col-md-6">
+                    <img src="<?php echo $imgUrl; ?>" alt="<?php echo 'New Letter Gallery'; ?>" />
+                </div>
+                <div class="wrapper-content__form col-md-6">
+                   <div class="form-title">
+                       <h2><?php echo __('NEWSLETTER') ?></h2>
+                       <p><?php echo __('Subscrible to the Market mailing list to receive updates on new arrivals, special offers and other'); ?></p>
+                   </div>
+                   <div class="form-content">
+                        <form class="form subscribe"
+                            novalidate
+                            action="<?php /* @escapeNotVerified */ echo $block->getFormActionUrl(); ?>"
+                            method="post"
+                            data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+                            id="newsletter-validate-detail">
+                            <div class="field newsletter">
+                                <div class="control">
+                                    <input name="email" type="email" id="newsletter"
+                                                placeholder="<?php /* @escapeNotVerified */ echo __('Your email ...'); ?>"
+                                                data-validate="{required:true, 'validate-email':true}"/>
+                                </div>
+                                <div class="actions">
+                                    <button class="action subscribe primary" title="<?php /* @escapeNotVerified */ echo __('Subscribe'); ?>" type="submit">
+                                        <span><?php /* @escapeNotVerified */ echo __('Subscribe'); ?></span>
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="no-show-checkbox">
+                                <input type="checkbox" name="vehicle" value="isShowAg" id="isShowAg" >
+                                <label for="isShowAg"><?php echo __('Don\'t show this popup again'); ?></label>
+                                <br>
+                            </div>
+                        </form>
+                   </div>
+
+                   <div class="share-link">
+                        <ul class="social-list">
+                            <li class="social-item">
+                                <a class="circle spin display-flex" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $shareLink;?>">
+                                    <i class="icon-facebook-1"></i> 
+                                </a>
+                            </li>
+                            <li class="social-item">
+                                <a class="circle spin display-flex" href="https://twitter.com/home?status=<?php echo $shareLink;?>"> <i class="icon-twitter"></i> </a>
+                            </li>
+                            <li class="social-item">
+                                <a class="circle spin display-flex" href="https://plus.google.com/share?url=<?php echo $shareLink;?>"> <i class="icon-gplus"></i> </a>
+                            </li>
+                            <li class="social-item ">
+                                <a class="circle spin display-flex" href="https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source=<?php echo $shareLink;?>"> <i class="icon-linkedin-1"></i> </a>
+                            </li>
+                            <li class="social-item ">
+                                <a class="circle spin display-flex" href="https://pinterest.com/pin/create/button/?url=<?php echo $shareLink;?>"> <i class="icon-pinterest"></i> </a>
+                            </li>
+                        </ul>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-role='popup-letter']": {
+            "PHPCuong_Newsletter/js/process-popup-newsletter": {
+            }
+        }
+    }
+</script>

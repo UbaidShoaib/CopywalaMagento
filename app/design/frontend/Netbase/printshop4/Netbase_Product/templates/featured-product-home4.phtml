@@ -1,0 +1,226 @@
+<?php
+    /**
+     * Copyright 2017 Netbaseteam, Inc. All rights reserved.
+     */
+    ?>
+<?php /** @var $block \Netbase\Product\Block\NewProduct */ ?>
+<?php
+    $showWishlist = true;
+    $showCompare = true;
+    $_helper = $this->helper('Netbase\Product\Helper\Data');
+    $config = $_helper->getConfig("pro_new/general");
+    $categories = explode(',', $config['categories']);
+    $attributeId = $config['attribute_code'];
+    $title = $_helper->getTitle('pro_new/general/title');
+    $currentSymbol = $_helper->getCurrencySymbol();
+    $banner = $_helper->getBanner('pro_new/general/banner');
+    $tabs = $_helper->getAllTabs('pro_new/general/categories', 'new-product-tab');
+    $type = 'widget-new-grid'; 
+    ?>
+<?php if (!empty($categories)): ?>
+<section class="featured-product04 product-list" data-action = "tab-pro-new">
+    <div class="container">
+        <div class="section-content section-home8 row ">
+        	<div class="home-product-title col-md-4">
+        		<div class="heading">
+			        <h2><?php echo __('Featured Products') ?></h2>
+			    </div>
+			    <div class="bg-img">
+					<img src="<?php echo $block->getViewFileUrl('images/8-product.jpg'); ?>" alt="<?php echo __('img-product') ?>" /> 
+				</div>
+			</div> 
+            <div class="tab-list col-md-8">
+                <div class="tab-header">
+                    <ul class="title-list tabs-new ">
+                        <?php echo $tabs; ?>
+                    </ul>
+                </div>
+                <div class="tab-main"> 
+                    <div class="product-list-content"> 
+                        <?php $j = 1;foreach ($categories as $key => $cateId): ?> 
+                        <?php $productCollection = $block->getProductCollection($cateId); ?>
+                        
+                        <div class="products wrapper home-product-slider <?php if($j == 1){echo 'current loaded';} ?> products-grid nb-list"  data-rev = "<?php echo $cateId; ?>">
+							<?php if($j == 1): ?>	
+								
+	                        	<ol class="products list items product-items row display-clear">
+		                            <?php $i=0; foreach ($productCollection as $key => $_product): ?>		                            
+		                            <li class="product product-item item col-sm-6 col-md-4 col-lg-4">
+		                                <div class="product-item-info" data-container="product-grid">
+		                                    <?php      
+		                                        $originalPrice = $_product->getPrice();  //200 
+		                                        $specialPrice = $_product->getSpecialPrice();  
+		                                        ?>
+		                                    <?php if(($specialPrice)&&($specialPrice <= $originalPrice)){?>	
+		                                    <div class="sale">
+		                                        <span> 
+		                                        <?php
+		                                            $saleof= abs(($specialPrice/($originalPrice))*100-100);
+		                                            echo '- ';    
+		                                            print_r(floor($saleof));
+		                                            echo '%'; 
+		                                            ?>									 
+		                                        </span> 
+		                                    </div>
+		                                    <?php } ?>
+		                                    <?php
+		                                        $image = 'category_page_grid' or 'category_page_list';
+		                                        $_imagehelper = $this->helper('Magento\Catalog\Helper\Image'); 
+		                                        $productImage = $_imagehelper->init($_product, $image)->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(250)->getUrl();
+		                                        ?>
+		                                    <div class="product-item-actions-wrap">
+		                                        <a href="<?php echo $_product->getProductUrl() ?>" class="product photo product-item-photo display-flex" tabindex="-1">
+		                                        <img class="product-image-photo" alt="" src="<?php echo $productImage; ?>" />
+		                                        </a> 
+		                                        <div class="product actions product-item-actions"> 
+		                                            <?php
+		                                                $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+		                                                ?> 
+		                                            <div class="actions-primary">
+		                                            	<?php
+					                                        $objectManagerr = \Magento\Framework\App\ObjectManager::getInstance();
+					                                        $objBlockk = $objectManagerr->get('\Netbaseteam\Calculatorshipping\Block\Calculatorshipping');
+				                                        ?>
+				                                        <?php if($objBlockk->_EnableModule()) : ?>
+				                                            <div class="calculator actions-all">
+				                                                <a data-product-id="<?php echo $_product->getId(); ?>" class="netbase-calculator netbase_calculator_button netbase-calculator-button" title="Calculator Shipping" >
+				                                                    <span><i class="icon-truck-1" style="font-size: 18px;"></i></span></a>
+				                                            </div>
+				                                        <?php endif ?>
+			                                            <?php if ($_product->isSaleable()): ?>
+			                                                <?php if ($_product->getTypeInstance()->hasRequiredOptions($_product)): ?>
+			                                                    <button class="action tocart primary one"
+			                                                            data-mage-init='{"redirectUrl":{"url":"<?php /* @escapeNotVerified */ echo $block->getAddToCartUrl($_product) ?>"}}'
+			                                                            type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart') ?>">
+			                                                        <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+			                                                    </button>
+			                                                <?php else: ?>
+			                                                    <?php
+			                                                        $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper') ; 
+			                                                        $postDatas = $_helper->getAddToCartPostParams($_product);
+			                                                        $postData = json_encode($postDatas);
+			                                                    ?>
+			                                                    <button class="action tocart primary two"
+			                                                            data-post='<?php /* @escapeNotVerified */ echo $postData; ?>'
+			                                                            type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart') ?>">
+			                                                        <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+			                                                    </button>
+			                                                <?php endif; ?>
+			                                            <?php else: ?>
+			                                                <?php if ($_product->getIsSalable()): ?>
+			                                                    <div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+			                                                <?php else: ?>
+			                                                    <div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+			                                                <?php endif; ?>
+			                                            <?php endif; ?>
+			                                        </div>
+		                                            <?php if ($showWishlist || $showCompare): ?>
+		                                            <?php
+		                                                $objectManagerr = \Magento\Framework\App\ObjectManager::getInstance();
+		                                                $objBlock = $objectManagerr->get('\Magento\CatalogWidget\Block\Product\ProductsList');
+		                                                ?>
+		                                            <div class="actions-secondary" data-role="add-to-links"> 
+		                                                <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showWishlist): ?>
+		                                                <a href="#"
+		                                                    data-post='<?php /* @escapeNotVerified */ echo $objBlock->getAddToWishlistParams($_product); ?>'
+		                                                    class="action towishlist" data-action="add-to-wishlist"
+		                                                    title="<?php /* @escapeNotVerified */ echo __('Add to Wish List') ?>">
+		                                                <span>Add to Wish List</span>
+		                                                </a>
+		                                                <a href="#"
+		                                                    class="action tocompare"
+		                                                    title="<?php echo __('Add To Compare'); ?>"
+		                                                    aria-label="<?php echo $block->escapeHtml(__('Add to Compare')); ?>"
+		                                                    data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($_product); ?>'
+		                                                    role="button"> 
+		                                                    <span>Compare</span>
+		                                                </a>
+		                                                <?php endif; ?>  
+		                                            </div>
+		                                            <?php endif; ?>
+		                                        </div>
+		                                    </div>
+		                                    <div class="product details product-item-details">
+		                                        <div class="inner-product">
+		                                        	<strong class="product name product-item-name">
+			                                            <a title="<?php echo $_product->getName(); ?>" href="<?php echo $_product->getProductUrl() ?>" class="product-item-link">
+			                                            <?php echo substr($_product->getName(),0,30); ?>
+			                                            </a>
+			                                        </strong>
+                                                    <?php $regularPrice = $_product->getPriceInfo()->getPrice('regular_price'); ?>
+                                                    <div class="price-home">
+                                                        <span class='min-price'><?php echo $_helper->getFormatPrice(((string)$regularPrice->getMinRegularAmount()), 2) ?></span>
+                                                    </div>
+
+                                                    <div class="swatch">
+                                                        <?php echo $block->getProductDetailsHtml($_product); ?>
+                                                    </div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </li> 
+		                            <?php
+										if ($i == 5) {
+											break;
+										}
+										$i++; endforeach;
+									?>
+		                        </ol>
+		                    <?php endif; ?> 
+                        </div>
+                        <?php $j++; endforeach ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php if ($block->getCategoryShowAll()): ?>
+        <div class="action-box">
+            <a href="<?php echo $block->getCategoryShowAllUrl(); ?>" class="btn-link view-more-btn button">
+            <span><?php echo __('View More'); ?></span>
+            <i class="icon-right-thin"></i>
+            </a>
+        </div>
+        <?php endif ?>
+    </div>
+</section> 
+<script type="text/javascript">
+	//Home product tab
+	require([
+     'jquery',
+     'jquery/ui'
+    ],
+    function($, tabs) {
+        $(document).ready(function(){ 
+			$('.featured-product04 ul.tabs-new li').click(function(event){
+                var removeContent = $('.products.wrapper.home-product-slider.products-grid.nb-list');
+                removeContent.length ? removeContent.html('') : '';
+				var tab_id = $(this).attr('data-tab');
+				var cat_id = $(this).attr('data-rev'); 
+				$('.featured-product04 ul.tabs-new li').removeClass('current');
+				$('.featured-product04 .nb-list').removeClass('current');
+				$(".featured-product04 div[data-rev='"+cat_id+"']").addClass('current');
+				$(".featured-product04 li[data-rev='"+cat_id+"']").addClass('current');
+				var hasloaded = !$(".new-product div[data-rev='"+cat_id+"']").hasClass('loaded'); 
+				if (hasloaded) {
+					var param = {
+						'categoryId':  cat_id,
+						'type' : 'featureproduct',
+						'home' : 'home4',
+					};
+					$.ajax({
+						url: "<?php echo $this->getUrl('product/index/index') ?>",
+						data: param,
+						type: "POST",
+						showLoader: true,
+						dataType: 'json'
+					}).done(function (data) { 
+						var html = $(data.cate_view);
+						$(".featured-product04 div[data-rev='"+cat_id+"']").html(html);
+					});
+				} 
+				$(".featured-product04 div[data-rev='"+cat_id+"']").addClass('loaded');
+			})
+		});
+    });          
+</script>
+<?php endif ?>

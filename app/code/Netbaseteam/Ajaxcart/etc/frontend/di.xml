@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--/**
+* @category   Netbaseteam
+* @package    Netbaseteam_Ajaxcart
+* @copyright  Copyright (c) 2018 Netbaseteam
+*/-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\wishlist\Controller\Index\Index">
+        <plugin name="list_product_wishlist_update" type="Netbaseteam\Ajaxcart\Controller\wishlist\Cart" sortOrder="1"/>
+    </type>
+</config>

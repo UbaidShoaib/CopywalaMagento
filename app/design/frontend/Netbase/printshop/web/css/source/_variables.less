@@ -1,0 +1,176 @@
+//  Lib Theme
+//  ---------------------------------------------
+//
+//  Translate
+//  ---------------------------------------------
+	.lib-translate (@x, @y:0) {
+		-webkit-transform:       translate(@x, @y);
+		-moz-transform: 	 translate(@x, @y);
+		-ms-transform: 		 translate(@x, @y);
+		-o-transform: 		 translate(@x, @y);
+	}
+//  Grays Darker Color
+//  ---------------------------------------------
+	@gray__darker : lighten(@main_color_grays__general, 13.5%);
+//
+//  Gray Dark
+//  ---------------------------------------------
+	@gray__dark : lighten(@main_color_grays__general, 20%);
+//
+//  Visually hidden / show visually hidden
+//  ---------------------------------------------
+	@gray_normal : lighten(@main_color_grays__general, 33.5%);
+//
+//  Visually hidden / show visually hidden
+//  ---------------------------------------------
+	@gray_light : lighten(@main_color_grays__general, 46.7%);
+//
+//  Visually hidden / show visually hidden
+//  ---------------------------------------------
+	@gray_lighter : lighten(@main_color_grays__general, 93.5%);
+//
+//  Variables theme Core Config "General Config Color"
+//  ---------------------------------------------
+//
+//  Font Base
+//  ---------------------------------------------
+	@font-family__base: @font-family-name__base,@font-family__sans-serif; 
+//
+//  Font weight
+//  ---------------------------------------------
+
+	@font-weight__300:300;
+	@font-weight__400:400;
+	@font-weight__500:500;
+	@font-weight__600:600;
+	@font-weight__700:700;
+//
+//
+//  Color Theme
+//  ---------------------------------------------
+	@theme_color : @primary__color;
+//	
+//  Color Price Special
+//  ---------------------------------------------
+	@product-price-special__color :@theme_color;
+//
+//  title Color
+//  ---------------------------------------------
+	@color-label : @text__color;
+//
+//
+//  Product Readmore
+//  ---------------------------------------------
+	@product-readmore__color :@theme_color; 
+//
+//  Font Size
+//  ---------------------------------------------
+	@h6__font-size_base : @font-size__base;
+	@h5__font-size_base : @font-size__scale * @h6__font-size_base;
+	@h4__font-size_base : @font-size__scale * @h5__font-size_base;
+	@h3__font-size_base : @font-size__scale * @h4__font-size_base;
+	@h2__font-size_base : @font-size__scale * @h3__font-size_base;
+	@h1__font-size_base : @font-size__scale * @h2__font-size_base;
+//
+//  Color Product
+//  ---------------------------------------------
+	@active__color : #1c65dd;
+	@product-name-link__color : #444444; 
+	@product-name-link__color__visited : #1c65dd; 
+	@product-name-link__color__active :#1c65dd;
+	@text__color__muted : @color-gray60;
+	@account-nav-item-hover:#1c65dd;
+
+//
+//  Colors Nesting
+//  ---------------------------------------------
+	@page__background-color: @color-white;
+	@copyright__background-color: @color-gray56;
+
+//
+//  Icons Config
+//  ---------------------------------------------
+	@rating-icon__content : '\ea31';
+	@icon-wishlist-full: '\ef2a';   
+	@icon-compare-full: '\eac9';
+	@icon-cart: '\e800';
+	@icon-grid:'\ef08';
+	@icon-list: '\ef09';
+	@icon-success: '\e60e';
+	@icon-error: '\e61f';
+	@icon-edit: '\ef5c';
+	@icon-print: '\e624';
+	@icon-star-empty: '\e625';
+	@icon-download: '\e626';
+	@icon-private: '\e629';
+	@icon-present: '\e62a';
+	@icon-gift-registry: '\e62b';
+	@icon-remove: '\e87f';
+	@icon-update: '\eac9';
+	@icon-share: '\e868';
+	@icon-cart-list : '\ed63';
+	@icon-remove-x : '\e836';
+	@icon-quickview : '\ea2c';
+	@icon-calendar__font-size: 23px;
+	@icon-checkmark:'\ea3b';
+	@icon-up:'\e8cb';
+	@icon-down:'\e8cc';
+//
+//  Line Height Base
+//  ---------------------------------------------
+	@line-height__base: @scale__line-height__base * @base__line;
+//
+//  Lineheight Heading Base
+//  ---------------------------------------------
+	@heading__line-height__base: @scale__heading__line-height__base * @base__line-heading__line-height__base;
+//
+//  Sidebar
+//  ---------------------------------------------
+	@sidebar__background-color: @color-white-smoke;
+//
+//  Button Small
+//  ---------------------------------------------
+	@button__padding__s:@vertical__padding_small @horizontal__padding_small;
+	@button__border-radius__s:@border-radius__small;
+//
+//  Button Large
+//  ---------------------------------------------
+	@button__font-size__l: @vertical__padding_large @horizontal__padding_large;
+	@button__border-radius__l:@border-radius__large;
+//
+//  Button Base
+//  ---------------------------------------------
+	@button__padding: @vertical__padding_base @horizontal__padding_base;
+	@button__border-radius: @border-radius__base;
+//
+//  Font Design Config
+//  ---------------------------------------------
+
+//
+//  pager config
+//  ---------------------------------------------
+	@pager-icon__font-size: 1.266rem;
+	@pager-icon__font-margin: 0;
+	@pager-action__color:@theme_color; 
+	@pager-action__hover__color: @color-white;
+	@pager-action__active__color:@color-white;
+	@pager-icon__previous-content:'\e8c1';
+	@pager-icon__next-content : '\e8c2';  
+	@pager-current__color:@color-white;
+	@pager__color:@theme_color;
+//
+//  toolbar variables
+//  ---------------------------------------------
+	@toolbar-mode-icon-font-size: @font-size__base;
+	@toolbar-background: transparent;
+	@toolbar-element-background: @color-gray94;
+	@pager-action__background: @toolbar-element-background;
+	@pager-action__hover__background: darken(@toolbar-element-background, 7%);
+	@pager__font-weight: @font-weight__bold;
+	@toolbar-mode-icon-line-height : 2rem;
+	@toolbar-label-color:@color-gray40; // 666;
+	@border-color__mode-toolbar: @border-color__999;
+//
+//  form config input
+//  --------------------------------------------- 
+	@form-element-input__border-color:#999;

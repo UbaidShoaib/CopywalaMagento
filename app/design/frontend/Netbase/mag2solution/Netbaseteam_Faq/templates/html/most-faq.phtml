@@ -1,0 +1,51 @@
+	<?php
+/**
+ * Copyright 2017 Netbaseteam, Inc. All rights reserved.
+ */
+?>
+<?php /** @var $block Netbaseteam\Faq\Block\Faq\Mostfaq */ ?>
+<?php if ($block->hasMostFaq()): ?>
+	<?php
+		$faqs = $block->getMostFaqCollection();
+		$helper = $this->helper('Netbaseteam\Faq\Helper\Data');
+	?>
+	
+	<div class="title-box">
+		<h4><?php echo __('FAQ Antique') ?></h4>
+		<img src="<?php echo $block->getViewFileUrl('images/cms/gallery_title_icon_1.png'); ?>" alt="<?php echo __('gallery title') ?>" /> 
+		<h2><?php echo __('get the quick answers') ?></h2>
+	</div>
+	<div class="content-box faq-list" data-mage-init='{"activeView": {"item":".faq-list__item","classActive":"active","iconActive":"icon-minus-1", "iconInActive":"icon-plus-1"}}'>
+		<?php foreach ($faqs as $faq): ?>
+			<div class="faq-list__item">
+				<div class="faq-list__item-heading">
+					<h4 class="panel-title">
+						<a href="javascript:void(0);">
+							<?php echo __($faq->getQuestion())?>
+						</a>
+						<i data-icon="icon-plus-1" data-icon-active="icon-minus-1" class="icon-plus-1"></i>
+					</h4>
+				</div>
+				<div class="faq-list__item-body">
+					<div class="panel-content">
+						<?php echo __($faq->getAnswer())  ?>
+					</div>
+					<div class="panel-more-info">
+						<div class="more-info">
+							<?php if ($faq->getAuthorName()): ?>
+								<span class="author-title">Created by:</span>
+								<span class="author"><?php echo $faq->getAuthorName(); ?></span>
+							<?php endif ?>
+							<?php if ($faq->getCreatedTime()): ?>
+								<span class="created-time">
+									<?php echo __('on '.date("F j, Y", strtotime($faq->getCreatedTime())));?>
+								</span>
+							<?php endif ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php endforeach ?>
+	</div>
+<?php endif ?>
+

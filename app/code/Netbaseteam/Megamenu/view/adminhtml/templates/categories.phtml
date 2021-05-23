@@ -1,0 +1,76 @@
+
+
+<div id="caticon_main_div">
+
+	<div id="category_info_tabs_my_custom_tab_content">
+	
+		<div class="input-icon-class">
+			<b>Class Name:</b>
+			<input id="my_class_name" name="my_class_name" value="" type="text">
+		</div>
+		<div class="icon-select">
+			<div class="label admin__field-label">Icon Selected</div>
+			<span style="cursor: pointer;" class="icon-lock-open" id="my_class_cat" onclick="clickSpan(this);"></span>
+		</div>
+		<br>
+		<br>
+		<div class="container">
+			<?php
+			/* read json file */
+			$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+			$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+			$mediaUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+			$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+			$fileSystem = $objectManager->create('\Magento\Framework\Filesystem');
+			$mediaPath = $fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::APP)->getAbsolutePath();
+
+			$path = $mediaPath.'code/Netbaseteam/Megamenu/view/adminhtml/web/html/config.json';
+			
+			$rows = json_decode(file_get_contents($path), TRUE);
+			/* \zend_debug::dump($rows["glyphs"]); */
+			$glyphs = $rows["glyphs"];
+			$html = "";
+			for($i=1; $i < count($glyphs); $i++){
+				$val = $glyphs[$i]["css"];
+				$html .= '<span style="cursor: pointer;" class="icon-'.$val.'" id="'.$val.'"  onclick="clickSpan(this);"></span>';
+			}
+			echo $html;
+			?>
+			
+		</div>
+	
+	</div>
+</div>
+
+<script type="text/javascript">
+	window.onload = function(e){ 
+		a = document.getElementById("megamenu_main_iconselect_class").value;
+		document.getElementById("my_class_cat").classList.remove('icon-lock-open');
+		document.getElementById("my_class_cat").classList.add(a);	
+	}
+
+	
+	function clickSpan(object) {
+		document.getElementById("my_class_name").value = object.id;
+		document.getElementById("my_class_cat").className = "icon-" + object.id;
+		
+		require(['jquery'], function($){ 
+			jQuery("#my_class_cat").text("");
+			$("#megamenu_main_iconselect_class").val("icon-" + object.id);
+		});
+	}
+
+</script>
+<style type="text/css">
+	.input-icon-class {
+    	display: none;
+	}
+	span#my_class_cat {
+	    font-size: 3em;
+	}
+	.container {
+    	border-top: 1px solid gray;
+    	padding-top: 15px;
+	}
+</style>

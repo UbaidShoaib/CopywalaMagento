@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!--/**
+* @category   Netbaseteam
+* @package    Netbaseteam_Ajaxcart
+* @copyright  Copyright (c) 2018 Netbaseteam
+*/-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Netbaseteam_Ajaxcart" setup_version="1.1.0" />
+</config>

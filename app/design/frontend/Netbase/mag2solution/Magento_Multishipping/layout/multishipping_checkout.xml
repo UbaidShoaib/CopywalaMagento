@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Multishipping Checkout" design_abstraction="custom">
+    <body>
+        <attribute name="class" value="multishipping-checkout"/>
+    	<referenceContainer name="page.wrapper">
+            <container name="wrap-product.info.main" htmlTag="footer" htmlClass="page-footer">  
+                <block class="Netbase\Sun\Block\Template" name="footer_block" template="html/footer.phtml">
+                    <block class="Magento\Store\Block\Switcher" name="footer.store_switcher" template="switch/stores.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\Template" name="scrolltop-btn" template="Netbase_Sun::html/js/scroll-top.phtml" after="-" cacheable="false" />
+            </container> 
+        </referenceContainer>
+    </body>
+</page>

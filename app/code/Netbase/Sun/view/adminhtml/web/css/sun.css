@@ -1,0 +1,58 @@
+.wrap-config-sun .button-primary {
+  float: right;
+  padding: 0 20px;
+  line-height: 40px;
+  border-radius: 5px;
+}
+.hidden-config{
+	display: none;
+}
+.show-config{
+	display: block;
+}
+.wrap-config-sun .config table td input {
+	width: 100%;
+}
+.wrap-config-sun .label_title{
+	font-weight: bold;
+	font-size: 16px;
+	margin-top: 0px;
+    margin-bottom: 25px;
+    float: left;
+    margin-right: 20px;
+}
+.page-content .btn_primary{
+	float: right;
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
+.wrap-design-sun .config table td input {
+	width: 100%;
+}
+.wrap-design-sun .label_title{
+	font-weight: bold;
+	font-size: 16px;
+	margin-top: 0px;
+    margin-bottom: 25px;
+    float: left;
+    margin-right: 20px;
+}
+.wrap-content-sun .config table td input {
+	width: 100%;
+}
+.wrap-content-sun .label_title{
+	font-weight: bold;
+	font-size: 16px;
+	margin-top: 0px;
+    margin-bottom: 25px;
+    float: left;
+    margin-right: 20px;
+} 
+.action.remove{
+	margin-left: -352px;
+}
+.wrap-config-sun .accordion .config .note{
+	font-size: 12px;
+	color: #888;
+	font-style: italic;
+}

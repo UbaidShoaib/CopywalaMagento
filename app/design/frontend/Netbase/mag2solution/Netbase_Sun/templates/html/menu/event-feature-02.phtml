@@ -1,0 +1,63 @@
+
+<?php $end_date = $block->getEndDate(); ?>
+
+<div class="event-feature-02 row">
+	<div class="event-feature__text">
+		<div class="direction"><?php echo __('June 27, 2017 @ 09 - 11 am. PO Box CT16122 Collins Street, US')?>
+		</div>
+		<div class="slogan"><?php echo __('Five Past and Present Doll Artists  to Know and Love') ?></div>
+	</div>
+	<div class="event-feature__count-down">
+		<div class="countdown-outer">
+			<div class="countdown-inner">
+				<div class="deal-countdown" data-counter = "counter-02" data-date="<?php echo $end_date; ?>" data-options="{&quot;time&quot;: { &quot;Hours&quot;: { &quot;show&quot;: true }, &quot;Minutes&quot;: { &quot;show&quot;: true }, &quot;Seconds&quot;: { &quot;show&quot;: true }}}"></div> 
+			</div>
+		</div>  
+	</div>
+</div>
+<script type="text/javascript">
+	require(['jquery','owlCarousel','TimeCircles'], function($) { 
+		$(document).ready(function() {
+			$("[data-counter = 'counter-02']").TimeCircles({
+				circle_bg_color: "rgba(0,0,0.0)",
+				fg_width: 0,
+				bg_width: 10,
+				use_background: false,
+				text_size: 0.1167,
+				number_size: 0.5,
+				total_duration: "Auto",
+				direction: "Counter-clockwise",
+				use_top_frame: false,
+				start_angle: 0,
+				time: {
+					Days: {
+						show: true,
+						text: "Days",
+						color: "#ffffff", 
+						
+
+					},
+					Hours: {
+						show: true,
+						text: "Hours",
+						color: "#ffffff", 
+						
+					},
+					Minutes: {
+						show: true,
+						text: "Minutes",
+						color: "#ffffff", 
+						
+					},
+					Seconds: {
+						show: false,
+						text: "Seconds",
+						color: "#ffffff", 
+						
+					}
+				}
+			});
+		});
+         
+    }); 
+</script>

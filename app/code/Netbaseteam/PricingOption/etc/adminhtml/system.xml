@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="netbaseteam" translate="label" sortOrder="9000">
+            <label>Netbaseteam</label>
+        </tab>
+        <section id="pricingoption" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Pricing Option</label>
+            <tab>netbaseteam</tab>
+            <resource>Netbaseteam_PricingOption::config_pricingoption</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <!-- <field id="nbdesigner_number_of_decimals" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of decimals</label>
+                    <comment>This sets the number of decinal points show in deisplayed option prices</comment>
+                </field> -->
+                <field id="nbdesigner_option_display" translate="label" type="radios" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Options display style</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\DisplayStyle</source_model>
+                    <comment>This controls how options are displayed on the front-end .</comment>
+                </field>
+                <field id="nbdesigner_hide_add_cart_until_form_filled" translate="label" type="radios" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hide Add to cart button until all required options are chosen</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\Yesno</source_model>
+                    <comment>Check this to show the add to cart button only when all required options are filled.</comment>
+                </field>
+                <field id="nbdesigner_hide_summary_options" translate="label" type="radios" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hide summary options</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\Yesno</source_model>
+                    <comment>Hide summary options in product detail page.</comment>
+                </field>
+                <field id="nbdesigner_float_summary_options" translate="label" type="radios" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Float summary options</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="nbdesigner_hide_table_pricing" translate="label" type="radios" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hide table pricing</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\Yesno</source_model>
+                    <comment>Hide table pricing in product detail page.</comment>
+                </field>
+                <field id="nbdesigner_table_pricing_type" translate="label" type="radios" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Table pricing type</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\TablePricingType</source_model>
+                </field>
+                <field id="nbdesigner_hide_option_swatch_label" translate="label" type="radios" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hide option swatch description</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\Yesno</source_model>
+                    <comment>Hide option swatch description in Style 1 in product detail page.</comment>
+                </field>
+                <!-- <field id="nbdesigner_change_base_price_html" translate="label" type="radios" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change original product price</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\Yesno</source_model>
+                    <comment>Overwrite the original product price when options are changing.</comment>
+                </field> -->
+                <field id="nbdesigner_hide_zero_price" translate="label" type="radios" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto hide price if zero</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\Yesno</source_model>
+                    <comment>Hide the option price display if it is zero.</comment>
+                </field>
+                <field id="nbdesigner_tooltip_position" translate="label" type="radios" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Option description tooltip position</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\Position</source_model>
+                </field>
+                <field id="nbdesigner_ad_sublist_position" translate="label" type="radios" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Advanced dropdown sub list position</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\SubPosition</source_model>
+                </field>
+                <field id="nbdesigner_selector_increase_qty_btn" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>jQuery selector for increase/decrease quantity button</label>
+                    <comment>This is used to re calculate quantity discount price, example: .quantity-plus, .quantity-minus</comment>
+                </field>
+                <!-- <field id="nbdesigner_display_product_option" translate="label" type="radios" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display product options on</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Config\Source\DisplayProductOption</source_model>
+                </field> -->
+                <field id="upload_min" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Min size upload</label>
+                    <comment>Unit: Mb. Default: 0Mb</comment>
+                </field>
+                <field id="upload_max" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Max size upload</label>
+                    <comment>Unit: Mb. Default: 5Mb</comment>
+                </field>
+                <field id="unit" translate="label" type="select" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Dimensions Unit</label>
+                    <source_model>Netbaseteam\PricingOption\Model\Unit</source_model>
+                    <comment>This controls what unit you will define lengths in.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

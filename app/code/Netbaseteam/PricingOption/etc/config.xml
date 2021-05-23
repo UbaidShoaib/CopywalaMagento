@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <pricingoption>
+            <general>
+                <nbdesigner_number_of_decimals>2</nbdesigner_number_of_decimals>
+                <nbdesigner_option_display>1</nbdesigner_option_display>
+                <nbdesigner_hide_add_cart_until_form_filled>no</nbdesigner_hide_add_cart_until_form_filled>
+                <nbdesigner_hide_summary_options>no</nbdesigner_hide_summary_options>
+                <nbdesigner_float_summary_options>no</nbdesigner_float_summary_options>
+                <nbdesigner_hide_table_pricing>no</nbdesigner_hide_table_pricing>
+                <nbdesigner_table_pricing_type>1</nbdesigner_table_pricing_type>
+                <nbdesigner_hide_option_swatch_label>yes</nbdesigner_hide_option_swatch_label>
+                <nbdesigner_change_base_price_html>no</nbdesigner_change_base_price_html>
+                <nbdesigner_hide_zero_price>no</nbdesigner_hide_zero_price>
+                <nbdesigner_tooltip_position>top</nbdesigner_tooltip_position>
+                <nbdesigner_ad_sublist_position>b</nbdesigner_ad_sublist_position>
+                <nbdesigner_display_product_option>2</nbdesigner_display_product_option>
+                <upload_min>0</upload_min>
+                <upload_max>5</upload_max>
+                <unit>cm</unit>
+            </general>
+        </pricingoption>
+    </default>
+</config>

@@ -1,0 +1,79 @@
+& when (@media-common = true) { 
+    .cms-no-route.cms-noroute-index {
+        .page-title-wrapper {
+            .page-title {
+                display: block;
+                text-align: center;
+                .lib-css(color, @theme_color);
+                .lib-css(font-size, ceil(9 * @font-size__xxl));
+                text-shadow: 10px 0 10px @theme_color_silver;
+                font-weight: 600;
+                margin: 0;
+                padding-top: 100px;
+            }
+        }
+        .erorr-404 {
+            text-align: center;
+            .lib-css(font-size, @font-size__l);
+            width: 100%;
+            float: left;
+            padding: 75px 0;
+            .error-desc {
+                width: 53%;
+                text-align: center;
+                margin: auto;
+                padding-bottom: 12px;
+                p{
+                    margin: 0;
+                }
+            }
+            .go-back {
+                a {
+                    .lib-css(color, @theme_color);
+                }
+            }
+            .back-home {
+                .lib-css(margin-top, @indent__l);
+                a {
+                    text-transform: uppercase;
+                    border: 1px solid transparent;
+                    .lib-css(padding, ceil(.7 * @indent__s) @indent__s);
+                    .lib-css(background, @theme_color);
+                    .lib-css(color, @theme_color__white);
+                    .lib-css(font-size, @font-size__base);
+                    .lib-css(font-weight, @font-weight__700);
+                    .lib-css(margin, 0 ceil(.5 * @indent__s));
+                    .border-radius(5px);
+                    &:hover {
+                        border:1px solid @theme_color;
+                        .lib-css(color, @theme_color);
+                        background: none;
+                    }
+                }                
+            }
+        }
+    }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__s - 1)) {
+        .media-width('max', @screen__s);
+        .cms-no-route.cms-noroute-index {
+            .page-title-wrapper .page-title {
+                font-size: 140px;
+                padding-top: @indent__xxl;
+                font-weight: 900;
+            } 
+            .erorr-404 {
+                padding-bottom: @indent__xxl;
+                margin-top: 0;
+                .error-desc {
+                    width: 100%;
+                }
+                .back-home a {
+                    padding: 8px 20px;
+                }
+            }
+        }
+    }
+}

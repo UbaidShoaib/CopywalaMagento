@@ -1,0 +1,15 @@
+<?php $helper = $this->helper('\Netbaseteam\Themeconfig\Helper\Data'); ?>
+
+<style id="menu_icon_changed" type="text/css">
+<?php 
+$content_css_icon = $helper->_readFile('Netbaseteam_Themeconfig/css/menu_icon_changed.min.css');
+echo $content_css_icon;
+?>
+</style>
+
+<style id="style_config" type="text/css">
+<?php
+$content_css_config = $helper->_readFile('Netbaseteam_Themeconfig/css/style_config.min.css');
+echo $content_css_config;
+?>
+</style>

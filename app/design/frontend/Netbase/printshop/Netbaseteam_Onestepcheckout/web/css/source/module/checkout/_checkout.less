@@ -1,0 +1,100 @@
+/* Variables */
+@checkout-wrapper__margin: @indent__base;
+@checkout-wrapper__columns: 8;
+@checkout-step-title__border: @border-width__base solid @color-gray80;
+@checkout-step-title__font-size: 26px;
+@checkout-step-title__font-weight: @font-weight__light;
+@checkout-step-title__padding: @indent__s;
+@checkout-step-title-mobile__font-size: 18px;
+
+& when (@media-common = true) {
+    .checkout-index-index,
+    .checkout-onepage-success {
+        .page-title-wrapper {
+            &:extend(.abs-visually-hidden all);
+        }
+    }
+/*    .checkout-index-index
+    .modal-popup .modal-inner-wrap*/
+    .checkout-container {
+        &:extend(.abs-add-clearfix all);
+        .lib-css(margin, 0 0 @checkout-wrapper__margin);
+    } 
+    .opc-wrapper {
+        .lib-css(margin, 0 0 @checkout-wrapper__margin);
+        .opc {
+            &:extend(.abs-reset-list all);
+        }
+        .step-title {
+            &:extend(.abs-checkout-title all);
+        }
+
+        .step-content {
+            margin: 0 0 @indent__xl;
+        }
+    }
+    .checkout-index-index {
+        .checkout-column{
+            .admin__field-label{
+                line-height: 1.3rem;
+            }
+            .admin__control-radio + label::before, .admin__control-checkbox + label::before{
+                height: 1.3rem; 
+                width: 1.3rem;
+            }
+            .admin__field + .admin__field{
+                margin-top: 0.5rem;
+            }
+        }
+        .amcheckout-delivery-date{
+            margin-top: 15px;
+        }
+        .logo {
+            margin-left: 0;
+        }
+        .column {
+            width: 100%;    
+        }
+    }
+    // ============ CHECKOUT=============//
+    .step-title:before { 
+        background: @theme_color;
+    } 
+    .checkout-index-index {
+        span.price {
+            color: @theme_color;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__s)) {
+        .media-width('max', @screen__s);
+        .opc-wrapper {
+            .step-title {
+                .lib-css(font-size, @checkout-step-title-mobile__font-size);
+                border-bottom: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (min-width: (@screen__m)) {
+        .media-width('min', @screen__m);
+        .opc-wrapper {
+            &:extend(.abs-add-box-sizing-desktop-m all);
+            .lib-layout-column(2, 1, @checkout-wrapper__columns);
+            padding-right: @indent__l;
+        }
+    }
+}

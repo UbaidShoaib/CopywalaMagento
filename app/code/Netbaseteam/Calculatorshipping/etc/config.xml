@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <calculatorshipping>
+            <view>
+                <enabled>1</enabled>
+                <popup_title>You need to choose options for your item for estimaste shipping</popup_title>
+                <est_btn_title>Estimate Shipping</est_btn_title>
+                <show_est_cateogry>1</show_est_cateogry>
+                <auto_ip>1</auto_ip>
+            </view>
+        </calculatorshipping>
+    </default>
+</config>

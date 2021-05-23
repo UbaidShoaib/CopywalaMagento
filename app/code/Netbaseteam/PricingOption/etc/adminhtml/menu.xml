@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Netbaseteam_PricingOption::manage_pricingoptions" title="Pricing Options" module="Netbaseteam_PricingOption" sortOrder="30" resource="Netbaseteam_PricingOption::manage_pricingoptions" />
+
+        <add id="Netbaseteam_PricingOption::pricing_option" title="Options" module="Netbaseteam_PricingOption" sortOrder="10" parent="Netbaseteam_PricingOption::manage_pricingoptions" action="pricingoption/option/" resource="Netbaseteam_PricingOption::pricing_option"/>
+        <add id="Netbaseteam_PricingOption::config_pricingoption" title="Configuration" module="Netbaseteam_PricingOption" sortOrder="20" parent="Netbaseteam_PricingOption::manage_pricingoptions" action="adminhtml/system_config/edit/section/pricingoption" resource="Netbaseteam_PricingOption::config_pricingoption" /> -->
+	</menu>
+</config>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Netbaseteam Team
+ * @copyright Copyright (c) 2018 Cmsmart (http://www.cmsmart.net)
+ * @package Netbaseteam_Onestepcheckout
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="checkout" frontName="checkout">
+            <module name="Netbaseteam_Onestepcheckout" before="Magento_Checkout" />
+        </route>
+    </router>
+</config>

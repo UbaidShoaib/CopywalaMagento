@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Netbaseteam Team
+ * @copyright Copyright (c) 2018 Cmsmart (http://www.cmsmart.net)
+ * @package Netbaseteam_Onestepcheckout
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Netbaseteam_Onestepcheckout::checkout_settings" title="One Step Checkout" translate="title" module="Netbaseteam_Onestepcheckout" sortOrder="100" parent="Magento_Backend::system" resource="Netbaseteam_Onestepcheckout::checkout_settings"/>
+        <add id="Netbaseteam_Onestepcheckout::checkout_settings_fields" title="Manage Checkout Fields" translate="title" module="Netbaseteam_Onestepcheckout" sortOrder="10" parent="Netbaseteam_Onestepcheckout::checkout_settings" action="netbaseteam_onestepcheckout/field" resource="Netbaseteam_Onestepcheckout::checkout_settings_fields"/>
+    </menu>
+</config>

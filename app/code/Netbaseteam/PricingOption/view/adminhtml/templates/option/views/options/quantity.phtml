@@ -1,0 +1,98 @@
+<?php 
+    $jsonHelper = $this->helper('Magento\Framework\Json\Helper\Data');
+    $max_input_vars = abs( intval( ini_get( 'max_input_vars' ) ) );
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $resource = $objectManager->get('\Magento\Framework\Module\ResourceInterface');
+    $version = $resource->getDbVersion('Netbaseteam_PricingOption');
+    $options = $this->getPricingOptions();
+    $default_field = $this->getDefaultConfigField();
+?>
+<div class="section-container">
+    <p class="section-title"><input class="nbd-ip-readonly" value="<?php echo __('Quantity'); ?>" readonly=""></p>
+    <div class="nbd-section-wrap">
+        <div class="nbd-field-info">
+            <div class="nbd-field-info-1">
+                <label><b><?php echo __('Replace default quantity input'); ?></b></label>
+            </div>  
+            <div class="nbd-field-info-2">
+                <select name="options[quantity_enable]" ng-model="options.quantity_enable">
+                    <option value="y"><?php echo __('Yes'); ?></option>
+                    <option value="n"><?php echo __('No'); ?></option>
+                </select>
+            </div>                                                    
+        </div>      
+        <div class="nbd-field-info" ng-show="options.quantity_enable == 'y'">
+            <div class="nbd-field-info-1">
+                <label><b><?php echo __('Display type'); ?></b></label>
+            </div>
+            <div class="nbd-field-info-2">
+                <select name="options[quantity_type]" ng-model="options.quantity_type">
+                    <option value="r"><?php echo __('Range slider'); ?></option>
+                    <option value="d"><?php echo __('Dropdown'); ?></option>
+                    <option value="s"><?php echo __('Select box'); ?></option>
+                </select>
+            </div>      
+        </div>   
+        <div class="nbd-field-info" ng-show="options.quantity_type == 'r' && options.quantity_enable == 'y'">
+            <div class="nbd-field-info-1">
+                <p><label><b><?php echo __('Step value'); ?></b><nbd-tip data-tip="<?php echo __('Enter the step for the handle.'); ?>" ></nbd-tip></label></p>                                              
+            </div>  
+            <div class="nbd-field-info-2">
+                <div class="nbd-table-wrap" style="overflow: hidden;">
+                    <table class="nbd-table">
+                        <tr>
+                            <th><?php echo __('Min'); ?></th>
+                            <th><?php echo __('Max'); ?></th>
+                            <th><?php echo __('Step'); ?></th>
+                        </tr>   
+                        <tr>
+                            <td><input type="text" name="options[quantity_min]" class="nbd-short-ip" ng-model="options.quantity_min"/></td>
+                            <td><input type="text" name="options[quantity_max]" class="nbd-short-ip" ng-model="options.quantity_max"/></td>
+                            <td><input type="text" name="options[quantity_step]" class="nbd-short-ip" ng-model="options.quantity_step"/></td>
+                        </tr>
+                    </table>
+                </div>    
+            </div>      
+        </div>                                              
+        <div class="nbd-field-info">
+            <div class="nbd-field-info-1">
+                <label><b><?php echo __('Discount type base on quantity breaks'); ?></b></label>
+            </div>  
+            <div class="nbd-field-info-2">
+                <select name="options[quantity_discount_type]" ng-model="options.quantity_discount_type">
+                    <option value="f"><?php echo __('Fixed'); ?></option>
+                    <option value="p"><?php echo __('Percentage'); ?></option>
+                </select>
+            </div>      
+        </div>                                                                                       
+        <div class="nbd-field-info">
+            <div class="nbd-field-info-1">
+                <label>
+                    <b><?php echo __('Quantity breaks'); ?></b>
+                    <nbd-tip data-tip="<?php echo __('This option allows you to create different price tiers for product based on the quantity a customer buys. For example, set it so a customer needs to buy 5 or more to get 10% off, buy 10 or  to get 15% off, and so on.'); ?>"></nbd-tip>
+                </label>
+            </div>  
+            <div class="nbd-field-info-2">
+                <div class="nbd-table-wrap" style="overflow: hidden;">
+                    <table class="nbd-table">
+                        <tr>
+                            <th><?php echo __('Break'); ?></th>
+                            <th><?php echo __('Discount'); ?> ( {{options.quantity_discount_type == 'f' ? '-' : '-%'}} / <?php echo __('item'); ?>)</th>
+                            <th><?php echo __('Default'); ?></th>
+                            <th><?php echo __('Action'); ?></th>
+                        </tr>
+                        <tr ng-repeat="break in options.quantity_breaks">
+                            <td><input name="options[quantity_breaks][{{$index}}][val]" type="number" string-to-number class="nbd-short-ip" ng-model="break.val" ng-min="1"/></td>
+                            <td><input name="options[quantity_breaks][{{$index}}][dis]" class="nbd-short-ip" type="text" ng-model="break.dis"/></td>
+                            <td><input ng-checked="break.default" ng-click="update_default_quantity( $index )" name="options[quantity_breaks][{{$index}}][default]" type="checkbox" /></td>
+                            <td><a class="button nbd-mini-btn"  ng-click="remove_price_break($index)" title="<?php echo __('Delete'); ?>"><span class="dashicons dashicons-no-alt"></span></a></td>
+                        </tr>
+                    </table>
+                </div>   
+                <div style="margin-top: 5px;">
+                    <a class="button" ng-click="add_price_break()"><span class="dashicons dashicons-plus"></span> <?php echo __('Add more'); ?></a>
+                </div>                                                    
+            </div>      
+        </div>   
+    </div>      
+</div>

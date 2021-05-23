@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Netbaseteam_Themeconfig::themeconfig" title="Themeconfig" sortOrder="0">
+                    <resource id="Netbaseteam_Themeconfig::layout_manage" title="Admin Theme Layouts" sortOrder="5" >
+                        <resource id="Netbaseteam_Themeconfig::layout_header" title="Header" sortOrder="10"/>
+                        <resource id="Netbaseteam_Themeconfig::layout_content" title="Content" sortOrder="10"/>
+                        <resource id="Netbaseteam_Themeconfig::layout_footer" title="Footer" sortOrder="10"/>
+                        <resource id="Netbaseteam_Themeconfig::layout_menu" title="Menu" sortOrder="10"/>
+                    </resource>
+                    <resource id="Netbaseteam_Themeconfig::main_manage" title="Main Area" sortOrder="10">
+                        <resource id="Netbaseteam_Themeconfig::main_area" title="Logo &amp; Avarta" sortOrder="10"/>
+                    </resource>
+                    <resource id="Netbaseteam_Themeconfig::status_manage" title="Status Color" sortOrder="10">
+                        <resource id="Netbaseteam_Themeconfig::status_order" title="Order" sortOrder="10"/>
+                        <resource id="Netbaseteam_Themeconfig::status_product" title="Product" sortOrder="10"/>
+                    </resource>
+                    <resource id="Netbaseteam_Themeconfig::menu_manage" title="Menu: Position and Icon" sortOrder="30">
+                        <resource id="Netbaseteam_Themeconfig::menu_position" title="Menu Position" sortOrder="10"/>
+                        <resource id="Netbaseteam_Themeconfig::menu_icon" title="Menu Icon" sortOrder="10"/>
+                    </resource>
+                    <resource id="Netbaseteam_Themeconfig::general_manage" title="General Settings" sortOrder="40">
+                        <resource id="Netbaseteam_Themeconfig::general_setting" title="Configuration" sortOrder="10"/>
+                    </resource>
+                    <resource id="Netbaseteam_Themeconfig::tool_manage" title="Import &amp; Export Config" sortOrder="50">
+                        <resource id="Netbaseteam_Themeconfig::tool_import" title="Import" sortOrder="10"/>
+                        <resource id="Netbaseteam_Themeconfig::tool_export" title="Export" sortOrder="10"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

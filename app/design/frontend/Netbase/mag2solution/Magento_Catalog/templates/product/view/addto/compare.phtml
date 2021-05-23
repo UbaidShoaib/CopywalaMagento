@@ -1,0 +1,16 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Catalog\Product\View\Addto\Compare */
+
+?>
+<?php $_product = $block->getProduct(); ?>
+<div product-id="<?php echo $_product->getId(); ?>" qty="1" id="btn-shipping" class="btn-shipping"><i class="icon-truck"></i></div>
+<a href="#" data-post='<?php /* @escapeNotVerified */ echo $block->getPostDataParams();?>'
+        data-role="add-to-links"
+        class="action tocompare"><i class="icon-arrows-cw"></i></span></a>

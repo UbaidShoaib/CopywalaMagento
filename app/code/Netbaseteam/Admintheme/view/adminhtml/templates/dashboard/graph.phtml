@@ -1,0 +1,140 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+$period = $this->getRequest()->getParam('period');
+switch ($period)
+{
+    case '24h':
+    case '7d':
+    case '1m':
+    case '1y':
+    case '2y':
+        break;
+    default:
+        $period = '2y';
+}
+?>
+<div class="dashboard-diagram">
+    <div class="dashboard-diagram-switcher">
+        <div class="diagram-title">
+            <h4><?php echo __('Revenue'); ?></h4>
+            <span><?php echo __('monthly stats').'...'; ?></span>
+        </div>
+        <div class="diagram-times">
+            <label for="order_<?php echo $block->getHtmlId() ?>_period"
+               class="label">
+               <?php /*@escapeNotVerified*/ echo __('Select Range:') ?>
+            </label>
+            <select name="period" id="order_<?php echo $block->getHtmlId() ?>_period"
+                    onchange="changeDiagramsPeriod(this);" class="admin__control-select">
+                <?php foreach ($this->helper('Magento\Backend\Helper\Dashboard\Data')->getDatePeriods() as $value => $label): ?>
+                    <?php if (in_array($value, ['custom'])) {
+                        continue;
+                    } ?>
+                    <option value="<?php /* @escapeNotVerified */ echo $value ?>"
+                        <?php if ($block->getRequest()->getParam('period') == $value): ?> selected="selected"<?php endif; ?>
+                        ><?php /* @escapeNotVerified */ echo $label ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <?php if ($block->getCount()): ?>
+    <div class="dashboard-diagram-image">
+        <div class="data-nb">
+            <?php 
+                $datas = $this->getChartUrl(false);
+                $_htmlId = $this->getHtmlId();
+                if(!empty($datas['value']['quantity'])){
+                    $labely = $datas['value']['quantity'];
+                }
+                $a = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+
+                if(empty($labely)){
+                    $y = json_encode($a);
+                }else{
+                    $y = json_encode($labely);
+                }
+
+                $labelx = $datas['chart'];
+                $x = json_encode($labelx);         
+            ?>
+            <?php if ($_htmlId == 'orders') { ?>
+                <div style="width:100%">
+                    <div>
+                        <canvas id="orders" height="280" width="600"></canvas>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    require(['jquery','our_chart'], function($){
+                        var lineChartData = {
+                            labels : <?php echo $x; ?>,
+                            datasets : [
+                                {
+                                    label: "My Second dataset",
+                                    fillColor: "rgba(104,202,230,0.8)",
+                                    strokeColor: "rgba(104,202,230,1)",
+                                    pointColor: "rgba(104,202,230,1)",
+                                    pointStrokeColor: "#fff",
+                                    pointHighlightFill: "#fff",
+                                    pointHighlightStroke: "rgba(104,202,230,1)",
+                                    data : <?php echo $y; ?>
+                                }
+                            ]
+                        }
+                        var ctx = document.getElementById("orders").getContext("2d");
+                        window.myLine = new Chart(ctx).Line(lineChartData, {
+                            responsive: true,
+                            scaleFontFamily: "'Roboto'",
+                            tooltipTitleFontFamily: "'Roboto'",
+                        });
+                    });
+                </script>
+            <?php }else{ ?>
+                <div style="width:100%">
+                    <div>
+                        <canvas id="amounts" height="280" width="600"></canvas>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    require(['jquery','our_chart'], function($){
+                        jQuery(document).ready(function(){
+                            var lineChartData = {
+                                labels : <?php echo $x; ?>,
+                                datasets : [
+                                    {
+                                        label: "My Second dataset",
+                                        fillColor: "rgba(104,202,230,0.8)",
+                                        strokeColor: "rgba(104,202,230,1)",
+                                        pointColor: "rgba(104,202,230,1)",
+                                        pointStrokeColor: "#fff",
+                                        pointHighlightFill: "#fff",
+                                        pointHighlightStroke: "rgba(104,202,230,1)",
+                                        data : <?php echo $y; ?>
+                                    }
+                                ]
+                            }
+                            var ctx = document.getElementById("amounts").getContext("2d");
+                            window.myLine = new Chart(ctx).Line(lineChartData, {
+                                responsive: true,
+                                scaleFontFamily: "'Roboto'",
+                                tooltipTitleFontFamily: "'Roboto'",
+                            });      
+                        });
+                    });
+                </script>
+            <?php } ?>
+        </div>
+    </div>
+    <?php else: ?>
+    <div class="dashboard-diagram-nodata">
+        <span><?php /* @escapeNotVerified */ echo __('No Data Found') ?></span>
+    </div>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,63 @@
+<?php
+/**
+ * Copyright 2017 Netbaseteam, Inc. All rights reserved.
+ */
+?>
+<?php /** @var $block \Magento\Framework\View\Element\Template */ ?>
+
+<?php
+	$posts = $block->getPosts();
+	$leftPosition = true;
+?>
+<?php if ($posts): ?>
+<section class="lastest-post section-print container">
+	<div class="heading">
+		<h3><?php echo __('Lastest Posts') ?></h3>
+		<p><?php echo __('Interesting To Read') ?></p>
+	</div>
+	<div class="section-content row">
+		<?php foreach ($posts as $key => $post): ?>
+			<div class="lastest-post__item col-md-4">
+				<?php if ($post->getThumbnail()): ?>
+					<div class="post-img">
+						<a href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>">
+							<img src="<?php echo $block->getImagePostUrl($post->getThumbnail()); ?>" alt="<?php echo $post->getThumbnail(); ?>" />
+						</a>
+					</div>	
+				<?php endif ?>
+				<div class="post-content">
+					<?php if ($block->getCategoryName($post->getId())): ?>
+						<div class="cate-info">
+							<span><?php echo __($block->getCategoryName($post->getId())); ?></span>
+						</div>
+					<?php endif ?>
+					<h3 class="title">
+						<a href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>" title="<?php echo $post->getTitle(); ?>">
+							<?php echo __($post->getTitle()); ?>
+						</a>
+					</h3>
+					<div class="meta-btn">
+						<div class="meta-btn__item author">
+							<span><?php echo __($post->getAuthorName()); ?></span>
+						</div>
+						<div class="meta-btn__item create-time">	
+							<span><?php echo __($block->formatCreatedDate($post->getCreationTime())); ?></span>
+						</div>
+						
+						<!-- <div class="meta-btn__item num-comments">	
+							<span><?php echo __($block->getNumberComments($post->getId())) ?></span>
+							<span><?php echo __('Comments') ?></span>		
+						</div> -->
+					</div>
+					<div class="short-content">
+						<?php echo __($post->getShortContent()); ?>
+					</div>
+					<div class="action">
+						<a class="shop-btn read-more-btn button" href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>"><span><?php echo __('Read more'); ?></span> </a>
+					</div>
+				</div>
+			</div>
+		<?php endforeach ?>
+	</div>
+</section>
+<?php endif ?>

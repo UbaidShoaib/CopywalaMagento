@@ -1,0 +1,27 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var \Magento\Wishlist\Model\Item $item */
+$item = $block->getItem();
+$product = $item->getProduct();
+?>
+<?php
+    $objectManagerr = \Magento\Framework\App\ObjectManager::getInstance();
+    $objBlockk = $objectManagerr->get('\Netbaseteam\Calculatorshipping\Block\Calculatorshipping');
+?>
+<?php if($objBlockk->_EnableModule()) : ?>
+    <div class="calculator actions-all">
+        <a data-product-id="<?php echo $product->getId(); ?>" class="netbase-calculator netbase_calculator_button netbase-calculator-button" title="Calculator Shipping" >
+            <span><i class="icon-truck-1" style="font-size: 18px;"></i></span></a>
+    </div>
+<?php endif ?>
+<?php if ($product->isVisibleInSiteVisibility()): ?>
+    <a class="edit" href="<?php /* @escapeNotVerified */ echo $block->getItemConfigureUrl($item) ?>">
+        <span><?php /* @escapeNotVerified */ echo __('Edit') ?></span>
+    </a>
+<?php endif ?>

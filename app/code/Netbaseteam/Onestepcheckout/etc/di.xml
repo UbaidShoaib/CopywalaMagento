@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Netbaseteam Team
+ * @copyright Copyright (c) 2018 Cmsmart (http://www.cmsmart.net)
+ * @package Netbaseteam_Onestepcheckout
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="\Netbaseteam\Onestepcheckout\Api\PaymentInformationManagementInterface" type="Netbaseteam\Onestepcheckout\Model\PaymentInformationManagement" />
+    <preference for="\Netbaseteam\Onestepcheckout\Api\GuestPaymentInformationManagementInterface" type="Netbaseteam\Onestepcheckout\Model\GuestPaymentInformationManagement" />
+
+    <preference for="\Netbaseteam\Onestepcheckout\Api\GiftMessageInformationManagementInterface" type="Netbaseteam\Onestepcheckout\Model\GiftMessageInformationManagement" />
+    <preference for="\Netbaseteam\Onestepcheckout\Api\GuestGiftMessageInformationManagementInterface" type="Netbaseteam\Onestepcheckout\Model\GuestGiftMessageInformationManagement" />
+
+    <preference for="\Netbaseteam\Onestepcheckout\Api\FeeRepositoryInterface" type="Netbaseteam\Onestepcheckout\Model\FeeRepository" />
+    <preference for="\Netbaseteam\Onestepcheckout\Api\GiftWrapInformationManagementInterface" type="Netbaseteam\Onestepcheckout\Model\GiftWrapInformationManagement" />
+    <preference for="\Netbaseteam\Onestepcheckout\Api\GuestGiftWrapInformationManagementInterface" type="Netbaseteam\Onestepcheckout\Model\GuestGiftWrapInformationManagement" />
+
+    <preference for="\Netbaseteam\Onestepcheckout\Api\DeliveryInformationManagementInterface" type="Netbaseteam\Onestepcheckout\Model\DeliveryInformationManagement" />
+    <preference for="\Netbaseteam\Onestepcheckout\Api\GuestDeliveryInformationManagementInterface" type="Netbaseteam\Onestepcheckout\Model\GuestDeliveryInformationManagement" />
+
+    <preference for="\Netbaseteam\Onestepcheckout\Api\ItemManagementInterface" type="Netbaseteam\Onestepcheckout\Model\ItemManagement" />
+    <preference for="\Netbaseteam\Onestepcheckout\Api\GuestItemManagementInterface" type="Netbaseteam\Onestepcheckout\Model\GuestItemManagement" />
+
+    <preference for="\Netbaseteam\Onestepcheckout\Api\NewsletterManagementInterface" type="Netbaseteam\Onestepcheckout\Model\NewsletterManagement" />
+    <preference for="\Netbaseteam\Onestepcheckout\Api\GuestNewsletterManagementInterface" type="Netbaseteam\Onestepcheckout\Model\GuestNewsletterManagement" />
+
+    <type name="Magento\Sales\Block\Items\AbstractItems">
+        <plugin name="Netbaseteam_Onestepcheckout::OrderInfo" type="Netbaseteam\Onestepcheckout\Plugin\Order\Delivery" />
+    </type>
+    <type name="Magento\Quote\Model\Cart\CartTotalRepository">
+        <plugin name="Netbaseteam_Onestepcheckout::CartTotalRepository" type="Netbaseteam\Onestepcheckout\Plugin\Quote\Model\Cart\CartTotalRepository" />
+    </type>
+    <type name="Magento\Framework\Api\DataObjectHelper">
+        <plugin name="Netbaseteam_Onestepcheckout::DataObjectHelper" type="Netbaseteam\Onestepcheckout\Plugin\Framework\Api\DataObjectHelperPlugin"/>
+    </type>
+    <type name="Magento\Payment\Model\Info">
+        <plugin name="Netbaseteam_Onestepcheckout::PaymentModelInfo" type="Netbaseteam\Onestepcheckout\Plugin\Payment\Model\Info" />
+    </type>
+</config>

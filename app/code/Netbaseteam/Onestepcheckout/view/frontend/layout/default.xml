@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Netbaseteam Team
+ * @copyright Copyright (c) 2018 Cmsmart (http://www.cmsmart.net)
+ * @package Netbaseteam_Onestepcheckout
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name='root'>
+            <block class="Netbaseteam\Onestepcheckout\Block\Navigation\CssFileInclude"
+                   name="amcheckout_css_include"
+                   ifconfig="netbaseteam_onestepcheckout/netbaseteam_information/css_include"
+            />
+        </referenceContainer>
+    </body>
+</page>

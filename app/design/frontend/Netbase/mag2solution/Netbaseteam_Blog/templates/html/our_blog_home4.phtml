@@ -1,0 +1,79 @@
+<?php
+/**
+ * Copyright 2017 Netbaseteam, Inc. All rights reserved.
+ */
+?>
+<?php /** @var $block \Magento\Framework\View\Element\Template */ ?>
+
+<?php
+	$posts = $block->getPosts();
+	//var_dump(count($posts));die;
+	$leftPosition = true;
+?>
+<?php if ($posts): ?>
+<section class="section-home8 our-blog04">
+	<div class="container">
+		<div class="heading">
+			<h2><?php echo __('Our Blog') ?></h2>
+			<p><?php echo __('Read our blog to update the trend of the phone cases world and get new information') ?></p>
+		</div>
+		<div class="section-content">
+			<div class="row">
+			<?php $i=0; ?>
+			<?php foreach ($posts as $key => $post): ?>
+				<?php if ($leftPosition): ?>
+					<?php $leftPosition = false; ?>
+					<?php else :?>
+						<?php //$leftPosition = true; ?>
+						<div class="our-blog04__item col-md-6"> 
+							<div class="our-blog__inner row">
+								<?php if ($post->getThumbnail()): ?>
+									<div class="post-img col-md-6 effect-6">
+										<a class="inner" href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>">
+											<img src="<?php echo $block->getImagePostUrl($post->getThumbnail()); ?>" alt="<?php echo __($post->getThumbnail()); ?>" />
+										</a>
+									</div>	
+								<?php endif ?>
+								<div class="post-content col-md-6">
+									<?php if ($block->getCategoryName($post->getId())): ?>
+										<div class="cate-info">
+											<span><?php echo __($block->getCategoryName($post->getId())); ?></span>
+										</div>
+									<?php endif ?>
+									<h3 class="title">
+										<a href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>" title="<?php echo __($post->getTitle()); ?>">
+											<?php echo __($post->getTitle()); ?>
+										</a>
+									</h3>
+									<div class="meta-btn">
+										<div class="meta-btn__item category">
+											<p><?php echo __('By:') ?></p>
+										</div>
+										<div class="meta-btn__item author">
+											<p><?php echo __($post->getAuthorName()); ?></p>
+										</div>
+										<div class="meta-btn__item create-time">	
+											<p><?php echo __($block->formatCreatedDate($post->getCreationTime())); ?></p>
+										</div>
+										
+										<!-- <div class="meta-btn__item num-comments">	
+											<span><?php echo __($block->getNumberComments($post->getId())) ?></span>
+											<span><?php echo __('Comments') ?></span>		
+										</div> -->
+									</div>
+									<div class="short-content">
+										<?php echo __($post->getShortContent()); ?>
+									</div>
+									<div class="action">
+										<a class="shop-btn read-more-btn button" href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>"><span><?php echo __('Read more'); ?></span> </a>
+									</div>
+								</div>
+							</div> 
+						</div>
+					<?php endif ?>
+			<?php endforeach ?>
+			</div>
+		</div>
+	</div>
+</section>
+<?php endif ?>

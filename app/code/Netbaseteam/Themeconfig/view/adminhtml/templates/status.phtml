@@ -1,0 +1,374 @@
+<?php 
+$helper = $this->helper('\Netbaseteam\Themeconfig\Helper\Data');
+$arr_status_order = $helper->getStatusOptions();
+$arr_status_product = array('enabled'=>'', 'disabled'=>'');
+$result = $helper->getStatusProduct();
+if (count($result)>0) {
+	if (isset($result[0]['value'])) {
+		$arr_status_product = json_decode($result[0]['value']);
+	}
+}
+?>
+<div id="body-overlay"><div><img src="<?php echo $this->getViewFileUrl('Netbaseteam_Themeconfig/images/loading.gif');?>" width="64px" height="64px"/></div></div>
+
+<div id="content_main_div">
+	<div class="layout-area">
+		<div class="row">
+			<h2 class="title">Status Color</h2>
+		</div>
+		<div class="row page-actions-buttons remarg-btn">
+			<button title="<?php echo __("Add Status Color"); ?>" type="button" class="action- scalable primary btn-add-status" <?php if (!$helper->getIsAllowed('Netbaseteam_Themeconfig::status_order')) { ?> disabled="disabled" <?php } ?>>
+				<span><?php echo __("Add Status Color"); ?></span>
+			</button>
+		</div>
+		<form class="frm-admin-config" action="" method="post">
+			<div class="row">
+				<div class="col no-padding s12 wrap-hztab">
+					<ul class="tabs">
+						<li class="tab col selected"><a class="active" href="#order">Order</a></li>
+						<li class="tab col"><a href="#product">Product</a></li>
+					</ul>
+				</div>
+				<div id="order" class="col no-padding s12 content-tab">
+					<table id="tb_order_status" class="responsive-table striped table-status-color">
+						<thead>
+							<tr>
+								<th>Status Name</th>
+								<th>Status Code</th>
+								<th>Status Color</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<select class="filter-status-color" style="padding: 5px;">
+										<option value="">All Status Name</option>
+										<?php for ($i=0; $i < count($arr_status_order); $i++) { ?>
+											<option value="<?php echo $arr_status_order[$i]['status']; ?>"><?php echo $arr_status_order[$i]['label']; ?></option>
+										<?php } ?>
+									</select>
+								</td>
+								<td>
+									<select class="filter-status-color" style="padding: 5px;">
+										<option value="">All Status Code</option>
+										<?php for ($i=0; $i < count($arr_status_order); $i++) { ?>
+											<option value="<?php echo $arr_status_order[$i]['status']; ?>"><?php echo $arr_status_order[$i]['status']; ?></option>
+										<?php } ?>
+									</select>
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<?php for ($i=0; $i < count($arr_status_order); $i++) { ?>
+								<tr data-key="<?php echo $arr_status_order[$i]['status']; ?>" data-type="order" class="row-status">
+									<td>
+										<div class="wrap-normal"><?php echo $arr_status_order[$i]['label']; ?></div>
+										<div class="wrap-edit">
+											<input type="text" value="<?php echo $arr_status_order[$i]['label']; ?>" class="admin_control-text field-simple-text status_name"/>
+										</div>
+									</td>
+									<td>
+										<div class="wrap-normal"><?php echo $arr_status_order[$i]['status']; ?></div>
+										<div class="wrap-edit">
+											<input type="text" value="<?php echo $arr_status_order[$i]['status']; ?>" class="admin_control-text field-simple-text status_code" disabled="disabled"/>
+										</div>
+									</td>
+									<td>
+										<div class="admin__field-control field-pick-color no-padding" style="border: none;">
+											<div class="selected-color"></div>
+											<input class="admin_control-text status_color" type="text" value="<?php echo (isset($arr_status_order[$i]['color'])?$arr_status_order[$i]['color']:''); ?>" autocomplete="off" style="background: transparent;">
+										</div>
+									</td>
+									<td>
+										<div class="wrap-normal">
+											<a href="#" class="btn-admin-action btn-edit-status">Edit</a>
+											<!-- <a href="#" class="btn-admin-action btn-remove-status">Delete</a> -->
+										</div>
+										<div class="wrap-edit">
+											<?php if ($helper->getIsAllowed('Netbaseteam_Themeconfig::status_order')) { ?>
+												<a href="#" class="btn-admin-action btn-save-status">Save</a>
+											<?php } ?>
+											<a href="#" class="btn-admin-action btn-cancel-status">Cancel</a>
+										</div>
+									</td>
+								</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+				<div id="product" class="col no-padding s12 content-tab">
+					<table id="tb_product_status" class="responsive-table striped table-status-color">
+						<thead>
+							<tr>
+								<th>Status Name</th>
+								<th>Status Code</th>
+								<th>Status Color</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td>
+									<select class="filter-status-color" style="padding: 5px; text-transform: capitalize;">
+										<option value="">All Status Code</option>
+										<?php foreach ($arr_status_product as $k => $v) { ?>
+											<option value="<?php echo $k; ?>"><?php echo $k; ?></option>
+										<?php } ?>
+									</select>
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<?php foreach ($arr_status_product as $k => $v) { ?>
+								<tr data-key="<?php echo $k; ?>" data-type="product" class="row-status">
+									<td style="text-transform: capitalize;"><?php echo $k; ?></td>
+									<td>
+										<div class="wrap-normal"><?php echo $k; ?></div>
+										<div class="wrap-edit">
+											<input type="text" value="<?php echo $k; ?>" class="admin_control-text field-simple-text status_code" disabled="disabled" />
+										</div>
+									</td>
+									<td>
+										<div class="admin__field-control field-pick-color no-padding" style="border: none;">
+											<div class="selected-color"></div>
+											<input class="admin_control-text status_color" type="text" value="<?php echo $v; ?>" autocomplete="off" style="background: transparent;">
+										</div>
+									</td>
+									<td>
+										<div class="wrap-normal">
+											<a href="#" class="btn-admin-action btn-edit-status">Edit</a>
+										</div>
+										<div class="wrap-edit">
+											<?php if ($helper->getIsAllowed('Netbaseteam_Themeconfig::status_product')) { ?>
+												<a href="#" class="btn-admin-action btn-save-status">Save</a>
+											<?php } ?>
+											<a href="#" class="btn-admin-action btn-cancel-status">Cancel</a>
+										</div>
+									</td>
+								</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<?php 
+$url_process_status = $this->getUrl('themeconfig/status/setting', ['status' => true, '_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+?>
+
+<script type="text/javascript">
+	require([
+		'jquery',
+		'spectrum',
+		'materialize'
+		], function($){
+			$(document).ready(function() {
+				$('.tabs').tabs();
+
+				$(".tab").click(function() {
+					$(".tab").removeClass('selected');
+					$(this).addClass('selected');
+					if ($(this).children('a').attr('href')=='#product') {
+						$('.btn-add-status').attr('disabled', 'disabled');
+					} else {
+						<?php if ($helper->getIsAllowed('Netbaseteam_Themeconfig::status_order')) { ?>
+							$('.btn-add-status').removeAttr('disabled');
+						<?php } ?>
+					}
+				});
+
+				var bgtab = $('.btn-add-status').css('background-color');
+				$('head').append('<style type="text/css">.frm-admin-config .wrap-hztab .tabs .tab.selected { background-color: '+bgtab+'; } .frm-admin-config .wrap-hztab { border-bottom: 2px solid '+bgtab+'; }</style>');
+
+				$('body').on('click', '.btn-edit-status', function(event) {
+					event.preventDefault();
+					$(this).parents('.row-status').find('.wrap-normal').hide();
+					$(this).parents('.row-status').find('.wrap-edit').show();
+					$(this).parents('.row-status').find('.field-pick-color').spectrum("enable");
+					$(this).parents('.row-status').find('.field-pick-color .admin_control-text').removeAttr('disabled');
+					$(this).parents('.row-status').attr({
+						'data-name': $(this).parents('.row-status').find('.status_name').val(),
+						'data-color': $(this).parents('.row-status').find('.status_color').val(),
+						'data-key': $(this).parents('.row-status').find('.status_code').val()
+					});
+				});
+
+				$('body').on('click', '.btn-cancel-status', function(event) {
+					event.preventDefault();
+					$(this).parents('.row-status').find('.wrap-normal').show();
+					$(this).parents('.row-status').find('.wrap-edit').hide();
+					$(this).parents('.row-status').find('.field-pick-color').spectrum("disable");
+					$(this).parents('.row-status').find('.field-pick-color .admin_control-text').attr('disabled', 'disabled');
+
+					$(this).parents('.row-status').find('.status_name').val($(this).parents('.row-status').attr('data-name'));
+					$(this).parents('.row-status').find('.status_code').val($(this).parents('.row-status').attr('data-key'));
+					$(this).parents('.row-status').find('.status_color').val($(this).parents('.row-status').attr('data-color'));
+					$(this).parents('.row-status').find('.selected-color').css('background', $(this).parents('.row-status').attr('data-color'));
+				});
+
+				$('body').on('click', '.btn-save-status', function(event) {
+					event.preventDefault();
+					var name = $(this).parents('.row-status').find('.status_name').val();
+					var color = $(this).parents('.row-status').find('.status_color').val();
+					var key = $(this).parents('.row-status').find('.status_code').val();
+					if (name!='' && key!='') {
+						if ($.type($(this).parents('.row-status').attr('data-act'))!=='undefined') {
+							var arr_code = $('.row-status td:nth-child(2) .wrap-normal').map(function() {
+								return $(this).text().toLowerCase();
+							}).get();
+							if (arr_code.indexOf(key.toLowerCase()) > -1) {
+								alert('We found another order status with the same order status code.');
+							} else if (validateCode(key)==false) {
+								alert('Please use only letters (a-z), numbers (0-9) or underscore (_) in field status code, and the first character should be a letter.');
+							} else {
+								$(this).parents('.row-status').attr({
+									'data-name': name,
+									'data-color': color,
+									'data-key': key
+								});
+								sendData($(this).parents('.row-status'));
+							}
+						} else {
+							$(this).parents('.row-status').attr({
+								'data-name': name,
+								'data-color': color,
+								'data-key': key
+							});
+							sendData($(this).parents('.row-status'));
+						}
+					} else {
+						alert('Missing data!');
+					}
+				});
+
+				$(".btn-add-status").click(function(event) {
+					event.preventDefault();
+					var new_row = $("#tb_order_status > tbody tr:nth-child(2)").clone();
+					new_row.attr('data-key','');
+					new_row.attr('data-act','add');
+					new_row.find('td:not(:nth-child(4)) .wrap-normal').text('');
+					new_row.find('.wrap-normal').hide();
+					new_row.find('.wrap-edit').show().children('.status_code').val('');
+					new_row.find('.wrap-edit').show().children('.status_name').val('');
+					new_row.find('.field-pick-color').children('.status_color').val('');
+					$("#tb_order_status > tbody tr:nth-child(2)").before(new_row);
+					
+					init_pickcolor(new_row.find('.field-pick-color'));
+					new_row.find('.field-pick-color').spectrum("enable");
+					new_row.find('.admin_control-text').removeAttr('disabled');
+				});
+
+				$(".field-pick-color").each(function() {
+					var $el = $(this);
+					init_pickcolor($el);
+				});
+
+				$(".filter-status-color").change(function(event) {
+					event.preventDefault();
+					$(this).parents(".table-status-color").find('.filter-status-color').val($(this).val());
+					$(this).parents(".table-status-color").find("tbody tr").show();
+					if ($(this).val()!='') {
+						$(this).parents(".table-status-color").find("tbody tr").not(':nth-child(1)').not('[data-key="'+$(this).val()+'"]').hide();
+					} else {
+						$(this).parents(".table-status-color").find("tbody tr").show();
+					}
+				});
+
+			});
+
+function validateCode(code) 
+{
+	var re = /^[a-z][a-z0-9]+(?:_[a-z0-9]+)*$/;
+	return re.test(code);
+}
+
+function init_pickcolor($el) {
+	$el.children('.selected-color').css({
+		'background': $el.children('.admin_control-text').val()
+	});
+	$el.children('.admin_control-text').css({
+		'width': $el.width() - $el.children('.selected-color').width()
+	});
+	$el.children('.admin_control-text').attr('disabled', 'disabled');
+
+	$el.spectrum({
+		allowEmpty:true,
+		color: $el.children('.admin_control-text').val(),
+		showInput: true,
+		showInitial: true,
+		showAlpha: true,
+		showSelectionPalette: true,
+		preferredFormat: "hex",
+		showButtons: false,
+		disabled: true,
+		move: function(color) {
+			try {
+				color_izone = color.toHexString();
+			} catch(error) {
+				color_izone = '#ffffff';
+			}
+			setPickColor($el, color_izone);
+		},
+		change: function(color) {
+			try {
+				color_izone = color.toHexString();
+			} catch(error) {
+				color_izone = '#ffffff';
+			}
+			setPickColor($el, color_izone);
+		}
+	});
+}
+
+function setPickColor($el, color) {
+	$el.children('.selected-color').css({
+		'background': color
+	});
+	$el.children('.admin_control-text').val(color);
+}
+
+function sendData(row) {
+	var formData = new FormData();
+	var form_key = FORM_KEY;
+	formData.append('form_key', form_key);
+	formData.append('type_status', row.attr('data-type'));
+	formData.append('key_status', row.attr('data-key'));
+	formData.append('name_status', row.attr('data-name'));
+	formData.append('color_status', row.attr('data-color'));
+	formData.append('act_status', ($.type(row.attr('data-act'))!=='undefined'?'add':'edit'));
+
+	$.ajax({
+		url: '<?php echo $url_process_status ?>',
+		type: "POST",
+		data:  formData,
+		beforeSend: function(){$("#body-overlay").show();},
+		contentType: false,
+		processData: false,
+		cache: false,
+		success: function(data)
+		{
+			$("#body-overlay").hide();
+			alert(data.message);
+			if (data.message=='Successful') {
+				row.removeAttr('data-act');
+				row.find('td:nth-child(1) .wrap-normal').text(row.attr('data-name'));
+				row.find('td:nth-child(2) .wrap-normal').text(row.attr('data-key'));
+				$('.wrap-normal').show();
+				$('.wrap-edit').hide();
+
+				$('.table-status-color').find('.field-pick-color').spectrum("disable");
+				$('.table-status-color').find('.field-pick-color .admin_control-text').attr('disabled', 'disabled');
+			}
+		},
+		error: function() {} 	        
+	});
+}
+
+});
+
+</script>

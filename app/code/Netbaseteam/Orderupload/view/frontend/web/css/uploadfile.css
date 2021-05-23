@@ -1,0 +1,461 @@
+.ajax-file-upload-statusbar {
+  border: 1px solid #d6d6d6; /*tuan edit #0ba1b5 to #d6d6d6*/
+  margin-top: 10px;
+  /*margin-right: 10px; tuan remove*/
+  /*margin: 5px; tuan remove*/
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 15px 5px 5px 15px;
+  position: relative;
+  margin-top: 0;
+  /* width: 488px; */
+  width: 100% !important;
+  float:left;
+  margin-bottom: 20px;
+}
+
+.ajax-file-upload-filename {
+  /*width: 300px; tuan remove*/
+  height: auto;
+  margin: 15px 5px 5px 0px;
+}
+
+.ajax-file-upload-filesize {
+  width: 50px;
+  height: auto;
+  margin: 0 5px 5px 0px;
+  display: inline-block;
+  vertical-align:middle;
+}
+.ajax-file-upload-progress {
+  margin: 5px 10px 5px 0px;
+  position: relative;
+  width: 250px;
+  border: 1px solid #ddd;
+  padding: 1px;
+  border-radius: 3px;
+  display: inline-block;
+  color:#FFFFFF;
+}
+.ajax-file-upload-bar {
+  background-color: #0ba1b5;
+  width: 0;
+  height: 22px;/*tuan edit 20 to 22*/
+  border-radius: 3px;
+  color:#FFFFFF;
+}
+.ajax-file-upload-percent {
+  position: absolute;
+  display: inline-block;
+  top: 3px;
+  left: 48%
+}
+.ajax-file-upload-red {
+  -moz-box-shadow: inset 0 39px 0 -24px #e67a73;
+  -webkit-box-shadow: inset 0 39px 0 -24px #e67a73;
+  box-shadow: inset 0 39px 0 -24px #e67a73;
+  background-color: #e4685d;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  display: inline-block;
+  color: #fff;
+  font-family: arial;
+  font-size: 13px;
+  font-weight: normal;
+  padding: 4px 15px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #b23e35;
+  cursor: pointer;
+  vertical-align: top;
+  margin: 5px 10px 5px 0px;
+}
+.ajax-file-upload-green {
+  background-color: #77b55a;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  color: #fff;
+  font-family: arial;
+  font-size: 13px;
+  font-weight: normal;
+  padding: 4px 15px;
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: 0 1px 0 #5b8a3c;
+  vertical-align: top;
+  margin: 5px 8px 5px 0px;
+  /* width: 110px; */
+  text-align: center;
+}
+.ajax-file-upload-comment {
+  background-color: #77b55a;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  margin: 0;
+  padding: 0;
+  display: inline-block !important;
+  color: #fff;
+  font-family: arial;
+  font-size: 13px;
+  font-weight: normal;
+  padding: 4px 15px;
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: 0 1px 0 #5b8a3c;
+  vertical-align: top;
+  margin: 5px 10px 5px 0px;
+}
+
+.comment-hide {
+  display: none;
+}
+
+.ajax-file-upload {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px 20px;
+  cursor:pointer;
+  line-height:26px; /*Tuan edit 20 to 26*/
+  height:35px;
+  margin:0 10px 10px 0;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  color: #888;
+  text-decoration: none;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -moz-box-shadow: 0 2px 0 0 #e8e8e8;
+  -webkit-box-shadow: 0 2px 0 0 #e8e8e8;
+  box-shadow: 0 2px 0 0 #e8e8e8;
+  padding: 6px 10px 4px 10px;
+  color: #fff;
+  background: #2f8ab9;
+  border: none;
+  -moz-box-shadow: 0 2px 0 0 #13648d;
+  -webkit-box-shadow: 0 2px 0 0 #13648d;
+  box-shadow: 0 2px 0 0 #13648d;
+  vertical-align: middle;
+}
+.ajax-file-upload:hover{
+  background: #3396c9;
+  -moz-box-shadow: 0 2px 0 0 #15719f;
+  -webkit-box-shadow: 0 2px 0 0 #15719f;
+  box-shadow: 0 2px 0 0 #15719f;
+}
+
+.ajax-upload-dragdrop
+{
+
+  border:2px dotted #A5A5C7;
+  /* width:420px; */
+  width: 100% !important;
+  color: #DADCE3;
+  text-align:left;
+  vertical-align:middle;
+  padding:10px 10px 0px 10px;
+}
+
+.ajax-file-upload-preview {
+  width: 100px; 
+  height: 96px;
+}
+
+.talbe-upload-files{
+  float:left;
+  width:100%; 
+  margin-top: 7px;
+}
+
+.state-hover
+{
+    border:2px solid #A5A5C7;
+}
+.ajax-file-upload-container
+{
+  margin:20px 0px 20px 0px;
+}
+
+.upload-info {
+    margin-bottom: 10px;
+}
+
+.upload-btn{
+  float:left;
+  margin-bottom:20px;
+  margin-top:20px;
+  width:100%;
+}
+
+.upload-info textarea{
+  width: 100%;
+}
+
+.upload-info >img{
+  float:left;
+  margin-right:20px;
+}
+
+.upload-info .file-title {
+    background-color: #cdcdcd;
+    font-weight: bold;
+    height: 27px;
+    padding-left: 10px;
+    padding-top: 6px;
+    /* width: 451px; */
+    width: 100%;
+  border-radius: 1px;
+  margin-top: 0;
+}
+
+.orderupload-comment {
+  float: right;
+  margin-right: 20px;
+  position: absolute;
+  right: 0;
+  top: 5px;
+  /* width: auto; */
+  width: 337px;
+  margin-top: 10px;
+  border-color: #d6d6d6; /*tuan add*/
+}
+
+/* cong added */
+
+@media(max-width: 1280px){
+
+}
+
+@media(max-width: 1024px){
+  .product-info-main .ajax-file-upload-statusbar, .product-info-main .ajax-upload-dragdrop{
+    width: 100% !important;
+  }
+  .ajax-file-upload-statusbar {
+    width: 520px;
+  }
+  #shopping-cart-table .upload-info .file-title {
+    width: 100%;
+  }
+}
+@media(max-width: 800px){
+  .ajax-file-upload-statusbar {
+    width: 360px !important;
+  }
+  
+  /* .upload-info textarea {
+    width: 325px !important;
+  } */
+  .product-info-main .ajax-file-upload-statusbar, .product-info-main  .ajax-upload-dragdrop  {
+    /* width: 313px !important; */
+    width: auto !important;
+  }
+  /* #shopping-cart-table .ajax-file-upload-container .file-title {
+    width: 331px !important;
+  } */
+  #shopping-cart-table .ajax-file-upload-container .orderupload-comment {
+    width: 210px;
+  }
+}
+@media(max-width: 768px){
+  .ajax-file-upload-statusbar {
+    width: 332px !important;
+  }
+  
+  /* product detail */
+  .product-info-main .ajax-upload-dragdrop{
+    /*width: 465px !important;*/
+    width: 100% !important;
+  }
+  
+  .product-info-main .ajax-file-upload-statusbar{
+    /*width: 465px !important;*/
+    width: 100% !important;
+  }  
+  #shopping-cart-table .ajax-file-upload-statusbar {
+    width: 315px !important;
+  }
+  
+  /* #shopping-cart-table .upload-info .file-title {
+    width: 285px !important;
+  } */
+  
+  /* #shopping-cart-table .ajax-file-upload-container .upload-info textarea {
+    width: 281px;
+  } */
+}
+/*tuan add*/
+@media(max-width: 640px){
+  .ajax-file-upload-statusbar{
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  .ajax-file-upload-statusbar{
+    padding: 3%;
+    text-align: center;
+  }
+  .ajax-file-upload-statusbar img{
+    margin: 0 auto 10px;
+    float: none;
+  }
+  .product-info-main .ajax-file-upload-container .orderupload-comment{
+    width: 94% !important;
+    margin: 0;
+    right: 3%;
+    top: 160px;
+  }
+  .ajax-file-upload-filename{
+    margin: 0 auto 110px auto;
+    text-align: center;
+  }
+  .ajax-file-upload-container.not-detail .ajax-file-upload-filename{
+    margin-bottom: 10px;
+  }
+  .ajax-file-upload-container.not-detail textarea{
+    width: 100% !important;
+  }
+  .ajax-file-upload-progress{
+    display: block;
+    margin: 5px auto 10px;
+  }
+  
+  .ajax-file-upload-green {
+    width: 110px;
+  }
+  
+  .ajax-file-upload-red{
+    padding: 13px 15px;
+  }
+  
+  .product-info-main .ajax-upload-dragdrop {
+    width: 100% !important;
+  }
+  
+  .product-info-main .ajax-file-upload-statusbar{
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  .product-info-main .ajax-file-upload-container .orderupload-comment {
+    width: 572px;
+  }
+  
+  .product-info-main .ajax-file-upload-container .ajax-file-upload-red {
+    padding: 4px 15px;
+  }
+  
+  /* #shopping-cart-table .upload-info .file-title {
+    width: 285px !important;
+  } */
+  
+  .order-details-items .ajax-file-upload-container .ajax-file-upload-filename {
+    margin-bottom: 10px;
+    width: 240px;
+  }
+
+}
+@media (max-width: 568px) {
+ /* .product-info-main .ajax-file-upload-container .orderupload-comment {
+    width: 500px !important;
+  }*/
+}
+@media(max-width: 480px){
+  /*.product-info-main .ajax-file-upload-container .orderupload-comment {
+    width: 421px !important;
+  }*/
+}
+@media(max-width: 380px){
+  .ajax-file-upload-progress{
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+  }
+  .ajax-file-upload-filename{
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ajax-file-upload-green {
+    width: 110px;
+  }
+}
+@media(max-width: 360px){
+  .product-info-main .ajax-file-upload-container .ajax-file-upload-red {
+    padding: 4px 15px;
+  }
+  
+  .product-info-main .ajax-file-upload-statusbar {
+    width: 100% !important;
+  }
+  
+  .product-info-main .ajax-upload-dragdrop {
+    width: 100% !important;
+  }
+  
+  .product-info-main .ajax-file-upload-container {
+    float: left;
+    clear: both;
+  }
+  
+  #label_oderupload {
+    width: 100% !important;
+  }
+}
+@media(max-width: 320px){
+  /*.product-info-main .ajax-file-upload-container .orderupload-comment {
+    width: 281px !important;
+  }*/
+  
+  #shopping-cart-table .ajax-file-upload-statusbar {
+    width: 215px !important;
+    box-sizing: border-box;
+  }
+  
+  #shopping-cart-table .ajax-file-upload-filename.file-title >span{
+    width: 150px;
+    float: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
+  /* #shopping-cart-table .upload-info .file-title {
+    width: 195px !important;
+  } */
+}
+@media(min-width: 992px) and (max-width: 1199px){
+  .product-info-main  .orderupload-comment {
+    width: 60%;
+    margin-right: 2%;
+  }
+  .ajax-file-upload-preview{
+    width: 35% !important;
+    height: auto !important;
+  }
+}
+@media(min-width: 768px) and (max-width: 991px){
+  .product-info-main  .orderupload-comment {
+    width: 50%;
+    margin-right: 2%;
+  }
+  .ajax-file-upload-preview{
+    width: 45% !important;
+    height: auto !important;
+  }
+}
+/* Chrome and Safari CSS hack: */
+/* @media screen and (-webkit-min-device-pixel-ratio:0){
+  .upload-info textarea{
+    width: 317px;
+  }
+}*/

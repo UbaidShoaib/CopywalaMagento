@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Netbaseteam_Megamenu/js/treeview/jquery.treeview.css"/>
+		<css src="Netbaseteam_Megamenu/css/style.css"/>
+        <css src="Netbaseteam_Megamenu/css/fontello.css"/>
+		<link src="Netbaseteam_Megamenu/js/lib/prototype.js"/>
+		<link src="Netbaseteam_Megamenu/js/h.js"/>
+		<link src="Netbaseteam_Megamenu/js/v.js"/>
+    </head>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Netbaseteam\Megamenu\Block\Adminhtml\Megamenu\Edit" name="megamenu_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Netbaseteam\Megamenu\Block\Adminhtml\Megamenu\Edit\Tabs" name="megamenu_edit_tabs">
+                <block class="Netbaseteam\Megamenu\Block\Adminhtml\Megamenu\Edit\Tab\Main" name="megamenu_edit_tab_main"/>
+                
+                
+				<block class="Netbaseteam\Megamenu\Block\Adminhtml\Megamenu\Edit\Tab\Horizontal" name="megamenu_edit_tab_horizontal"/>
+				<block class="Netbaseteam\Megamenu\Block\Adminhtml\Megamenu\Edit\Tab\Vertical" name="megamenu_edit_tab_vertical"/>
+				
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">megamenu_edit_tab_main</argument>
+                </action>
+                
+				
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">horizontal_section</argument>
+                    <argument name="block" xsi:type="string">megamenu_edit_tab_horizontal</argument>
+                </action>
+				
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">vertical_section</argument>
+                    <argument name="block" xsi:type="string">megamenu_edit_tab_vertical</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

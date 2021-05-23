@@ -1,0 +1,574 @@
+//
+//  Extend fallback
+//  _____________________________________________
+//
+//
+//  Header Config
+//  ---------------------------------------------
+& when (@media-common = true) {
+	& when not (@class_list_header_1 = ""){
+		@length_header_1 : length(@class_list_header_1); 
+		.alert-class-list-header1(@class_list_header_1;@index) when (@index > 0) {
+			.alert-class-list-header1(@class_list_header_1; @index - 1); // decrement.
+			@name  : extract(@class_list_header_1, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__header_1 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__header_1;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__header_1;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__header_1;
+				        )
+				    }
+				}
+				& when (@custom__font-size__header_1 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__header_1;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__header_1;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__header_1;
+				        )
+				    }
+				}
+				& when (@custom__line-height__header_1 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__header_1;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_1;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_1;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-header1(@class_list_header_1;@length_header_1);
+	}
+	& when not (@class_list_header_2 = ""){
+		@length_header_2 : length(@class_list_header_2); 
+		.alert-class-list-header2(@class_list_header_2;@index) when (@index > 0) {
+			.alert-class-list-header2(@class_list_header_2; @index - 1); // decrement.
+			@name  : extract(@class_list_header_2, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__header_2 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__header_2;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__header_2;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__header_2;
+				        )
+				    }
+				}
+				& when (@custom__font-size__header_2 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__header_2;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__header_2;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__header_2;
+				        )
+				    }
+				}
+				& when (@custom__line-height__header_2 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__header_2;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_2;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_2;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-header2(@class_list_header_2;@length_header_2);
+	}
+	& when not (@class_list_header_3 = ""){
+		@length_header_3 : length(@class_list_header_3); 
+		.alert-class-list-header3(@class_list_header_3;@index) when (@index > 0) {
+			.alert-class-list-header3(@class_list_header_3; @index - 1); // decrement.
+			@name  : extract(@class_list_header_3, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__header_3 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__header_3;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__header_3;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__header_3;
+				        )
+				    }
+				}
+				& when (@custom__font-size__header_3 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__header_3;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__header_3;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__header_3;
+				        )
+				    }
+				}
+				& when (@custom__line-height__header_3 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__header_3;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_3;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_3;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-header3(@class_list_header_3;@length_header_3);
+	}
+	& when not (@class_list_header_4 = ""){
+		@length_header_4 : length(@class_list_header_4); 
+		.alert-class-list-header4(@class_list_header_4;@index) when (@index > 0) {
+			.alert-class-list-header4(@class_list_header_4; @index - 1); // decrement.
+			@name  : extract(@class_list_header_4, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__header_4 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__header_4;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__header_4;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__header_4;
+				        )
+				    }
+				}
+				& when (@custom__font-size__header_4 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__header_4;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__header_4;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__header_4;
+				        )
+				    }
+				}
+				& when (@custom__line-height__header_4 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__header_4;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_4;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_4;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-header4(@class_list_header_4;@length_header_4);
+	}
+	& when not (@class_list_header_5 = ""){
+		@length_header_5 : length(@class_list_header_5); 
+		.alert-class-list-header5(@class_list_header_5;@index) when (@index > 0) {
+			.alert-class-list-header5(@class_list_header_5; @index - 1); // decrement.
+			@name  : extract(@class_list_header_5, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__header_5 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__header_5;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__header_5;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__header_5;
+				        )
+				    }
+				}
+				& when (@custom__font-size__header_5 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__header_5;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__header_5;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__header_5;
+				        )
+				    }
+				}
+				& when (@custom__line-height__header_5 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__header_5;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_5;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__header_5;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-header5(@class_list_header_5;@length_header_5);
+	}
+}
+//
+//  footer Config
+//  --------------------------------------------- 
+& when (@media-common = true) {
+	& when not (@class_list_footer_1 = ""){
+		@length_footer_1 : length(@class_list_footer_1); 
+		.alert-class-list-footer1(@class_list_footer_1;@index) when (@index > 0) {
+			.alert-class-list-footer1(@class_list_footer_1; @index - 1); // decrement.
+			@name  : extract(@class_list_footer_1, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__footer_1 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__footer_1;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__footer_1;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__footer_1;
+				        )
+				    }
+				}
+				& when (@custom__font-size__footer_1 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__footer_1;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__footer_1;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__footer_1;
+				        )
+				    }
+				}
+				& when (@custom__line-height__footer_1 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__footer_1;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_1;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_1;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-footer1(@class_list_footer_1;@length_footer_1);
+	}
+	& when not (@class_list_footer_2 = ""){
+		@length_footer_2 : length(@class_list_footer_2); 
+		.alert-class-list-footer2(@class_list_footer_2;@index) when (@index > 0) {
+			.alert-class-list-footer2(@class_list_footer_2; @index - 1); // decrement.
+			@name  : extract(@class_list_footer_2, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__footer_2 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__footer_2;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__footer_2;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__footer_2;
+				        )
+				    }
+				}
+				& when (@custom__font-size__footer_2 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__footer_2;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__footer_2;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__footer_2;
+				        )
+				    }
+				}
+				& when (@custom__line-height__footer_2 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__footer_2;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_2;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_2;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-footer2(@class_list_footer_2;@length_footer_2);
+	}
+	& when not (@class_list_footer_3 = ""){
+		@length_footer_3 : length(@class_list_footer_3); 
+		.alert-class-list-footer3(@class_list_footer_3;@index) when (@index > 0) {
+			.alert-class-list-footer3(@class_list_footer_3; @index - 1); // decrement.
+			@name  : extract(@class_list_footer_3, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__footer_3 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__footer_3;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__footer_3;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__footer_3;
+				        )
+				    }
+				}
+				& when (@custom__font-size__footer_3 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__footer_3;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__footer_3;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__footer_3;
+				        )
+				    }
+				}
+				& when (@custom__line-height__footer_3 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__footer_3;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_3;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_3;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-footer3(@class_list_footer_3;@length_footer_3);
+	}
+	& when not (@class_list_footer_4 = ""){
+		@length_footer_4 : length(@class_list_footer_4); 
+		.alert-class-list-footer4(@class_list_footer_4;@index) when (@index > 0) {
+			.alert-class-list-footer4(@class_list_footer_4; @index - 1); // decrement.
+			@name  : extract(@class_list_footer_4, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__footer_4 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__footer_4;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__footer_4;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__footer_4;
+				        )
+				    }
+				}
+				& when (@custom__font-size__footer_4 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__footer_4;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__footer_4;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__footer_4;
+				        )
+				    }
+				}
+				& when (@custom__line-height__footer_4 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__footer_4;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_4;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_4;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-footer4(@class_list_footer_4;@length_footer_4);
+	}
+	& when not (@class_list_footer_5 = ""){
+		@length_footer_5 : length(@class_list_footer_5); 
+		.alert-class-list-footer5(@class_list_footer_5;@index) when (@index > 0) {
+			.alert-class-list-footer5(@class_list_footer_5; @index - 1); // decrement.
+			@name  : extract(@class_list_footer_5, @index);
+			.@{name}{ 
+				& when (@custom__fontfamily__footer_5 = custom){
+					.lib-font-family_config(
+			            @_font-family: @element__font-family__footer_5;
+			        );
+					a{
+				    	.lib-font-family_config(
+				            @_font-family: @a__font-family__footer_5;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-family_config(
+				            @_font-family: @heading__font-family__footer_5;
+				        )
+				    }
+				}
+				& when (@custom__font-size__footer_5 = custom){
+					.lib-font-size_config(
+			            @_font-size: @font-size__element__footer_5;
+			        );
+					a{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__link__footer_5;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-font-size_config(
+				            @_font-size: @font-size__heading__footer_5;
+				        )
+				    }
+				}
+				& when (@custom__line-height__footer_5 = custom){
+					.lib-line-height_config(
+			            @_line-height: @line-height__element__footer_5;
+			        );
+					a{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_5;
+				        )
+				    }
+				    h1,h2,h3,h4,h5,h6{
+				    	.lib-line-height_config(
+				            @_line-height: @line-height__link__footer_5;
+				        )
+				    }
+				}
+
+			}
+		}
+		.alert-class-list-footer5(@class_list_footer_5;@length_footer_5);
+	}
+}

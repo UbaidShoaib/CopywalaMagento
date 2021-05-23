@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Netbaseteam_Themeconfig::themeconfig" title="Theme Config" module="Netbaseteam_Themeconfig" sortOrder="30" resource="Netbaseteam_Themeconfig::themeconfig"/>
+        
+        <add id="Netbaseteam_Themeconfig::layout_manage" title="Admin Theme Layouts" module="Netbaseteam_Themeconfig" sortOrder="5" parent="Netbaseteam_Themeconfig::themeconfig" action="themeconfig/layout/" resource="Netbaseteam_Themeconfig::layout_manage"/>
+		<add id="Netbaseteam_Themeconfig::main_manage" title="Main Area" module="Netbaseteam_Themeconfig" sortOrder="10" parent="Netbaseteam_Themeconfig::themeconfig" action="themeconfig/main/" resource="Netbaseteam_Themeconfig::main_manage"/>
+		<add id="Netbaseteam_Themeconfig::status_manage" title="Status Color" module="Netbaseteam_Themeconfig" sortOrder="15" parent="Netbaseteam_Themeconfig::themeconfig" action="themeconfig/status/" resource="Netbaseteam_Themeconfig::status_manage"/>
+		<add id="Netbaseteam_Themeconfig::menu_manage" title="Menu: Position and Icon" module="Netbaseteam_Themeconfig" sortOrder="200" parent="Netbaseteam_Themeconfig::themeconfig" action="themeconfig/menu/" resource="Netbaseteam_Themeconfig::menu_manage"/>
+		<add id="Netbaseteam_Themeconfig::general_manage" title="General Settings" module="Netbaseteam_Themeconfig" sortOrder="300" parent="Netbaseteam_Themeconfig::themeconfig" action="themeconfig/general/" resource="Netbaseteam_Themeconfig::general_manage"/>
+		<add id="Netbaseteam_Themeconfig::tool_manage" title="Import &amp; Export Config" module="Netbaseteam_Themeconfig" sortOrder="500" parent="Netbaseteam_Themeconfig::themeconfig" action="themeconfig/tool/" resource="Netbaseteam_Themeconfig::tool_manage"/>
+	</menu>
+</config>

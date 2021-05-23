@@ -1,0 +1,50 @@
+& when (@media-common = true) {
+    .breadcrumbs {
+        strong {
+        	.lib-css(color, @_breadcrumbs-page-current__color);
+            .lib-css(font-weight,500);
+    	}
+    	.item:not(:last-child) {
+			&:after {
+                .lib-css(content, @_breadcrumbs-icon__font-content);
+                .lib-css(font-size, @_breadcrumbs-icon__font-size);
+                .lib-css(margin,0 17px);
+                color: #fff;
+            }
+    	}
+    }
+    // ============ BREACRUMB PAGE =============//
+    .customer-account-login, .customer-account-create, 
+    .page-products, .catalog-product-view,.multishipping-checkout-register{
+        .breadcrumbs {
+            .items {
+                padding: 23px 0;
+                clear: both;
+                float: left;
+                width: 100%;
+                li {
+                    display: inline-block;
+                    color: @text__color-description;
+                }
+                .item {
+                    a {
+                        line-height: 1.71;
+                        color: @text__color-description;
+                    } 
+                    &:last-child {
+                        color: @theme_color;
+                    }
+                }
+            }
+        }
+    }
+}
+& when (@media-common = true),
+    (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__m - 1)) {
+        .media-width('max', @screen__m); 
+        .breadcrumbs {
+            margin: @indent__s 0;
+        }
+    }
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <remove src="Netbaseteam_Blog::css/default.css" />
+    </head>
+    <body>
+        <referenceContainer name="page.wrapper"> 
+            <container name="container.wrapper.breadcrumbs" htmlClass="wrapper-breadcrumbs" htmlTag="div" after="sun_header" />
+        </referenceContainer>  
+        <referenceContainer name="container.wrapper.breadcrumbs">
+            <container name="wrapper.breadcrumbs" htmlClass="wrapper-breadcrumbs-inner" htmlTag="div" /> 
+             
+            <block class="Magento\Cms\Block\Block" name="image-title" after="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">image-blog</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <referenceContainer name="sidebar.additional">
+                <block class="Netbaseteam\Faq\Block\Faqcategory" name="category.faq.list" template="Netbaseteam_Faq::sidebar/faq_category.phtml" before="catalog.compare.sidebar" /> 
+                <!-- <block class="Netbaseteam\Faq\Block\Tagname" name="faq.sidebar.tagname" template="Netbaseteam_Faq::sidebar/tags.phtml" after="category.faq.list" ifconfig="faq/faq_page/faq_tag_list"/> -->
+                <referenceBlock name="brand_sidebar" remove="true"/>
+            </referenceContainer>
+        </referenceContainer> 
+        <move element="page.main.title" destination="wrapper.breadcrumbs" before="-"/>
+        <move element="breadcrumbs" destination="wrapper.breadcrumbs" after="-"/>
+        <move element="category.image" destination="container.wrapper.breadcrumbs" after="wrapper.breadcrumbs"/>
+        <referenceBlock name="brand_sidebar" remove="true"/>
+    </body>
+</page>

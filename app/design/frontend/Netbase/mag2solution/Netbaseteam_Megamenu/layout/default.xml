@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+    	<remove src="Netbaseteam_Megamenu/css/bootstrap.min.css" />
+    	<remove src="Netbaseteam_Megamenu/css/font-awesome.min.css" />
+    	<remove src="Netbaseteam_Megamenu/css/theme-default.css" />
+    	<remove src="Netbaseteam_Megamenu/css/fontello.css" />
+    </head>
+	<body>
+		<referenceBlock name="navigation.sections">
+			<action method="setTemplate">
+				<argument name="template" xsi:type="string">Netbaseteam_Megamenu::main_menu.phtml</argument>
+			</action>
+		</referenceBlock>
+		
+		<referenceContainer name="page.wrapper">
+			<block class="Netbaseteam\Megamenu\Block\Megamenu" name="megamenu.mobi" template="Netbaseteam_Megamenu::topmenu-pwrap.phtml" before="-"/>
+		</referenceContainer>
+	</body>
+</page>

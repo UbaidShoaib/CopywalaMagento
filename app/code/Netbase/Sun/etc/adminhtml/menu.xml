@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Netbase_Sun::nb_all" title="Netbase" module="Netbase_Sun" sortOrder="10" resource="Netbase_Sun::all"/>
+        <add id="Netbase_Sun::nb_theme" title="Netbase Theme 2.0.0" module="Netbase_Sun" sortOrder="10" parent="Netbase_Sun::nb_all" resource="Netbase_Sun::all"/> 
+        <add id="Netbase_Sun::general_settings" title="General Setting" module="Netbase_Sun" sortOrder="5" parent="Netbase_Sun::nb_theme" action="netbasesun/system/general" resource="Netbase_Sun::general_settings"/>
+		<add id="Netbase_Sun::design_settings" title="Design Config" module="Netbase_Sun" sortOrder="20" parent="Netbase_Sun::nb_theme" action="netbasesun/system/design" resource="Netbase_Sun::design_settings"/> 
+		<add id="Netbase_Sun::design_contents" title="Design Content Config" module="Netbase_Sun" sortOrder="25" parent="Netbase_Sun::nb_theme" action="netbasesun/system/content" resource="Netbase_Sun::design_contents"/> 
+
+		<add id="Netbase_Sun::theme_settings" title="Settings Panel" module="Netbase_Sun" sortOrder="30" parent="Netbase_Sun::nb_theme" action="adminhtml/system_config/edit/section/sun_settings" resource="Netbase_Sun::theme_settings"/>
+    </menu>
+</config>

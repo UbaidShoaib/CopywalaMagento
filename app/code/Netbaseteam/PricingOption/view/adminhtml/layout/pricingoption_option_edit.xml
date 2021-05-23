@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="Netbaseteam_PricingOption::css/admin-options.css"/>
+        <css src="Netbaseteam_PricingOption::css/colorpicker.css"/>
+        <link src="Netbaseteam_PricingOption::js/pricingoption.min.js"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Netbaseteam\PricingOption\Block\Adminhtml\Option\Edit" name="pricingoption_option_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Netbaseteam\PricingOption\Block\Adminhtml\Option\Edit\Tabs" name="pricingoption_edit_tabs">
+                <block class="Netbaseteam\PricingOption\Block\Adminhtml\Option\Edit\Tab\Main" name="pricingoption_edit_tab_main"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">pricingoption_edit_tab_main</argument>
+                </action>
+				
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">pricingoption_edit_tab_applyfor</argument>
+                    <argument name="block" xsi:type="array">
+                        <item name="label" xsi:type="string">Apply For</item>
+                        <item name="title" xsi:type="string">Apply For</item>
+                        <item name="url" xsi:type="helper" helper="Netbaseteam\PricingOption\Helper\Data::getProductsGridUrl"></item>
+                        <item name="class" xsi:type="string">ajax</item>
+                    </argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="string">1</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

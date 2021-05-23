@@ -1,0 +1,29 @@
+.est_option_content{
+	width:auto;
+	position:relative;
+	display:inline-block;
+}
+.est_option_content img{
+	width:100%;
+}
+
+.est_option_content .btn-loading-image-wrapper{
+	display:none;
+	position:absolute;
+	top:13%;
+	left:0;
+	width:33%;
+	z-index: 9999;
+}
+.est_option_content .btn-loading-image-wrapper{
+	display:table-cell;
+}
+.est_option_content .btn-loading-image{
+	width:100%;
+	height:39px;
+	background-color:rgba(0, 191, 255, 0.39);
+	border:none;
+	color:white;
+	font-weight:bold;
+	font-size:14px;
+}

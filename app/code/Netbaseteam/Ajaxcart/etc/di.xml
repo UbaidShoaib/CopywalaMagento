@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--/**
+* @category   Netbaseteam
+* @package    Netbaseteam_Ajaxcart
+* @copyright  Copyright (c) 2018 Netbaseteam
+*/-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Netbaseteam\Ajaxcart\Controller\AbstractController\AjaxcartLoaderInterface" type="\Netbaseteam\Ajaxcart\Controller\AbstractController\AjaxcartLoader" />
+    <type name="Magento\Checkout\Controller\Cart\Add">
+        <plugin disabled="false" name="ajax_add_to_cart" sortOrder="2" type="Netbaseteam\Ajaxcart\Plugin\Checkout\Cart\Add"/>
+    </type>
+    <preference for="Magento\Catalog\Block\Product\ListProduct" type="Netbaseteam\Ajaxcart\Block\Magento\Catalog\Product\ListProduct" />
+</config>

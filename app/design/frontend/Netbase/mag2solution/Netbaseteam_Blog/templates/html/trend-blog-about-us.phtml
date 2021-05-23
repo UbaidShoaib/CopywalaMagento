@@ -1,0 +1,117 @@
+<?php
+/**
+ * Copyright 2017 Netbaseteam, Inc. All rights reserved.
+ */
+?>
+<?php /** @var $block \Magento\Framework\View\Element\Template */ ?>
+
+<?php
+	$posts = $block->getPosts();
+	$leftPosition = true;
+?>
+<?php if ($posts): ?>
+<section class="trend-blog section-antique">
+	<div class="container">
+		<div class="title-box">
+			<h4><?php echo __('Lastest new of week') ?></h4>
+			<img src="<?php echo $block->getViewFileUrl('images/cms/gallery_title_icon_1.png'); ?>" alt="<?php echo __('gallery title') ?>" /> 
+			<h2><?php echo __('Antique trend blog') ?></h2>
+		</div>
+		<div class="content-box">
+			<?php foreach ($posts as $key => $post): ?>
+				<?php if ($leftPosition): ?>
+					<?php $leftPosition = false; ?>
+					<div class="trend-blog__item row">
+						<div class="post-content col-md-6 col-md-push-6">
+							<?php if ($block->getCategoryName($post->getId())): ?>
+								<div class="cate-info">
+									<span><?php echo __($block->getCategoryName($post->getId())); ?></span>
+								</div>
+							<?php endif ?>
+							<h3 class="title">
+								<a href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>" title="<?php echo __($post->getTitle()); ?>">
+									<?php echo __($post->getTitle()); ?>
+								</a>
+							</h3>
+							<div class="meta-btn">
+								<div class="meta-btn__item create-time">	
+									<i class="icon-clock"></i>
+									<span><?php echo __($block->formatCreatedDate($post->getCreationTime())); ?></span>
+								</div>
+								<div class="meta-btn__item author">
+									<i class="icon-user"></i>
+									<span><?php echo __($post->getAuthorName()); ?></span>
+								</div>
+								<div class="meta-btn__item num-comments">	
+									<i class="icon-comment"></i>
+									<span><?php echo __($block->getNumberComments($post->getId())) ?></span>
+									<span><?php echo __('Comments') ?></span>		
+								</div>
+							</div>
+							<div class="short-content">
+								<?php echo __($post->getShortContent()); ?>
+							</div>
+							<div class="action">
+								<a class="shop-btn read-more-btn button" href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>"><span><?php echo __('Read more'); ?></span> </a>
+							</div>
+						</div>
+
+						<?php if ($post->getThumbnail()): ?>
+							<div class="post-img col-md-6 col-md-pull-6">
+								<a href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>">
+									<img src="<?php echo $block->getImagePostUrl($post->getThumbnail()); ?>" alt="<?php echo __($post->getThumbnail()); ?>" />
+								</a>
+							</div>	
+						<?php endif ?>
+					</div>
+				<?php else :?>
+					<?php $leftPosition = true; ?>
+					<div class="trend-blog__item row">
+						<div class="post-content col-md-6 ">
+							<?php if ($block->getCategoryName($post->getId())): ?>
+								<div class="cate-info">
+									<span><?php echo __($block->getCategoryName($post->getId())); ?></span>
+								</div>
+							<?php endif ?>
+							<h3 class="title">
+								<a href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>" title="<?php echo __($post->getTitle()); ?>">
+									<?php echo __($post->getTitle()); ?>
+								</a>
+							</h3>
+							<div class="meta-btn">
+								<div class="meta-btn__item create-time">
+									<i class="icon-clock"></i>
+									<span><?php echo __($block->formatCreatedDate($post->getCreationTime())); ?></span>	
+								</div>
+								<div class="meta-btn__item author">
+									<i class="icon-user"></i>
+									<span><?php echo __($post->getAuthorName()); ?></span>
+								</div>
+								<div class="meta-btn__item num-comments">
+									<i class="icon-comment"></i>
+									<span><?php echo __($block->getNumberComments($post->getId())) ?></span>
+									<span><?php echo __('Comments') ?></span>
+								</div>
+							</div>
+							<div class="short-content">
+								<?php echo __($post->getShortContent()); ?>
+							</div>
+							<div class="action">
+								<a class="shop-btn read-more-btn button" href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>"><span><?php echo __('Read more'); ?></span> </a>
+							</div>
+						</div>
+						<?php if ($post->getThumbnail()): ?>
+							<div class="post-img col-md-6">
+								<a href="<?php echo $block->getPostUrl($post->getIdentifier()); ?>">
+									<img src="<?php echo $block->getImagePostUrl($post->getThumbnail()); ?>" alt="<?php echo __($post->getThumbnail()); ?>" />
+								</a>
+							</div>	
+						<?php endif ?>
+					</div>
+				<?php endif ?>
+				
+			<?php endforeach ?>
+		</div>
+	</div>
+</section>
+<?php endif ?>

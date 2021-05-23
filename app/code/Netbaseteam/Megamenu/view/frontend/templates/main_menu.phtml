@@ -1,0 +1,57 @@
+<div id="header-nav" class="navigation">
+<?php
+	$objectManagerr = \Magento\Framework\App\ObjectManager::getInstance();
+	$helper = $objectManagerr->get('\Netbaseteam\Megamenu\Helper\Data');
+	$detect = $objectManagerr->get('\Netbaseteam\Megamenu\Helper\Detect');
+	$mobilestatus = $helper->getMobileEnable();
+	$mobileposition = $helper->getMobilePosition();
+	$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+	if(!$helper->getPosition()) {
+		$position = 1; /* top menu for default */
+	} else {
+		$position = $helper->getPosition();
+	}
+	
+if($helper->isEnable()){
+	
+?>
+	<div id = "nb_mn_computer">
+	<?php
+		echo $this->getLayout()->createBlock('Magento\Framework\View\Element\Template')
+				->setTemplate('Netbaseteam_Megamenu::colors.phtml')->toHtml(); 
+
+	?>
+
+	<?php
+		if($position == \Netbaseteam\Megamenu\Model\Config\Source\Menutype::HORIZONTAL) {
+			echo $this->getLayout()->createBlock('Netbaseteam\Megamenu\Block\Navigation')
+					->setTemplate('Netbaseteam_Megamenu::topmenu.phtml')->toHtml();
+		}
+	?>
+
+	<?php
+		if($position == \Netbaseteam\Megamenu\Model\Config\Source\Menutype::VERTICAL) {
+			echo $this->getLayout()->createBlock('Netbaseteam\Megamenu\Block\Navigation')
+					->setTemplate('Netbaseteam_Megamenu::vertical.phtml')->toHtml();
+		}
+	?>
+	
+	<?php
+		if($position == \Netbaseteam\Megamenu\Model\Config\Source\Menutype::BOTH) {
+			echo $this->getLayout()->createBlock('Netbaseteam\Megamenu\Block\Navigation')
+					->setTemplate('Netbaseteam_Megamenu::topmenu.phtml')->toHtml();
+					
+			echo $this->getLayout()->createBlock('Netbaseteam\Megamenu\Block\Navigation')
+					->setTemplate('Netbaseteam_Megamenu::vertical.phtml')->toHtml(); 
+		}
+	?>
+	</div>  
+<?php
+	
+} else { /* when disable megamenu will show default menu */
+	echo $this->getLayout()->createBlock('Magento\Theme\Block\Html\Topmenu\Interceptor')
+			->setTemplate('Magento_Theme::html/topmenu.phtml')->toHtml(); 
+} 
+?>
+</div>
+

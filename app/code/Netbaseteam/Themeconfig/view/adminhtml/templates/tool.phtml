@@ -1,0 +1,178 @@
+<div id="body-overlay"><div><img src="<?php echo $this->getViewFileUrl('Netbaseteam_Themeconfig/images/loading.gif');?>" width="64px" height="64px"/></div></div>
+
+<?php
+$helper = $this->helper('\Netbaseteam\Themeconfig\Helper\Data');
+$url_process_export = $this->getUrl('themeconfig/tool/export', ['_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+$url_process_import = $this->getUrl('themeconfig/tool/import', ['_secure'=>(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')]);
+
+$arr_entity = array('Admin Theme Layouts', 'Configuration Menu and Icon', 'General Settings');
+?>
+
+<div id="content_main_div">
+    <div class="layout-area">
+        <div class="row frm-admin-config">
+            <h2 class="title"><?php echo __("Export/ Import Configurations"); ?></h2>
+
+            <div class="col l6 m12 s12 no-padding" style="margin-bottom: 30px;">
+                <div class="admin_group-field">
+                    <h3><?php echo __("Export Configurations"); ?></h3>
+                    <form id="exportConfigForm" action="<?php echo $url_process_export; ?>" method="post">
+                        <input type="hidden" name="form_key" value="" />
+                        <div class="admin_group-field group-mgbt">
+                            <label class="col no-padding l3 m5 s12"><?php echo __("Entity Type:"); ?></label>
+
+                            <div class="admin__field-control styled-select slate col no-padding l8 m7 s12">
+                                <div class="overlay-select"></div>
+                                <select id="entity_type" name="entity_type" class="admin-field-select">
+                                    <?php foreach ($arr_entity as $k => $v) { ?>
+                                        <option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                                </select>
+                                <ul class="fs-scrollbar-content">
+                                    <?php foreach ($arr_entity as $k => $v) { ?>
+                                        <li rel="<?php echo $k; ?>"><?php echo $v; ?></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                            <span class="text-descript">You can select each section and export it as you want</span>
+                        </div>
+
+                        <button id="adm_export_config" title="<?php echo __("Export"); ?>" type="submit" class="action- scalable primary">
+                            <span><?php echo __("Export File"); ?></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col l6 m12 s12 no-padding">
+                <div class="admin_group-field">
+                    <h3><?php echo __("Import Configurations"); ?></h3>
+                    <form id="importConfigForm" action="upload.php" method="post">
+                        <div class="admin_group-field">
+                            <label class="col no-padding l5 m5 s12"><?php echo __("Import:"); ?></label>
+                            <div class="admin__field-control field-upload-image col no-padding l7 m7 s12">
+                                <input type="button" class="button-upload" value="<?php echo __("Choose file"); ?>" style="margin-bottom: 10px;" />
+                                <input class="admin_control-text" type="file" accept=".json" name="userImportConfig" id="userImportConfig" onchange="showPreviewFile(this);">
+                                <strong id="name_import_file"></strong>
+                            </div>
+                        </div>
+                        <span class="text-descript" style="position: relative; top: 20px;">Select (.json) file to import the configuration</span>
+                        <div class="col l12 no-padding" style="margin-top: 20px;">
+                            <button id="adm_export_config" title="<?php echo __("Import File"); ?>" type="submit" class="action- scalable primary">
+                                <span><?php echo __("Import File"); ?></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery'
+        ], function($){
+            $(document).ready(function() {
+                var form_key = FORM_KEY;
+
+                $("body").on('click', '.admin__field-control.styled-select.slate .overlay-select', function(event) {
+                    event.preventDefault();
+                    if ($(this).siblings('.fs-scrollbar-content').is(':visible')==false) {
+                        $('.fs-scrollbar-content').hide();
+                        $(this).siblings('.fs-scrollbar-content').show('fast');
+                    } else {
+                        $(this).siblings('.fs-scrollbar-content').hide('fast');
+                    }
+                });
+
+                $(".fs-scrollbar-content li").click(function(event) {
+                    $(this).parents('.admin__field-control.styled-select.slate').children('.admin-field-select').val($(this).attr('rel'));
+                    $(this).parents('.admin__field-control.styled-select.slate').children('.admin-field-select').trigger("change");
+                    $(this).parents('.admin__field-control.styled-select.slate').children('.fs-scrollbar-content').hide();
+                });
+
+                $(window).on("click.Bst", function(event) {     
+                    if($('.styled-select').has(event.target).length == 0 && !$('.styled-select').is(event.target)) {
+                        $('.fs-scrollbar-content').hide();
+                    }
+                });
+
+                $("#exportConfigForm").on('submit',(function(e) {
+                    $(this).find('input[name="form_key"]').val(form_key);
+                    <?php if ($helper->getIsAllowed('Netbaseteam_Themeconfig::tool_export')) { ?>
+                        if($('#entity_type').val()=='') {
+                            alert("Please choose entity type.");
+                            return false;
+                        }
+                        alert('Export file successful!');
+                        return true;
+                    <?php } else { ?>
+                        alert('No permission.');
+                        return false;
+                    <?php } ?>
+                }));
+
+                $("#importConfigForm").on('submit',(function(e) {
+                    e.preventDefault();
+                    <?php if ($helper->getIsAllowed('Netbaseteam_Themeconfig::tool_import')) { ?>
+                        if( document.getElementById("userImportConfig").files.length == 0 ) {
+                            alert("Please choose a config file.");
+                            return;
+                        }
+
+                        var formData = new FormData(this);
+                        formData.append('form_key', form_key);
+
+                        $.ajax({
+                            url: '<?php echo $url_process_import; ?>',
+                            type: "POST",
+                            data:  formData,
+                            beforeSend: function(){$("#body-overlay").show();},
+                            contentType: false,
+                            processData: false,
+                            cache: false,
+                            success: function(data)
+                            {
+                                $("#body-overlay").hide();
+                                if ($.type(data.message)  === "undefined") {
+                                    alert("Updated configuration!");
+                                    window.location.reload(true);
+                                } else {
+                                    alert(data.message);
+                                }
+                            },
+                            error: function(request, status, error) {
+                                console.log(request.responseText);
+                            }            
+                        });
+                    <?php } else { ?>
+                        alert('No permission.');
+                    <?php } ?>
+                }));
+
+                $(".field-upload-image .button-upload").click(function(event) {
+                    event.preventDefault();
+                    $(this).siblings('.admin_control-text').click();
+                });
+
+            });
+
+});
+
+function showPreviewFile(objFileInput) {
+    require([
+        'jquery'
+        ], function($){
+            if (objFileInput.files[0]) {
+                var fileReader = new FileReader();
+                fileReader.onload = function (e) {
+                    console.log(e.target.result);
+                }
+                $("#name_import_file").text(objFileInput.files[0]["name"]);
+                fileReader.readAsDataURL(objFileInput.files[0]);
+            }
+        });
+}
+</script>

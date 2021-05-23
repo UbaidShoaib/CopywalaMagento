@@ -1,0 +1,677 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) { 
+	@length : length(@class_list_cta); 
+	.alert-class-list-btn(@class_list_cta;@index) when (@index > 0) {
+		.alert-class-list-btn(@class_list_cta; @index - 1); // decrement.
+		@name  : extract(@class_list_cta, @index);
+		.@{name}{ 
+			.lib-button-cta();
+			& when (@custom__fontfamily-button-cta__design = custom){
+				.lib-font-family-button(
+					@_button-font-family:@font-family-button-cta__design
+				);
+			}
+			& when (@custom__color-text-button-cta__design = custom){
+				.lib-color-button(
+					@_button-color:@color-text-button-cta__design
+				)
+			}
+			& when (@custom__color-text-button-cta__design = maincolor){
+				.lib-color-button(
+					@_button-color:@main_color__general
+				)
+			}
+			& when (@custom__color-text-button-cta__design = accentcolor){
+				.lib-color-button(
+					@_button-color:@main_color__accent
+				)
+			}
+			& when (@custom__color-text-button-cta__design = hovercolor){
+				.lib-color-button(
+					@_button-color:@color_hover__general
+				)
+			}
+			& when (@custom__color-text-button-cta__design = secondarycolor){
+				.lib-color-button(
+					@_button-color:@secondary_color__general
+				)
+			}
+			& when (@custom__color-text-button-cta__design = textcolor){
+				.lib-color-button(
+					@_button-color:@text_color__general
+				)
+			}
+			& when (@custom__color-text-button-cta__design = linkcolor){
+				.lib-color-button(
+					@_button-color:@link_color__general
+				)
+			} 
+			& when (@custom__color-text-button-cta__design = graybase){
+				.lib-color-button(
+					@_button-color:@main_color_grays__general
+				)
+			}
+			& when (@custom__color-text-button-cta__design = graydarker){
+				.lib-color-button(
+					@_button-color:@gray__darker
+				)
+			}
+			& when (@custom__color-text-button-cta__design = graydark){
+				.lib-color-button(
+					@_button-color:@gray__dark
+				)
+			}
+			& when (@custom__color-text-button-cta__design = graynormal){
+				.lib-color-button(
+					@_button-color:@gray_normal
+				)
+			}
+			& when (@custom__color-text-button-cta__design = graylight){
+				.lib-color-button(
+					@_button-color: @gray_light
+				)
+			}
+			& when (@custom__color-text-button-cta__design = graylighter){
+				.lib-color-button(
+					@_button-color: @gray_lighter
+				)
+			}
+			//
+			//  Color Text Hover
+			//  ---------------------------------------------
+
+			& when (@custom__hover__color-text-button-cta__design = custom){
+				.lib-color-hover-button(
+					@_button-color-hover:@hover__color-text-button-cta__design
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = maincolor){
+				.lib-color-hover-button(
+					@_button-color-hover:@main_color__general
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = accentcolor){
+				.lib-color-hover-button(
+					@_button-color-hover:@main_color__accent
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = hovercolor){
+				.lib-color-hover-button(
+					@_button-color-hover:@color_hover__general
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = secondarycolor){
+				.lib-color-hover-button(
+					@_button-color-hover:@secondary_color__general
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = textcolor){
+				.lib-color-hover-button(
+					@_button-color-hover:@text_color__general
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = linkcolor){
+				.lib-color-hover-button(
+					@_button-color-hover:@link_color__general
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = graybase){
+				.lib-color-hover-button(
+					@_button-color-hover:@main_color_grays__general
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = graydarker){
+				.lib-color-hover-button(
+					@_button-color-hover:@gray__darker
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = graydark){
+				.lib-color-hover-button(
+					@_button-color-hover:@gray__dark
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = graynormal){
+				.lib-color-hover-button(
+					@_button-color-hover:@gray_normal
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = graylight){
+				.lib-color-hover-button(
+					@_button-color-hover: @gray_light
+				)
+			}
+			& when (@custom__hover__color-text-button-cta__design = graylighter){
+				.lib-color-hover-button(
+					@_button-color-hover: @gray_lighter
+				)
+			}
+			//
+			//  Color Active Button
+			//  ---------------------------------------------
+			& when (@custom__active__color-text-button-cta__design = custom){
+				.lib-color-active-button(
+					@_button-color-active:@active__color-text-button-cta__design
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = maincolor){
+				.lib-color-active-button(
+					@_button-color-active:@main_color__general
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = accentcolor){
+				.lib-color-active-button(
+					@_button-color-active:@main_color__accent
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = hovercolor){
+				.lib-color-active-button(
+					@_button-color-active:@color_hover__general
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = secondarycolor){
+				.lib-color-active-button(
+					@_button-color-active:@secondary_color__general
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = textcolor){
+				.lib-color-active-button(
+					@_button-color-active:@text_color__general
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = linkcolor){
+				.lib-color-active-button(
+					@_button-color-active:@link_color__general
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = graybase){
+				.lib-color-active-button(
+					@_button-color-active:@main_color_grays__general
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = graydarker){
+				.lib-color-active-button(
+					@_button-color-active:@gray__darker
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = graydark){
+				.lib-color-active-button(
+					@_button-color-active:@gray__dark
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = graynormal){
+				.lib-color-active-button(
+					@_button-color-active:@gray_normal
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = graylight){
+				.lib-color-active-button(
+					@_button-color-active: @gray_light
+				)
+			}
+			& when (@custom__active__color-text-button-cta__design = graylighter){
+				.lib-color-active-button(
+					@_button-color-active: @gray_lighter
+				)
+			}
+			//
+			//  Backgroud Color Button
+			//  ---------------------------------------------
+			& when (@custom__backgroud__color-button-cta__design = custom){
+				.lib-background-color-button(
+					@_button-background:@backgroud__color-button-cta__design
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = maincolor){
+				.lib-background-color-button(
+					@_button-background:@main_color__general
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = accentcolor){
+				.lib-background-color-button(
+					@_button-background:@main_color__accent
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = hovercolor){
+				.lib-background-color-button(
+					@_button-background:@color_hover__general
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = secondarycolor){
+				.lib-background-color-button(
+					@_button-background:@secondary_color__general
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = textcolor){
+				.lib-background-color-button(
+					@_button-background:@text_color__general
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = linkcolor){
+				.lib-background-color-button(
+					@_button-background:@link_color__general
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = graybase){
+				.lib-background-color-button(
+					@_button-background:@main_color_grays__general
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = graydarker){
+				.lib-background-color-button(
+					@_button-background:@gray__darker
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = graydark){
+				.lib-background-color-button(
+					@_button-background:@gray__dark
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = graynormal){
+				.lib-background-color-button(
+					@_button-background:@gray_normal
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = graylight){
+				.lib-background-color-button(
+					@_button-background: @gray_light
+				)
+			}
+			& when (@custom__backgroud__color-button-cta__design = graylighter){
+				.lib-background-color-button(
+					@_button-background: @gray_lighter
+				)
+			}
+			//
+			//  Backgroud Hover Color Button
+			//  ---------------------------------------------
+			& when (@custom__hover__backgroud__color-button-cta__design = custom){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@hover__backgroud__color-button-cta__design
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = maincolor){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@main_color__general
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = accentcolor){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@main_color__accent
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = hovercolor){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@color_hover__general
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = secondarycolor){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@secondary_color__general
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = textcolor){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@text_color__general
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = linkcolor){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@link_color__general
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = graybase){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@main_color_grays__general
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = graydarker){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@gray__darker
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = graydark){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@gray__dark
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = graynormal){
+				.lib-hover-background-color-button(
+					@_button-background-hover:@gray_normal
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = graylight){
+				.lib-hover-background-color-button(
+					@_button-background-hover: @gray_light
+				)
+			}
+			& when (@custom__hover__backgroud__color-button-cta__design = graylighter){
+				.lib-hover-background-color-button(
+					@_button-background-hover: @gray_lighter
+				)
+			}
+			//
+			//  Backgroud Active Color Button
+			//  ---------------------------------------------
+			& when (@custom__active__backgroud__color-button-cta__design = custom){
+				.lib-active-background-color-button(
+					@_button-background-active:@active__backgroud__color-button-cta__design
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = maincolor){
+				.lib-active-background-color-button(
+					@_button-background-active:@main_color__general
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = accentcolor){
+				.lib-active-background-color-button(
+					@_button-background-active:@main_color__accent
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = hovercolor){
+				.lib-active-background-color-button(
+					@_button-background-active:@color_hover__general
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = secondarycolor){
+				.lib-active-background-color-button(
+					@_button-background-active:@secondary_color__general
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = textcolor){
+				.lib-active-background-color-button(
+					@_button-background-active:@text_color__general
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = linkcolor){
+				.lib-active-background-color-button(
+					@_button-background-active:@link_color__general
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = graybase){
+				.lib-active-background-color-button(
+					@_button-background-active:@main_color_grays__general
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = graydarker){
+				.lib-active-background-color-button(
+					@_button-background-active:@gray__darker
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = graydark){
+				.lib-active-background-color-button(
+					@_button-background-active:@gray__dark
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = graynormal){
+				.lib-active-background-color-button(
+					@_button-background-active:@gray_normal
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = graylight){
+				.lib-active-background-color-button(
+					@_button-background-active: @gray_light
+				)
+			}
+			& when (@custom__active__backgroud__color-button-cta__design = graylighter){
+				.lib-active-background-color-button(
+					@_button-background-active: @gray_lighter
+				)
+			}
+			//
+			//  Border Button CTA
+			//  ---------------------------------------------
+
+	        & when(@custom__width__border-button-cta__design = custom){
+	        	.lib-border-width-button(
+	                @_button-border-width: @width__border-button-cta__design,
+	            ); 
+	        } 
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = custom){
+	            .lib-border-color-button(
+	                @_button-border-color: @border__color-button-cta__design,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = maincolor){
+	            .lib-border-color-button(
+	                @_button-border-color: @main_color__general,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = accentcolor){
+	            .lib-border-color-button(
+	                @_button-border-color: @main_color__accent,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = secondarycolor){
+	            .lib-border-color-button(
+	                @_button-border-color: @secondary_color__general,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = hovercolor){
+	            .lib-border-color-button(
+	                @_button-border-color: @color_hover__general,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = textcolor){
+	            .lib-border-color-button(
+	                @_button-border-color: @text_color__general,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = linkcolor){
+	            .lib-border-color-button(
+	                @_button-border-color: @link_color__general,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = graybase){
+	            .lib-border-color-button(
+	                @_button-border-color: @main_color_grays__general,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = graydarker){
+	            .lib-border-color-button(
+	                @_button-border-color: @gray__darker,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = graydark){
+	            .lib-border-color-button(
+	                @_button-border-color: @gray__dark,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = graynormal){
+	            .lib-border-color-button(
+	                @_button-border-color: @gray_normal,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = graylight){
+	            .lib-border-color-button(
+	                @_button-border-color: @gray_light,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = custom) and (@custom__color__border-button-cta__design = graylighter){
+	            .lib-border-color-button(
+	                @_button-border-color: @gray_lighter,
+	            );
+	        }
+	        & when(@custom__width__border-button-cta__design = none){
+	            .lib-border-button(
+	                @_button-border: none,
+	            );
+	            .lib-hover-border-button(
+	                @_button-border: none,
+	            );
+	            .lib-active-border-button(
+	                @_button-border: none,
+	            );
+	        }
+	        & when (@custom__hover__color__border-button-cta__design = custom) and (@custom__width__border-button-cta__design = custom){
+	            .lib-hover-color-border-button(
+	                @_button-color-border-hover: @hover__border__color-button-cta__design,
+	                @_button-border-width:@width__border-button-cta__design,
+	            ); 
+	        }
+	        & when (@custom__hover__color__border-button-cta__design = maincolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-hover-color-border-button(
+	                @_button-color-border-hover: @main_color__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            ); 
+	        }
+	        & when (@custom__hover__color__border-button-cta__design = accentcolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-hover-color-border-button(
+	                @_button-color-border-hover: @main_color__accent,
+	                @_button-border-width:@width__border-button-cta__design,
+	            ); 
+	        }
+	        & when (@custom__hover__color__border-button-cta__design = secondarycolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-hover-color-border-button(
+	                @_button-color-border-hover: @secondary_color__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            ); 
+	        }
+	        & when (@custom__hover__color__border-button-cta__design = textcolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-hover-color-border-button(
+	                @_button-color-border-hover: @text_color__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            ); 
+	        }
+	        & when (@custom__hover__color__border-button-cta__design = hovercolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-hover-color-border-button(
+	                @_button-color-border-hover: @color_hover__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            ); 
+	        }
+	        & when (@custom__hover__color__border-button-cta__design = linkcolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-hover-color-border-button(
+	                @_button-color-border-hover: @link_color__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            ); 
+	        }
+	        //active border color 
+	        & when (@custom__active__color__border-button-cta__design = custom) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @active__border__color-button__design,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        }
+	        & when (@custom__active__color__border-button-cta__design = maincolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @main_color__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        } 
+	        & when (@custom__active__color__border-button-cta__design = accentcolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @main_color__accent,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        } 
+	        & when (@custom__active__color__border-button-cta__design = secondarycolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @secondary_color__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        } 
+	        & when (@custom__active__color__border-button-cta__design = textcolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @text_color__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        }  
+	        & when (@custom__active__color__border-button-cta__design = hovercolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @link_color__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        }  
+	        & when (@custom__active__color__border-button-cta__design = linkcolor) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @color_hover__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        }
+	        & when (@custom__active__color__border-button-cta__design = graybase) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @main_color_grays__general,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        }
+	        & when (@custom__active__color__border-button-cta__design = graydarker) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @gray__darker,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        }
+	        & when (@custom__active__color__border-button-cta__design = graydark) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @gray__dark,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        }
+	        & when (@custom__active__color__border-button-cta__design = graynormal) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @gray_normal,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        }
+	        & when (@custom__active__color__border-button-cta__design = graylight) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @gray_light,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        }
+	        & when (@custom__active__color__border-button-cta__design = graylighter) and (@custom__width__border-button-cta__design = custom){
+	            .lib-active-color-border-button(
+	                @_button-color-border-active: @gray_lighter,
+	                @_button-border-width:@width__border-button-cta__design,
+	            );
+	        } 
+			//
+			//  Vertical Padding 
+			//  ---------------------------------------------
+
+	        & when (@custom__vertical__padding-button-cta__design = custom){
+	            .lib-padding-vertical-button(
+	                @_button-padding: @vertical__padding-button-cta__design,
+	            );
+            }  
+            & when (@custom__vertical__padding-button-cta__design = vertical_padding_l){
+            .lib-padding-vertical-button(
+                @_button-padding: @vertical__padding_large,
+            );
+            }
+            & when (@custom__vertical__padding-button-cta__design = vertical_padding_b){
+            .lib-padding-vertical-button(
+                @_button-padding: @vertical__padding_base,
+            );
+                 }
+                 & when (@custom__vertical__padding-button-cta__design = vertical_padding_s){
+            .lib-padding-vertical-button(
+                @_button-padding: @vertical__padding_small,
+            );
+                 }
+         	// padding hozital button
+            & when (@custom__hozital__padding-button-cta__design = custom){
+	            .lib-padding-hozital-button(
+	                @_button-padding: @hozital__padding-button__design,
+	            );
+            }
+            & when (@custom__hozital__padding-button-cta__design = hozital_padding_l){
+	            .lib-padding-hozital-button(
+	                @_button-padding: @horizontal__padding_large,
+	            );
+            }
+            & when (@custom__hozital__padding-button-cta__design = hozital_padding_b){
+	            .lib-padding-hozital-button(
+	                @_button-padding: @horizontal__padding_base,
+	            );
+            }
+            & when (@custom__hozital__padding-button-cta__design = hozital_padding_s){
+	            .lib-padding-hozital-button(
+	                @_button-padding: @horizontal__padding_small,
+	            );
+           	}
+		}
+	}
+	.alert-class-list-btn(@class_list_cta;@length);
+}

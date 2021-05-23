@@ -1,0 +1,17 @@
+<div class="search-content">
+	<div class="block-title">
+		<strong>Search Post</strong>
+	</div>
+	<div class="block-content">
+		<form action="<?php echo $block->getFormAction();?>" method="get" id="search_form">
+			<input type="text" name="q_str" class="search_box" placeholder="Search Post..." value="<?php
+				if ($block->getSearchString()) {
+					echo $block->getSearchString();
+				}?>" />
+			<button type="submit" class="sbm_button">
+				<i class="icon-search"></i>
+			</button>
+		</form>
+	</div>
+	
+</div>
